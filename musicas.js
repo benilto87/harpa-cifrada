@@ -224,6 +224,66 @@ const songs=[
 },
 
 /* =========================
+   0015 — CONVERSÃO
+========================= */
+
+{
+  id:'0015',
+  number:'0015',
+  title:'CONVERSÃO',
+  category:'Harpa Cristã',
+  sourceToneIndex:7,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Oh! quão cego andei e perdido vaguei,',anchors:[{pos:11,chord:'G'},{pos:27,chord:'D'}]},
+      {lyric:'Longe, longe do meu Salvador!',anchors:[{pos:28,chord:'G'}]},
+      {lyric:'Mas do céu Ele desceu, e Seu sangue verteu',anchors:[{pos:8,chord:'C'},{pos:31,chord:'G'}]},
+      {lyric:'P\'ra salvar um tão pobre pecador.',anchors:[{pos:8,chord:'Am'},{pos:23,chord:'D'},{pos:32,chord:'G'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Foi na cruz, foi na cruz,',anchors:[{pos:9,chord:'G'}]},
+      {lyric:'Onde um dia eu vi',anchors:[{pos:9,chord:'D'}]},
+      {lyric:'Meu pecado castigado em Jesus;',anchors:[{pos:7,chord:'D'},{pos:28,chord:'G'}]},
+      {lyric:'Foi ali, pela fé, que os olhos abri,',anchors:[{pos:5,chord:'C'},{pos:27,chord:'G'}]},
+      {lyric:'E agora me alegro em Sua luz.',anchors:[{pos:4,chord:'Am'},{pos:13,chord:'D'},{pos:27,chord:'G'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Eu ouvia falar dessa graça sem par,',anchors:[{pos:6,chord:'G'},{pos:23,chord:'D'}]},
+      {lyric:'Que do céu trouxe nosso Jesus;',anchors:[{pos:28,chord:'G'}]},
+      {lyric:'Mas eu surdo me fiz, converter-me não quis',anchors:[{pos:8,chord:'C'},{pos:29,chord:'G'}]},
+      {lyric:'Ao Senhor, que por mim morreu na cruz.',anchors:[{pos:7,chord:'Am'},{pos:21,chord:'D'},{pos:37,chord:'G'}]}
+    ]
+    },
+	{
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Mas um dia senti meu pecado, e vi ',anchors:[{pos:9,chord:'G'},{pos:33,chord:'D'}]},
+      {lyric:'Sobre mim a espada da lei;',anchors:[{pos:25,chord:'G'}]},
+      {lyric:'Apressado fugi, em Jesus me escondi, ',anchors:[{pos:10,chord:'C'},{pos:35,chord:'G'}]},
+      {lyric:'E abrigo seguro nEle achei.',anchors:[{pos:5,chord:'Am'},{pos:12,chord:'D'},{pos:26,chord:'G'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Quão ditoso, então, este meu coração,',anchors:[{pos:11,chord:'G'},{pos:36,chord:'D'}]},
+      {lyric:'Conhecendo o excelso amor',anchors:[{pos:24,chord:'G'}]},
+      {lyric:'Que levou meu Jesus a sofrer lá na cruz; ',anchors:[{pos:11,chord:'C'},{pos:39,chord:'G'}]},
+      {lyric:'P\'ra salvar a um ·tão pobre pecador.',anchors:[{pos:9,chord:'Am'},{pos:24,chord:'D'},{pos:35,chord:'G'}]}
+    ]
+    }
+  ]
+},
+/* =========================
    077 — GUARDA O CONTACTO
 ========================= */
 
