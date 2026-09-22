@@ -53,7 +53,7 @@ const chromatic=[{name:'C'},{name:'Db'},{name:'D'},{name:'Eb'},{name:'E'},{name:
   A posição pode cair no meio de uma palavra ou de uma sílaba.
 */
 
-let currentSongId='001';let currentIndex=songs.find(s=>s.id===currentSongId).sourceToneIndex;let sectionsHidden=true;let progressionMode=false;let inlineMode=false;let fontScale=.80;const MIN_FONT_SCALE=.80,MAX_FONT_SCALE=1.35,FONT_STEP=.05;
+let currentSongId='001';let currentIndex=songs.find(s=>s.id===currentSongId).sourceToneIndex;let sectionsHidden=true;let progressionMode=false;let inlineMode=false;let fontScale=.90;const MIN_FONT_SCALE=.80,MAX_FONT_SCALE=1.35,FONT_STEP=.05;
 
 const aliases={C:0,'B#':0,'C#':1,Db:1,D:2,'D#':3,Eb:3,E:4,Fb:4,F:5,'E#':5,'F#':6,Gb:6,G:7,'G#':8,Ab:8,A:9,'A#':10,Bb:10,B:11,Cb:11};
 function transposeChord(chord,semitones){const m=chord.match(/^([A-G](?:#|b)?)(.*)$/);if(!m)return chord;const root=m[1],suffix=m[2]||'';if(!(root in aliases))return chord;const preferred=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];return preferred[(aliases[root]+semitones+120)%12]+suffix}

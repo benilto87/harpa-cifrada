@@ -224,6 +224,66 @@ const songs=[
 },
 
 /* =========================
+   077 — GUARDA O CONTACTO
+========================= */
+
+{
+  id:'077',
+  number:'077',
+  title:'GUARDA O CONTACTO',
+  category:'Harpa Cristã',
+  sourceToneIndex:0,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Queres, neste mundo, ser um vencedor?',anchors:[{pos:0,chord:'C'},{pos:35,chord:'Dm'}]},
+      {lyric:'Queres tu cantar nas lutas e na dor?',anchors:[{pos:0,chord:'G'},{pos:35,chord:'C'}]},
+      {lyric:'Queres ser alegre, qual bom lutador?',anchors:[{pos:0,chord:'C'},{pos:35,chord:'F'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Guarda o contacto com teu Salvador!',anchors:[{pos:0,chord:'F'},{pos:10,chord:'C/G'},{pos:20,chord:'G'},{pos:34,chord:'C'}]},
+      {lyric:'Guarda o contacto com teu Salvador,',anchors:[{pos:0,chord:'C'},{pos:13,chord:'G'},{pos:34,chord:'C'}]},
+      {lyric:'E a nuvem do mal não te cobrirá;',anchors:[{pos:0,chord:'F'},{pos:11,chord:'C'},{pos:25,chord:'D'},{pos:31,chord:'G'}]},
+      {lyric:'Pela senda alegre, tu caminharás',anchors:[{pos:0,chord:'C'},{pos:31,chord:'F'}]},
+      {lyric:'Indo em contacto com teu Salvador.',anchors:[{pos:0,chord:'F'},{pos:12,chord:'C/G'},{pos:19,chord:'G'},{pos:33,chord:'C'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Neste mundo, vivem muitos a penar,',anchors:[{pos:0,chord:'C'},{pos:32,chord:'Dm'}]},
+      {lyric:'Cujos corações transbordam de pesar;',anchors:[{pos:0,chord:'G'},{pos:35,chord:'C'}]},
+      {lyric:'Dá-lhes a mensagem de amor sem par;',anchors:[{pos:0,chord:'C'},{pos:34,chord:'F'}]},
+      {lyric:'Com Deus o contacto deves tu guardar!',anchors:[{pos:0,chord:'F'},{pos:14,chord:'C/G'},{pos:22,chord:'G'},{pos:36,chord:'C'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Queres tu, com Deus, a comunhão obter?',anchors:[{pos:0,chord:'C'},{pos:36,chord:'Dm'}]},
+      {lyric:'Sua glória em ti sempre permanecer?',anchors:[{pos:0,chord:'G'},{pos:34,chord:'C'}]},
+      {lyric:'Que o mundo possa Cristo em ti ver!',anchors:[{pos:0,chord:'C'},{pos:34,chord:'F'}]},
+      {lyric:'Guarda o contacto co’o supremo Ser.',anchors:[{pos:0,chord:'F'},{pos:13,chord:'C/G'},{pos:20,chord:'G'},{pos:34,chord:'C'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Deixa que o Espírito implante em teu ser,',anchors:[{pos:0,chord:'C'},{pos:39,chord:'Dm'}]},
+      {lyric:'O amor de Cristo, divinal prazer;',anchors:[{pos:0,chord:'G'},{pos:32,chord:'C'}]},
+      {lyric:'Queres, neste mundo, todo o mal vencer?',anchors:[{pos:0,chord:'C'},{pos:38,chord:'F'}]},
+      {lyric:'Guarda o contacto e terás poder!',anchors:[{pos:0,chord:'F'},{pos:12,chord:'C/G'},{pos:18,chord:'G'},{pos:31,chord:'C'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    198 — JESUS, O BOM AMIGO
 ========================= */
 
