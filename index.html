@@ -7,6 +7,7 @@
 <style>
 :root{--bg:#f2eee7;--paper:#fffdf9;--ink:#25221e;--muted:#746e64;--accent:#7a4a24;--line:#ddd5ca;--key:#f8f5ef;--key-hover:#ece5da}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif}
+.ocultado{display:none!important}
 .topbar{position:sticky;top:0;z-index:20;background:rgba(255,253,249,.96);border-bottom:1px solid var(--line);box-shadow:0 3px 14px rgba(60,45,30,.06);backdrop-filter:blur(8px)}
 .toolbar{width:min(1500px,100%);margin:0 auto;padding:8px 14px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 button{border:1px solid #cec4b7;background:var(--key);color:var(--ink);border-radius:8px;padding:8px 9px;min-height:34px;cursor:pointer;font:600 .79rem/1 Arial,sans-serif;transition:background .12s,transform .12s,border-color .12s}button:hover,button:focus-visible{background:var(--key-hover);transform:translateY(-1px);outline:2px solid rgba(184,135,81,.25);outline-offset:1px}button:disabled{opacity:.38;cursor:default;transform:none}button.active{background:var(--accent);color:#fff;border-color:var(--accent)}.action{padding-inline:10px}
@@ -27,7 +28,7 @@ button{border:1px solid #cec4b7;background:var(--key);color:var(--ink);border-ra
     <button class="action" id="down" title="Descer 1 semitom">−½</button><button class="action" id="up" title="Subir 1 semitom">+½</button><button class="action" id="reset" title="Tom original">↺</button>
     <button class="action" id="fontDown" title="Diminuir fonte">−</button><button class="action" id="fontUp" title="Aumentar fonte">+</button>
     <button class="action" id="toggleSections" title="Ocultar marcações">🎵</button>
-    <button class="action" id="toggleNotes" title="Mostrar/ocultar tons">OCULTAR</button>
+    <button class="action" id="toggleNotes" title="Mostrar/ocultar tons">🔺</button>
     <button class="action" id="toggleProgression" title="Progressão numérica">#</button><button class="action" id="toggleInline" title="Cifras dentro da letra">.</button>
     <div class="tone-pill">Tom atual <strong id="currentTone">Bb</strong></div>
   </div>
@@ -76,10 +77,125 @@ function renderLibrary(){const list=document.getElementById('libraryList'),q=doc
 function openLibrary(){libraryDrawer.classList.add('open');libraryBackdrop.classList.add('open');libraryDrawer.setAttribute('aria-hidden','false')}function closeLibrary(){libraryDrawer.classList.remove('open');libraryBackdrop.classList.remove('open');libraryDrawer.setAttribute('aria-hidden','true')}
 function createToneKeys(){const p=document.getElementById('tonePanel');chromatic.forEach((t,i)=>{const b=document.createElement('button');b.textContent=t.name;b.onclick=()=>{currentIndex=i;render()};p.appendChild(b)})}
 
-const openLibraryBtn=document.getElementById('openLibrary'),closeLibraryBtn=document.getElementById('closeLibrary'),libraryBackdrop=document.getElementById('libraryBackdrop'),libraryDrawer=document.getElementById('libraryDrawer'),librarySearch=document.getElementById('librarySearch'),favoritesFilter=document.getElementById('favoritesFilter'),allSongsFilter=document.getElementById('allSongsFilter');
-document.getElementById('down').onclick=()=>{currentIndex=(currentIndex+11)%12;render()};document.getElementById('up').onclick=()=>{currentIndex=(currentIndex+1)%12;render()};document.getElementById('reset').onclick=()=>{currentIndex=getCurrentSong().sourceToneIndex;render()};document.getElementById('fontDown').onclick=()=>{fontScale=Math.max(MIN_FONT_SCALE,Math.round((fontScale-FONT_STEP)*100)/100);applyFontScale()};document.getElementById('fontUp').onclick=()=>{fontScale=Math.min(MAX_FONT_SCALE,Math.round((fontScale+FONT_STEP)*100)/100);applyFontScale()};document.getElementById('toggleSections').onclick=()=>{sectionsHidden=!sectionsHidden;render()};document.getElementById('toggleProgression').onclick=()=>{progressionMode=!progressionMode;render()};document.getElementById('toggleInline').onclick=()=>{inlineMode=!inlineMode;render()};document.getElementById('toggleNotes').onclick=()=>{const p=document.getElementById('tonePanel'),hidden=p.classList.toggle('hidden');document.getElementById('toggleNotes').textContent=hidden?'MOSTRAR':'OCULTAR'};
-openLibraryBtn.onclick=openLibrary;closeLibraryBtn.onclick=closeLibrary;libraryBackdrop.onclick=closeLibrary;librarySearch.oninput=renderLibrary;favoritesFilter.onclick=()=>{favoritesOnly=true;favoritesFilter.classList.add('active');allSongsFilter.classList.remove('active');renderLibrary()};allSongsFilter.onclick=()=>{favoritesOnly=false;favoritesFilter.classList.remove('active');allSongsFilter.classList.add('active');renderLibrary()};
-document.addEventListener('keydown',e=>{if(e.target.matches('input,textarea'))return;if(e.key==='ArrowLeft'){currentIndex=(currentIndex+11)%12;render()}if(e.key==='ArrowRight'){currentIndex=(currentIndex+1)%12;render()}if(e.key==='#'){e.preventDefault();document.getElementById('toggleProgression').click()}if(e.key==='.'){e.preventDefault();document.getElementById('toggleInline').click()}if(e.key==='-'&&!e.ctrlKey&&!e.metaKey){document.getElementById('fontDown').click()}if((e.key==='+'||e.key==='=')&&!e.ctrlKey&&!e.metaKey){document.getElementById('fontUp').click()}if(e.key.toLowerCase()==='n'){document.getElementById('toggleNotes').click()}if(e.key==='Escape')closeLibrary()});
+const openLibraryBtn=document.getElementById('openLibrary'),
+closeLibraryBtn=document.getElementById('closeLibrary'),
+libraryBackdrop=document.getElementById('libraryBackdrop'),
+libraryDrawer=document.getElementById('libraryDrawer'),
+librarySearch=document.getElementById('librarySearch'),
+favoritesFilter=document.getElementById('favoritesFilter'),
+allSongsFilter=document.getElementById('allSongsFilter');
+
+const ocultarComNotas=['down','up','reset','fontDown','fontUp','tonePanel'];
+
+down.onclick=()=>{
+  currentIndex=(currentIndex+11)%12;
+  render();
+};
+
+up.onclick=()=>{
+  currentIndex=(currentIndex+1)%12;
+  render();
+};
+
+reset.onclick=()=>{
+  currentIndex=getCurrentSong().sourceToneIndex;
+  render();
+};
+
+fontDown.onclick=()=>{
+  fontScale=Math.max(MIN_FONT_SCALE,fontScale-FONT_STEP);
+  applyFontScale();
+};
+
+fontUp.onclick=()=>{
+  fontScale=Math.min(MAX_FONT_SCALE,fontScale+FONT_STEP);
+  applyFontScale();
+};
+
+toggleSections.onclick=()=>{
+  sectionsHidden=!sectionsHidden;
+  render();
+};
+
+toggleProgression.onclick=()=>{
+  progressionMode=!progressionMode;
+  render();
+};
+
+toggleInline.onclick=()=>{
+  inlineMode=!inlineMode;
+  render();
+};
+
+document.getElementById('toggleNotes').onclick=()=>{
+  const p=document.getElementById('tonePanel');
+  const hidden=p.classList.toggle('hidden');
+
+  ocultarComNotas.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.classList.toggle('ocultado',hidden);
+  });
+
+  document.getElementById('toggleNotes').textContent=hidden?'🔻':'🔺';
+};
+
+openLibraryBtn.onclick=openLibrary;
+closeLibraryBtn.onclick=closeLibrary;
+libraryBackdrop.onclick=closeLibrary;
+librarySearch.oninput=renderLibrary;
+
+favoritesFilter.onclick=()=>{
+  favoritesOnly=true;
+  favoritesFilter.classList.add('active');
+  allSongsFilter.classList.remove('active');
+  renderLibrary();
+};
+
+allSongsFilter.onclick=()=>{
+  favoritesOnly=false;
+  favoritesFilter.classList.remove('active');
+  allSongsFilter.classList.add('active');
+  renderLibrary();
+};
+
+document.addEventListener('keydown',e=>{
+  if(e.target.matches('input,textarea'))return;
+
+  if(e.key==='ArrowLeft'){
+    currentIndex=(currentIndex+11)%12;
+    render();
+  }
+
+  if(e.key==='ArrowRight'){
+    currentIndex=(currentIndex+1)%12;
+    render();
+  }
+
+  if(e.key==='#'){
+    e.preventDefault();
+    toggleProgression.click();
+  }
+
+  if(e.key==='.'){
+    e.preventDefault();
+    toggleInline.click();
+  }
+
+  if(e.key==='-'&&!e.ctrlKey&&!e.metaKey){
+    fontDown.click();
+  }
+
+  if((e.key==='+'||e.key==='=')&&!e.ctrlKey&&!e.metaKey){
+    fontUp.click();
+  }
+
+  if(e.key.toLowerCase()==='n'){
+    document.getElementById('toggleNotes').click();
+  }
+
+  if(e.key==='Escape')closeLibrary();
+});
+
 createToneKeys();applyFontScale();render();renderLibrary();
 </script>
 </body></html>
