@@ -377,10 +377,12 @@ const songs=[
     {
       label:'2ª estrofe',
       lines:[
-      {lyric:'Já de muitos foi achada a rosa / E provado o excelente odor',anchors:[{pos:7,chord:'C'},{pos:27,chord:'G'},{pos:39,chord:'G'},{pos:56,chord:'C'}]},
+      {lyric:'Já de muitos foi achada a rosa',anchors:[{pos:7,chord:'C'},{pos:27,chord:'G'}]},
+      {lyric:'E provado o excelente odor',anchors:[{pos:6,chord:'G'},{pos:24,chord:'C'}]},
       {lyric:'E o poder desta flor gloriosa / Que dá vida ao vil pecador.',anchors:[{pos:7,chord:'C'},{pos:25,chord:'G'},{pos:37,chord:'G'},{pos:57,chord:'C'}]},
       {lyric:'Mui zeloso pela lei foi Saulo, / Perseguia o povo de Deus,',anchors:[{pos:6,chord:'C'},{pos:25,chord:'F'},{pos:39,chord:'G'},{pos:54,chord:'C'}]},
-      {lyric:'Mas transformado foi em um Paulo, / Pois achou ele a rosa dos céus.',anchors:[{pos:10,chord:'C'},{pos:28,chord:'F'},{pos:44,chord:'G'},{pos:63,chord:'C'}]}
+      {lyric:'Mas transformado foi em um Paulo, / ',anchors:[{pos:10,chord:'C'},{pos:28,chord:'F'}]},
+      {lyric:'Pois achou ele a rosa dos céus.',anchors:[{pos:8,chord:'G'},{pos:27,chord:'C'}]}
     ]
     },
     {
