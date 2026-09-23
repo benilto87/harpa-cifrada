@@ -15,9 +15,10 @@ const songs=[
     {
       label:'1ª estrofe',
     lines:[
-      {lyric:'Deus prometeu com certeza Chuvas de graça mandar;',anchors:[{pos:0,chord:'Bb'},{pos:11,chord:'F'},{pos:22,chord:'Bb'},{pos:29,chord:'F'},{pos:48,chord:'Bb'}]},
-      {lyric:'Ele nos dá fortaleza, E ricas bênçãos sem par',anchors:[{pos:0,chord:'Eb'},{pos:17,chord:'Bb'},{pos:24,chord:'Gm'},{pos:33,chord:'C'},{pos:44,chord:'F'}]}
-    ]
+            {lyric:'Deus prometeu com certeza, ',anchors:[{pos:0,chord:'Bb'},{pos:11,chord:'F'},{pos:22,chord:'Bb'}]},
+      {lyric:'Chuvas de graça mandar',anchors:[{pos:1,chord:'F'},{pos:20,chord:'Bb'}]},
+      {lyric:'Ele nos dá fortaleza ',anchors:[{pos:0,chord:'Eb'},{pos:16,chord:'Bb'}]},
+      {lyric:'E ricas bênçãos sem par',anchors:[{pos:0,chord:'Gm'},{pos:9,chord:'C'},{pos:22,chord:'F'}]}    ]
   },
   {
     label:'Coro',
@@ -344,6 +345,57 @@ const songs=[
 },
 
 /* =========================
+   196 — UMA FLOR GLORIOSA
+========================= */
+
+{
+  id:'196',
+  number:'196',
+  title:'UMA FLOR GLORIOSA',
+  category:'Harpa Cristã',
+  sourceToneIndex:0,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Já achei uma flor gloriosa, / E quem deseja a mesma terá;',anchors:[{pos:6,chord:'C'},{pos:23,chord:'G'},{pos:37,chord:'G'},{pos:54,chord:'C'}]},
+      {lyric:'A rosa de Saron preciosa / Entre mil mais beleza terá;',anchors:[{pos:4,chord:'C'},{pos:21,chord:'G'},{pos:34,chord:'G'},{pos:51,chord:'C'}]},
+      {lyric:'No vale de sombra e morte, / Nas alturas de glória e luz,',anchors:[{pos:5,chord:'C'},{pos:21,chord:'F'},{pos:34,chord:'G'},{pos:54,chord:'C'}]},
+      {lyric:'Esta rosa será a minha sorte, / Precioso p’ra mim é Jesus!',anchors:[{pos:6,chord:'C'},{pos:24,chord:'F'},{pos:37,chord:'G'},{pos:55,chord:'C'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Precioso p’ra mim é Jesus!',anchors:[{pos:4,chord:'C'},{pos:23,chord:'G'}]},
+      {lyric:'Precioso p’ra mim é Jesus!',anchors:[{pos:4,chord:'G'},{pos:23,chord:'C'}]},
+      {lyric:'Eu confesso na vida e na morte',anchors:[{pos:6,chord:'C'},{pos:26,chord:'F'}]},
+      {lyric:'Que tudo p’ra mim é Jesus!',anchors:[{pos:5,chord:'G'},{pos:23,chord:'C'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Já de muitos foi achada a rosa / E provado o excelente odor',anchors:[{pos:7,chord:'C'},{pos:27,chord:'G'},{pos:39,chord:'G'},{pos:56,chord:'C'}]},
+      {lyric:'E o poder desta flor gloriosa / Que dá vida ao vil pecador.',anchors:[{pos:7,chord:'C'},{pos:25,chord:'G'},{pos:37,chord:'G'},{pos:57,chord:'C'}]},
+      {lyric:'Mui zeloso pela lei foi Saulo, / Perseguia o povo de Deus,',anchors:[{pos:6,chord:'C'},{pos:25,chord:'F'},{pos:39,chord:'G'},{pos:54,chord:'C'}]},
+      {lyric:'Mas transformado foi em um Paulo, / Pois achou ele a rosa dos céus.',anchors:[{pos:10,chord:'C'},{pos:28,chord:'F'},{pos:44,chord:'G'},{pos:63,chord:'C'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Vai buscar a Jesus precioso, / Vai depressa, a noite já vem,',anchors:[{pos:8,chord:'C'},{pos:24,chord:'G'},{pos:39,chord:'G'},{pos:57,chord:'C'}]},
+      {lyric:'E, se perdes o amor glorioso, / Será triste p’ra ti o além;',anchors:[{pos:7,chord:'C'},{pos:25,chord:'G'},{pos:39,chord:'G'},{pos:56,chord:'C'}]},
+      {lyric:'Esta flor hoje é ofertada / A quem humildemente a buscar;',anchors:[{pos:7,chord:'C'},{pos:22,chord:'F'},{pos:35,chord:'G'},{pos:54,chord:'C'}]},
+      {lyric:'Será logo da terra tirada, / Para brilhar em outro lugar.',anchors:[{pos:6,chord:'C'},{pos:21,chord:'F'},{pos:35,chord:'G'},{pos:54,chord:'C'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    198 — JESUS, O BOM AMIGO
 ========================= */
 
@@ -358,39 +410,45 @@ const songs=[
     {
       label:'1ª estrofe',
       lines:[
-      {lyric:'Achei um bom amigo, / Jesus, o Salvador,',anchors:[{pos:0,chord:'F'},{pos:25,chord:'Bb'},{pos:37,chord:'F'}]},
+      {lyric:'Achei um bom amigo, / Jesus, o Salvador,',anchors:[{pos:1,chord:'F'},{pos:24,chord:'Bb'},{pos:37,chord:'F'}]},
       {lyric:'O escolhido dos milhares para mim;',anchors:[{pos:7,chord:'F'},{pos:31,chord:'C'}]},
-      {lyric:'Dos vales é o lírio, é o forte Mediador, / Que me purifica e guarda para Si,',anchors:[{pos:5,chord:'F'},{pos:26,chord:'Bb'},{pos:38,chord:'F'},{pos:52,chord:'F'},{pos:63,chord:'Bb'},{pos:71,chord:'C'},{pos:74,chord:'F'}]},
-      {lyric:'Consolador amado, meu protetor do mal, / Solicitude minha toma a Si.',anchors:[{pos:3,chord:'Bb'},{pos:24,chord:'F'},{pos:45,chord:'F'},{pos:66,chord:'C'}]}
+      {lyric:'Dos vales é o lírio, é o forte Mediador, / ',anchors:[{pos:5,chord:'F'},{pos:25,chord:'Bb'},{pos:37,chord:'F'}]},
+      {lyric:'Que me purifica e guarda para Si,',anchors:[{pos:7,chord:'F'},{pos:19,chord:'Bb'},{pos:26,chord:'C'},{pos:30,chord:'F'}]},
+      {lyric:'Consolador amado, meu protetor do mal, /',anchors:[{pos:3,chord:'Bb'},{pos:23,chord:'F'}]},
+      {lyric:' Solicitude minha toma a Si.',anchors:[{pos:4,chord:'F'},{pos:25,chord:'C'}]}
     ]
     },
     {
       label:'Coro',
       lines:[
       {lyric:'Dos vales é o lírio, a estrela da manhã,',anchors:[{pos:5,chord:'F'},{pos:25,chord:'Bb'},{pos:38,chord:'F'}]},
-      {lyric:'O escolhido dos milhares para mim.',anchors:[{pos:7,chord:'F'},{pos:20,chord:'Bb'},{pos:26,chord:'C'},{pos:31,chord:'F'}]},
-      {lyric:'Consolador amado, meu protetor do mal,',anchors:[{pos:3,chord:'Bb'},{pos:24,chord:'F'}]},
-      {lyric:'Solicitude minha toma a Si,',anchors:[{pos:2,chord:'F'},{pos:25,chord:'C'}]},
-      {lyric:'Dos vales é o lírio, a estrela da manhã,',anchors:[{pos:5,chord:'F'},{pos:25,chord:'Bb'},{pos:38,chord:'F'}]},
-      {lyric:'O escolhido dos milhares para mim.',anchors:[{pos:8,chord:'F'},{pos:19,chord:'Bb'},{pos:26,chord:'C'},{pos:32,chord:'F'}]}
+      {lyric:'O escolhido dos milhares para mim.',anchors:[{pos:7,chord:'F'},{pos:19,chord:'Bb'},{pos:26,chord:'C'},{pos:31,chord:'F'}]},
+      {lyric:'Consolador amado, meu protetor do mal,',anchors:[{pos:3,chord:'Bb'},{pos:23,chord:'F'}]},
+      {lyric:'Solicitude minha toma a Si,',anchors:[{pos:2,chord:'F'},{pos:24,chord:'C'}]},
+      {lyric:'Dos vales é o lírio, a estrela da manhã,',anchors:[{pos:5,chord:'F'},{pos:26,chord:'Bb'},{pos:37,chord:'F'}]},
+      {lyric:'O escolhido dos milhares para mim.',anchors:[{pos:7,chord:'F'},{pos:19,chord:'Bb'},{pos:26,chord:'C'},{pos:31,chord:'F'}]}
     ]
     },
     {
       label:'2ª estrofe',
       lines:[
-      {lyric:'Levou-me as dores todas, / As mágoas lhe entreguei;',anchors:[{pos:2,chord:'F'},{pos:32,chord:'Bb'},{pos:48,chord:'F'}]},
-      {lyric:'Minha fortaleza é, na tentação.',anchors:[{pos:0,chord:'F'},{pos:28,chord:'C'}]},
-      {lyric:'Deixei, por Ele tudo; os ídolos queimei; / Ele me conserva santo o coração,',anchors:[{pos:4,chord:'F'},{pos:25,chord:'Bb'},{pos:38,chord:'F'},{pos:49,chord:'F'},{pos:60,chord:'Bb'},{pos:69,chord:'C'},{pos:74,chord:'F'}]},
-      {lyric:'Que o mundo me abandone; persiga o tentador; / Jesus me guarda até da vida o fim.',anchors:[{pos:0,chord:'Bb'},{pos:28,chord:'F'},{pos:49,chord:'F'},{pos:79,chord:'C'}]}
+      {lyric:'Levou-me as dores todas, / As mágoas lhe entreguei;',anchors:[{pos:2,chord:'F'},{pos:30,chord:'Bb'},{pos:48,chord:'F'}]},
+      {lyric:'Minha fortaleza é, na tentação.',anchors:[{pos:6,chord:'F'},{pos:28,chord:'C'}]},
+      {lyric:'Deixei, por Ele tudo; os ídolos queimei; /',anchors:[{pos:4,chord:'F'},{pos:25,chord:'Bb'},{pos:37,chord:'F'}]},
+      {lyric:'Ele me conserva santo o coração,',anchors:[{pos:5,chord:'F'},{pos:16,chord:'Bb'},{pos:24,chord:'C'},{pos:29,chord:'F'}]},
+      {lyric:'Que o mundo me abandone; persiga o tentador; /',anchors:[{pos:8,chord:'Bb'},{pos:30,chord:'F'}]},
+      {lyric:'Jesus me guarda até da vida o fim.',anchors:[{pos:2,chord:'F'},{pos:32,chord:'C'}]}
     ]
     },
     {
       label:'3ª estrofe',
       lines:[
-      {lyric:'Não desampara nunca, / Nem me abandonará,',anchors:[{pos:4,chord:'F'},{pos:27,chord:'Bb'},{pos:39,chord:'F'}]},
-      {lyric:'Se fiel e obediente eu viver;',anchors:[{pos:5,chord:'F'},{pos:27,chord:'C'}]},
-      {lyric:'Um muro é de fogo, que me protegerá, / \'Té que venha a mim o tempo de morrer,',anchors:[{pos:4,chord:'F'},{pos:24,chord:'Bb'},{pos:34,chord:'F'},{pos:49,chord:'F'},{pos:62,chord:'Bb'},{pos:68,chord:'C'},{pos:76,chord:'F'}]},
-      {lyric:'Ao céu então voando, Sua glória eu verei / Onde a dor e a morte nunca vêm.',anchors:[{pos:3,chord:'Bb'},{pos:27,chord:'F'},{pos:49,chord:'F'},{pos:72,chord:'C'}]}
+      {lyric:'Não desampara nunca, / Nem me abandonará,',anchors:[{pos:5,chord:'F'},{pos:28,chord:'Bb'},{pos:38,chord:'F'}]},
+      {lyric:'Se fiel e obediente eu viver;',anchors:[{pos:5,chord:'F'},{pos:26,chord:'C'}]},
+      {lyric:'Um muro é de fogo, que me protegerá, / ',anchors:[{pos:4,chord:'F'},{pos:23,chord:'Bb'},{pos:33,chord:'F'}]},
+      {lyric:'\'Té que venha a mim o tempo de morrer,',anchors:[{pos:10,chord:'F'},{pos:23,chord:'Bb'},{pos:29,chord:'C'},{pos:36,chord:'F'}]},
+      {lyric:'Ao céu então voando, Sua glória eu verei / ',anchors:[{pos:3,chord:'Bb'},{pos:26,chord:'F'}]},
+      {lyric:'Onde a dor e a morte nunca vêm.',anchors:[{pos:5,chord:'F'},{pos:29,chord:'C'}]}
     ]
     }
   ]

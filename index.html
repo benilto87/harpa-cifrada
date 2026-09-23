@@ -5,19 +5,543 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Harpa Cifrada — Biblioteca v23</title>
 <style>
-:root{--bg:#f2eee7;--paper:#fffdf9;--ink:#25221e;--muted:#746e64;--accent:#7a4a24;--line:#ddd5ca;--key:#f8f5ef;--key-hover:#ece5da}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif}
-.ocultado{display:none!important}
-.topbar{position:sticky;top:0;z-index:20;background:rgba(255,253,249,.96);border-bottom:1px solid var(--line);box-shadow:0 3px 14px rgba(60,45,30,.06);backdrop-filter:blur(8px)}
-.toolbar{width:min(1500px,100%);margin:0 auto;padding:8px 14px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-button{border:1px solid #cec4b7;background:var(--key);color:var(--ink);border-radius:8px;padding:8px 9px;min-height:34px;cursor:pointer;font:600 .79rem/1 Arial,sans-serif;transition:background .12s,transform .12s,border-color .12s}button:hover,button:focus-visible{background:var(--key-hover);transform:translateY(-1px);outline:2px solid rgba(184,135,81,.25);outline-offset:1px}button:disabled{opacity:.38;cursor:default;transform:none}button.active{background:var(--accent);color:#fff;border-color:var(--accent)}.action{padding-inline:10px}
-.current-song{min-width:0;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:600 .82rem/1.1 Arial,sans-serif;color:var(--muted)}.current-song strong{color:var(--ink)}
-.tone-pill{margin-left:auto;display:flex;align-items:center;gap:6px;font:600 .78rem/1 Arial,sans-serif;white-space:nowrap;color:var(--muted)}.tone-pill strong{color:var(--accent);background:#f0e7da;border:1px solid #d8c4ad;border-radius:999px;padding:6px 9px;font-size:.84rem}
-.tone-panel{width:min(1500px,100%);margin:0 auto;padding:0 14px 7px;display:flex;align-items:center;gap:2px;overflow-x:auto;overflow-y:hidden;max-height:65px;opacity:1;transition:max-height .2s,opacity .15s,padding .2s}.tone-panel.hidden{max-height:0;opacity:0;padding-top:0;padding-bottom:0;pointer-events:none}.tone-panel button{min-width:35px;padding:6px 5px}
-.library-backdrop{position:fixed;inset:0;background:rgba(35,29,23,.22);z-index:28;opacity:0;pointer-events:none;transition:opacity .18s}.library-backdrop.open{opacity:1;pointer-events:auto}.library-drawer{position:fixed;left:0;top:0;bottom:0;width:min(360px,92vw);background:rgba(255,253,249,.99);border-right:1px solid var(--line);box-shadow:10px 0 35px rgba(50,40,30,.16);z-index:30;transform:translateX(-102%);transition:transform .2s;display:flex;flex-direction:column}.library-drawer.open{transform:translateX(0)}.library-head{padding:18px 18px 12px;border-bottom:1px solid var(--line)}.library-head-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.library-title{font:700 1.05rem/1 Arial,sans-serif;letter-spacing:.03em}.library-close{min-width:38px}.library-search{width:100%;border:1px solid #cfc6b9;background:#fffdf9;color:var(--ink);border-radius:9px;padding:10px 11px;font:500 .9rem/1.2 Arial,sans-serif;outline:none}.library-search:focus{border-color:var(--accent)}.library-tools{display:flex;gap:7px;padding:10px 18px 8px;border-bottom:1px solid var(--line)}.library-tools button{flex:1}.library-list{overflow:auto;padding:8px 8px 18px}.library-section-label{padding:12px 10px 7px;font:700 .74rem/1 Arial,sans-serif;text-transform:uppercase;letter-spacing:.1em;color:var(--accent)}.song-item{display:grid;grid-template-columns:minmax(0,1fr) 40px;align-items:center;gap:6px;margin:2px 0;border:1px solid transparent;background:transparent;border-radius:9px}.song-item.active{background:#efe5d8;border-color:#dcc6ad}.song-open{display:grid;grid-template-columns:44px minmax(0,1fr);align-items:center;gap:8px;width:100%;border:0;background:transparent;text-align:left;padding:10px 8px;border-radius:9px;transform:none!important}.song-open:hover{background:#f6f1e9}.song-number{font:700 .82rem/1 Arial,sans-serif;color:var(--muted)}.song-name{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font:600 .92rem/1.2 Arial,sans-serif}.song-fav{min-width:34px;padding:7px 5px;color:#8d6b2f;border-color:transparent;background:transparent;font-size:1rem;transform:none!important}.library-empty{padding:20px 12px;color:var(--muted);font:500 .9rem/1.4 Arial,sans-serif}
-.score{--font-scale:.80;width:min(1500px,100%);margin:0 auto;padding:16px clamp(14px,3vw,44px) 48px}.stanza{margin:0 0 17px}.score.section-markers-hidden .verse-title{display:none}.stanza.chorus-section{font-style:italic;font-weight:700}.stanza.chorus-section .verse-title,.stanza.chorus-section .music-line,.stanza.chorus-section .aligned-line,.stanza.chorus-section .plain-segment,.stanza.chorus-section .chord-group,.stanza.chorus-section .chord-text,.stanza.chorus-section .lyrics-inline{font-style:italic;font-weight:700}.verse-title{font:700 .76rem/1 Arial,sans-serif;color:var(--accent);text-transform:uppercase;letter-spacing:.11em;margin:0 0 6px}.music-line{margin:0 0 7px}
-.aligned-wrap{width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}.aligned-line{display:flex;align-items:flex-end;width:max-content;min-width:100%;white-space:nowrap;font-size:calc(clamp(1.12rem,2vw,1.42rem)*var(--font-scale));line-height:1.27;padding-top:1.20em;overflow:visible}.plain-segment{display:inline-block;align-self:flex-end;flex:0 0 auto;line-height:inherit;white-space:pre}.chord-group{position:relative;display:inline-block;align-self:flex-end;flex:0 0 auto;line-height:inherit;white-space:pre}.chord-label{position:absolute;left:0;bottom:100%;display:block;height:auto;color:var(--accent);font-size:calc(clamp(.80rem,1.08vw,.95rem)*var(--font-scale));font-weight:700;font-family:'Courier New',monospace;line-height:1;white-space:nowrap;pointer-events:none}.chord-text{display:block;line-height:inherit;white-space:pre}.lyrics-inline{font-size:calc(clamp(1.12rem,2vw,1.42rem)*var(--font-scale));line-height:1.30;letter-spacing:.005em;max-width:1100px;white-space:pre-wrap}.inline-chord{color:var(--accent);font-weight:800;font-size:.78em;white-space:nowrap;vertical-align:baseline}
-@media(max-width:760px){.toolbar{padding:7px 8px;gap:4px}.current-song{order:50;max-width:none;flex:1 1 100%;padding:0 2px 2px}.tone-pill{margin-left:3px}.score{padding:14px 10px 38px}.aligned-line{font-size:calc(1.08rem*var(--font-scale));line-height:1.24;padding-top:1.16em}.chord-label{font-size:calc(.80rem*var(--font-scale))}.lyrics-inline{font-size:calc(1.08rem*var(--font-scale));line-height:1.26}.tone-panel{padding-left:8px;padding-right:8px}.tone-panel button{min-width:34px;padding:5px 4px}}
+
+:root{
+  --bg:#f2eee7;
+  --paper:#fffdf9;
+  --ink:#25221e;
+  --muted:#746e64;
+  --accent:#7a4a24;
+  --line:#ddd5ca;
+  --key:#f8f5ef;
+  --key-hover:#ece5da;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Georgia,'Times New Roman',serif;
+}
+
+.ocultado{
+  display:none!important;
+}
+
+
+/* =========================
+   BARRA SUPERIOR
+========================= */
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(255,253,249,.96);
+  border-bottom:1px solid var(--line);
+  box-shadow:0 3px 14px rgba(60,45,30,.06);
+  backdrop-filter:blur(8px);
+}
+
+.toolbar{
+  width:min(1500px,100%);
+  margin:0 auto;
+  padding:8px 14px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+button{
+  border:1px solid #cec4b7;
+  background:var(--key);
+  color:var(--ink);
+  border-radius:8px;
+  padding:8px 9px;
+  min-height:34px;
+  cursor:pointer;
+  font:600 .79rem/1 Arial,sans-serif;
+  transition:background .12s,transform .12s,border-color .12s;
+}
+
+button:hover,
+button:focus-visible{
+  background:var(--key-hover);
+  transform:translateY(-1px);
+  outline:2px solid rgba(184,135,81,.25);
+  outline-offset:1px;
+}
+
+button:disabled{
+  opacity:.38;
+  cursor:default;
+  transform:none;
+}
+
+button.active{
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
+}
+
+.action{
+  padding-inline:10px;
+}
+
+
+/* =========================
+   MÚSICA ATUAL / TOM
+========================= */
+
+.current-song{
+  min-width:0;
+  max-width:260px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font:600 .82rem/1.1 Arial,sans-serif;
+  color:var(--muted);
+}
+
+.current-song strong{
+  color:var(--ink);
+}
+
+.tone-pill{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font:600 .78rem/1 Arial,sans-serif;
+  white-space:nowrap;
+  color:var(--muted);
+}
+
+.tone-pill strong{
+  color:var(--accent);
+  background:#f0e7da;
+  border:1px solid #d8c4ad;
+  border-radius:999px;
+  padding:6px 9px;
+  font-size:.84rem;
+}
+
+.tone-panel{
+  width:min(1500px,100%);
+  margin:0 auto;
+  padding:0 14px 7px;
+  display:flex;
+  align-items:center;
+  gap:2px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  max-height:65px;
+  opacity:1;
+  transition:max-height .2s,opacity .15s,padding .2s;
+}
+
+.tone-panel.hidden{
+  max-height:0;
+  opacity:0;
+  padding-top:0;
+  padding-bottom:0;
+  pointer-events:none;
+}
+
+.tone-panel button{
+  min-width:35px;
+  padding:6px 5px;
+}
+
+
+/* =========================
+   BIBLIOTECA
+========================= */
+
+.library-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(35,29,23,.22);
+  z-index:28;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .18s;
+}
+
+.library-backdrop.open{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.library-drawer{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:min(360px,92vw);
+  background:rgba(255,253,249,.99);
+  border-right:1px solid var(--line);
+  box-shadow:10px 0 35px rgba(50,40,30,.16);
+  z-index:30;
+  transform:translateX(-102%);
+  transition:transform .2s;
+  display:flex;
+  flex-direction:column;
+}
+
+.library-drawer.open{
+  transform:translateX(0);
+}
+
+.library-head{
+  padding:18px 18px 12px;
+  border-bottom:1px solid var(--line);
+}
+
+.library-head-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.library-title{
+  font:700 1.05rem/1 Arial,sans-serif;
+  letter-spacing:.03em;
+}
+
+.library-close{
+  min-width:38px;
+}
+
+.library-search{
+  width:100%;
+  border:1px solid #cfc6b9;
+  background:#fffdf9;
+  color:var(--ink);
+  border-radius:9px;
+  padding:10px 11px;
+  font:500 .9rem/1.2 Arial,sans-serif;
+  outline:none;
+}
+
+.library-search:focus{
+  border-color:var(--accent);
+}
+
+.library-tools{
+  display:flex;
+  gap:7px;
+  padding:10px 18px 8px;
+  border-bottom:1px solid var(--line);
+}
+
+.library-tools button{
+  flex:1;
+}
+
+.library-list{
+  overflow:auto;
+  padding:8px 8px 18px;
+}
+
+.library-section-label{
+  padding:12px 10px 7px;
+  font:700 .74rem/1 Arial,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--accent);
+}
+
+.song-item{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 40px;
+  align-items:center;
+  gap:6px;
+  margin:2px 0;
+  border:1px solid transparent;
+  background:transparent;
+  border-radius:9px;
+}
+
+.song-item.active{
+  background:#efe5d8;
+  border-color:#dcc6ad;
+}
+
+.song-open{
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr);
+  align-items:center;
+  gap:8px;
+  width:100%;
+  border:0;
+  background:transparent;
+  text-align:left;
+  padding:10px 8px;
+  border-radius:9px;
+  transform:none!important;
+}
+
+.song-open:hover{
+  background:#f6f1e9;
+}
+
+.song-number{
+  font:700 .82rem/1 Arial,sans-serif;
+  color:var(--muted);
+}
+
+.song-name{
+  min-width:0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font:600 .92rem/1.2 Arial,sans-serif;
+}
+
+.song-fav{
+  min-width:34px;
+  padding:7px 5px;
+  color:#8d6b2f;
+  border-color:transparent;
+  background:transparent;
+  font-size:1rem;
+  transform:none!important;
+}
+
+.library-empty{
+  padding:20px 12px;
+  color:var(--muted);
+  font:500 .9rem/1.4 Arial,sans-serif;
+}
+
+
+/* =========================
+   PARTITURA / LETRA
+========================= */
+
+.score{
+  --font-scale:.80;
+  width:min(1500px,100%);
+  margin:0 auto;
+  padding:16px clamp(14px,3vw,44px) 48px;
+}
+
+.stanza{
+  margin:0 0 7px;
+}
+
+.score.section-markers-hidden .verse-title{
+  display:none;
+}
+
+.stanza.chorus-section{
+  font-style:italic;
+  font-weight:700;
+}
+
+.stanza.chorus-section .verse-title,
+.stanza.chorus-section .music-line,
+.stanza.chorus-section .aligned-line,
+.stanza.chorus-section .plain-segment,
+.stanza.chorus-section .chord-group,
+.stanza.chorus-section .chord-text,
+.stanza.chorus-section .lyrics-inline{
+  font-style:italic;
+  font-weight:700;
+}
+
+.verse-title{
+  font:700 .76rem/1 Arial,sans-serif;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:.11em;
+  margin:0 0 0px;
+}
+
+.music-line{
+  margin:0 0 0px;
+}
+
+
+/* =========================
+   CIFRAS ALINHADAS
+========================= */
+
+.aligned-wrap{
+  position:relative;
+  width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:thin;
+}
+
+.overflow-chord-indicator{
+  position:absolute;
+  right:2px;
+  top:0;
+  z-index:5;
+  display:none;
+  align-items:center;
+  gap:2px;
+  padding:3px 5px 3px 7px;
+  border:1px solid #d8c4ad;
+  border-radius:6px;
+  background:var(--paper);
+  color:#b00000;
+  font:800 calc(clamp(.80rem,1.08vw,.95rem)*var(--font-scale))/1 'Courier New',monospace;
+  white-space:nowrap;
+  box-shadow:-5px 0 8px rgba(255,253,249,.95);
+  pointer-events:none;
+}
+
+.overflow-chord-indicator::after{
+  content:'>';
+  color:var(--ink);
+  font-weight:900;
+}
+
+.aligned-line{
+  display:flex;
+  align-items:flex-end;
+  width:max-content;
+  min-width:100%;
+  white-space:nowrap;
+  font-size:calc(clamp(1.12rem,2vw,1.42rem)*var(--font-scale));
+  line-height:1.27;
+  padding-top:1.20em;
+  overflow:visible;
+}
+
+.plain-segment{
+  display:inline-block;
+  align-self:flex-end;
+  flex:0 0 auto;
+  line-height:inherit;
+  white-space:pre;
+}
+
+.chord-group{
+  position:relative;
+  display:inline-block;
+  align-self:flex-end;
+  flex:0 0 auto;
+  line-height:inherit;
+  white-space:pre;
+}
+
+
+/* =========================
+   CIFRAS
+========================= */
+
+.chord-label{
+  position:absolute;
+  left:0;
+  bottom:100%;
+  display:block;
+  height:auto;
+  color:#b00000;
+  font-size:calc(clamp(.80rem,1.08vw,.95rem)*var(--font-scale));
+  font-weight:800;
+  font-family:'Courier New',monospace;
+  line-height:1;
+  white-space:nowrap;
+  pointer-events:none;
+}
+
+.chord-text{
+  display:block;
+  line-height:inherit;
+  white-space:pre;
+}
+
+
+/* =========================
+   MODO INLINE
+========================= */
+
+.lyrics-inline{
+  font-size:calc(clamp(1.12rem,2vw,1.42rem)*var(--font-scale));
+  line-height:1.30;
+  letter-spacing:.005em;
+  max-width:1100px;
+  white-space:pre-wrap;
+}
+
+.inline-chord{
+  color:#c00000;
+  font-weight:800;
+  font-size:.78em;
+  white-space:nowrap;
+  vertical-align:baseline;
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media(max-width:760px){
+
+  .toolbar{
+    padding:7px 8px;
+    gap:4px;
+  }
+
+  .current-song{
+    order:50;
+    max-width:none;
+    flex:1 1 100%;
+    padding:0 2px 2px;
+  }
+
+  .tone-pill{
+    margin-left:3px;
+  }
+
+  .score{
+    padding:14px 10px 38px;
+  }
+
+  .aligned-line{
+    font-size:calc(1.08rem*var(--font-scale));
+    line-height:1.24;
+    padding-top:1.16em;
+  }
+
+  .chord-label{
+    font-size:calc(.80rem*var(--font-scale));
+  }
+
+  .lyrics-inline{
+    font-size:calc(1.08rem*var(--font-scale));
+    line-height:1.26;
+  }
+
+  .tone-panel{
+    padding-left:8px;
+    padding-right:8px;
+  }
+
+  .tone-panel button{
+    min-width:34px;
+    padding:5px 4px;
+  }
+
+}
+
 </style>
 </head>
 <body>
@@ -53,7 +577,7 @@ const chromatic=[{name:'C'},{name:'Db'},{name:'D'},{name:'Eb'},{name:'E'},{name:
   A posição pode cair no meio de uma palavra ou de uma sílaba.
 */
 
-let currentSongId='001';let currentIndex=songs.find(s=>s.id===currentSongId).sourceToneIndex;let sectionsHidden=true;let progressionMode=false;let inlineMode=false;let fontScale=.90;const MIN_FONT_SCALE=.80,MAX_FONT_SCALE=1.35,FONT_STEP=.05;
+let currentSongId='001';let currentIndex=songs.find(s=>s.id===currentSongId).sourceToneIndex;let sectionsHidden=true;let progressionMode=false;let inlineMode=false;let fontScale=.85;const MIN_FONT_SCALE=.80,MAX_FONT_SCALE=1.35,FONT_STEP=.05;
 
 const aliases={C:0,'B#':0,'C#':1,Db:1,D:2,'D#':3,Eb:3,E:4,Fb:4,F:5,'E#':5,'F#':6,Gb:6,G:7,'G#':8,Ab:8,A:9,'A#':10,Bb:10,B:11,Cb:11};
 function transposeChord(chord,semitones){const m=chord.match(/^([A-G](?:#|b)?)(.*)$/);if(!m)return chord;const root=m[1],suffix=m[2]||'';if(!(root in aliases))return chord;const preferred=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];return preferred[(aliases[root]+semitones+120)%12]+suffix}
@@ -67,7 +591,100 @@ function applyFontScale(){document.getElementById('score').style.setProperty('--
 */
 function normalizeAnchors(lyric,anchors){return [...anchors].sort((a,b)=>a.pos-b.pos).map(a=>({pos:Math.max(0,Math.min(Number(a.pos),lyric.length)),chord:a.chord}))}
 function renderInlineFromAnchors(lyric,anchors){const frag=document.createDocumentFragment();let cursor=0;normalizeAnchors(lyric,anchors).forEach(a=>{if(a.pos>cursor)frag.appendChild(document.createTextNode(lyric.slice(cursor,a.pos)));const chord=document.createElement('strong');chord.className='inline-chord';chord.textContent='('+a.chord+')';frag.appendChild(chord);cursor=a.pos});if(cursor<lyric.length)frag.appendChild(document.createTextNode(lyric.slice(cursor)));return frag}
-function renderAlignedFromAnchors(lyric,anchors){const wrap=document.createElement('div');wrap.className='aligned-wrap';const line=document.createElement('div');line.className='aligned-line';let cursor=0;const aa=normalizeAnchors(lyric,anchors);aa.forEach((a,i)=>{if(a.pos>cursor){const plain=document.createElement('span');plain.className='plain-segment';plain.textContent=lyric.slice(cursor,a.pos);line.appendChild(plain)}const group=document.createElement('span');group.className='chord-group';const label=document.createElement('span');label.className='chord-label';label.textContent=a.chord;const nextPos=i+1<aa.length?aa[i+1].pos:lyric.length;const text=document.createElement('span');text.className='chord-text';text.textContent=lyric.slice(a.pos,nextPos);group.append(label,text);line.appendChild(group);cursor=nextPos});if(cursor<lyric.length){const plain=document.createElement('span');plain.className='plain-segment';plain.textContent=lyric.slice(cursor);line.appendChild(plain)}wrap.appendChild(line);return wrap}
+function renderAlignedFromAnchors(lyric,anchors){
+  const wrap=document.createElement('div');
+  wrap.className='aligned-wrap';
+
+  const line=document.createElement('div');
+  line.className='aligned-line';
+
+  let cursor=0;
+  const aa=normalizeAnchors(lyric,anchors);
+
+  aa.forEach((a,i)=>{
+    if(a.pos>cursor){
+      const plain=document.createElement('span');
+      plain.className='plain-segment';
+      plain.textContent=lyric.slice(cursor,a.pos);
+      line.appendChild(plain);
+    }
+
+    const group=document.createElement('span');
+    group.className='chord-group';
+
+    const label=document.createElement('span');
+    label.className='chord-label';
+    label.textContent=a.chord;
+
+    const nextPos=i+1<aa.length?aa[i+1].pos:lyric.length;
+
+    const text=document.createElement('span');
+    text.className='chord-text';
+    text.textContent=lyric.slice(a.pos,nextPos);
+
+    group.append(label,text);
+    line.appendChild(group);
+    cursor=nextPos;
+  });
+
+  if(cursor<lyric.length){
+    const plain=document.createElement('span');
+    plain.className='plain-segment';
+    plain.textContent=lyric.slice(cursor);
+    line.appendChild(plain);
+  }
+
+  /* Indicador de cifra que ficou fora da área visível */
+  const indicator=document.createElement('span');
+  indicator.className='overflow-chord-indicator';
+
+  const updateOverflowIndicator=()=>{
+    indicator.style.display='none';
+
+    const wrapRect=wrap.getBoundingClientRect();
+    const groups=[...line.querySelectorAll('.chord-group')];
+
+    for(const group of groups){
+      const label=group.querySelector('.chord-label');
+      if(!label) continue;
+
+      const rect=label.getBoundingClientRect();
+
+      /*
+        Só mostra o indicador quando a CIFRA realmente
+        desapareceu da área visível.
+
+        O texto da letra pode continuar além da tela,
+        e isso não deve disparar o indicador.
+      */
+      if(rect.left >= wrapRect.right - 1){
+        const chord=label.textContent?.trim();
+        if(chord){
+          indicator.textContent=chord;
+          indicator.style.display='flex';
+        }
+        break;
+      }
+    }
+  };
+
+  wrap.appendChild(line);
+  wrap.appendChild(indicator);
+
+  /* Aguarda a largura real da linha antes de verificar o corte. */
+  requestAnimationFrame(updateOverflowIndicator);
+
+  if(typeof ResizeObserver!=='undefined'){
+    const observer=new ResizeObserver(updateOverflowIndicator);
+    observer.observe(wrap);
+    observer.observe(line);
+    wrap._overflowObserver=observer;
+  }
+
+  wrap.addEventListener('scroll',updateOverflowIndicator,{passive:true});
+
+  return wrap;
+}
 function getCurrentSong(){return songs.find(s=>s.id===currentSongId)||songs[0]}
 function render(){const s=getCurrentSong(),delta=currentIndex-s.sourceToneIndex,current=chromatic[currentIndex].name;document.getElementById('currentTone').textContent=current;document.getElementById('currentSongLabel').innerHTML=`<strong>${s.number} — ${s.title}</strong>`;const root=document.getElementById('song');root.innerHTML='';s.sections.forEach(sectionData=>{const section=document.createElement('section');section.className='stanza'+(/^coro$/i.test(sectionData.label.trim())?' chorus-section':'');const label=document.createElement('div');label.className='verse-title';label.textContent=sectionData.label;section.appendChild(label);sectionData.lines.forEach(lineData=>{const line=document.createElement('div');line.className='music-line';const anchors=lineData.anchors.map(a=>({...a,chord:progressionMode?chordToProgression(transposeChord(a.chord,delta),current):transposeChord(a.chord,delta)}));if(inlineMode){const lr=document.createElement('div');lr.className='lyrics-inline';lr.appendChild(renderInlineFromAnchors(lineData.lyric,anchors));line.appendChild(lr)}else line.appendChild(renderAlignedFromAnchors(lineData.lyric,anchors));section.appendChild(line)});root.appendChild(section)});document.getElementById('score').classList.toggle('section-markers-hidden',sectionsHidden);const sb=document.getElementById('toggleSections');sb.classList.toggle('active',sectionsHidden);sb.textContent=sectionsHidden?'/':'🎵';sb.title=sectionsHidden?'Mostrar marcações':'Ocultar marcações';document.getElementById('toggleProgression').classList.toggle('active',progressionMode);document.getElementById('toggleInline').classList.toggle('active',inlineMode);document.querySelectorAll('#tonePanel button').forEach((b,i)=>b.classList.toggle('active',i===currentIndex))}
 function safeGet(k,f){try{const v=localStorage.getItem(k);return v===null?f:v}catch{return f}}function safeSet(k,v){try{localStorage.setItem(k,v)}catch{}}
