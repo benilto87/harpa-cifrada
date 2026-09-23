@@ -494,5 +494,66 @@ const songs=[
       {lyric:'Gozo em vida e no futuro nele podemos alcançar',anchors:[{pos:0,chord:'F'},{pos:7,chord:'F7'},{pos:21,chord:'Bb'},{pos:27,chord:'C'},{pos:46,chord:'F'}]}
     ]
     }
+  ]
+},
+
+/* =========================
+   350 — A HISTÓRIA DA CRUZ
+========================= */
+
+{
+  id:'350',
+  number:'350',
+  title:'A HISTÓRIA DA CRUZ',
+  category:'Harpa Cristã',
+  sourceToneIndex:8,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Tens tu lido a história da dura cruz,',anchors:[{pos:7,chord:'Ab'},{pos:27,chord:'Db'},{pos:33,chord:'Ab'}]},
+      {lyric:'Na qual Jesus morreu,',anchors:[{pos:4,chord:'Ab'},{pos:11,chord:'Eb'},{pos:18,chord:'Ab'}]},
+      {lyric:'Desfazendo as trevas raiou a luz,',anchors:[{pos:5,chord:'Db'},{pos:24,chord:'Ab'},{pos:29,chord:'Eb'}]},
+      {lyric:'Mandando o sangue Seu?',anchors:[{pos:3,chord:'Db'},{pos:11,chord:'Eb'},{pos:19,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Jesus padeceu na cruz por ti;',anchors:[{pos:2,chord:'Eb'},{pos:18,chord:'Ab'}]},
+      {lyric:'Jesus padeceu na cruz!',anchors:[{pos:2,chord:'Ab'},{pos:18,chord:'Eb'}]},
+      {lyric:'Oh! Grande amor do Salvador',anchors:[{pos:5,chord:'Ab'},{pos:19,chord:'Db'}]},
+      {lyric:'Morrendo na cruz por mim!',anchors:[{pos:3,chord:'Eb'},{pos:21,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Tens tu lido que Cristo não se queixou,',anchors:[{pos:8,chord:'Ab'},{pos:27,chord:'Db'},{pos:35,chord:'Ab'}]},
+      {lyric:'No lenho, em grande dor,',anchors:[{pos:2,chord:'Ab'},{pos:14,chord:'Eb'},{pos:21,chord:'Ab'}]},
+      {lyric:'Mas ao Pai o perdão \'inda suplicou',anchors:[{pos:7,chord:'Db'},{pos:26,chord:'Ab'},{pos:32,chord:'Eb'}]},
+      {lyric:'P\'ra o povo pecador?',anchors:[{pos:7,chord:'Db'},{pos:12,chord:'Eb'},{pos:17,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Tens tu lido que Cristo salvou, por fim,',anchors:[{pos:8,chord:'Ab'},{pos:27,chord:'Db'},{pos:36,chord:'Ab'}]},
+      {lyric:'Na cruz, um malfeitor?',anchors:[{pos:3,chord:'Ab'},{pos:12,chord:'Eb'},{pos:19,chord:'Ab'}]},
+      {lyric:'Que sofrendo na cruz Lhe rogou: “De mim,',anchors:[{pos:7,chord:'Db'},{pos:28,chord:'Ab'},{pos:36,chord:'Eb'}]},
+      {lyric:'ó lembra-Te, Senhor”?',anchors:[{pos:2,chord:'Db'},{pos:9,chord:'Eb'},{pos:16,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Tens tu lido que Cristo exclamou na cruz:',anchors:[{pos:8,chord:'Ab'},{pos:29,chord:'Db'},{pos:37,chord:'Ab'}]},
+      {lyric:'“Eis consumado está”,',anchors:[{pos:5,chord:'Ab'},{pos:11,chord:'Eb'},{pos:17,chord:'Ab'}]},
+      {lyric:'Foi por mim, foi por ti, que morreu Jesus,',anchors:[{pos:8,chord:'Db'},{pos:32,chord:'Ab'},{pos:38,chord:'Eb'}]},
+      {lyric:'Aceita Cristo já.',anchors:[{pos:1,chord:'Db'},{pos:7,chord:'Eb'},{pos:13,chord:'Ab'}]}
+    ]
+    }
   ]}
 ];
+
