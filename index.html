@@ -99,6 +99,68 @@ button.active{
 
 
 /* =========================
+   ROLAGEM AUTOMÁTICA
+========================= */
+
+.auto-scroll-panel{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  padding:6px 12px 8px;
+  border-top:1px solid var(--line);
+  background:rgba(255,253,249,.98);
+}
+
+.auto-scroll-panel.hidden{
+  display:none;
+}
+
+.auto-scroll-panel .memory-check{
+  display:flex;
+  align-items:center;
+  gap:3px;
+  font:700 .78rem/1 Arial,sans-serif;
+  cursor:pointer;
+  user-select:none;
+}
+
+.auto-scroll-panel .memory-check input{
+  width:16px;
+  height:16px;
+  margin:0;
+  accent-color:var(--accent);
+}
+
+.auto-scroll-panel .speed-btn{
+  min-width:30px;
+  min-height:30px;
+  padding:4px 8px;
+  border-radius:7px;
+}
+
+.auto-scroll-speed{
+  width:min(220px,42vw);
+  accent-color:var(--accent);
+  cursor:pointer;
+}
+
+.auto-scroll-value{
+  min-width:22px;
+  text-align:center;
+  font:700 .76rem/1 Arial,sans-serif;
+  color:var(--muted);
+}
+
+.auto-scroll-label{
+  margin-left:4px;
+  font:600 .72rem/1 Arial,sans-serif;
+  color:var(--muted);
+  white-space:nowrap;
+}
+
+
+/* =========================
    MÚSICA ATUAL / TOM
 ========================= */
 
@@ -213,6 +275,29 @@ button.active{
   justify-content:space-between;
   gap:10px;
   margin-bottom:12px;
+}
+
+.library-options{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-left:auto;
+}
+
+.library-check{
+  display:flex;
+  align-items:center;
+  gap:3px;
+  font:700 .78rem/1 Arial,sans-serif;
+  cursor:pointer;
+  user-select:none;
+}
+
+.library-check input{
+  width:16px;
+  height:16px;
+  margin:0;
+  accent-color:var(--accent);
 }
 
 .library-title{
@@ -390,15 +475,15 @@ button.active{
 .overflow-chord-indicator{
   position:absolute;
   right:2px;
-  top:0;
+  top:0px;
   z-index:5;
   display:none;
   align-items:center;
   gap:2px;
-  padding:3px 5px 3px 7px;
+  padding:0px 5px 0px 7px;
   border:1px solid #d8c4ad;
   border-radius:6px;
-  background:var(--paper);
+  background:rgba(255,253,249,.50);
   color:#b00000;
   font:800 calc(clamp(.80rem,1.08vw,.95rem)*var(--font-scale))/1 'Courier New',monospace;
   white-space:nowrap;
@@ -557,14 +642,22 @@ button.active{
     <button class="action" id="fontDown" title="Diminuir fonte">−</button><button class="action" id="fontUp" title="Aumentar fonte">+</button>
     <button class="action" id="toggleSections" title="Ocultar marcações">🎵</button>
     <button class="action" id="toggleNotes" title="Mostrar/ocultar tons">🔺</button>
-    <button class="action" id="toggleProgression" title="Progressão numérica">#</button><button class="action" id="toggleInline" title="Cifras dentro da letra">.</button>
+    <button class="action" id="toggleProgression" title="Progressão numérica">#</button><button class="action" id="toggleInline" title="Cifras dentro da letra">.</button><button class="action" id="toggleSplit" title="Dividir pelo /">*</button><button class="action" id="toggleAutoScroll" title="Rolagem automática — 3 minutos">▶</button>
     <div class="tone-pill">Tom atual <strong id="currentTone">Bb</strong></div>
   </div>
   <div id="tonePanel" class="tone-panel" role="group" aria-label="Tons"></div>
+  <div id="autoScrollPanel" class="auto-scroll-panel hidden" aria-label="Velocidade da rolagem automática">
+    <label class="memory-check" title="Memorizar o tempo desta música"><input type="checkbox" id="autoScrollMemory"><span>⏱</span></label>
+    <button type="button" class="speed-btn" id="autoScrollSlow" title="Mais devagar">−</button>
+    <input class="auto-scroll-speed" id="autoScrollSpeed" type="range" min="-5" max="5" step="1" value="0" aria-label="Velocidade da rolagem">
+    <span class="auto-scroll-value" id="autoScrollValue">0</span>
+    <button type="button" class="speed-btn" id="autoScrollFast" title="Mais rápido">+</button>
+    <span class="auto-scroll-label" id="autoScrollTime">3:00</span>
+  </div>
 </header>
 <div class="library-backdrop" id="libraryBackdrop"></div>
 <aside class="library-drawer" id="libraryDrawer" aria-hidden="true">
-  <div class="library-head"><div class="library-head-row"><div class="library-title">MÚSICAS</div><button class="library-close" id="closeLibrary">×</button></div><input id="librarySearch" class="library-search" type="search" inputmode="numeric" pattern="[0-9]*" placeholder="🔎  Número do hino..."></div>
+  <div class="library-head"><div class="library-head-row"><div class="library-title">MÚSICAS</div><div class="library-options"><label class="library-check" title="Usar sustenidos"><input type="checkbox" id="toggleSharp">#</label><label class="library-check" title="Entrar meio tom abaixo"><input type="checkbox" id="toggleHalfDown">−½</label></div><button class="library-close" id="closeLibrary">×</button></div><input id="librarySearch" class="library-search" type="search" inputmode="numeric" pattern="[0-9]*" placeholder="🔎  Número do hino..."></div>
   <div class="library-tools"><button id="favoritesFilter">⭐ Favoritos</button><button id="allSongsFilter" class="active">Todas</button></div>
   <div class="library-list" id="libraryList"></div>
 </aside>
@@ -581,10 +674,19 @@ const chromatic=[{name:'C'},{name:'Db'},{name:'D'},{name:'Eb'},{name:'E'},{name:
   A posição pode cair no meio de uma palavra ou de uma sílaba.
 */
 
-let currentSongId='001';let currentIndex=songs.find(s=>s.id===currentSongId).sourceToneIndex;let sectionsHidden=true;let progressionMode=false;let inlineMode=false;let fontScale=.80;const MIN_FONT_SCALE=.75,MAX_FONT_SCALE=1.35,FONT_STEP=.05;
+let useSharps=localStorage.getItem('harpa_use_sharps')==='1';
+let startHalfDown=localStorage.getItem('harpa_start_half_down')==='1';
+let currentSongId='001';let currentIndex=(songs.find(s=>s.id===currentSongId).sourceToneIndex+(startHalfDown?11:0))%12;let sectionsHidden=true;let progressionMode=false;let inlineMode=false;let splitMode=false;let autoScrollMode=false;let autoScrollRunning=false;let autoScrollSpeedLevel=0;let autoScrollFrame=0;let autoScrollSegmentStartTime=0;let autoScrollSegmentStartY=0;let autoScrollSegmentDuration=180000;let autoScrollResumeY=null;let fontScale=.80;const MIN_FONT_SCALE=.75,MAX_FONT_SCALE=1.35,FONT_STEP=.05;
 
 const aliases={C:0,'B#':0,'C#':1,Db:1,D:2,'D#':3,Eb:3,E:4,Fb:4,F:5,'E#':5,'F#':6,Gb:6,G:7,'G#':8,Ab:8,A:9,'A#':10,Bb:10,B:11,Cb:11};
-function transposeChord(chord,semitones){const m=chord.match(/^([A-G](?:#|b)?)(.*)$/);if(!m)return chord;const root=m[1],suffix=m[2]||'';if(!(root in aliases))return chord;const preferred=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];return preferred[(aliases[root]+semitones+120)%12]+suffix}
+function spellNote(note){
+  const flat=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
+  const sharp=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+  const i=aliases[note];
+  if(i===undefined)return note;
+  return (useSharps?sharp:flat)[i];
+}
+function transposeChord(chord,semitones){const m=chord.match(/^([A-G](?:#|b)?)(.*)$/);if(!m)return chord;const root=m[1],suffix=m[2]||'';if(!(root in aliases))return chord;return spellNote((['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'])[(aliases[root]+semitones+120)%12])+suffix}
 function chordToProgression(chord,keyName){const m=chord.match(/^([A-G](?:#|b)?)(.*)$/);if(!m)return '('+chord+')';const root=m[1],suffix=m[2]||'',scale=[0,2,4,5,7,9,11],key=aliases[keyName],r=aliases[root];if(key===undefined||r===undefined)return '('+chord+')';const interval=(r-key+12)%12,degree=scale.indexOf(interval);let degreeText;if(degree>=0)degreeText=String(degree+1);else{const nearest=scale.reduce((best,val,i)=>{const d=Math.min((interval-val+12)%12,(val-interval+12)%12);return !best||d<best.d?{d,i,dir:((interval-val+12)%12)<=( (val-interval+12)%12)?1:-1}:best},null);degreeText=nearest?(nearest.dir<0?'♭':'♯')+(nearest.i+1):String(interval)}const ext=[];if(/7/.test(suffix))ext.push('7');if(/4/.test(suffix)&&!/7/.test(suffix))ext.push('4');return ext.length?`${degreeText},${ext.join(',')}`:`${degreeText}`}
 function applyFontScale(){document.getElementById('score').style.setProperty('--font-scale',fontScale.toFixed(2));document.getElementById('fontDown').disabled=fontScale<=MIN_FONT_SCALE+.001;document.getElementById('fontUp').disabled=fontScale>=MAX_FONT_SCALE-.001}
 
@@ -648,27 +750,62 @@ function renderAlignedFromAnchors(lyric,anchors){
     const wrapRect=wrap.getBoundingClientRect();
     const groups=[...line.querySelectorAll('.chord-group')];
 
-    for(const group of groups){
+    const hiddenChords=[];
+    let primeiraOverflow=-1;
+
+    /*
+      A plaquinha também é um limite real.
+      1ª cifra: chega ao limite da tela.
+      Depois que a plaquinha aparece, as próximas são
+      calculadas em relação à borda ESQUERDA dela:
+        2ª = 20 px antes da plaquinha
+        3ª = 30 px antes
+        4ª = 40 px antes
+        etc.
+
+      Assim a cifra não precisa atravessar a plaquinha
+      para ser considerada escondida.
+    */
+    groups.forEach((group,i)=>{
       const label=group.querySelector('.chord-label');
-      if(!label) continue;
+      if(!label) return;
 
       const rect=label.getBoundingClientRect();
 
-      /*
-        Só mostra o indicador quando a CIFRA realmente
-        desapareceu da área visível.
-
-        O texto da letra pode continuar além da tela,
-        e isso não deve disparar o indicador.
-      */
-      if(rect.left >= wrapRect.right - 1){
-        const chord=label.textContent?.trim();
-        if(chord){
-          indicator.textContent=chord;
-          indicator.style.display='flex';
-        }
-        break;
+      /* Primeira cifra: começa a sair pela borda direita visível. */
+      if(primeiraOverflow===-1 && rect.right > wrapRect.right + 1){
+        primeiraOverflow=i;
       }
+
+      if(primeiraOverflow!==-1){
+        const ordem=i-primeiraOverflow;
+
+        if(ordem===0){
+          const chord=label.textContent?.trim();
+          if(chord) hiddenChords.push(chord);
+
+          /* Mede a plaquinha imediatamente após inserir a primeira cifra. */
+          indicator.textContent=hiddenChords.join(', ');
+          indicator.style.display='flex';
+        }else{
+          const indicatorRect=indicator.getBoundingClientRect();
+
+          const distancia=20+(ordem-1)*10;
+          const limite=indicatorRect.left-distancia;
+
+          if(rect.right >= limite){
+            const chord=label.textContent?.trim();
+            if(chord) hiddenChords.push(chord);
+            indicator.textContent=hiddenChords.join(', ');
+          }
+        }
+      }
+    });
+
+    if(hiddenChords.length){
+      indicator.style.display='flex';
+    }else{
+      indicator.style.display='none';
     }
   };
 
@@ -689,14 +826,249 @@ function renderAlignedFromAnchors(lyric,anchors){
 
   return wrap;
 }
+function splitLineAtSlash(lyric,anchors){
+  const slash=lyric.indexOf('/');
+  if(slash===-1)return null;
+
+  const leftRaw=lyric.slice(0,slash);
+  const rightRaw=lyric.slice(slash+1);
+
+  /*
+    Remove apenas o espaço que normalmente fica antes/depois do "/".
+    O espaço inicial da segunda parte é preservado quando existir.
+  */
+  const left=leftRaw.replace(/\s+$/,'');
+  const right=rightRaw.replace(/^\s+/,' ');
+
+  const cut=slash;
+
+  const leftAnchors=[];
+  const rightAnchors=[];
+
+  normalizeAnchors(lyric,anchors).forEach(a=>{
+    if(a.pos<cut){
+      leftAnchors.push({pos:a.pos,chord:a.chord});
+    }else if(a.pos>cut){
+      const posInRight=a.pos-(cut+1);
+      rightAnchors.push({pos:Math.max(0,posInRight),chord:a.chord});
+    }else{
+      /*
+        Uma cifra exatamente sobre o "/" pertence à segunda parte.
+      */
+      rightAnchors.push({pos:0,chord:a.chord});
+    }
+  });
+
+  return {
+    leftLyric:left,
+    leftAnchors,
+    rightLyric:right,
+    rightAnchors
+  };
+}
+
+function isChorusSection(section){return /^(coro|refrão)$/i.test(String(section?.label||'').trim())}
+function isVerseSection(section){return /^\s*\d+ª?\s*estrofe/i.test(String(section?.label||''))}
+function getAutoScrollSections(sections){
+  const choruses=sections.filter(isChorusSection);
+  if(!choruses.length)return sections;
+  const result=[];
+  sections.forEach(section=>{
+    if(isChorusSection(section))return;
+    result.push(section);
+    if(isVerseSection(section))choruses.forEach(chorus=>result.push(chorus));
+  });
+  return result.length?result:sections;
+}
+function getAutoScrollMax(){return Math.max(0,document.documentElement.scrollHeight-window.innerHeight)}
+function getAutoScrollMultiplier(){return Math.pow(1.15,autoScrollSpeedLevel)}
+function getAutoScrollDurationMs(){return 180000/getAutoScrollMultiplier()}
+function formatAutoScrollTime(ms){const total=Math.max(1,Math.round(ms/1000));const minutes=Math.floor(total/60);const seconds=total%60;return `${minutes}:${String(seconds).padStart(2,'0')}`}
+function autoScrollMemoryKey(songId){return `harpa_scroll_tempo_${songId}`}
+function loadAutoScrollMemory(songId){const raw=safeGet(autoScrollMemoryKey(songId),null);const n=raw===null?0:Number(raw);return Number.isFinite(n)?Math.max(-5,Math.min(5,n)):0}
+function isAutoScrollMemorySaved(){return String(safeGet(autoScrollMemoryKey(currentSongId),'__none__'))===String(autoScrollSpeedLevel)}
+function updateAutoScrollMemoryButton(){
+  const checkbox=document.getElementById('autoScrollMemory');
+  if(!checkbox)return;
+  checkbox.checked=isAutoScrollMemorySaved();
+  checkbox.title=checkbox.checked?'Tempo memorizado para esta música':'Memorizar o tempo desta música';
+}
+function updateAutoScrollPanel(){
+  const panel=document.getElementById('autoScrollPanel');
+  const value=document.getElementById('autoScrollValue');
+  const range=document.getElementById('autoScrollSpeed');
+  const time=document.getElementById('autoScrollTime');
+  if(range)range.value=String(autoScrollSpeedLevel);
+  if(value)value.textContent=autoScrollSpeedLevel>0?`+${autoScrollSpeedLevel}`:String(autoScrollSpeedLevel);
+  if(time)time.textContent=formatAutoScrollTime(getAutoScrollDurationMs());
+  updateAutoScrollMemoryButton();
+  const button=document.getElementById('toggleAutoScroll');
+  if(button){
+    button.classList.toggle('active',autoScrollMode);
+    button.textContent=autoScrollRunning?'⏸':'▶';
+    button.title=autoScrollRunning?'Parar rolagem automática':'Rolagem automática';
+  }
+}
+function cancelAutoScrollFrame(){
+  if(autoScrollFrame){cancelAnimationFrame(autoScrollFrame);autoScrollFrame=0;}
+}
+function finishAutoScroll(){
+  cancelAutoScrollFrame();
+  autoScrollRunning=false;
+  autoScrollMode=false;
+  autoScrollResumeY=null;
+  window.scrollTo(0,getAutoScrollMax());
+  updateAutoScrollPanel();
+  document.getElementById('autoScrollPanel')?.classList.add('hidden');
+  render();
+}
+function autoScrollTick(now){
+  if(!autoScrollRunning)return;
+  const maxY=getAutoScrollMax();
+  const elapsed=now-autoScrollSegmentStartTime;
+  const p=Math.min(1,elapsed/Math.max(1,autoScrollSegmentDuration));
+  const y=autoScrollSegmentStartY+(maxY-autoScrollSegmentStartY)*p;
+  window.scrollTo(0,y);
+  if(p>=1){finishAutoScroll();return;}
+  autoScrollFrame=requestAnimationFrame(autoScrollTick);
+}
+function startAutoScroll(){
+  document.getElementById('autoScrollPanel')?.classList.remove('hidden');
+  cancelAutoScrollFrame();
+  const retomando=autoScrollResumeY!==null;
+  autoScrollMode=true;
+  autoScrollRunning=true;
+
+  const notesButton=document.getElementById('toggleNotes');
+  const tonePanel=document.getElementById('tonePanel');
+  if(notesButton && tonePanel && !tonePanel.classList.contains('hidden')) notesButton.click();
+
+  updateAutoScrollPanel();
+  if(!retomando) render();
+
+  requestAnimationFrame(()=>{
+    const maxY=getAutoScrollMax();
+    if(maxY<=0){finishAutoScroll();return;}
+    const startY=retomando?Math.min(autoScrollResumeY,maxY):0;
+    autoScrollSegmentStartY=startY;
+    autoScrollSegmentStartTime=performance.now();
+    autoScrollSegmentDuration=getAutoScrollDurationMs()*Math.max(0,(maxY-startY)/maxY);
+    autoScrollResumeY=null;
+    window.scrollTo(0,startY);
+    autoScrollFrame=requestAnimationFrame(autoScrollTick);
+  });
+}
+function stopAutoScroll(){
+  autoScrollResumeY=window.scrollY;
+  cancelAutoScrollFrame();
+  autoScrollRunning=false;
+  autoScrollMode=true;
+  updateAutoScrollPanel();
+}
+function setAutoScrollSpeed(level){
+  const next=Math.max(-5,Math.min(5,Number(level)||0));
+  if(next===autoScrollSpeedLevel){updateAutoScrollPanel();return;}
+  if(autoScrollRunning){
+    const now=performance.now();
+    const maxY=getAutoScrollMax();
+    const currentY=Math.min(window.scrollY,maxY);
+    const remaining=Math.max(0,maxY-currentY);
+    const remainingRatio=maxY>0?remaining/maxY:0;
+    autoScrollSpeedLevel=next;
+    autoScrollSegmentStartY=currentY;
+    autoScrollSegmentStartTime=now;
+    autoScrollSegmentDuration=getAutoScrollDurationMs()*remainingRatio;
+  }else{
+    autoScrollSpeedLevel=next;
+  }
+  updateAutoScrollPanel();
+}
+
 function getCurrentSong(){return songs.find(s=>s.id===currentSongId)||songs[0]}
-function render(){const s=getCurrentSong(),delta=currentIndex-s.sourceToneIndex,current=chromatic[currentIndex].name;document.getElementById('currentTone').textContent=current;document.getElementById('currentSongLabel').innerHTML=`<strong>${s.number} — ${s.title}</strong>`;const root=document.getElementById('song');root.innerHTML='';s.sections.forEach(sectionData=>{const section=document.createElement('section');section.className='stanza'+(/^coro$/i.test(sectionData.label.trim())?' chorus-section':'');const label=document.createElement('div');label.className='verse-title';label.textContent=sectionData.label;section.appendChild(label);sectionData.lines.forEach(lineData=>{const line=document.createElement('div');line.className='music-line';const anchors=lineData.anchors.map(a=>({...a,chord:progressionMode?chordToProgression(transposeChord(a.chord,delta),current):transposeChord(a.chord,delta)}));if(inlineMode){const lr=document.createElement('div');lr.className='lyrics-inline';lr.appendChild(renderInlineFromAnchors(lineData.lyric,anchors));line.appendChild(lr)}else line.appendChild(renderAlignedFromAnchors(lineData.lyric,anchors));section.appendChild(line)});root.appendChild(section)});document.getElementById('score').classList.toggle('section-markers-hidden',sectionsHidden);const sb=document.getElementById('toggleSections');sb.classList.toggle('active',sectionsHidden);sb.textContent=sectionsHidden?'/':'🎵';sb.title=sectionsHidden?'Mostrar marcações':'Ocultar marcações';document.getElementById('toggleProgression').classList.toggle('active',progressionMode);document.getElementById('toggleInline').classList.toggle('active',inlineMode);document.querySelectorAll('#tonePanel button').forEach((b,i)=>b.classList.toggle('active',i===currentIndex))}
-function safeGet(k,f){try{const v=localStorage.getItem(k);return v===null?f:v}catch{return f}}function safeSet(k,v){try{localStorage.setItem(k,v)}catch{}}
+function render(){
+  const s=getCurrentSong(),delta=currentIndex-s.sourceToneIndex,current=spellNote(chromatic[currentIndex].name);
+  document.getElementById('currentTone').textContent=current;
+  document.getElementById('currentSongLabel').innerHTML=`<strong>${s.number} — ${s.title}</strong>`;
+  const root=document.getElementById('song');
+  root.innerHTML='';
+
+  const sectionsToRender=autoScrollMode?getAutoScrollSections(s.sections):s.sections;
+
+  sectionsToRender.forEach(sectionData=>{
+    const section=document.createElement('section');
+    section.className='stanza'+(/^coro$/i.test(sectionData.label.trim())?' chorus-section':'');
+
+    const label=document.createElement('div');
+    label.className='verse-title';
+    label.textContent=sectionData.label;
+    section.appendChild(label);
+
+    sectionData.lines.forEach(lineData=>{
+      const originalAnchors=lineData.anchors.map(a=>({
+        ...a,
+        chord:progressionMode
+          ? chordToProgression(transposeChord(a.chord,delta),current)
+          : transposeChord(a.chord,delta)
+      }));
+
+      /*
+        MODO DIVIDIR:
+        Se houver "/", transforma uma linha em duas,
+        usando o "/" apenas como referência e nunca o mostra.
+      */
+      const split=splitMode
+        ? splitLineAtSlash(lineData.lyric,originalAnchors)
+        : null;
+
+      const parts=split
+        ? [
+            {lyric:split.leftLyric,anchors:split.leftAnchors},
+            {lyric:split.rightLyric,anchors:split.rightAnchors}
+          ]
+        : [{lyric:lineData.lyric,anchors:originalAnchors}];
+
+      parts.forEach(part=>{
+        const line=document.createElement('div');
+        line.className='music-line';
+
+        if(inlineMode){
+          const lr=document.createElement('div');
+          lr.className='lyrics-inline';
+          lr.appendChild(renderInlineFromAnchors(part.lyric,part.anchors));
+          line.appendChild(lr);
+        }else{
+          line.appendChild(renderAlignedFromAnchors(part.lyric,part.anchors));
+        }
+
+        section.appendChild(line);
+      });
+    });
+
+    root.appendChild(section);
+  });
+
+  document.getElementById('score').classList.toggle('section-markers-hidden',sectionsHidden);
+
+  const sb=document.getElementById('toggleSections');
+  sb.classList.toggle('active',sectionsHidden);
+  sb.textContent=sectionsHidden?'/':'🎵';
+  sb.title=sectionsHidden?'Mostrar marcações':'Ocultar marcações';
+
+  document.getElementById('toggleProgression').classList.toggle('active',progressionMode);
+  document.getElementById('toggleInline').classList.toggle('active',inlineMode);
+  document.getElementById('toggleSplit').classList.toggle('active',splitMode);
+  updateAutoScrollPanel();
+
+  document.querySelectorAll('#tonePanel button').forEach((b,i)=>b.classList.toggle('active',i===currentIndex));
+}
+
+function safeGet(k,f){try{const v=localStorage.getItem(k);return v===null?f:v}catch{return f}}function safeSet(k,v){try{localStorage.setItem(k,v)}catch{}}function safeRemove(k){try{localStorage.removeItem(k)}catch{}}
 let favoriteSongs=new Set();try{const v=JSON.parse(safeGet('harpa_favoritos','[]'));if(Array.isArray(v))favoriteSongs=new Set(v)}catch{}
 let favoritesOnly=false;function saveFav(){safeSet('harpa_favoritos',JSON.stringify([...favoriteSongs]))}
-function renderLibrary(){const list=document.getElementById('libraryList'),q=document.getElementById('librarySearch').value.trim().toLowerCase(),filtered=songs.filter(s=>(!q||`${s.number} ${s.title} ${s.category}`.toLowerCase().includes(q))&&(!favoritesOnly||favoriteSongs.has(s.id)));list.innerHTML='';const lab=document.createElement('div');lab.className='library-section-label';lab.textContent='Harpa Cristã';list.appendChild(lab);if(!filtered.length){const e=document.createElement('div');e.className='library-empty';e.textContent=favoritesOnly?'Nenhuma música favorita.':'Nenhuma música encontrada.';list.appendChild(e);return}filtered.forEach(s=>{const row=document.createElement('div');row.className='song-item'+(s.id===currentSongId?' active':'');const open=document.createElement('button');open.className='song-open';open.innerHTML=`<span class="song-number">${s.number}</span><span class="song-name">${s.title}</span>`;open.onclick=()=>{currentSongId=s.id;currentIndex=getCurrentSong().sourceToneIndex;render();renderLibrary();closeLibrary()};const fav=document.createElement('button');fav.className='song-fav';fav.textContent=favoriteSongs.has(s.id)?'★':'☆';fav.onclick=(e)=>{e.stopPropagation();favoriteSongs.has(s.id)?favoriteSongs.delete(s.id):favoriteSongs.add(s.id);saveFav();renderLibrary()};row.append(open,fav);list.appendChild(row)})}
+function renderLibrary(){const list=document.getElementById('libraryList'),q=document.getElementById('librarySearch').value.trim().toLowerCase(),filtered=songs.filter(s=>(!q||`${s.number} ${s.title} ${s.category}`.toLowerCase().includes(q))&&(!favoritesOnly||favoriteSongs.has(s.id)));list.innerHTML='';const lab=document.createElement('div');lab.className='library-section-label';lab.textContent='Harpa Cristã';list.appendChild(lab);if(!filtered.length){const e=document.createElement('div');e.className='library-empty';e.textContent=favoritesOnly?'Nenhuma música favorita.':'Nenhuma música encontrada.';list.appendChild(e);return}filtered.forEach(s=>{const row=document.createElement('div');row.className='song-item'+(s.id===currentSongId?' active':'');const open=document.createElement('button');open.className='song-open';open.innerHTML=`<span class="song-number">${s.number}</span><span class="song-name">${s.title}</span>`;open.onclick=()=>{currentSongId=s.id;currentIndex=(getCurrentSong().sourceToneIndex+(startHalfDown?11:0))%12;autoScrollSpeedLevel=loadAutoScrollMemory(currentSongId);render();renderLibrary();closeLibrary()};const fav=document.createElement('button');fav.className='song-fav';fav.textContent=favoriteSongs.has(s.id)?'★':'☆';fav.onclick=(e)=>{e.stopPropagation();favoriteSongs.has(s.id)?favoriteSongs.delete(s.id):favoriteSongs.add(s.id);saveFav();renderLibrary()};row.append(open,fav);list.appendChild(row)})}
 function openLibrary(){libraryDrawer.classList.add('open');libraryBackdrop.classList.add('open');libraryDrawer.setAttribute('aria-hidden','false')}function closeLibrary(){libraryDrawer.classList.remove('open');libraryBackdrop.classList.remove('open');libraryDrawer.setAttribute('aria-hidden','true')}
-function createToneKeys(){const p=document.getElementById('tonePanel');chromatic.forEach((t,i)=>{const b=document.createElement('button');b.textContent=t.name;b.onclick=()=>{currentIndex=i;render()};p.appendChild(b)})}
+function createToneKeys(){const p=document.getElementById('tonePanel');chromatic.forEach((t,i)=>{const b=document.createElement('button');b.textContent=spellNote(t.name);b.onclick=()=>{currentIndex=i;render()};p.appendChild(b)})}
+function updateToneKeyLabels(){document.querySelectorAll('#tonePanel button').forEach((b,i)=>{if(chromatic[i])b.textContent=spellNote(chromatic[i].name)})}
 
 const openLibraryBtn=document.getElementById('openLibrary'),
 closeLibraryBtn=document.getElementById('closeLibrary'),
@@ -719,7 +1091,7 @@ up.onclick=()=>{
 };
 
 reset.onclick=()=>{
-  currentIndex=getCurrentSong().sourceToneIndex;
+  currentIndex=(getCurrentSong().sourceToneIndex+(startHalfDown?11:0))%12;
   render();
 };
 
@@ -747,6 +1119,48 @@ toggleInline.onclick=()=>{
   inlineMode=!inlineMode;
   render();
 };
+
+document.getElementById('toggleSplit').onclick=()=>{
+  splitMode=!splitMode;
+  fontScale=splitMode?1.00:.80;
+  applyFontScale();
+  render();
+};
+
+document.getElementById('toggleAutoScroll').onclick=()=>{
+  if(autoScrollRunning)stopAutoScroll();
+  else startAutoScroll();
+};
+
+document.getElementById('autoScrollMemory').onchange=e=>{
+  if(e.target.checked){
+    safeSet(autoScrollMemoryKey(currentSongId),String(autoScrollSpeedLevel));
+  }else{
+    safeRemove(autoScrollMemoryKey(currentSongId));
+  }
+  updateAutoScrollPanel();
+};
+document.getElementById('autoScrollSlow').onclick=()=>setAutoScrollSpeed(autoScrollSpeedLevel-1);
+document.getElementById('autoScrollFast').onclick=()=>setAutoScrollSpeed(autoScrollSpeedLevel+1);
+document.getElementById('autoScrollSpeed').oninput=e=>setAutoScrollSpeed(e.target.value);
+
+document.getElementById('toggleSharp').onchange=e=>{
+  useSharps=e.target.checked;
+  localStorage.setItem('harpa_use_sharps',useSharps?'1':'0');
+  updateToneKeyLabels();
+  render();
+};
+
+document.getElementById('toggleSharp').checked=useSharps;
+
+document.getElementById('toggleHalfDown').onchange=e=>{
+  startHalfDown=e.target.checked;
+  localStorage.setItem('harpa_start_half_down',startHalfDown?'1':'0');
+  currentIndex=(getCurrentSong().sourceToneIndex+(startHalfDown?11:0))%12;
+  render();
+};
+
+document.getElementById('toggleHalfDown').checked=startHalfDown;
 
 document.getElementById('toggleNotes').onclick=()=>{
   const p=document.getElementById('tonePanel');
@@ -802,6 +1216,11 @@ document.addEventListener('keydown',e=>{
     toggleInline.click();
   }
 
+  if(e.key==='*'){
+    e.preventDefault();
+    toggleSplit.click();
+  }
+
   if(e.key==='-'&&!e.ctrlKey&&!e.metaKey){
     fontDown.click();
   }
@@ -817,6 +1236,6 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape')closeLibrary();
 });
 
-createToneKeys();applyFontScale();render();renderLibrary();
+createToneKeys();autoScrollSpeedLevel=loadAutoScrollMemory(currentSongId);applyFontScale();render();renderLibrary();
 </script>
 </body></html>
