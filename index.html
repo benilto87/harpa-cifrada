@@ -97,6 +97,26 @@ button.active{
   padding-inline:10px;
 }
 
+.tone-memory-check{
+  display:flex;
+  align-items:center;
+  gap:3px;
+  flex:0 0 auto;
+  margin-left:2px;
+  cursor:pointer;
+  user-select:none;
+  font:700 .78rem/1 Arial,sans-serif;
+  color:var(--ink);
+}
+
+.tone-memory-check input{
+  width:16px;
+  height:16px;
+  margin:0;
+  accent-color:var(--accent);
+  cursor:pointer;
+}
+
 
 /* =========================
    ROLAGEM AUTOMÁTICA
@@ -166,15 +186,20 @@ button.active{
 
 .current-song{
   min-width:0;
-  max-width:260px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+  max-width:320px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex:0 1 auto;
   font:600 .82rem/1.1 Arial,sans-serif;
   color:var(--muted);
 }
 
 .current-song strong{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
   color:var(--ink);
 }
 
@@ -637,7 +662,7 @@ button.active{
 <header class="topbar">
   <div class="toolbar" aria-label="Controles">
     <button class="action" id="openLibrary" title="Biblioteca">☰</button>
-    <div class="current-song" id="currentSongLabel"><strong>001 — Chuvas de Graça</strong></div>
+    <div class="current-song" id="currentSongLabel"><strong>001 — Chuvas de Graça</strong><label class="tone-memory-check" title="Memorizar o tom desta música"><input type="checkbox" id="toneMemory"><span>*</span></label></div>
     <button class="action" id="down" title="Descer 1 semitom">−½</button><button class="action" id="up" title="Subir 1 semitom">+½</button><button class="action" id="reset" title="Tom original">↺</button>
     <button class="action" id="fontDown" title="Diminuir fonte">−</button><button class="action" id="fontUp" title="Aumentar fonte">+</button>
     <button class="action" id="toggleSections" title="Ocultar marcações">🎵</button>
@@ -676,7 +701,10 @@ const chromatic=[{name:'C'},{name:'Db'},{name:'D'},{name:'Eb'},{name:'E'},{name:
 
 let useSharps=localStorage.getItem('harpa_use_sharps')==='1';
 let startHalfDown=localStorage.getItem('harpa_start_half_down')==='1';
-let currentSongId='001';let currentIndex=(songs.find(s=>s.id===currentSongId).sourceToneIndex+(startHalfDown?11:0))%12;let sectionsHidden=true;let progressionMode=false;let inlineMode=false;let splitMode=false;let autoScrollMode=false;let autoScrollRunning=false;let autoScrollSpeedLevel=0;let autoScrollFrame=0;let autoScrollSegmentStartTime=0;let autoScrollSegmentStartY=0;let autoScrollSegmentDuration=180000;let autoScrollResumeY=null;let fontScale=.80;const MIN_FONT_SCALE=.75,MAX_FONT_SCALE=1.35,FONT_STEP=.05;
+function toneMemoryKey(songId){return `harpa_tom_${songId}`}
+function loadToneMemory(songId){try{const v=localStorage.getItem(toneMemoryKey(songId));if(v===null)return null;const n=Number(v);return Number.isFinite(n)&&n>=0&&n<12?n:null}catch{return null}}
+function getSongStartIndex(songId){const song=songs.find(s=>s.id===songId)||songs[0];const saved=loadToneMemory(songId);return saved===null?(song.sourceToneIndex+(startHalfDown?11:0))%12:saved}
+let currentSongId='001';let currentIndex=getSongStartIndex(currentSongId);let sectionsHidden=true;let progressionMode=false;let inlineMode=false;let splitMode=false;let autoScrollMode=false;let autoScrollRunning=false;let autoScrollSpeedLevel=0;let autoScrollFrame=0;let autoScrollSegmentStartTime=0;let autoScrollSegmentStartY=0;let autoScrollSegmentDuration=180000;let autoScrollResumeY=null;let fontScale=.80;const MIN_FONT_SCALE=.75,MAX_FONT_SCALE=1.35,FONT_STEP=.05;
 
 const aliases={C:0,'B#':0,'C#':1,Db:1,D:2,'D#':3,Eb:3,E:4,Fb:4,F:5,'E#':5,'F#':6,Gb:6,G:7,'G#':8,Ab:8,A:9,'A#':10,Bb:10,B:11,Cb:11};
 function spellNote(note){
@@ -988,7 +1016,7 @@ function getCurrentSong(){return songs.find(s=>s.id===currentSongId)||songs[0]}
 function render(){
   const s=getCurrentSong(),delta=currentIndex-s.sourceToneIndex,current=spellNote(chromatic[currentIndex].name);
   document.getElementById('currentTone').textContent=current;
-  document.getElementById('currentSongLabel').innerHTML=`<strong>${s.number} — ${s.title}</strong>`;
+  document.getElementById('currentSongLabel').innerHTML=`<strong>${s.number} — ${s.title}</strong><label class="tone-memory-check" title="Memorizar o tom desta música"><input type="checkbox" id="toneMemory"><span>*</span></label>`;
   const root=document.getElementById('song');
   root.innerHTML='';
 
@@ -1060,14 +1088,18 @@ function render(){
   updateAutoScrollPanel();
 
   document.querySelectorAll('#tonePanel button').forEach((b,i)=>b.classList.toggle('active',i===currentIndex));
+  updateToneMemoryControl();
 }
 
 function safeGet(k,f){try{const v=localStorage.getItem(k);return v===null?f:v}catch{return f}}function safeSet(k,v){try{localStorage.setItem(k,v)}catch{}}function safeRemove(k){try{localStorage.removeItem(k)}catch{}}
+function isToneMemorySaved(){return loadToneMemory(currentSongId)!==null}
+function updateToneMemoryControl(){const cb=document.getElementById('toneMemory');if(cb)cb.checked=isToneMemorySaved()}
+function saveToneIfEnabled(){const cb=document.getElementById('toneMemory');if(cb?.checked)safeSet(toneMemoryKey(currentSongId),String(currentIndex))}
 let favoriteSongs=new Set();try{const v=JSON.parse(safeGet('harpa_favoritos','[]'));if(Array.isArray(v))favoriteSongs=new Set(v)}catch{}
 let favoritesOnly=false;function saveFav(){safeSet('harpa_favoritos',JSON.stringify([...favoriteSongs]))}
-function renderLibrary(){const list=document.getElementById('libraryList'),q=document.getElementById('librarySearch').value.trim().toLowerCase(),filtered=songs.filter(s=>(!q||`${s.number} ${s.title} ${s.category}`.toLowerCase().includes(q))&&(!favoritesOnly||favoriteSongs.has(s.id)));list.innerHTML='';const lab=document.createElement('div');lab.className='library-section-label';lab.textContent='Harpa Cristã';list.appendChild(lab);if(!filtered.length){const e=document.createElement('div');e.className='library-empty';e.textContent=favoritesOnly?'Nenhuma música favorita.':'Nenhuma música encontrada.';list.appendChild(e);return}filtered.forEach(s=>{const row=document.createElement('div');row.className='song-item'+(s.id===currentSongId?' active':'');const open=document.createElement('button');open.className='song-open';open.innerHTML=`<span class="song-number">${s.number}</span><span class="song-name">${s.title}</span>`;open.onclick=()=>{currentSongId=s.id;currentIndex=(getCurrentSong().sourceToneIndex+(startHalfDown?11:0))%12;autoScrollSpeedLevel=loadAutoScrollMemory(currentSongId);render();renderLibrary();closeLibrary()};const fav=document.createElement('button');fav.className='song-fav';fav.textContent=favoriteSongs.has(s.id)?'★':'☆';fav.onclick=(e)=>{e.stopPropagation();favoriteSongs.has(s.id)?favoriteSongs.delete(s.id):favoriteSongs.add(s.id);saveFav();renderLibrary()};row.append(open,fav);list.appendChild(row)})}
+function renderLibrary(){const list=document.getElementById('libraryList'),q=document.getElementById('librarySearch').value.trim().toLowerCase(),filtered=songs.filter(s=>(!q||`${s.number} ${s.title} ${s.category}`.toLowerCase().includes(q))&&(!favoritesOnly||favoriteSongs.has(s.id)));list.innerHTML='';const lab=document.createElement('div');lab.className='library-section-label';lab.textContent='Harpa Cristã';list.appendChild(lab);if(!filtered.length){const e=document.createElement('div');e.className='library-empty';e.textContent=favoritesOnly?'Nenhuma música favorita.':'Nenhuma música encontrada.';list.appendChild(e);return}filtered.forEach(s=>{const row=document.createElement('div');row.className='song-item'+(s.id===currentSongId?' active':'');const open=document.createElement('button');open.className='song-open';open.innerHTML=`<span class="song-number">${s.number}</span><span class="song-name">${s.title}</span>`;open.onclick=()=>{currentSongId=s.id;currentIndex=getSongStartIndex(currentSongId);autoScrollSpeedLevel=loadAutoScrollMemory(currentSongId);render();renderLibrary();closeLibrary()};const fav=document.createElement('button');fav.className='song-fav';fav.textContent=favoriteSongs.has(s.id)?'★':'☆';fav.onclick=(e)=>{e.stopPropagation();favoriteSongs.has(s.id)?favoriteSongs.delete(s.id):favoriteSongs.add(s.id);saveFav();renderLibrary()};row.append(open,fav);list.appendChild(row)})}
 function openLibrary(){libraryDrawer.classList.add('open');libraryBackdrop.classList.add('open');libraryDrawer.setAttribute('aria-hidden','false')}function closeLibrary(){libraryDrawer.classList.remove('open');libraryBackdrop.classList.remove('open');libraryDrawer.setAttribute('aria-hidden','true')}
-function createToneKeys(){const p=document.getElementById('tonePanel');chromatic.forEach((t,i)=>{const b=document.createElement('button');b.textContent=spellNote(t.name);b.onclick=()=>{currentIndex=i;render()};p.appendChild(b)})}
+function createToneKeys(){const p=document.getElementById('tonePanel');chromatic.forEach((t,i)=>{const b=document.createElement('button');b.textContent=spellNote(t.name);b.onclick=()=>{currentIndex=i;saveToneIfEnabled();render()};p.appendChild(b)})}
 function updateToneKeyLabels(){document.querySelectorAll('#tonePanel button').forEach((b,i)=>{if(chromatic[i])b.textContent=spellNote(chromatic[i].name)})}
 
 const openLibraryBtn=document.getElementById('openLibrary'),
@@ -1082,16 +1114,19 @@ const ocultarComNotas=['down','up','reset','fontDown','fontUp','tonePanel'];
 
 down.onclick=()=>{
   currentIndex=(currentIndex+11)%12;
+  saveToneIfEnabled();
   render();
 };
 
 up.onclick=()=>{
   currentIndex=(currentIndex+1)%12;
+  saveToneIfEnabled();
   render();
 };
 
 reset.onclick=()=>{
   currentIndex=(getCurrentSong().sourceToneIndex+(startHalfDown?11:0))%12;
+  saveToneIfEnabled();
   render();
 };
 
@@ -1157,10 +1192,21 @@ document.getElementById('toggleHalfDown').onchange=e=>{
   startHalfDown=e.target.checked;
   localStorage.setItem('harpa_start_half_down',startHalfDown?'1':'0');
   currentIndex=(getCurrentSong().sourceToneIndex+(startHalfDown?11:0))%12;
+  saveToneIfEnabled();
   render();
 };
 
 document.getElementById('toggleHalfDown').checked=startHalfDown;
+
+document.getElementById('currentSongLabel').addEventListener('change',e=>{
+  if(e.target.id!=='toneMemory')return;
+  if(e.target.checked){
+    safeSet(toneMemoryKey(currentSongId),String(currentIndex));
+  }else{
+    safeRemove(toneMemoryKey(currentSongId));
+  }
+  updateToneMemoryControl();
+});
 
 document.getElementById('toggleNotes').onclick=()=>{
   const p=document.getElementById('tonePanel');
