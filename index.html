@@ -158,7 +158,7 @@ button.active{
 .auto-scroll-panel.fade-50 .memory-check,
 .auto-scroll-panel.fade-50 .auto-scroll-value,
 .auto-scroll-panel.fade-50 .auto-scroll-label{
-  opacity:.20;
+  opacity:.40;
 }
 
 .auto-scroll-panel .memory-check{
@@ -274,7 +274,6 @@ button.active{
   min-width:35px;
   padding:6px 5px;
 }
-
 
 /* =========================
    BIBLIOTECA
@@ -472,6 +471,10 @@ button.active{
   width:min(1500px,100%);
   margin:0 auto;
   padding:16px clamp(14px,3vw,44px) 48px;
+}
+
+.score.auto-scroll-mode{        /*  EXTRA — MODO DE ROLAGEM */
+  padding-top:52px;
 }
 
 .stanza{
@@ -690,6 +693,35 @@ button.active{
 
 }
 
+/* TOM ORIGINAL NA FILEIRA DE NOTAS */
+.tone-panel button.original-tone:not(.active){
+  background:#eee7dc;
+  border-color:#cdbda9;
+  font-weight:700;
+}
+
+/* =========================================================
+   APLICATIVOS DA BIBLIOTECA
+   ========================================================= */
+
+.library-apps{
+  padding:10px 8px;
+  border-bottom:1px solid var(--line);
+}
+
+.library-app-button{
+  width:100%;
+  background:#efe5d8;
+  border-color:#dcc6ad;
+  color:var(--ink);
+  font-weight:700;
+}
+
+.library-app-button:hover,
+.library-app-button:focus-visible{
+  background:#e5d7c7;
+}
+
 </style><span></span></label>
 </head>
 <body>
@@ -739,7 +771,15 @@ button.active{
 <div class="library-backdrop" id="libraryBackdrop"></div>
 <aside class="library-drawer" id="libraryDrawer" aria-hidden="true">
   <div class="library-head"><div class="library-head-row"><div class="library-title">MÚSICAS</div><div class="library-options"><label class="library-check" title="Usar sustenidos"><input type="checkbox" id="toggleSharp">#</label><label class="library-check" title="Entrar meio tom abaixo"><input type="checkbox" id="toggleHalfDown">−½</label></div><button class="library-close" id="closeLibrary">×</button></div><input id="librarySearch" class="library-search" type="search" inputmode="numeric" pattern="[0-9]*" placeholder="🔎  Número do hino..."></div>
-  <div class="library-tools"><button id="favoritesFilter">⭐ Favoritos</button><button id="allSongsFilter" class="active">Todas</button></div>
+  <div class="library-tools">
+  <button id="favoritesFilter">⭐ Favoritos</button>
+  <button id="allSongsFilter" class="active">Todas</button>
+  </div>
+  <div class="library-apps">
+  <button id="openEarTrainer" class="library-app-button">
+    🎧 Adivinhe o Tom
+  </button>
+</div>
   <div class="library-list" id="libraryList"></div>
 </aside>
 <main id="score" class="score"><div id="song"></div></main>
@@ -776,14 +816,22 @@ function getSongStartIndex(songId){
     : song.sourceToneIndex;
 }
 
-let currentSongId='001';let currentIndex=getSongStartIndex(currentSongId);let sectionsHidden=true;let progressionMode=false;let inlineMode=false;let splitMode=false;let autoScrollMode=false;let autoScrollRunning=false;
+let currentSongId=localStorage.getItem('harpa_current_song')||'001'; // MEMORIZA HINO ABERTO //
+let currentIndex=getSongStartIndex(currentSongId);
+let sectionsHidden=true;
+let progressionMode=false;
+let inlineMode=false;
+let splitMode=false;
+let autoScrollMode=false;
+let autoScrollRunning=false;
 let autoScrollSpeedLevel=0;
 let autoScrollFrame=0;
 let autoScrollFadeTimer=0;
 let autoScrollSegmentStartTime=0;
 let autoScrollSegmentStartY=0;
 let autoScrollSegmentDuration=180000;
-let autoScrollResumeY=null;let fontScale=.80;
+let autoScrollResumeY=null;
+let fontScale=.80;
 const MIN_FONT_SCALE=.75,MAX_FONT_SCALE=1.35,FONT_STEP=.05;
 
 const aliases={C:0,'B#':0,'C#':1,Db:1,D:2,'D#':3,Eb:3,E:4,Fb:4,F:5,'E#':5,'F#':6,Gb:6,G:7,'G#':8,Ab:8,A:9,'A#':10,Bb:10,B:11,Cb:11};
@@ -1122,6 +1170,17 @@ function stopAutoScroll(){
   autoScrollMode=true;
   updateAutoScrollPanel();
 }
+/* =========================================================
+   SCROLL MANUAL DURANTE A PAUSA
+   ========================================================= */
+window.addEventListener('scroll',()=>{
+
+  if(autoScrollMode && !autoScrollRunning){
+    autoScrollResumeY=window.scrollY;
+  }
+
+},{passive:true});
+
 function setAutoScrollSpeed(level){
   const next=Math.max(-5,Math.min(5,Number(level)||0));
   if(next===autoScrollSpeedLevel){updateAutoScrollPanel();return;}
@@ -1204,7 +1263,15 @@ function render(){
     root.appendChild(section);
   });
 
-  document.getElementById('score').classList.toggle('section-markers-hidden',sectionsHidden);
+  document.getElementById('score').classList.toggle(
+  'section-markers-hidden',
+  sectionsHidden
+);
+
+document.getElementById('score').classList.toggle(
+  'auto-scroll-mode',
+  autoScrollMode
+);
 
   const sb=document.getElementById('toggleSections');
   sb.classList.toggle('active',sectionsHidden);
@@ -1216,7 +1283,21 @@ function render(){
   document.getElementById('toggleSplit').classList.toggle('active',splitMode);
   updateAutoScrollPanel();
 
-  document.querySelectorAll('#tonePanel button').forEach((b,i)=>b.classList.toggle('active',i===currentIndex));
+  document.querySelectorAll('#tonePanel button').forEach(b=>{
+
+  const i=Number(b.dataset.noteIndex);
+
+  b.classList.toggle(
+    'active',
+    i===currentIndex
+  );
+
+  b.classList.toggle(
+    'original-tone',
+    i===s.sourceToneIndex
+  );
+
+});
   updateToneMemoryControl();
 }
 
@@ -1407,31 +1488,29 @@ function renderLibrary(){
 
     open.onclick=()=>{
 
-      // 1. Para completamente a rolagem da música anterior
-      resetAutoScrollForNewSong();
+  resetAutoScrollForNewSong();
 
-      // 2. Troca a música
-      currentSongId=s.id;
+  currentSongId=s.id;
 
-      // 3. Define o tom inicial da nova música
-      currentIndex=getSongStartIndex(currentSongId);
+  localStorage.setItem(
+    'harpa_current_song',
+    currentSongId
+  );
 
-      // 4. Recupera a velocidade memorizada desta música
-      autoScrollSpeedLevel=
-        loadAutoScrollMemory(currentSongId);
+  currentIndex=getSongStartIndex(currentSongId);
 
-      // 5. Renderiza a nova música
-      render();
+  autoScrollSpeedLevel=
+    loadAutoScrollMemory(currentSongId);
 
-      // 6. Garante que a nova música comece no topo
-      window.scrollTo(0,0);
+  render();
 
-      // 7. Atualiza a biblioteca
-      renderLibrary();
+  centerOriginalTone();
 
-      // 8. Fecha a biblioteca
-      closeLibrary();
-    };
+  window.scrollTo(0,0);
+
+  renderLibrary();
+  closeLibrary();
+};
 
 
     /* =====================================================
@@ -1501,27 +1580,69 @@ function closeLibrary(){
 
 
 /* =========================================================
-   BOTÕES DE TOM
+   CARROSSEL CIRCULAR DOS TONS
+   3 cópias permitem movimento infinito para os dois lados.
    ========================================================= */
 
 function createToneKeys(){
 
   const p=document.getElementById('tonePanel');
 
-  chromatic.forEach((t,i)=>{
+  p.innerHTML='';
 
-    const b=document.createElement('button');
+  for(let copy=0;copy<3;copy++){
 
-    b.textContent=spellNote(t.name);
+    chromatic.forEach((t,i)=>{
 
-    b.onclick=()=>{
-      currentIndex=i;
-      saveToneIfEnabled();
-      render();
-    };
+      const b=document.createElement('button');
 
-    p.appendChild(b);
-  });
+      b.textContent=spellNote(t.name);
+
+      // Índice real da nota
+      b.dataset.noteIndex=String(i);
+
+      // Qual das 3 cópias
+      b.dataset.toneCopy=String(copy);
+
+      b.onclick=()=>{
+
+        currentIndex=i;
+
+        saveToneIfEnabled();
+
+        render();
+      };
+
+      p.appendChild(b);
+    });
+  }
+
+
+  /* =======================================================
+     RODÍZIO INFINITO
+     Quando chega perto de uma extremidade, desloca
+     exatamente uma sequência de 12 notas.
+     ======================================================= */
+
+  p.addEventListener('scroll',()=>{
+
+    const copyWidth=p.scrollWidth/3;
+
+    if(copyWidth<=p.clientWidth)return;
+
+    // Chegou muito para a esquerda
+    if(p.scrollLeft<copyWidth*.5){
+
+      p.scrollLeft+=copyWidth;
+    }
+
+    // Chegou muito para a direita
+    else if(p.scrollLeft>copyWidth*1.5){
+
+      p.scrollLeft-=copyWidth;
+    }
+
+  },{passive:true});
 }
 
 
@@ -1534,7 +1655,9 @@ function updateToneKeyLabels(){
 
   document
     .querySelectorAll('#tonePanel button')
-    .forEach((b,i)=>{
+    .forEach(b=>{
+
+      const i=Number(b.dataset.noteIndex);
 
       if(chromatic[i]){
         b.textContent=
@@ -1542,6 +1665,42 @@ function updateToneKeyLabels(){
       }
 
     });
+}
+
+/* =========================================================
+   CENTRALIZAR SOMENTE O TOM ORIGINAL
+   ========================================================= */
+
+/* =========================================================
+   CENTRALIZA O TOM ORIGINAL
+   SOMENTE QUANDO A MÚSICA É ABERTA.
+   ========================================================= */
+
+function centerOriginalTone(){
+
+  const panel=document.getElementById('tonePanel');
+
+  if(!panel)return;
+
+  const originalIndex=
+    getCurrentSong().sourceToneIndex;
+
+  const originalButton=
+    panel.querySelector(
+      `button[data-note-index="${originalIndex}"][data-tone-copy="1"]`
+    );
+
+  if(!originalButton)return;
+
+  requestAnimationFrame(()=>{
+
+    const target=
+      originalButton.offsetLeft-
+      (panel.clientWidth-originalButton.offsetWidth)/2;
+
+    panel.scrollLeft=Math.max(0,target);
+
+  });
 }
 
 const openLibraryBtn=document.getElementById('openLibrary'),
@@ -1699,6 +1858,39 @@ allSongsFilter.onclick=()=>{
   renderLibrary();
 };
 
+openLibraryBtn.onclick=openLibrary;
+closeLibraryBtn.onclick=closeLibrary;
+libraryBackdrop.onclick=closeLibrary;
+librarySearch.oninput=renderLibrary;
+
+favoritesFilter.onclick=()=>{
+  favoritesOnly=true;
+  favoritesFilter.classList.add('active');
+  allSongsFilter.classList.remove('active');
+  renderLibrary();
+};
+
+allSongsFilter.onclick=()=>{
+  favoritesOnly=false;
+  favoritesFilter.classList.remove('active');
+  allSongsFilter.classList.add('active');
+  renderLibrary();
+};
+
+
+/* =========================================================
+   TREINADOR DE OUVIDO
+   ========================================================= */
+
+document.getElementById('openEarTrainer').onclick=()=>{
+  window.location.href='treinador-ouvido.html';
+};
+
+
+/* =========================================================
+   TECLADO
+   ========================================================= */
+
 document.addEventListener('keydown',e=>{
   if(e.target.matches('input,textarea'))return;
 
@@ -1742,6 +1934,11 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape')closeLibrary();
 });
 
-createToneKeys();autoScrollSpeedLevel=loadAutoScrollMemory(currentSongId);applyFontScale();render();renderLibrary();
+createToneKeys();
+autoScrollSpeedLevel=loadAutoScrollMemory(currentSongId);
+applyFontScale();
+render();
+centerOriginalTone();
+renderLibrary();
 </script>
 </body></html>
