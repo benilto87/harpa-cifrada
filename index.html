@@ -45,10 +45,10 @@ body{
   position:sticky;
   top:0;
   z-index:20;
-  background:rgba(255,253,249,.96);
+  background:transparent;
   border-bottom:1px solid var(--line);
   box-shadow:0 3px 14px rgba(60,45,30,.06);
-  backdrop-filter:blur(8px);
+  backdrop-filter:none;
 }
 
 .toolbar{
@@ -59,6 +59,7 @@ body{
   align-items:center;
   gap:7px;
   flex-wrap:wrap;
+  background:rgba(255,253,249,.96);
 }
 
 button{
@@ -134,6 +135,30 @@ button.active{
 
 .auto-scroll-panel.hidden{
   display:none;
+}
+
+.auto-scroll-panel.fade-50{                   /*TRANSPARENCIA NA PLACA DE ROLAGEM*/
+  background:rgba(255,253,249,.10);
+}
+
+.auto-scroll-panel.fade-50 button{
+  background:rgba(248,245,239,.50);
+  border-color:rgba(206,196,183,.20);
+}
+
+.auto-scroll-panel.fade-50 button:hover,
+.auto-scroll-panel.fade-50 button:focus-visible{
+  background:rgba(236,229,218,.30);
+}
+
+.auto-scroll-panel.fade-50 .auto-scroll-speed{
+  opacity:.2;
+}
+
+.auto-scroll-panel.fade-50 .memory-check,
+.auto-scroll-panel.fade-50 .auto-scroll-value,
+.auto-scroll-panel.fade-50 .auto-scroll-label{
+  opacity:.20;
 }
 
 .auto-scroll-panel .memory-check{
@@ -234,6 +259,7 @@ button.active{
   max-height:65px;
   opacity:1;
   transition:max-height .2s,opacity .15s,padding .2s;
+  background:rgba(255,253,249,.96);
 }
 
 .tone-panel.hidden{
@@ -482,8 +508,16 @@ button.active{
 
 .music-line{
   margin:0 0 0px;
+  padding-left:0;
 }
 
+.stanza > .verse-title + .music-line{
+  padding-left:3px;                    /* RECUO DA PRIMEIRA LINHA DE CADA ESTROFE */
+}
+
+.stanza.chorus-section > .verse-title + .music-line{
+  padding-left:0;                      /* CORO SEM RECUO */
+}
 
 /* =========================
    CIFRAS ALINHADAS
@@ -656,20 +690,42 @@ button.active{
 
 }
 
-</style>
+</style><span></span></label>
 </head>
 <body>
 <header class="topbar">
-  <div class="toolbar" aria-label="Controles">
-    <button class="action" id="openLibrary" title="Biblioteca">☰</button>
-    <div class="current-song" id="currentSongLabel"><strong>001 — Chuvas de Graça</strong><label class="tone-memory-check" title="Memorizar o tom desta música"><input type="checkbox" id="toneMemory"><span>*</span></label></div>
-    <button class="action" id="down" title="Descer 1 semitom">−½</button><button class="action" id="up" title="Subir 1 semitom">+½</button><button class="action" id="reset" title="Tom original">↺</button>
-    <button class="action" id="fontDown" title="Diminuir fonte">−</button><button class="action" id="fontUp" title="Aumentar fonte">+</button>
-    <button class="action" id="toggleSections" title="Ocultar marcações">🎵</button>
-    <button class="action" id="toggleNotes" title="Mostrar/ocultar tons">🔺</button>
-    <button class="action" id="toggleProgression" title="Progressão numérica">#</button><button class="action" id="toggleInline" title="Cifras dentro da letra">.</button><button class="action" id="toggleSplit" title="Dividir pelo /">*</button><button class="action" id="toggleAutoScroll" title="Rolagem automática — 3 minutos">▶</button>
-    <div class="tone-pill">Tom atual <strong id="currentTone">Bb</strong></div>
+<div class="toolbar" aria-label="Controles">
+
+  <button class="action" id="openLibrary" title="Biblioteca">☰</button>
+
+  <div class="current-song" id="currentSongLabel">
+    <strong>001 — Chuvas de Graça</strong>
+    <label class="tone-memory-check" title="Memorizar o tom desta música">
+      <input type="checkbox" id="toneMemory">
+    </label>
   </div>
+
+  <button class="action" id="down" title="Descer 1 semitom">−½</button>
+  <button class="action" id="up" title="Subir 1 semitom">+½</button>
+  <button class="action" id="reset" title="Tom original">↺</button>
+
+  <button class="action" id="fontDown" title="Diminuir fonte">−</button>
+  <button class="action" id="fontUp" title="Aumentar fonte">+</button>
+
+  <button class="action" id="toggleSections" title="Ocultar marcações">🎵</button>
+  <button class="action" id="toggleNotes" title="Mostrar/ocultar tons">🔺</button>
+
+  <button class="action" id="toggleProgression" title="Progressão numérica">#</button>
+  <button class="action" id="toggleInline" title="Cifras dentro da letra">.</button>
+  <button class="action" id="toggleSplit" title="Dividir pelo /">*</button>
+  <button class="action" id="toggleAutoScroll" title="Rolagem automática — 3 minutos">▶</button>
+
+  <div class="tone-pill">
+    Tom atual
+    <strong id="currentTone">Bb</strong>
+  </div>
+
+</div>
   <div id="tonePanel" class="tone-panel" role="group" aria-label="Tons"></div>
   <div id="autoScrollPanel" class="auto-scroll-panel hidden" aria-label="Velocidade da rolagem automática">
     <label class="memory-check" title="Memorizar o tempo desta música"><input type="checkbox" id="autoScrollMemory"><span>⏱</span></label>
@@ -703,8 +759,32 @@ let useSharps=localStorage.getItem('harpa_use_sharps')==='1';
 let startHalfDown=localStorage.getItem('harpa_start_half_down')==='1';
 function toneMemoryKey(songId){return `harpa_tom_${songId}`}
 function loadToneMemory(songId){try{const v=localStorage.getItem(toneMemoryKey(songId));if(v===null)return null;const n=Number(v);return Number.isFinite(n)&&n>=0&&n<12?n:null}catch{return null}}
-function getSongStartIndex(songId){const song=songs.find(s=>s.id===songId)||songs[0];const saved=loadToneMemory(songId);return saved===null?(song.sourceToneIndex+(startHalfDown?11:0))%12:saved}
-let currentSongId='001';let currentIndex=getSongStartIndex(currentSongId);let sectionsHidden=true;let progressionMode=false;let inlineMode=false;let splitMode=false;let autoScrollMode=false;let autoScrollRunning=false;let autoScrollSpeedLevel=0;let autoScrollFrame=0;let autoScrollSegmentStartTime=0;let autoScrollSegmentStartY=0;let autoScrollSegmentDuration=180000;let autoScrollResumeY=null;let fontScale=.80;const MIN_FONT_SCALE=.75,MAX_FONT_SCALE=1.35,FONT_STEP=.05;
+function getHalfDownIndex(song){
+  const i=song.sourceToneIndex;
+  const semitones=[1,3,6,8,10]; // Db, Eb, Gb, Ab, Bb
+  return semitones.includes(i)?(i+11)%12:i;
+}
+
+function getSongStartIndex(songId){
+  const song=songs.find(s=>s.id===songId)||songs[0];
+  const saved=loadToneMemory(songId);
+
+  if(saved!==null)return saved;
+
+  return startHalfDown
+    ? getHalfDownIndex(song)
+    : song.sourceToneIndex;
+}
+
+let currentSongId='001';let currentIndex=getSongStartIndex(currentSongId);let sectionsHidden=true;let progressionMode=false;let inlineMode=false;let splitMode=false;let autoScrollMode=false;let autoScrollRunning=false;
+let autoScrollSpeedLevel=0;
+let autoScrollFrame=0;
+let autoScrollFadeTimer=0;
+let autoScrollSegmentStartTime=0;
+let autoScrollSegmentStartY=0;
+let autoScrollSegmentDuration=180000;
+let autoScrollResumeY=null;let fontScale=.80;
+const MIN_FONT_SCALE=.75,MAX_FONT_SCALE=1.35,FONT_STEP=.05;
 
 const aliases={C:0,'B#':0,'C#':1,Db:1,D:2,'D#':3,Eb:3,E:4,Fb:4,F:5,'E#':5,'F#':6,Gb:6,G:7,'G#':8,Ab:8,A:9,'A#':10,Bb:10,B:11,Cb:11};
 function spellNote(note){
@@ -714,6 +794,7 @@ function spellNote(note){
   if(i===undefined)return note;
   return (useSharps?sharp:flat)[i];
 }
+
 function transposeChord(chord,semitones){const m=chord.match(/^([A-G](?:#|b)?)(.*)$/);if(!m)return chord;const root=m[1],suffix=m[2]||'';if(!(root in aliases))return chord;return spellNote((['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'])[(aliases[root]+semitones+120)%12])+suffix}
 function chordToProgression(chord,keyName){const m=chord.match(/^([A-G](?:#|b)?)(.*)$/);if(!m)return '('+chord+')';const root=m[1],suffix=m[2]||'',scale=[0,2,4,5,7,9,11],key=aliases[keyName],r=aliases[root];if(key===undefined||r===undefined)return '('+chord+')';const interval=(r-key+12)%12,degree=scale.indexOf(interval);let degreeText;if(degree>=0)degreeText=String(degree+1);else{const nearest=scale.reduce((best,val,i)=>{const d=Math.min((interval-val+12)%12,(val-interval+12)%12);return !best||d<best.d?{d,i,dir:((interval-val+12)%12)<=( (val-interval+12)%12)?1:-1}:best},null);degreeText=nearest?(nearest.dir<0?'♭':'♯')+(nearest.i+1):String(interval)}const ext=[];if(/7/.test(suffix))ext.push('7');if(/4/.test(suffix)&&!/7/.test(suffix))ext.push('4');return ext.length?`${degreeText},${ext.join(',')}`:`${degreeText}`}
 function applyFontScale(){document.getElementById('score').style.setProperty('--font-scale',fontScale.toFixed(2));document.getElementById('fontDown').disabled=fontScale<=MIN_FONT_SCALE+.001;document.getElementById('fontUp').disabled=fontScale>=MAX_FONT_SCALE-.001}
@@ -940,15 +1021,53 @@ function updateAutoScrollPanel(){
 function cancelAutoScrollFrame(){
   if(autoScrollFrame){cancelAnimationFrame(autoScrollFrame);autoScrollFrame=0;}
 }
-function finishAutoScroll(){
+function resetAutoScrollForNewSong(){
   cancelAutoScrollFrame();
+  clearTimeout(autoScrollFadeTimer);
+  autoScrollFadeTimer=0;
+
   autoScrollRunning=false;
   autoScrollMode=false;
   autoScrollResumeY=null;
-  window.scrollTo(0,getAutoScrollMax());
+
+  const panel=document.getElementById('autoScrollPanel');
+  if(panel){
+    panel.classList.add('hidden');
+    panel.classList.remove('fade-50');
+  }
+
   updateAutoScrollPanel();
-  document.getElementById('autoScrollPanel')?.classList.add('hidden');
-  render();
+}
+/* =========================================================
+   FIM DA ROLAGEM
+   Mantém a visualização própria da rolagem no final.
+   ========================================================= */
+
+function finishAutoScroll(){
+
+  // Para apenas a animação
+  cancelAutoScrollFrame();
+
+  // A rolagem terminou, mas continua no modo de rolagem
+  autoScrollRunning=false;
+  autoScrollMode=true;
+
+  // Não há mais posição para retomar
+  autoScrollResumeY=null;
+
+  // Garante que fique exatamente no final
+  window.scrollTo(0,getAutoScrollMax());
+
+  // Mantém a plaquinha visível e atualiza o botão para ▶
+  updateAutoScrollPanel();
+
+  // IMPORTANTE:
+  // Não esconder a plaquinha
+  // Não remover fade-50
+  // Não chamar render()
+  //
+  // Assim a visualização continua exatamente
+  // como estava no modo de rolagem.
 }
 function autoScrollTick(now){
   if(!autoScrollRunning)return;
@@ -961,7 +1080,17 @@ function autoScrollTick(now){
   autoScrollFrame=requestAnimationFrame(autoScrollTick);
 }
 function startAutoScroll(){
-  document.getElementById('autoScrollPanel')?.classList.remove('hidden');
+  const panel=document.getElementById('autoScrollPanel');
+
+  if(panel){
+    clearTimeout(autoScrollFadeTimer);
+    panel.classList.remove('hidden','fade-50');
+
+    autoScrollFadeTimer=setTimeout(()=>{
+      if(autoScrollRunning)panel.classList.add('fade-50');
+    },5000);
+  }
+
   cancelAutoScrollFrame();
   const retomando=autoScrollResumeY!==null;
   autoScrollMode=true;
@@ -1016,7 +1145,7 @@ function getCurrentSong(){return songs.find(s=>s.id===currentSongId)||songs[0]}
 function render(){
   const s=getCurrentSong(),delta=currentIndex-s.sourceToneIndex,current=spellNote(chromatic[currentIndex].name);
   document.getElementById('currentTone').textContent=current;
-  document.getElementById('currentSongLabel').innerHTML=`<strong>${s.number} — ${s.title}</strong><label class="tone-memory-check" title="Memorizar o tom desta música"><input type="checkbox" id="toneMemory"><span>*</span></label>`;
+  document.getElementById('currentSongLabel').innerHTML=`<strong>${s.number} — ${s.title}</strong><label class="tone-memory-check" title="Memorizar o tom desta música"><input type="checkbox" id="toneMemory"><span>tom</span></label>`;
   const root=document.getElementById('song');
   root.innerHTML='';
 
@@ -1091,16 +1220,329 @@ function render(){
   updateToneMemoryControl();
 }
 
-function safeGet(k,f){try{const v=localStorage.getItem(k);return v===null?f:v}catch{return f}}function safeSet(k,v){try{localStorage.setItem(k,v)}catch{}}function safeRemove(k){try{localStorage.removeItem(k)}catch{}}
-function isToneMemorySaved(){return loadToneMemory(currentSongId)!==null}
-function updateToneMemoryControl(){const cb=document.getElementById('toneMemory');if(cb)cb.checked=isToneMemorySaved()}
-function saveToneIfEnabled(){const cb=document.getElementById('toneMemory');if(cb?.checked)safeSet(toneMemoryKey(currentSongId),String(currentIndex))}
-let favoriteSongs=new Set();try{const v=JSON.parse(safeGet('harpa_favoritos','[]'));if(Array.isArray(v))favoriteSongs=new Set(v)}catch{}
-let favoritesOnly=false;function saveFav(){safeSet('harpa_favoritos',JSON.stringify([...favoriteSongs]))}
-function renderLibrary(){const list=document.getElementById('libraryList'),q=document.getElementById('librarySearch').value.trim().toLowerCase(),filtered=songs.filter(s=>(!q||`${s.number} ${s.title} ${s.category}`.toLowerCase().includes(q))&&(!favoritesOnly||favoriteSongs.has(s.id)));list.innerHTML='';const lab=document.createElement('div');lab.className='library-section-label';lab.textContent='Harpa Cristã';list.appendChild(lab);if(!filtered.length){const e=document.createElement('div');e.className='library-empty';e.textContent=favoritesOnly?'Nenhuma música favorita.':'Nenhuma música encontrada.';list.appendChild(e);return}filtered.forEach(s=>{const row=document.createElement('div');row.className='song-item'+(s.id===currentSongId?' active':'');const open=document.createElement('button');open.className='song-open';open.innerHTML=`<span class="song-number">${s.number}</span><span class="song-name">${s.title}</span>`;open.onclick=()=>{currentSongId=s.id;currentIndex=getSongStartIndex(currentSongId);autoScrollSpeedLevel=loadAutoScrollMemory(currentSongId);render();renderLibrary();closeLibrary()};const fav=document.createElement('button');fav.className='song-fav';fav.textContent=favoriteSongs.has(s.id)?'★':'☆';fav.onclick=(e)=>{e.stopPropagation();favoriteSongs.has(s.id)?favoriteSongs.delete(s.id):favoriteSongs.add(s.id);saveFav();renderLibrary()};row.append(open,fav);list.appendChild(row)})}
-function openLibrary(){libraryDrawer.classList.add('open');libraryBackdrop.classList.add('open');libraryDrawer.setAttribute('aria-hidden','false')}function closeLibrary(){libraryDrawer.classList.remove('open');libraryBackdrop.classList.remove('open');libraryDrawer.setAttribute('aria-hidden','true')}
-function createToneKeys(){const p=document.getElementById('tonePanel');chromatic.forEach((t,i)=>{const b=document.createElement('button');b.textContent=spellNote(t.name);b.onclick=()=>{currentIndex=i;saveToneIfEnabled();render()};p.appendChild(b)})}
-function updateToneKeyLabels(){document.querySelectorAll('#tonePanel button').forEach((b,i)=>{if(chromatic[i])b.textContent=spellNote(chromatic[i].name)})}
+/* =========================================================
+   MEMÓRIA / FAVORITOS / BIBLIOTECA
+   ========================================================= */
+
+function safeGet(k,f){
+  try{
+    const v=localStorage.getItem(k);
+    return v===null?f:v
+  }catch{
+    return f
+  }
+}
+
+function safeSet(k,v){
+  try{
+    localStorage.setItem(k,v)
+  }catch{}
+}
+
+function safeRemove(k){
+  try{
+    localStorage.removeItem(k)
+  }catch{}
+}
+
+
+/* =========================================================
+   MEMÓRIA DO TOM
+   ========================================================= */
+
+function isToneMemorySaved(){
+  return loadToneMemory(currentSongId)!==null
+}
+
+function updateToneMemoryControl(){
+  const cb=document.getElementById('toneMemory');
+  if(cb)cb.checked=isToneMemorySaved()
+}
+
+function saveToneIfEnabled(){
+  const cb=document.getElementById('toneMemory');
+  if(cb?.checked){
+    safeSet(
+      toneMemoryKey(currentSongId),
+      String(currentIndex)
+    )
+  }
+}
+
+
+/* =========================================================
+   MEMÓRIA DOS FAVORITOS
+   ========================================================= */
+
+let favoriteSongs=new Set();
+
+try{
+  const v=JSON.parse(
+    safeGet('harpa_favoritos','[]')
+  );
+
+  if(Array.isArray(v)){
+    favoriteSongs=new Set(v)
+  }
+}catch{}
+
+let favoritesOnly=false;
+
+function saveFav(){
+  safeSet(
+    'harpa_favoritos',
+    JSON.stringify([...favoriteSongs])
+  )
+}
+
+
+/* =========================================================
+   PARAR ROLAGEM AO TROCAR DE MÚSICA
+   ========================================================= */
+
+function resetAutoScrollForNewSong(){
+
+  // Cancela a animação atual da rolagem
+  cancelAutoScrollFrame();
+
+  // Cancela o temporizador da transparência da plaquinha
+  clearTimeout(autoScrollFadeTimer);
+  autoScrollFadeTimer=0;
+
+  // Desliga completamente o estado da rolagem
+  autoScrollRunning=false;
+  autoScrollMode=false;
+  autoScrollResumeY=null;
+
+  // Esconde e restaura a plaquinha da rolagem
+  const panel=document.getElementById('autoScrollPanel');
+
+  if(panel){
+    panel.classList.add('hidden');
+    panel.classList.remove('fade-50');
+  }
+
+  // Atualiza o botão ▶/⏸ e os demais controles
+  updateAutoScrollPanel();
+}
+
+
+/* =========================================================
+   BIBLIOTECA DE MÚSICAS
+   ========================================================= */
+
+function renderLibrary(){
+
+  const list=document.getElementById('libraryList');
+
+  const q=document
+    .getElementById('librarySearch')
+    .value
+    .trim()
+    .toLowerCase();
+
+  const filtered=songs.filter(s=>
+    (!q||`${s.number} ${s.title} ${s.category}`
+      .toLowerCase()
+      .includes(q))
+    &&
+    (!favoritesOnly||favoriteSongs.has(s.id))
+  );
+
+  list.innerHTML='';
+
+
+  /* Título da seção */
+  const lab=document.createElement('div');
+  lab.className='library-section-label';
+  lab.textContent='Harpa Cristã';
+  list.appendChild(lab);
+
+
+  /* Nenhuma música encontrada */
+  if(!filtered.length){
+
+    const e=document.createElement('div');
+
+    e.className='library-empty';
+
+    e.textContent=
+      favoritesOnly
+      ? 'Nenhuma música favorita.'
+      : 'Nenhuma música encontrada.';
+
+    list.appendChild(e);
+
+    return;
+  }
+
+
+  /* =======================================================
+     CADA MÚSICA DA BIBLIOTECA
+     ======================================================= */
+
+  filtered.forEach(s=>{
+
+    const row=document.createElement('div');
+
+    row.className=
+      'song-item'+
+      (s.id===currentSongId?' active':'');
+
+
+    /* Botão principal para abrir a música */
+    const open=document.createElement('button');
+
+    open.className='song-open';
+
+    open.innerHTML=
+      `<span class="song-number">${s.number}</span>`+
+      `<span class="song-name">${s.title}</span>`;
+
+
+    /* =====================================================
+       TROCA DE MÚSICA
+       Aqui a rolagem anterior é encerrada primeiro.
+       ===================================================== */
+
+    open.onclick=()=>{
+
+      // 1. Para completamente a rolagem da música anterior
+      resetAutoScrollForNewSong();
+
+      // 2. Troca a música
+      currentSongId=s.id;
+
+      // 3. Define o tom inicial da nova música
+      currentIndex=getSongStartIndex(currentSongId);
+
+      // 4. Recupera a velocidade memorizada desta música
+      autoScrollSpeedLevel=
+        loadAutoScrollMemory(currentSongId);
+
+      // 5. Renderiza a nova música
+      render();
+
+      // 6. Garante que a nova música comece no topo
+      window.scrollTo(0,0);
+
+      // 7. Atualiza a biblioteca
+      renderLibrary();
+
+      // 8. Fecha a biblioteca
+      closeLibrary();
+    };
+
+
+    /* =====================================================
+       BOTÃO DE FAVORITO
+       ===================================================== */
+
+    const fav=document.createElement('button');
+
+    fav.className='song-fav';
+
+    fav.textContent=
+      favoriteSongs.has(s.id)
+      ? '★'
+      : '☆';
+
+
+    fav.onclick=(e)=>{
+
+      e.stopPropagation();
+
+      if(favoriteSongs.has(s.id)){
+        favoriteSongs.delete(s.id)
+      }else{
+        favoriteSongs.add(s.id)
+      }
+
+      saveFav();
+
+      renderLibrary();
+    };
+
+
+    row.append(open,fav);
+
+    list.appendChild(row);
+  });
+}
+
+
+/* =========================================================
+   ABRIR / FECHAR BIBLIOTECA
+   ========================================================= */
+
+function openLibrary(){
+
+  libraryDrawer.classList.add('open');
+
+  libraryBackdrop.classList.add('open');
+
+  libraryDrawer.setAttribute(
+    'aria-hidden',
+    'false'
+  );
+}
+
+function closeLibrary(){
+
+  libraryDrawer.classList.remove('open');
+
+  libraryBackdrop.classList.remove('open');
+
+  libraryDrawer.setAttribute(
+    'aria-hidden',
+    'true'
+  );
+}
+
+
+/* =========================================================
+   BOTÕES DE TOM
+   ========================================================= */
+
+function createToneKeys(){
+
+  const p=document.getElementById('tonePanel');
+
+  chromatic.forEach((t,i)=>{
+
+    const b=document.createElement('button');
+
+    b.textContent=spellNote(t.name);
+
+    b.onclick=()=>{
+      currentIndex=i;
+      saveToneIfEnabled();
+      render();
+    };
+
+    p.appendChild(b);
+  });
+}
+
+
+/* =========================================================
+   ATUALIZAÇÃO DOS NOMES DOS TONS
+   (# / ♭)
+   ========================================================= */
+
+function updateToneKeyLabels(){
+
+  document
+    .querySelectorAll('#tonePanel button')
+    .forEach((b,i)=>{
+
+      if(chromatic[i]){
+        b.textContent=
+          spellNote(chromatic[i].name);
+      }
+
+    });
+}
 
 const openLibraryBtn=document.getElementById('openLibrary'),
 closeLibraryBtn=document.getElementById('closeLibrary'),
@@ -1125,7 +1567,8 @@ up.onclick=()=>{
 };
 
 reset.onclick=()=>{
-  currentIndex=(getCurrentSong().sourceToneIndex+(startHalfDown?11:0))%12;
+  const song=getCurrentSong();
+  currentIndex=startHalfDown?getHalfDownIndex(song):song.sourceToneIndex;
   saveToneIfEnabled();
   render();
 };
@@ -1163,8 +1606,20 @@ document.getElementById('toggleSplit').onclick=()=>{
 };
 
 document.getElementById('toggleAutoScroll').onclick=()=>{
-  if(autoScrollRunning)stopAutoScroll();
-  else startAutoScroll();
+
+  if(autoScrollRunning){
+    // ▶ virou ⏸: apenas pausa a rolagem
+    stopAutoScroll();
+    return;
+  }
+
+  // Sempre que iniciar/retomar a rolagem,
+  // ativa automaticamente o modo dividir pelo /
+  if(!splitMode){
+    document.getElementById('toggleSplit').click();
+  }
+
+  startAutoScroll();
 };
 
 document.getElementById('autoScrollMemory').onchange=e=>{
@@ -1191,7 +1646,12 @@ document.getElementById('toggleSharp').checked=useSharps;
 document.getElementById('toggleHalfDown').onchange=e=>{
   startHalfDown=e.target.checked;
   localStorage.setItem('harpa_start_half_down',startHalfDown?'1':'0');
-  currentIndex=(getCurrentSong().sourceToneIndex+(startHalfDown?11:0))%12;
+
+  const song=getCurrentSong();
+  currentIndex=startHalfDown
+    ? getHalfDownIndex(song)
+    : song.sourceToneIndex;
+
   saveToneIfEnabled();
   render();
 };
