@@ -225,12 +225,12 @@ const songs=[
 },
 
 /* =========================
-   0015 — CONVERSÃO
+   015 — CONVERSÃO
 ========================= */
 
 {
-  id:'0015',
-  number:'0015',
+  id:'015',
+  number:'015',
   title:'CONVERSÃO',
   category:'Harpa Cristã',
   sourceToneIndex:7,
@@ -284,6 +284,67 @@ const songs=[
     }
   ]
 },
+
+/* =========================
+   020 — OLHAI P’RA O CORDEIRO DE DEUS
+========================= */
+
+{
+  id:'020',
+  number:'020',
+  title:'OLHAI P’RA O CORDEIRO DE DEUS',
+  category:'Harpa Cristã',
+  sourceToneIndex:5,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Livres de pecado vós quereis ficar?',anchors:[{pos:0,chord:'F'}]},
+      {lyric:'Olhai p’ra o Cordeiro de Deus!',anchors:[{pos:0,chord:'F'},{pos:27,chord:'C'}]},
+      {lyric:'Ele morto foi na cruz, p’ra vos salvar,',anchors:[{pos:0,chord:'F'},{pos:35,chord:'Dm'}]},
+      {lyric:'Olhai p’ra o Cordeiro de Deus!',anchors:[{pos:2,chord:'C'},{pos:26,chord:'F'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Olhai p’ra o Cordeiro de Deus,',anchors:[{pos:3,chord:'F'},{pos:26,chord:'C'}]},
+      {lyric:'Olhai p’ra o Cordeiro de Deus,',anchors:[{pos:3,chord:'C'},{pos:27,chord:'F'}]},
+      {lyric:'Porque só Ele vos pode salvar,',anchors:[{pos:1,chord:'F'},{pos:19,chord:'Bb'}]},
+      {lyric:'Olhai p’ra o Cordeiro de Deus!',anchors:[{pos:3,chord:'C'},{pos:26,chord:'F'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Se estais tentados, em hesitação,',anchors:[{pos:0,chord:'F'}]},
+      {lyric:'Olhai p’ra o Cordeiro de Deus!',anchors:[{pos:0,chord:'F'},{pos:26,chord:'C'}]},
+      {lyric:'Ele encherá o vosso coração.',anchors:[{pos:0,chord:'F'},{pos:24,chord:'Dm'}]},
+      {lyric:'Olhai p’ra o Cordeiro de Deus!',anchors:[{pos:3,chord:'C'},{pos:26,chord:'F'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Se estais cansados e sem mais vigor,',anchors:[{pos:0,chord:'F'}]},
+      {lyric:'Olhai p’ra o Cordeiro de Deus!',anchors:[{pos:0,chord:'F'},{pos:26,chord:'C'}]},
+      {lyric:'Ele vos quer dar Seu divinal amor,',anchors:[{pos:0,chord:'F'},{pos:30,chord:'Dm'}]},
+      {lyric:'Olhai p’ra o Cordeiro de Deus!',anchors:[{pos:3,chord:'C'},{pos:26,chord:'F'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Se na vossa senda sombras vêm cair,',anchors:[{pos:0,chord:'F'}]},
+      {lyric:'Olhai p’ra o Cordeiro de Deus!',anchors:[{pos:3,chord:'F'},{pos:26,chord:'C'}]},
+      {lyric:'Ele, com Sua graça, tudo quer suprir.',anchors:[{pos:0,chord:'F'},{pos:33,chord:'Dm'}]},
+      {lyric:'Olhai p’ra o Cordeiro de Deus!',anchors:[{pos:3,chord:'C'},{pos:26,chord:'F'}]}
+    ]
+    }
+  ]
+},
+
 /* =========================
    077 — GUARDA O CONTACTO
 ========================= */
