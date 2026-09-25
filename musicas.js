@@ -54,6 +54,69 @@ const songs=[
 },
 
 /* =========================
+   003 — PLENA PAZ
+========================= */
+
+{
+  id:'003',
+  number:'003',
+  title:'PLENA PAZ',
+  category:'Harpa Cristã',
+  sourceToneIndex:2,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Plena paz e santo gozo, / Tenho em ti, ó meu Jesus!',anchors:[{pos:7,chord:'G'},{pos:26,chord:'G/B'},{pos:35,chord:'C'},{pos:48,chord:'G'}]},
+      {lyric:'Pois eu cri em Tua morte sobre a cruz;',anchors:[{pos:9,chord:'G'},{pos:34,chord:'D'}]},
+      {lyric:'No Senhor só confiando / Neste mundo viverei,',anchors:[{pos:6,chord:'G'},{pos:25,chord:'G/B'},{pos:32,chord:'C'},{pos:42,chord:'G'}]},
+      {lyric:'Entoando aleluias ao meu Rei!',anchors:[{pos:3,chord:'G'},{pos:13,chord:'D'},{pos:26,chord:'G'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Oh! Glória ao meu Jesus!',anchors:[{pos:5,chord:'C'}]},
+      {lyric:'Pois é digno de louvor;',anchors:[{pos:7,chord:'G'}]},
+      {lyric:'É meu Rei, meu bom Pastor,',anchors:[{pos:6,chord:'C'},{pos:23,chord:'G'}]},
+      {lyric:'É meu Senhor.',anchors:[{pos:10,chord:'D'}]},
+      {lyric:'Como os anjos, que O louvam,',anchors:[{pos:8,chord:'G'}]},
+      {lyric:'Eu também O louvarei,',anchors:[{pos:0,chord:'G/B'},{pos:7,chord:'C'},{pos:17,chord:'G'}]},
+      {lyric:'Entoando aleluias ao meu Rei!',anchors:[{pos:4,chord:'G'},{pos:13,chord:'D'},{pos:26,chord:'G'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'O amor de Jesus Cristo / É mui grande para mim,',anchors:[{pos:4,chord:'G'},{pos:24,chord:'G/B'},{pos:31,chord:'C'},{pos:44,chord:'G'}]},
+      {lyric:'Pois Sua graça me encheu de amor sem fim.',anchors:[{pos:10,chord:'G'},{pos:37,chord:'D'}]},
+      {lyric:'Meu Jesus foi para a glória, / Mas um dia eu O verei,',anchors:[{pos:6,chord:'G'},{pos:31,chord:'G/B'},{pos:38,chord:'C'},{pos:50,chord:'G'}]},
+      {lyric:'Entoando aleluias ao meu Rei!',anchors:[{pos:4,chord:'G'},{pos:13,chord:'D'},{pos:26,chord:'G'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Este mundo não deseja / Tão bondoso Salvador,',anchors:[{pos:6,chord:'G'},{pos:23,chord:'G/B'},{pos:32,chord:'C'},{pos:42,chord:'G'}]},
+      {lyric:'Não sabendo agradecer Seu grande amor.',anchors:[{pos:7,chord:'G'},{pos:35,chord:'D'}]},
+      {lyric:'Eu, porém, estou gozando / Do favor da Sua lei,',anchors:[{pos:7,chord:'G'},{pos:26,chord:'G/B'},{pos:33,chord:'C'},{pos:44,chord:'G'}]},
+      {lyric:'Entoando aleluias ao meu Rei!',anchors:[{pos:3,chord:'G'},{pos:13,chord:'D'},{pos:26,chord:'G'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Quando o povo israelita / Com Jesus se concertar,',anchors:[{pos:9,chord:'G'},{pos:26,chord:'G/B'},{pos:33,chord:'C'},{pos:46,chord:'G'}]},
+      {lyric:'Dando glória ao Seu nome, sem cessar.',anchors:[{pos:7,chord:'G'},{pos:33,chord:'D'}]},
+      {lyric:'Nesse tempo, céu e terra / Hão de ser a mesma grei,',anchors:[{pos:6,chord:'G'},{pos:27,chord:'G/B'},{pos:35,chord:'C'},{pos:47,chord:'G'}]},
+      {lyric:'Entoando aleluias ao meu Rei!',anchors:[{pos:4,chord:'G'},{pos:13,chord:'D'},{pos:26,chord:'G'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    002 — SAUDOSA LEMBRANÇA
 ========================= */
 
