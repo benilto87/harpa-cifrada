@@ -522,6 +522,66 @@ const songs=[
 },
 
 /* =========================
+   123 — CRISTO VOLTARÁ
+========================= */
+
+{
+  id:'123',
+  number:'123',
+  title:'CRISTO VOLTARÁ',
+  category:'Harpa Cristã',
+  sourceToneIndex:8,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Um dia, Cristo voltará;',anchors:[{pos:3,chord:'Ab'},{pos:8,chord:'Db'},{pos:20,chord:'Ab'}]},
+      {lyric:'Ao ascender, o prometeu;',anchors:[{pos:3,chord:'Eb'}]},
+      {lyric:'Do modo que subiu virá;',anchors:[{pos:3,chord:'Ab'},{pos:8,chord:'Db'},{pos:21,chord:'Ab'}]},
+      {lyric:'Há de ver o Rei Jesus, o povo Seu.',anchors:[{pos:6,chord:'Db'},{pos:19,chord:'Eb'},{pos:31,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Mui breve sim, Jesus virá,',anchors:[{pos:4,chord:'Db'},{pos:17,chord:'Ab'}]},
+      {lyric:'Alegre O verá Seu povo;',anchors:[{pos:0,chord:'Eb'},{pos:18,chord:'Ab'}]},
+      {lyric:'Velando, todos devem sempre estar,',anchors:[{pos:2,chord:'Db'},{pos:15,chord:'Ab'}]},
+      {lyric:'A fim de vê-Lo voltar.',anchors:[{pos:2,chord:'Eb'},{pos:18,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Os mensageiros do Senhor,',anchors:[{pos:3,chord:'Ab'},{pos:9,chord:'Db'},{pos:21,chord:'Ab'}]},
+      {lyric:'Afirmam que Jesus virá;',anchors:[{pos:1,chord:'Eb'}]},
+      {lyric:'E o poder Consolador',anchors:[{pos:1,chord:'Ab'},{pos:6,chord:'Db'},{pos:18,chord:'Ab'}]},
+      {lyric:'As fiéis promessas nos revelará.',anchors:[{pos:4,chord:'Db'},{pos:19,chord:'Eb'},{pos:29,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Oh! gozo sem comparação',anchors:[{pos:4,chord:'Ab'},{pos:10,chord:'Db'},{pos:21,chord:'Ab'}]},
+      {lyric:'No dia do meu Salvador,',anchors:[{pos:3,chord:'Eb'}]},
+      {lyric:'Com a mui grande multidão,',anchors:[{pos:3,chord:'Ab'},{pos:11,chord:'Db'},{pos:23,chord:'Ab'}]},
+      {lyric:'Subiremos ao encontro do Senhor.',anchors:[{pos:4,chord:'Db'},{pos:15,chord:'Eb'},{pos:29,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Bem-vindo sejas, meu Senhor,',anchors:[{pos:4,chord:'Ab'},{pos:10,chord:'Db'},{pos:25,chord:'Ab'}]},
+      {lyric:'Em Tua gloriosa luz;',anchors:[{pos:3,chord:'Eb'}]},
+      {lyric:'E nossa fé terá valor;',anchors:[{pos:1,chord:'Ab'},{pos:7,chord:'Db'},{pos:19,chord:'Ab'}]},
+      {lyric:'Nós dizemos: “Ora, vem Senhor Jesus”.',anchors:[{pos:6,chord:'Db'},{pos:19,chord:'Eb'},{pos:33,chord:'Ab'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    198 — JESUS, O BOM AMIGO
 ========================= */
 
@@ -536,18 +596,18 @@ const songs=[
     {
       label:'1ª estrofe',
       lines:[
-      {lyric:'Achei um bom amigo, / Jesus, o Salvador,',anchors:[{pos:1,chord:'F'},{pos:24,chord:'Bb'},{pos:37,chord:'F'}]},
+      {lyric:'Achei um bom amigo, / Jesus, o Salvador,',anchors:[{pos:3,chord:'F'},{pos:25,chord:'Bb'},{pos:37,chord:'F'}]},
       {lyric:'O escolhido dos milhares para mim;',anchors:[{pos:7,chord:'F'},{pos:31,chord:'C'}]},
-      {lyric:'Dos vales é o lírio, é o forte Mediador, / ',anchors:[{pos:5,chord:'F'},{pos:25,chord:'Bb'},{pos:37,chord:'F'}]},
-      {lyric:'Que me purifica e guarda para Si,',anchors:[{pos:7,chord:'F'},{pos:19,chord:'Bb'},{pos:26,chord:'C'},{pos:30,chord:'F'}]},
-      {lyric:'Consolador amado, meu protetor do mal, /',anchors:[{pos:3,chord:'Bb'},{pos:23,chord:'F'}]},
+      {lyric:'Dos vales é o lírio, é o forte Mediador,',anchors:[{pos:5,chord:'F'},{pos:26,chord:'Bb'},{pos:37,chord:'F'}]},
+      {lyric:'Que me purifica e guarda para Si,',anchors:[{pos:8,chord:'F'},{pos:20,chord:'Bb'},{pos:26,chord:'C'},{pos:30,chord:'F'}]},
+      {lyric:'Consolador amado, meu protetor do mal,',anchors:[{pos:3,chord:'Bb'},{pos:22,chord:'F'}]},
       {lyric:' Solicitude minha toma a Si.',anchors:[{pos:4,chord:'F'},{pos:25,chord:'C'}]}
     ]
     },
     {
       label:'Coro',
       lines:[
-      {lyric:'Dos vales é o lírio, a estrela da manhã,',anchors:[{pos:5,chord:'F'},{pos:25,chord:'Bb'},{pos:38,chord:'F'}]},
+      {lyric:'Dos vales é o lírio, a estrela da manhã,',anchors:[{pos:5,chord:'F'},{pos:25,chord:'Bb'},{pos:37,chord:'F'}]},
       {lyric:'O escolhido dos milhares para mim.',anchors:[{pos:7,chord:'F'},{pos:19,chord:'Bb'},{pos:26,chord:'C'},{pos:31,chord:'F'}]},
       {lyric:'Consolador amado, meu protetor do mal,',anchors:[{pos:3,chord:'Bb'},{pos:23,chord:'F'}]},
       {lyric:'Solicitude minha toma a Si,',anchors:[{pos:2,chord:'F'},{pos:24,chord:'C'}]},
@@ -560,10 +620,10 @@ const songs=[
       lines:[
       {lyric:'Levou-me as dores todas, / As mágoas lhe entreguei;',anchors:[{pos:2,chord:'F'},{pos:30,chord:'Bb'},{pos:48,chord:'F'}]},
       {lyric:'Minha fortaleza é, na tentação.',anchors:[{pos:6,chord:'F'},{pos:28,chord:'C'}]},
-      {lyric:'Deixei, por Ele tudo; os ídolos queimei; /',anchors:[{pos:4,chord:'F'},{pos:25,chord:'Bb'},{pos:37,chord:'F'}]},
+      {lyric:'Deixei, por Ele tudo; os ídolos queimei;',anchors:[{pos:4,chord:'F'},{pos:24,chord:'Bb'},{pos:37,chord:'F'}]},
       {lyric:'Ele me conserva santo o coração,',anchors:[{pos:5,chord:'F'},{pos:16,chord:'Bb'},{pos:24,chord:'C'},{pos:29,chord:'F'}]},
-      {lyric:'Que o mundo me abandone; persiga o tentador; /',anchors:[{pos:8,chord:'Bb'},{pos:30,chord:'F'}]},
-      {lyric:'Jesus me guarda até da vida o fim.',anchors:[{pos:2,chord:'F'},{pos:32,chord:'C'}]}
+      {lyric:'Que o mundo me abandone; persiga o tentador;',anchors:[{pos:7,chord:'Bb'},{pos:28,chord:'F'}]},
+      {lyric:'Jesus me guarda até da vida o fim.',anchors:[{pos:2,chord:'F'},{pos:31,chord:'C'}]}
     ]
     },
     {
@@ -571,9 +631,9 @@ const songs=[
       lines:[
       {lyric:'Não desampara nunca, / Nem me abandonará,',anchors:[{pos:5,chord:'F'},{pos:28,chord:'Bb'},{pos:38,chord:'F'}]},
       {lyric:'Se fiel e obediente eu viver;',anchors:[{pos:5,chord:'F'},{pos:26,chord:'C'}]},
-      {lyric:'Um muro é de fogo, que me protegerá, / ',anchors:[{pos:4,chord:'F'},{pos:23,chord:'Bb'},{pos:33,chord:'F'}]},
-      {lyric:'\'Té que venha a mim o tempo de morrer,',anchors:[{pos:10,chord:'F'},{pos:23,chord:'Bb'},{pos:29,chord:'C'},{pos:36,chord:'F'}]},
-      {lyric:'Ao céu então voando, Sua glória eu verei / ',anchors:[{pos:3,chord:'Bb'},{pos:26,chord:'F'}]},
+      {lyric:'Um muro é de fogo, que me protegerá,',anchors:[{pos:4,chord:'F'},{pos:25,chord:'Bb'},{pos:33,chord:'F'}]},
+      {lyric:'Té que venha a mim o tempo de morrer,',anchors:[{pos:8,chord:'F'},{pos:21,chord:'Bb'},{pos:27,chord:'C'},{pos:34,chord:'F'}]},
+      {lyric:'Ao céu então voando, Sua glória eu verei',anchors:[{pos:3,chord:'Bb'},{pos:26,chord:'F'}]},
       {lyric:'Onde a dor e a morte nunca vêm.',anchors:[{pos:5,chord:'F'},{pos:29,chord:'C'}]}
     ]
     }

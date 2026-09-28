@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qual a Nota?</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0; min-height:100vh; display:flex; justify-content:center; align-items:center;
+  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+  background:#f4f1ea; color:#222;
+}
+.app{width:min(560px,94vw); padding:22px}
+h1{text-align:center;margin:0 0 5px;font-size:30px}
+.sub{text-align:center;color:#777;margin:0 0 20px}
+.top{display:flex;gap:10px;margin-bottom:14px}
+.stat{
+  flex:1;background:white;border-radius:14px;padding:11px;text-align:center;
+  box-shadow:0 3px 12px #0000000d
+}
+.stat b{display:block;font-size:21px}
+.card{
+  background:white;border-radius:24px;padding:38px 20px 28px;text-align:center;
+  box-shadow:0 8px 30px #00000012; min-height:300px;
+}
+.label{font-size:14px;color:#888;text-transform:uppercase;letter-spacing:1px}
+.question{font-size:64px;font-weight:800;margin:18px 0 8px}
+.hint{color:#777;margin-bottom:25px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+button{
+  border:0;border-radius:14px;padding:17px;font-size:20px;font-weight:700;
+  background:#eee8dc;color:#222;cursor:pointer;transition:.15s;
+}
+button:hover{transform:translateY(-2px);background:#e2dacb}
+button.correct{background:#bde8c7;color:#155b29}
+button.wrong{background:#f3bcbc;color:#7d1818}
+button:disabled{cursor:default;transform:none}
+.feedback{min-height:32px;margin-top:18px;font-weight:700;font-size:18px}
+.next{
+  width:100%;margin-top:8px;background:#222;color:white;display:none;
+}
+.next:hover{background:#333}
+.mode{
+  display:flex;gap:8px;margin:14px 0;
+}
+.mode button{font-size:14px;padding:10px;flex:1}
+.mode button.active{background:#222;color:white}
+.restart{width:100%;margin-top:12px;background:#ddd;font-size:15px;padding:12px}
+
+/* Tela de memorização */
+.preview-screen{
+  background:white;border-radius:24px;padding:24px 18px 28px;
+  box-shadow:0 8px 30px #00000012;text-align:center;
+}
+.preview-title{font-size:22px;font-weight:800}
+.preview-sub{color:#777;margin:5px 0 8px}
+.countdown{
+  font-size:46px;font-weight:900;line-height:1;margin:8px 0 14px;
+}
+.memory-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+}
+.memory-card{
+  perspective:800px;height:105px;cursor:default;
+}
+.memory-card-inner{
+  position:relative;width:100%;height:100%;
+  transition:transform .6s;transform-style:preserve-3d;
+}
+.memory-card.show .memory-card-inner{transform:rotateY(180deg)}
+.memory-face{
+  position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  box-shadow:0 3px 10px #00000012;border:1px solid #eee;
+}
+.memory-front{background:#242424;color:white;font-size:27px;font-weight:800}
+.memory-front small{font-size:11px;color:#bbb;margin-top:4px}
+.memory-back{background:#eee8dc;transform:rotateY(180deg)}
+.memory-back .n{font-size:21px;font-weight:800}
+.memory-back .c{font-size:16px;margin-top:3px;color:#555}
+.game-card{padding-top:26px}
+.flip-card{perspective:1000px;height:220px;margin-bottom:20px}
+.flip-inner{
+  position:relative;width:100%;height:100%;
+  transition:transform .65s cubic-bezier(.2,.7,.2,1);
+  transform-style:preserve-3d;
+}
+.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{
+  position:absolute;inset:0;backface-visibility:hidden;
+  border-radius:20px;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;
+}
+.flip-front{background:#fff}
+.flip-back{
+  background:#eee8dc;transform:rotateY(180deg);
+}
+.flip-back .question{font-size:58px}
+@media(max-width:500px){
+  .memory-grid{grid-template-columns:repeat(2,1fr)}
+  .memory-card{height:90px}
+  .flip-card{height:200px}
+}
+
+
+.phase-head{text-align:center;margin:4px 0 18px}
+.phase-head h2{margin:7px 0 3px;font-size:25px}
+.phase-head p{margin:0;color:#777}
+.learn-actions{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.learn-actions button{margin:0!important}
+.learn-repeat{background:#ddd;color:#222}
+.phase-badge{
+  display:inline-block;background:#222;color:#fff;border-radius:20px;
+  padding:6px 12px;font-size:12px;font-weight:800;letter-spacing:.8px
+}
+.goal{margin-top:10px;font-size:14px;color:#666}
+.match-area{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.match-column{
+  background:#fff;border-radius:20px;padding:15px;
+  box-shadow:0 5px 22px #0000000d
+}
+.match-column h3{text-align:center;margin:0 0 12px;font-size:15px;color:#777}
+.match-grid{display:grid;gap:9px}
+.match-card{
+  border:2px solid transparent;background:#eee8dc;border-radius:13px;
+  min-height:57px;font-size:22px;font-weight:800;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:.18s;user-select:none
+}
+.match-card:hover{transform:translateY(-2px)}
+.match-card.selected{border-color:#333;transform:scale(1.03);background:#ddd2bf}
+.match-card.correct{
+  background:#bde8c7;border-color:#52a568;color:#155b29;
+  animation:pop .25s ease
+}
+.match-card.wrong{
+  background:#f3bcbc;border-color:#c95757;color:#7d1818;
+  animation:shake .28s ease
+}
+.match-card.removing{opacity:0;transform:scale(.65);transition:.3s}
+@keyframes pop{50%{transform:scale(1.07)}}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.transition-box{
+  background:white;border-radius:25px;padding:45px 20px;text-align:center;
+  box-shadow:0 8px 30px #00000012
+}
+.big-check{
+  width:75px;height:75px;border-radius:50%;margin:auto;
+  display:flex;align-items:center;justify-content:center;
+  background:#bde8c7;color:#155b29;font-size:42px;font-weight:900
+}
+.transition-box h2{margin:18px 0 8px}
+.transition-box p{color:#666;margin:6px}
+.transition-box .countdown{margin:24px 0 8px}
+.small-note{color:#999;font-size:13px}
+
+
+
+.phase-progress{margin:10px auto 0;max-width:430px;text-align:center;color:#777;font-size:13px;background:#f5f3ee;border-radius:12px;padding:8px 10px}
+.phase-progress strong{color:#222}
+.system-badge{display:inline-block;margin-left:6px;padding:4px 9px;border-radius:12px;background:#eee8dc;color:#333;font-size:11px;font-weight:800;vertical-align:middle}
+
+.phase-head{text-align:center}.learn-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:18px 0}.learn-grid .learn-card{height:135px;perspective:900px;cursor:pointer}.learn-card .learn-inner{position:relative;width:100%;height:100%;transition:.6s;transform-style:preserve-3d}.learn-card.flipped .learn-inner{transform:rotateY(180deg)}.learn-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:17px;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 4px 14px #0001}.learn-front{background:#242424;color:#fff;font-size:28px;font-weight:800}.learn-front small{font-size:11px;color:#aaa;margin-top:5px}.learn-back{background:#eee8dc;transform:rotateY(180deg)}.learn-back strong{font-size:25px}.learn-back span{font-size:19px;color:#666;margin-top:4px}.main-btn{border:0;border-radius:14px;padding:13px 20px;background:#222;color:#fff;font-weight:750;font-size:16px;cursor:pointer}.main-btn:disabled{opacity:.35}.quiz-question-label{text-align:center;color:#777;font-size:12px;text-transform:uppercase;margin-top:20px}.quiz-question{text-align:center;font-size:55px;font-weight:900;margin:10px 0 20px}.quiz-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.quiz-options button{border:0;border-radius:14px;padding:17px;background:#eee8dc;font-size:21px;font-weight:800;cursor:pointer}.quiz-options button.correct{background:#bde8c7;color:#155b29}.quiz-options button.wrong{background:#f3bcbc;color:#7d1818}.quiz-options button:disabled{cursor:default}
+
+.accident-choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:520px;margin:22px auto}
+.accident-choice{border:0;border-radius:20px;padding:25px 15px;background:#eee8dc;cursor:pointer;box-shadow:0 4px 15px #00000010;transition:.18s}
+.accident-choice:hover{transform:translateY(-2px)}
+.accident-choice strong{display:block;font-size:25px}.accident-choice small{display:block;color:#777;margin-top:8px;font-size:13px}
+.accident-choice.sharp{background:#eee8dc}.accident-choice.flat{background:#e9e4dc}
+@media(max-width:480px){.accident-choice-grid{grid-template-columns:1fr}}
+
+/* Barra visual de progresso do módulo */
+.lesson-progress{
+  margin:10px auto 14px;
+  max-width:430px;
+}
+.lesson-progress-track{
+  height:7px;
+  background:#e9e7e2;
+  border-radius:999px;
+  overflow:hidden;
+}
+.lesson-progress-fill{
+  height:100%;
+  width:0%;
+  background:#222;
+  border-radius:999px;
+  transition:width .35s ease;
+}
+.voltar{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:36px;
+  height:36px;
+  margin-bottom:8px;
+  border-radius:9px;
+  background:#eee8dc;
+  color:#222;
+  text-decoration:none;
+  font:700 24px/1 Arial,sans-serif;
+}
+
+.voltar:hover{
+  background:#e2dacb;
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+<a href="index.html" class="voltar">←</a>
+  <h1>🎵 Memorize Notas</h1>
+  <p class="sub">Treine sua memória musical em etapas progressivas</p>
+
+  <div class="top">
+    <div class="stat">Pontos<b id="score">0</b></div>
+    <div class="stat">Acertos<b id="hits">0</b></div>
+    <div class="stat">Progresso<b id="progress">0%</b></div>
+  </div>
+
+  <!-- FASE 0 -->
+  <section id="phase0">
+    <div class="phase-head"><span class="phase-badge">FASE 0 · APRENDER</span>
+      <h2 id="learnTitle">Dó • Ré • Mi</h2>
+      <p id="learnDesc">Toque em cada carta para virá-la e descobrir a cifra.</p>
+      <div class="lesson-progress"><div class="lesson-progress-track"><div id="phase0Bar" class="lesson-progress-fill"></div></div></div>
+       <div id="phase0Progress" class="phase-progress"></div>
+      <div class="learn-grid" id="learnGrid"></div>
+      <div class="learn-actions">
+        <button id="learnRepeat" class="main-btn learn-repeat" onclick="repeatLearnStage()">↻ Novo</button>
+        <button id="learnNext" class="main-btn" disabled onclick="advanceLearn()">Aprendi →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FASE 1 -->
+  <section id="phase1" style="display:none">
+    <div class="phase-head"><span class="phase-badge">FASE 1 · TESTE</span>
+      <h2 id="quizTitle">Dó, Ré e Mi</h2>
+      <p>Agora tente lembrar sozinho. São apenas 3 opções.</p>
+      <div class="goal">Meta: <strong>75%</strong></div>
+       <div class="lesson-progress"><div class="lesson-progress-track"><div id="phase1Bar" class="lesson-progress-fill"></div></div></div>
+    </div>
+    <div class="quiz-question-label">Qual é a cifra de:</div>
+    <div class="quiz-question" id="quizQuestion">Dó</div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="feedback" id="quizFeedback"></div>
+    <button class="next" id="quizNext" onclick="nextQuiz()">Próxima →</button>
+  </section>
+
+  <!-- FASE 2 -->
+  <section id="phase2" style="display:none">
+    <div class="phase-head">
+      <span class="phase-badge">FASE 2 · ASSOCIAÇÃO</span>
+      <h2>Associe as cartas</h2>
+      <p>Selecione uma cifra e depois a nota correspondente.</p>
+      <div class="goal">Meta: <strong>75%</strong></div>
+      <div class="lesson-progress"><div class="lesson-progress-track"><div id="phase2Bar" class="lesson-progress-fill"></div></div></div>
+       <div id="phase2Progress" class="phase-progress"></div>
+    </div>
+
+    <div class="match-area">
+      <div class="match-column">
+        <h3>Cifras</h3>
+        <div id="chordCards" class="match-grid"></div>
+      </div>
+      <div class="match-column">
+        <h3>Notas</h3>
+        <div id="noteCards" class="match-grid"></div>
+      </div>
+    </div>
+
+    <div id="matchFeedback" class="feedback"></div>
+    <button id="resetPhase1" class="restart" onclick="restartPhase1()">↻ Reiniciar Fase 1</button>
+  </section>
+
+  <!-- TRANSIÇÃO -->
+  <section id="transition" style="display:none">
+    <div class="transition-box">
+      <div class="big-check">✓</div>
+      <h2>Fase 2 concluída!</h2>
+      <p>Você alcançou pelo menos <strong>75%</strong>.</p>
+      <p>Prepare-se para a terceira fase.</p>
+      <div id="transitionProgress" class="phase-progress"></div>
+      <div class="countdown" id="transitionCountdown">5</div>
+      <div class="small-note">A próxima fase começa em...</div>
+    </div>
+  </section>
+
+  <!-- FASE 3 -->
+  <section id="phase3" style="display:none">
+    <div class="mode">
+      <button id="mixed" class="active" onclick="setMode('mixed')">↔ Misturado</button>
+      <button id="noteToChord" onclick="setMode('note')">Nota → Cifra</button>
+      <button id="chordToNote" onclick="setMode('chord')">Cifra → Nota</button>
+    </div>
+
+    <div id="previewScreen" class="preview-screen">
+      <div class="preview-title">🧠 Memorize as cartas</div>
+      <div class="preview-sub">Observe as relações entre as notas e as cifras.</div>
+      <div class="lesson-progress"><div class="lesson-progress-track"><div id="phase3Bar" class="lesson-progress-fill"></div></div></div>
+       <div id="phase3Progress" class="phase-progress"></div>
+      <div class="countdown" id="countdown">5</div>
+      <div class="memory-grid" id="memoryGrid"></div>
+    </div>
+
+    <div class="card game-card" id="gameCard" style="display:none">
+      <div class="flip-card" id="flipCard">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="label" id="label">Qual é a cifra?</div>
+            <div class="question" id="question">Dó</div>
+            <div class="hint">Escolha uma das quatro opções</div>
+          </div>
+          <div class="flip-back">
+            <div class="label">Resposta</div>
+            <div class="question" id="revealAnswer">C</div>
+            <div class="hint">Resposta correta</div>
+          </div>
+        </div>
+      </div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+      <button class="next" id="next" onclick="newRound()">Próxima →</button>
+    </div>
+  </section>
+
+
+
+  <!-- MÓDULO DE ACIDENTES -->
+  <section id="accidentChoice" style="display:none">
+    <div class="phase-head">
+      <span class="phase-badge">NOVA ETAPA · ACIDENTES</span>
+      <h2>Como você quer aprender?</h2>
+      <p>Escolha o sistema de notas que será usado nas próximas fases.</p>
+      <div class="lesson-progress"><div class="lesson-progress-track"><div id="accChoiceBar" class="lesson-progress-fill"></div></div></div>
+       <div class="phase-progress"><strong>Próximo passo:</strong> escolha ♯ Sustenidos ou ♭ Bemóis</div>
+    </div>
+    <div class="accident-choice-grid">
+      <button class="accident-choice sharp" onclick="chooseAccidentals('sharp')">
+        <strong>♯ Sustenidos</strong><small>C♯ · D♯ · F♯ · G♯ · A♯</small>
+      </button>
+      <button class="accident-choice flat" onclick="chooseAccidentals('flat')">
+        <strong>♭ Bemóis</strong><small>D♭ · E♭ · G♭ · A♭ · B♭</small>
+      </button>
+    </div>
+  </section>
+
+  <!-- ACIDENTES: APRENDER -->
+  <section id="acc0" style="display:none">
+    <div class="phase-head">
+      <span class="phase-badge">ACIDENTES · FASE 0 <span id="accSystem0" class="system-badge"></span></span>
+      <h2 id="accLearnTitle"></h2>
+      <p id="accLearnDesc">Toque nas cartas para descobrir a nota e a cifra.</p>
+      <div class="lesson-progress"><div class="lesson-progress-track"><div id="acc0Bar" class="lesson-progress-fill"></div></div></div>
+       <div id="acc0Progress" class="phase-progress"></div>
+      <div class="learn-grid" id="accLearnGrid"></div>
+      <div class="learn-actions">
+        <button id="accLearnRepeat" class="main-btn learn-repeat" onclick="repeatAccLearn()">↻ Novo</button>
+        <button id="accLearnNext" class="main-btn" disabled onclick="advanceAccLearn()">Aprendi →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACIDENTES: MÚLTIPLA ESCOLHA -->
+  <section id="acc1" style="display:none">
+    <div class="phase-head">
+      <span class="phase-badge">ACIDENTES · FASE 1 <span id="accSystem1" class="system-badge"></span></span>
+      <h2>Teste rápido</h2>
+      <p>Escolha a cifra correta.</p>
+      <div class="lesson-progress"><div class="lesson-progress-track"><div id="acc1Bar" class="lesson-progress-fill"></div></div></div>
+       <div id="acc1Progress" class="phase-progress"></div>
+    </div>
+    <div class="quiz-question-label">Qual é a cifra de:</div>
+    <div class="quiz-question" id="accQuestion"></div>
+    <div class="quiz-options" id="accOptions"></div>
+    <div class="feedback" id="accFeedback"></div>
+    <button class="next" id="accNext" onclick="nextAccQuiz()">Próxima →</button>
+  </section>
+
+  <!-- ACIDENTES: ASSOCIAÇÃO -->
+  <section id="acc2" style="display:none">
+    <div class="phase-head">
+      <span class="phase-badge">ACIDENTES · FASE 2 <span id="accSystem2" class="system-badge"></span></span>
+      <h2>Associe as cartas</h2>
+      <p>Escolha uma cifra e depois a nota correspondente.</p>
+      <div class="lesson-progress"><div class="lesson-progress-track"><div id="acc2Bar" class="lesson-progress-fill"></div></div></div>
+       <div id="acc2Progress" class="phase-progress"></div>
+    </div>
+    <div class="match-area">
+      <div class="match-column"><h3>CIFRAS</h3><div id="accChords" class="match-grid"></div></div>
+      <div class="match-column"><h3>NOTAS</h3><div id="accNotes" class="match-grid"></div></div>
+    </div>
+    <div id="accMatchFeedback" class="feedback"></div>
+  </section>
+
+  <!-- DESAFIO MISTO: NATURAIS + ACIDENTES -->
+  <section id="mixedChallenge" style="display:none">
+    <div class="phase-head">
+      <span class="phase-badge">DESAFIO FINAL · TUDO MISTURADO</span>
+      <h2>🎯 Descubra a nota</h2>
+      <p>Agora entram juntas as notas naturais e as alterações que você aprendeu.</p>
+      <div class="lesson-progress"><div class="lesson-progress-track"><div id="mixedBar" class="lesson-progress-fill"></div></div></div>
+       <div id="mixedChallengeProgress" class="phase-progress"></div>
+    </div>
+    <div class="card game-card" id="mixedCard">
+      <div class="flip-card" id="mixedFlipCard">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <div class="label" id="mixedLabel">Qual é a cifra?</div>
+            <div class="question" id="mixedQuestion"></div>
+            <div class="hint">Escolha uma das quatro opções</div>
+          </div>
+          <div class="flip-back">
+            <div class="label">Resposta</div>
+            <div class="question" id="mixedAnswer"></div>
+            <div class="hint">Você descobriu!</div>
+          </div>
+        </div>
+      </div>
+      <div class="options" id="mixedOptions"></div>
+      <div class="feedback" id="mixedFeedback"></div>
+      <button class="next" id="mixedNext" onclick="nextMixedChallenge()">Próxima →</button>
+    </div>
+  </section>
+
+  <!-- ACIDENTES: MEMÓRIA -->
+  <section id="acc3" style="display:none">
+    <div id="accPreview">
+      <div class="phase-head"><span class="phase-badge">ACIDENTES · FASE 3 <span id="accSystem3" class="system-badge"></span></span>
+        <h2>🧠 Memorize as relações</h2><p>Observe as cartas antes do teste.</p>
+        <div class="lesson-progress"><div class="lesson-progress-track"><div id="acc3Bar" class="lesson-progress-fill"></div></div></div>
+       <div id="acc3Progress" class="phase-progress"></div>
+      </div>
+      <div class="countdown" id="accCountdown">5</div>
+      <div class="memory-grid" id="accMemoryGrid"></div>
+    </div>
+    <div id="accFinal" style="display:none">
+      <div class="mode">
+        <button id="accMixed" class="active" onclick="setAccMode('mixed')">↔ Misturado</button>
+        <button id="accNote" onclick="setAccMode('note')">Nota → Cifra</button>
+        <button id="accChord" onclick="setAccMode('chord')">Cifra → Nota</button>
+      </div>
+      <div class="flip-card" id="accFlipCard">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="label" id="accFinalLabel"></div><div class="question" id="accFinalQuestion"></div></div>
+          <div class="flip-back"><div class="label">Resposta</div><div class="question" id="accFinalAnswer"></div></div>
+        </div>
+      </div>
+      <div class="options" id="accFinalOptions"></div>
+      <div class="feedback" id="accFinalFeedback"></div>
+      <button class="next" id="accFinalNext" onclick="nextAccFinal()">Próxima →</button>
+    </div>
+  </section>
+
+  <button class="restart" onclick="restartAll()">↻ Recomeçar jogo</button>
+</div>
+<script>
+
+const pairs = [
+  ["Dó","C"], ["Ré","D"], ["Mi","E"], ["Fá","F"],
+  ["Sol","G"], ["Lá","A"], ["Si","B"]
+];
+
+let mode="mixed", current=null, answered=false;
+let hits=0, misses=0, streak=0, score=0;
+let phase1Score=0, phase1Attempts=0, selectedChord=null, phase1Done=false;
+let previewRunning=false, finalRound=0, finalHits=0, finalMisses=0;
+
+const $ = id => document.getElementById(id);
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+
+function updateStats(){
+  $("score").textContent=score;
+  $("hits").textContent=hits;
+  const total=hits+misses;
+  $("progress").textContent=total ? Math.round((hits/total)*100)+"%" : "0%";
+}
+
+function setLessonBar(id, percent){
+  const el = document.getElementById(id);
+  if(el) el.style.width = Math.max(0, Math.min(100, percent)) + "%";
+}
+
+function setPhaseProgress(){
+  const remaining=5-learnStage;
+  setLessonBar("phase0Bar", ((learnStage+1)/5)*100);
+  setLessonBar("phase1Bar", Math.min(100, (quizRound/7)*100));
+  setLessonBar("phase2Bar", phase1Attempts ? Math.min(100, (phase1Attempts/7)*100) : 0);
+  setLessonBar("phase3Bar", Math.min(100, (finalRound/10)*100));
+  if($("phase0Progress")) $("phase0Progress").innerHTML=remaining>0?'<strong>Próxima etapa:</strong> Fase 1 · Teste · falta concluir '+remaining+' etapa'+(remaining===1?'':'s'):'<strong>Próxima etapa:</strong> Fase 1 · Teste';
+  if($("phase1Progress")) $("phase1Progress").innerHTML='<strong>Próxima etapa:</strong> Fase 2 · Associação';
+  if($("phase2Progress")) $("phase2Progress").innerHTML='<strong>Próxima etapa:</strong> Fase 3 · Memória';
+  if($("phase3Progress")) $("phase3Progress").innerHTML='<strong>Fase 3:</strong> 10 desafios · meta de 75% para liberar ♯ / ♭';
+  if($("transitionProgress")) $("transitionProgress").innerHTML='<strong>Próxima etapa:</strong> Fase 3 · Memória';
+}
+
+function updateAccProgress(){
+  setLessonBar("accChoiceBar", accidentMode ? 100 : 0);
+  setLessonBar("acc0Bar", ((accStage+1)/4)*100);
+  setLessonBar("acc1Bar", Math.min(100, (accQuizN/7)*100));
+  setLessonBar("acc2Bar", accMatchAttempts ? Math.min(100, (accMatchAttempts/5)*100) : 0);
+  setLessonBar("acc3Bar", 100);
+  const names=['Aprender','Teste','Associação','Memória'];
+  const system=accidentMode==='sharp'?'♯ SUSTENIDOS':'♭ BEMÓIS';
+  ['accSystem0','accSystem1','accSystem2','accSystem3'].forEach(id=>$(id).textContent=system);
+  $("acc0Progress").innerHTML='<strong>'+system+'</strong> · Próxima: Fase 1 · Teste · faltam 3 fases';
+  $("acc1Progress").innerHTML='<strong>'+system+'</strong> · Próxima: Fase 2 · Associação · faltam 2 fases';
+  $("acc2Progress").innerHTML='<strong>'+system+'</strong> · Próxima: Fase 3 · Memória · falta 1 fase';
+  $("acc3Progress").innerHTML='<strong>'+system+'</strong> · Última fase deste módulo';
+}
+
+/* ================= FASE 1 ================= */
+
+const learningStages=[[['Dó','C'],['Ré','D'],['Mi','E']],[['Dó','C'],['Ré','D'],['Mi','E'],['Fá','F']],[['Dó','C'],['Ré','D'],['Mi','E'],['Fá','F'],['Sol','G']],[['Dó','C'],['Ré','D'],['Mi','E'],['Fá','F'],['Sol','G'],['Lá','A']],[['Dó','C'],['Ré','D'],['Mi','E'],['Fá','F'],['Sol','G'],['Lá','A'],['Si','B']]];
+let learnStage=0,learnFlips=0,quizRound=0,quizCorrect=0,quizWrong=0,quizCurrent=null,quizAnswered=false;
+function renderLearn(){
+ const set=learningStages[learnStage];learnFlips=0;
+ $('learnTitle').textContent=set.map(x=>x[0]).join(' • '); setPhaseProgress();
+ $('learnDesc').textContent=learnStage===0?'Comece com Dó, Ré e Mi. Toque nas cartas para descobrir as cifras.':'Agora acrescentamos uma nota. Reforce todas as associações.';
+ $('learnNext').disabled=true;$('learnNext').textContent=learnStage<4?'Aprendi →':'Começar teste →';
+ const g=$('learnGrid');g.innerHTML='';shuffle(set).forEach(p=>{const c=document.createElement('div');c.className='learn-card';c.innerHTML='<div class="learn-inner"><div class="learn-face learn-front">'+p[0]+'<small>toque para virar</small></div><div class="learn-face learn-back"><strong>'+p[0]+'</strong><span>'+p[1]+'</span></div></div>';c.onclick=()=>{if(!c.classList.contains('flipped')){c.classList.add('flipped');learnFlips++;if(learnFlips===set.length)$('learnNext').disabled=false}};g.appendChild(c)});
+}
+function advanceLearn(){if(learnFlips<learningStages[learnStage].length)return;if(learnStage<4){learnStage++;renderLearn()}else{$('phase0').style.display='none';$('phase1').style.display='block';startQuiz()}}
+function repeatLearnStage(){renderLearn()}
+function startQuiz(){quizRound=0;quizCorrect=0;quizWrong=0;renderQuiz()}
+function renderQuiz(){quizAnswered=false;$('quizNext').style.display='none';$('quizFeedback').textContent='';const set=learningStages[learnStage];quizCurrent=set[Math.floor(Math.random()*set.length)];$('quizQuestion').textContent=quizCurrent[0];const wrong=shuffle(set.filter(x=>x[1]!==quizCurrent[1])).slice(0,2).map(x=>x[1]);$('quizOptions').innerHTML='';shuffle([quizCurrent[1],...wrong]).forEach(v=>{const b=document.createElement('button');b.textContent=v;b.onclick=()=>answerQuiz(b,v);$('quizOptions').appendChild(b)})}
+function answerQuiz(b,v){if(quizAnswered)return;quizAnswered=true;[...$('quizOptions').children].forEach(x=>x.disabled=true);if(v===quizCurrent[1]){b.classList.add('correct');quizCorrect++;hits++;score+=10;$('quizFeedback').textContent='✓ Acertou! +10 pontos'}else{b.classList.add('wrong');quizWrong++;score=Math.max(0,score-5);[...$('quizOptions').children].forEach(x=>{if(x.textContent===quizCurrent[1])x.classList.add('correct')});$('quizFeedback').textContent='✗ Era '+quizCurrent[1]+'  −5 pontos'}quizRound++;setPhaseProgress();updateStats();$('quizNext').style.display='block'}
+function nextQuiz(){if(quizRound<7){renderQuiz();return}const acc=quizCorrect/quizRound;if(acc>=.75){$('phase1').style.display='none';$('phase2').style.display='block';buildPhase1()}else{$('quizFeedback').textContent='Você fez '+Math.round(acc*100)+'%. Precisa de 75%. Vamos tentar novamente.';quizRound=0;quizCorrect=0;quizWrong=0;setTimeout(renderQuiz,900)}}
+
+function buildPhase1(){
+  phase1Score=0; phase1Attempts=0; selectedChord=null; phase1Done=false;
+  $("matchFeedback").textContent="";
+  $("chordCards").innerHTML="";
+  $("noteCards").innerHTML="";
+
+  shuffle(pairs).forEach(pair=>{
+    const b=document.createElement("div");
+    b.className="match-card chord-card";
+    b.textContent=pair[1];
+    b.dataset.note=pair[0];
+    b.onclick=()=>selectChord(b);
+    $("chordCards").appendChild(b);
+  });
+
+  shuffle(pairs).forEach(pair=>{
+    const b=document.createElement("div");
+    b.className="match-card note-card";
+    b.textContent=pair[0];
+    b.dataset.chord=pair[1];
+    b.onclick=()=>selectNote(b);
+    $("noteCards").appendChild(b);
+  });
+}
+
+function selectChord(card){
+  if(phase1Done || card.classList.contains("removing")) return;
+
+  document.querySelectorAll(".chord-card").forEach(c=>c.classList.remove("selected"));
+  card.classList.add("selected");
+
+  // Guarda diretamente a cifra escolhida: C, D, E...
+  selectedChord = card;
+  $("matchFeedback").textContent="Agora escolha a nota correspondente.";
+}
+
+function selectNote(noteCard){
+  if(phase1Done || !selectedChord || noteCard.classList.contains("removing")) return;
+
+  phase1Attempts++;
+
+  // A carta da nota também guarda diretamente a cifra que corresponde a ela.
+  // Ex.: carta "Dó" -> correctChord = "C".
+  const chosenChord = selectedChord.textContent.trim();
+  const correctChord = noteCard.dataset.chord;
+  const correct = chosenChord === correctChord;
+
+  if(correct){
+    phase1Score += 10;
+    score += 10;
+    hits++;
+
+    selectedChord.classList.remove("selected");
+    selectedChord.classList.add("correct");
+    noteCard.classList.add("correct");
+    $("matchFeedback").textContent="✓ Correto! +10 pontos";
+
+    const oldChord = selectedChord;
+    setTimeout(()=>{
+      oldChord.classList.add("removing");
+      noteCard.classList.add("removing");
+      setTimeout(()=>{
+        oldChord.remove();
+        noteCard.remove();
+        selectedChord=null;
+        checkPhase1Complete();
+      },300);
+    },420);
+
+  }else{
+    phase1Score = Math.max(0,phase1Score-5);
+    score = Math.max(0,score-5);
+    misses++;
+
+    selectedChord.classList.add("wrong");
+    noteCard.classList.add("wrong");
+    $("matchFeedback").textContent="✗ Associação errada! -5 pontos";
+
+    const oldChord = selectedChord;
+    setTimeout(()=>{
+      oldChord.classList.add("removing");
+      noteCard.classList.add("removing");
+      setTimeout(()=>{
+        oldChord.remove();
+        noteCard.remove();
+        selectedChord=null;
+        checkPhase1Complete();
+      },300);
+    },420);
+  }
+
+  updateStats();
+}
+
+function checkPhase1Complete(){
+  const remaining=document.querySelectorAll(".note-card").length;
+  if(remaining===0){
+    const accuracy=phase1Attempts ? hits/(hits+misses) : 0;
+    if(accuracy>=.75){
+      phase1Done=true;
+      startTransition();
+    }else{
+      $("matchFeedback").innerHTML=
+        "A rodada terminou em <strong>"+Math.round(accuracy*100)+
+        "%</strong>. Você precisa de pelo menos 75% (6 de 7 acertos).";
+    }
+  }
+}
+
+function restartPhase1(){
+  // Reset only the phase and its accumulated stats.
+  hits=0; misses=0; score=0;
+  updateStats();
+  buildPhase1();
+}
+
+function startTransition(){
+  $("phase2").style.display="none";
+  $("transition").style.display="block";
+  $("phase3").style.display="none";
+
+  let n=5;
+  $("transitionCountdown").textContent=n;
+  const timer=setInterval(()=>{
+    n--;
+    if(n>0) $("transitionCountdown").textContent=n;
+    else{
+      clearInterval(timer);
+      $("transitionCountdown").textContent="🎵";
+      setTimeout(()=>{
+        $("transition").style.display="none";
+        $("phase3").style.display="block";
+        startPreview();
+      },450);
+    }
+  },1000);
+}
+
+/* ================= FASE 2 ================= */
+
+function setMode(m){
+  mode=m;
+  document.querySelectorAll(".mode button").forEach(b=>b.classList.remove("active"));
+  $(m==="mixed"?"mixed":m==="note"?"noteToChord":"chordToNote").classList.add("active");
+  startPreview();
+}
+
+function buildPreview(){
+  const grid=$("memoryGrid"); grid.innerHTML="";
+  shuffle(pairs).forEach(pair=>{
+    const wrap=document.createElement("div");
+    wrap.className="memory-card";
+    wrap.innerHTML=`
+      <div class="memory-card-inner">
+        <div class="memory-face memory-front">?</div>
+        <div class="memory-face memory-back">
+          <div class="n">${pair[0]}</div><div class="c">${pair[1]}</div>
+        </div>
+      </div>`;
+    grid.appendChild(wrap);
+  });
+}
+
+function startPreview(){
+  if(previewRunning) return;
+  finalRound=0; finalHits=0; finalMisses=0;
+  previewRunning=true;
+  $("gameCard").style.display="none";
+  $("previewScreen").style.display="block";
+  buildPreview();
+
+  setTimeout(()=>{
+    document.querySelectorAll(".memory-card").forEach((c,i)=>{
+      setTimeout(()=>c.classList.add("show"),i*55);
+    });
+  },80);
+
+  let remaining=5;
+  $("countdown").textContent=remaining;
+  const timer=setInterval(()=>{
+    remaining--;
+    if(remaining>0) $("countdown").textContent=remaining;
+    else{
+      clearInterval(timer);
+      $("countdown").textContent="✓";
+      setTimeout(()=>{
+        $("previewScreen").style.display="none";
+        $("gameCard").style.display="block";
+        previewRunning=false;
+        newRound();
+      },450);
+    }
+  },1000);
+}
+
+function newRound(){
+  if(finalRound>=10){
+    const acc=finalHits/finalRound;
+    if(acc>=.75){showAccidentChoice();return;}
+    finalRound=0;finalHits=0;finalMisses=0;
+  }
+  answered=false;$("feedback").textContent="";$("next").style.display="none";$("next").textContent="Próxima →";$("flipCard").classList.remove("flipped");
+  const pair=pairs[Math.floor(Math.random()*pairs.length)];
+  const noteFirst=mode==="note"||(mode==="mixed"&&Math.random()<.5);
+  current={pair,question:noteFirst?pair[0]:pair[1],answer:noteFirst?pair[1]:pair[0],label:noteFirst?"Qual é a cifra?":"Qual é a nota?"};
+  $("label").textContent=current.label;$("question").textContent=current.question;$("revealAnswer").textContent=current.answer;
+  const wrongs=shuffle(pairs.filter(p=>p[0]!==pair[0])).slice(0,3).map(p=>noteFirst?p[1]:p[0]);
+  $("options").innerHTML="";shuffle([current.answer,...wrongs]).forEach(choice=>{const b=document.createElement("button");b.textContent=choice;b.onclick=()=>answer(b,choice);$("options").appendChild(b)});
+}
+
+function answer(button,choice){
+  if(answered)return;answered=true;[...$("options").children].forEach(b=>b.disabled=true);
+  const correct=choice===current.answer;
+  if(correct){button.classList.add("correct");hits++;streak++;finalHits++;score+=10;$("feedback").textContent="✓ Acertou! +10"}
+  else{button.classList.add("wrong");streak=0;misses++;finalMisses++;score=Math.max(0,score-5);[...$("options").children].forEach(b=>{if(b.textContent===current.answer)b.classList.add("correct")});$("feedback").textContent="✗ Errou! -5 — resposta: "+current.answer}
+  finalRound++;setPhaseProgress();updateStats();
+  setTimeout(()=>{$("flipCard").classList.add("flipped");$("next").style.display="block";if(finalRound>=10)$("next").textContent=(finalHits/finalRound>=.75)?"Continuar para ♯ / ♭ →":"Tentar novamente →"},220);
+}
+
+function restartAll(){
+  hits=0;misses=0;streak=0;score=0;phase1Done=false;learnStage=0;learnFlips=0;finalRound=0;finalHits=0;finalMisses=0;
+  ["phase1","phase2","transition","phase3","accidentChoice","acc0","acc1","acc2","acc3","mixedChallenge"].forEach(id=>{if($(id))$(id).style.display="none"});
+  $("phase0").style.display="block";updateStats();renderLearn();
+}
+
+
+/* ================= MÓDULO DE ACIDENTES ================= */
+const accidentSets={
+ sharp:[['Dó♯','C♯'],['Ré♯','D♯'],['Fá♯','F♯'],['Sol♯','G♯'],['Lá♯','A♯']],
+ flat:[['Ré♭','D♭'],['Mi♭','E♭'],['Sol♭','G♭'],['Lá♭','A♭'],['Si♭','B♭']]
+};
+let accidentMode=null,accStage=0,accFlips=0,accQuizN=0,accQuizHits=0,accQuizMiss=0,accQuizCurrent=null,accQuizAnswered=false;
+let accSelected=null,accMatchHits=0,accMatchMiss=0,accMatchAttempts=0,accFinalMode='mixed',accFinalCurrent=null,accFinalAnswered=false;
+
+function showAccidentChoice(){
+  ['phase0','phase1','phase2','transition','phase3'].forEach(id=>$(id).style.display='none');
+  ['acc0','acc1','acc2','acc3'].forEach(id=>$(id).style.display='none');
+  $('accidentChoice').style.display='block';
+}
+function chooseAccidentals(modeName){
+  accidentMode=modeName; updateAccProgress();accStage=0;score=0;hits=0;misses=0;updateStats();
+  $('accidentChoice').style.display='none';$('acc0').style.display='block';renderAccLearn();
+}
+function accStages(){
+  const all=accidentSets[accidentMode];
+  return [all.slice(0,2),all.slice(0,3),all.slice(0,4),all.slice(0,5)];
+}
+function renderAccLearn(){
+  const set=accStages()[accStage];accFlips=0;
+  $('accLearnTitle').textContent=set.map(x=>x[0]).join(' • '); updateAccProgress();
+  $('accLearnDesc').textContent=accStage===0?'Comece com duas alterações. Toque nas cartas para descobrir as cifras.':'Agora acrescentamos mais uma alteração. Reforce todas as associações.';
+  $('accLearnNext').disabled=true;$('accLearnNext').textContent=accStage<3?'Aprendi →':'Começar teste →';
+  const g=$('accLearnGrid');g.innerHTML='';shuffle(set).forEach(p=>{
+    const c=document.createElement('div');c.className='learn-card';
+    c.innerHTML='<div class="learn-inner"><div class="learn-face learn-front">'+p[0]+'<small>toque para virar</small></div><div class="learn-face learn-back"><strong>'+p[0]+'</strong><span>'+p[1]+'</span></div></div>';
+    c.onclick=()=>{if(!c.classList.contains('flipped')){c.classList.add('flipped');accFlips++;if(accFlips===set.length)$('accLearnNext').disabled=false}};
+    g.appendChild(c);
+  });
+}
+function repeatAccLearn(){renderAccLearn()}
+function advanceAccLearn(){if(accFlips<accStages()[accStage].length)return;if(accStage<3){accStage++;renderAccLearn()}else{$('acc0').style.display='none';$('acc1').style.display='block';startAccQuiz()}}
+function startAccQuiz(){accQuizN=0;accQuizHits=0;accQuizMiss=0;renderAccQuiz()}
+function renderAccQuiz(){
+  accQuizAnswered=false;$('accNext').style.display='none';$('accFeedback').textContent='';
+  const set=accStages()[accStage];accQuizCurrent=set[Math.floor(Math.random()*set.length)];$('accQuestion').textContent=accQuizCurrent[0];
+  const wrong=shuffle(set.filter(x=>x[1]!==accQuizCurrent[1])).slice(0,2).map(x=>x[1]);$('accOptions').innerHTML='';
+  shuffle([accQuizCurrent[1],...wrong]).forEach(v=>{const b=document.createElement('button');b.textContent=v;b.onclick=()=>answerAccQuiz(b,v);$('accOptions').appendChild(b)});
+}
+function answerAccQuiz(b,v){
+  if(accQuizAnswered)return;accQuizAnswered=true;[...$('accOptions').children].forEach(x=>x.disabled=true);
+  if(v===accQuizCurrent[1]){b.classList.add('correct');accQuizHits++;hits++;score+=10;$('accFeedback').textContent='✓ Acertou! +10 pontos'}
+  else{b.classList.add('wrong');accQuizMiss++;score=Math.max(0,score-5);[...$('accOptions').children].forEach(x=>{if(x.textContent===accQuizCurrent[1])x.classList.add('correct')});$('accFeedback').textContent='✗ Era '+accQuizCurrent[1]+'  −5 pontos'}
+  accQuizN++;updateStats();$('accNext').style.display='block';
+}
+function nextAccQuiz(){
+  if(accQuizN<7){renderAccQuiz();return}
+  const acc=accQuizHits/accQuizN;
+  if(acc>=.75){$('acc1').style.display='none';$('acc2').style.display='block';buildAccMatch()}
+  else{$('accFeedback').textContent='Você fez '+Math.round(acc*100)+'%. Precisa de 75%. Vamos tentar novamente.';setTimeout(startAccQuiz,900)}
+}
+function buildAccMatch(){
+  accSelected=null;accMatchHits=0;accMatchMiss=0;accMatchAttempts=0;$('accMatchFeedback').textContent='';$('accChords').innerHTML='';$('accNotes').innerHTML='';
+  const set=accidentSets[accidentMode];
+  shuffle(set).forEach(p=>{const c=document.createElement('div');c.className='match-card';c.textContent=p[1];c.dataset.chord=p[1];c.onclick=()=>pickAccChord(c);$('accChords').appendChild(c)});
+  shuffle(set).forEach(p=>{const n=document.createElement('div');n.className='match-card';n.textContent=p[0];n.dataset.chord=p[1];n.onclick=()=>pickAccNote(n);$('accNotes').appendChild(n)});
+}
+function pickAccChord(c){document.querySelectorAll('#accChords .match-card').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');accSelected=c;$('accMatchFeedback').textContent='Agora escolha a nota correspondente.'}
+function pickAccNote(n){
+  if(!accSelected||n.classList.contains('removing'))return;accMatchAttempts++;const ch=accSelected;const ok=ch.dataset.chord===n.dataset.chord;
+  if(ok){accMatchHits++;hits++;score+=10;ch.classList.add('correct');n.classList.add('correct');$('accMatchFeedback').textContent='✓ Correto! +10'}
+  else{accMatchMiss++;score=Math.max(0,score-5);ch.classList.add('wrong');n.classList.add('wrong');$('accMatchFeedback').textContent='✗ Errado! −5'}
+  updateStats();setTimeout(()=>{ch.classList.add('removing');n.classList.add('removing');setTimeout(()=>{ch.remove();n.remove();accSelected=null;if(!$('accNotes').children.length)finishAccMatch()},300)},400);
+}
+function finishAccMatch(){
+  const acc=accMatchHits/accMatchAttempts;
+  if(acc>=.75){$('acc2').style.display='none';startAccFinal()}
+  else{$('accMatchFeedback').textContent='Você fez '+Math.round(acc*100)+'%. Precisa de 75%. Vamos tentar novamente.';setTimeout(buildAccMatch,1000)}
+}
+function startAccFinal(){
+  $('acc3').style.display='block';$('accPreview').style.display='block';$('accFinal').style.display='none';const g=$('accMemoryGrid');g.innerHTML='';
+  shuffle(accidentSets[accidentMode]).forEach(p=>{const c=document.createElement('div');c.className='memory-card';c.innerHTML='<div class="memory-card-inner"><div class="memory-face memory-front">?</div><div class="memory-face memory-back"><div class="n">'+p[0]+'</div><div class="c">'+p[1]+'</div></div></div>';g.appendChild(c)});
+  setTimeout(()=>document.querySelectorAll('#accMemoryGrid .memory-card').forEach((c,i)=>setTimeout(()=>c.classList.add('show'),i*60)),100);
+  let n=5;$('accCountdown').textContent=n;const t=setInterval(()=>{n--;if(n>0)$('accCountdown').textContent=n;else{clearInterval(t);$('accPreview').style.display='none';$('accFinal').style.display='block';newAccFinal()}},1000);
+}
+function setAccMode(m){accFinalMode=m;document.querySelectorAll('#accFinal .mode button').forEach(b=>b.classList.remove('active'));$(m==='mixed'?'accMixed':m==='note'?'accNote':'accChord').classList.add('active');newAccFinal()}
+function newAccFinal(){
+  accFinalAnswered=false;$('accFinalNext').style.display='none';$('accFinalFeedback').textContent='';$('accFlipCard').classList.remove('flipped');
+  const p=accidentSets[accidentMode][Math.floor(Math.random()*accidentSets[accidentMode].length)];const note=accFinalMode==='note'||(accFinalMode==='mixed'&&Math.random()<.5);
+  accFinalCurrent={q:note?p[0]:p[1],a:note?p[1]:p[0]};$('accFinalLabel').textContent=note?'Qual é a cifra?':'Qual é a nota?';$('accFinalQuestion').textContent=accFinalCurrent.q;$('accFinalAnswer').textContent=accFinalCurrent.a;
+  const wrong=shuffle(accidentSets[accidentMode].filter(x=>(note?x[1]:x[0])!==accFinalCurrent.a)).slice(0,3).map(x=>note?x[1]:x[0]);$('accFinalOptions').innerHTML='';shuffle([accFinalCurrent.a,...wrong]).forEach(v=>{const b=document.createElement('button');b.textContent=v;b.onclick=()=>answerAccFinal(b,v);$('accFinalOptions').appendChild(b)});
+}
+function answerAccFinal(b,v){
+  if(accFinalAnswered)return;accFinalAnswered=true;[...$('accFinalOptions').children].forEach(x=>x.disabled=true);
+  if(v===accFinalCurrent.a){b.classList.add('correct');hits++;score+=10;$('accFinalFeedback').textContent='✓ Acertou! +10 pontos'}
+  else{b.classList.add('wrong');score=Math.max(0,score-5);[...$('accFinalOptions').children].forEach(x=>{if(x.textContent===accFinalCurrent.a)x.classList.add('correct')});$('accFinalFeedback').textContent='✗ Errou! −5 pontos'}
+  updateStats();setTimeout(()=>{
+    $('accFlipCard').classList.add('flipped');
+    $('accFinalNext').style.display='block';
+    $('accFinalNext').textContent='Próxima →';
+  },220);
+}
+
+// Depois da fase de memória dos acidentes, o próximo passo é o desafio em que tudo se mistura.
+const originalNewAccFinal = newAccFinal;
+
+
+function nextAccFinal(){
+  // A memória dos acidentes funciona como preparação; após o usuário avançar, começa o desafio misto.
+  startMixedChallenge();
+}
+
+
+/* ================= DESAFIO FINAL MISTO ================= */
+const mixedNatural=[['Dó','C'],['Ré','D'],['Mi','E'],['Fá','F'],['Sol','G'],['Lá','A'],['Si','B']];
+const mixedSharp=[['Dó♯','C♯'],['Ré♯','D♯'],['Fá♯','F♯'],['Sol♯','G♯'],['Lá♯','A♯']];
+const mixedFlat=[['Ré♭','D♭'],['Mi♭','E♭'],['Sol♭','G♭'],['Lá♭','A♭'],['Si♭','B♭']];
+let mixedPool=[],mixedRound=0,mixedHits=0,mixedMisses=0,mixedCurrent=null,mixedAnswered=false;
+
+function startMixedChallenge(){
+  $('acc3').style.display='none';
+  $('mixedChallenge').style.display='block';
+  const accidentPool=accidentMode==='sharp'?mixedSharp:mixedFlat;
+  mixedPool=[...mixedNatural,...accidentPool];
+  mixedRound=0;mixedHits=0;mixedMisses=0;
+  updateMixedProgress();
+  newMixedChallenge();
+}
+function updateMixedProgress(){
+  setLessonBar("mixedBar", (mixedRound/20)*100);
+  const left=Math.max(0,20-mixedRound);
+  $('mixedChallengeProgress').innerHTML='<strong>Desafio misto:</strong> '+mixedRound+'/20 · '+(left?'faltam '+left+' desafios':'último desafio');
+}
+function newMixedChallenge(){
+  mixedAnswered=false;
+  $('mixedNext').style.display='none';
+  $('mixedFeedback').textContent='';
+  $('mixedFlipCard').classList.remove('flipped');
+  const p=mixedPool[Math.floor(Math.random()*mixedPool.length)];
+  const noteFirst=Math.random()<0.5;
+  mixedCurrent={q:noteFirst?p[0]:p[1],a:noteFirst?p[1]:p[0]};
+  $('mixedLabel').textContent=noteFirst?'Qual é a cifra?':'Qual é a nota?';
+  $('mixedQuestion').textContent=mixedCurrent.q;
+  $('mixedAnswer').textContent=mixedCurrent.a;
+  const wrong=shuffle(mixedPool.filter(x=>(noteFirst?x[1]:x[0])!==mixedCurrent.a)).slice(0,3).map(x=>noteFirst?x[1]:x[0]);
+  $('mixedOptions').innerHTML='';
+  shuffle([mixedCurrent.a,...wrong]).forEach(v=>{
+    const b=document.createElement('button');b.textContent=v;b.onclick=()=>answerMixedChallenge(b,v);$('mixedOptions').appendChild(b);
+  });
+  updateMixedProgress();
+}
+function answerMixedChallenge(b,v){
+  if(mixedAnswered)return;
+  mixedAnswered=true;
+  [...$('mixedOptions').children].forEach(x=>x.disabled=true);
+  if(v===mixedCurrent.a){
+    b.classList.add('correct');mixedHits++;hits++;score+=10;
+    $('mixedFeedback').textContent='✓ Acertou! +10 pontos';
+  }else{
+    b.classList.add('wrong');mixedMisses++;score=Math.max(0,score-5);
+    [...$('mixedOptions').children].forEach(x=>{if(x.textContent===mixedCurrent.a)x.classList.add('correct')});
+    $('mixedFeedback').textContent='✗ Errou! −5 pontos — resposta: '+mixedCurrent.a;
+  }
+  mixedRound++;updateStats();updateMixedProgress();
+  setTimeout(()=>{
+    $('mixedFlipCard').classList.add('flipped');
+    $('mixedNext').style.display='block';
+    $('mixedNext').textContent=mixedRound>=20?'Ver resultado →':'Próxima →';
+  },220);
+}
+function nextMixedChallenge(){
+  if(mixedRound<20){newMixedChallenge();return;}
+  const acc=mixedHits/mixedRound;
+  $('mixedFeedback').innerHTML='<strong>Desafio concluído!</strong> Você acertou '+Math.round(acc*100)+'% ('+mixedHits+'/20).';
+  $('mixedNext').style.display='none';
+  $('mixedChallengeProgress').innerHTML='<strong>Módulo completo:</strong> '+Math.round(acc*100)+'% de aproveitamento';
+}
+
+
+renderLearn();
+setPhaseProgress();
+updateAccProgress();
+updateMixedProgress();
+updateStats();
+
+</script>
+</body>
+</html>

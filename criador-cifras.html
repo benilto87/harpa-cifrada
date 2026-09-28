@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editor de Cifras — HarpaCifrada</title>
+<style>
+  :root{
+    --bg:#f2eee7;
+    --paper:#fffdf9;
+    --ink:#25221e;
+    --muted:#746e64;
+    --accent:#7a4a24;
+    --accent2:#b88751;
+    --line:#ddd5ca;
+    --key:#f8f5ef;
+    --key-hover:#ece5da;
+    --ok:#3b6b4a;
+    --shadow:0 7px 24px rgba(60,45,30,.08);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:Arial,sans-serif;
+  }
+  button,input,textarea,select{font:inherit}
+  button{
+    border:1px solid #cec4b7;
+    background:var(--key);
+    color:var(--ink);
+    border-radius:9px;
+    padding:8px 11px;
+    min-height:36px;
+    cursor:pointer;
+    font-weight:700;
+  }
+  button:hover{background:var(--key-hover)}
+  button.active{
+    background:var(--accent);
+    color:#fff;
+    border-color:var(--accent);
+  }
+  header{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(255,253,249,.96);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 3px 14px rgba(60,45,30,.06);
+  }
+  .top{
+    width:min(1500px,100%);
+    margin:auto;
+    padding:8px 12px;
+    display:flex;
+    align-items:center;
+    gap:7px;
+    flex-wrap:wrap;
+  }
+  .back-arrow{
+    display:grid;
+    place-items:center;
+    width:36px;
+    height:36px;
+    flex:0 0 36px;
+    border:1px solid #cec4b7;
+    border-radius:9px;
+    background:var(--key);
+    color:var(--ink);
+    text-decoration:none;
+    font:700 23px/1 Arial,sans-serif;
+  }
+  .back-arrow:hover,.back-arrow:focus-visible{
+    background:var(--key-hover);
+    outline:none;
+  }
+  .brand{font-weight:800;letter-spacing:.03em;margin-right:auto;white-space:nowrap}
+  .mode{display:flex;gap:5px}
+  .top small{color:var(--muted)}
+  .page{
+    width:min(1500px,100%);
+    margin:auto;
+    padding:16px;
+    display:grid;
+    grid-template-columns:minmax(280px,420px) minmax(0,1fr);
+    gap:16px;
+  }
+  .card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    padding:14px;
+  }
+  h2,h3{margin:0 0 10px}
+  h2{font-size:1.05rem}
+  h3{font-size:.92rem}
+  label{
+    display:block;
+    margin:10px 0 5px;
+    color:var(--muted);
+    font-size:.78rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+  }
+  input,textarea,select{
+    width:100%;
+    border:1px solid #cfc6b9;
+    background:#fffdf9;
+    color:var(--ink);
+    border-radius:9px;
+    padding:9px 10px;
+    outline:none;
+  }
+  input:focus,textarea:focus,select:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(122,74,36,.09)
+  }
+  textarea{
+    min-height:220px;
+    resize:vertical;
+    font:500 14px/1.45 "Courier New",monospace;
+    white-space:pre;
+  }
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .hint{
+    color:var(--muted);
+    font-size:.78rem;
+    line-height:1.45;
+    margin-top:7px;
+  }
+  .actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+  .status{
+    min-height:20px;
+    margin-top:8px;
+    color:var(--ok);
+    font-size:.8rem;
+    font-weight:700;
+  }
+  .preview-shell{
+    overflow:auto;
+    border:1px solid var(--line);
+    border-radius:11px;
+    background:#f7f3ec;
+    padding:18px;
+    min-height:300px;
+  }
+  .preview-line{
+    position:relative;
+    margin:0 0 22px;
+    padding-top:28px;
+    min-height:58px;
+    width:max-content;
+    min-width:100%;
+  }
+  .lyrics{
+    font:400 25px/1.25 Georgia,"Times New Roman",serif;
+    white-space:pre;
+    display:inline-block;
+  }
+  .anchor-chord{
+    position:absolute;
+    top:0;
+    transform:translateX(-1px);
+    color:var(--accent);
+    font:700 16px/1.1 "Courier New",monospace;
+    white-space:nowrap;
+    cursor:grab;
+    user-select:none;
+    padding:2px 4px;
+    border-radius:5px;
+  }
+  .anchor-chord:hover,.anchor-chord.selected{
+    background:#eadccb;
+    outline:1px solid #d8c1a4;
+  }
+  .anchor-chord:active{cursor:grabbing}
+  .ruler{
+    position:absolute;
+    left:0;
+    right:0;
+    top:26px;
+    height:1px;
+    background:#e1d7ca;
+    pointer-events:none;
+  }
+  .pos-marker{
+    position:absolute;
+    top:28px;
+    width:1px;
+    height:20px;
+    background:#b88751;
+    opacity:.35;
+    pointer-events:none;
+  }
+  .selected-info{
+    margin-top:10px;
+    padding:9px 10px;
+    background:#f0e7da;
+    border-radius:9px;
+    font:700 .82rem/1.4 Arial,sans-serif;
+  }
+  .output{
+    min-height:300px;
+    background:#24211d;
+    color:#f8f5ef;
+    border-radius:9px;
+    padding:12px;
+    overflow:auto;
+    white-space:pre;
+    font:500 12px/1.5 "Courier New",monospace;
+  }
+  .code-editor{
+    width:100%;
+    min-height:360px;
+    resize:vertical;
+    background:#24211d;
+    color:#f8f5ef;
+    border:1px solid #403b35;
+    border-radius:9px;
+    padding:12px;
+    outline:none;
+    white-space:pre;
+    font:500 12px/1.5 "Courier New",monospace;
+  }
+  .code-editor:focus{border-color:var(--accent2);box-shadow:0 0 0 3px rgba(184,135,81,.12)}
+  .code-actions{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 0}
+  .legend{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:7px;
+    margin-top:10px;
+  }
+  .legend span{
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:7px;
+    color:var(--muted);
+    font-size:.75rem;
+  }
+
+  .add-action{
+    border:2px solid var(--ink);
+    background:#fffdf9;
+    color:var(--ink);
+  }
+  .add-action:hover,.add-action.active{
+    background:var(--accent);
+    color:#fff;
+    border-color:var(--accent);
+  }
+
+  .visual-add-row{
+    position:relative;
+    margin:0 0 22px;
+    padding:7px 8px 12px;
+    border:1px dashed #cdbda9;
+    border-radius:9px;
+    background:rgba(255,253,249,.72);
+  }
+  .visual-add-label{
+    font:700 11px/1.2 Arial,sans-serif;
+    color:#8a7b69;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    margin-bottom:4px;
+  }
+  .visual-add-section,.visual-add-chords,.visual-add-lyrics{
+    outline:none;
+  }
+  .visual-add-section{
+    min-height:20px;
+    color:#7a4a24;
+    font:700 12px/1.2 Arial,sans-serif;
+    cursor:text;
+    margin-bottom:5px;
+  }
+  .visual-add-chords{
+    min-height:23px;
+    color:var(--accent);
+    font:700 16px/1.1 "Courier New",monospace;
+    white-space:pre;
+    cursor:text;
+  }
+  .visual-add-lyrics{
+    min-height:34px;
+    color:var(--ink);
+    font:400 25px/1.25 Georgia,"Times New Roman",serif;
+    white-space:pre-wrap;
+    cursor:text;
+  }
+  .visual-add-section:empty:before{content:'1ª estrofe';color:#b9aa98}
+  .visual-add-chords:empty:before{content:'Cifras (opcional)';color:#c6b7a5}
+  .visual-add-lyrics:empty:before{content:'Digite a letra ou qualquer texto…';color:#b9aa98}
+  .visual-add-hint{
+    margin-top:6px;
+    color:#9a8d7d;
+    font:600 11px/1.35 Arial,sans-serif;
+  }
+  .preview-shell.visual-add-active{
+    box-shadow:0 0 0 2px rgba(122,74,36,.08) inset;
+  }
+  .preview-shell.visual-add-active .preview-line.editable-line{
+    cursor:text;
+    border-radius:8px;
+    transition:background .15s,box-shadow .15s;
+  }
+  .preview-shell.visual-add-active .preview-line.editable-line:hover{
+    background:rgba(122,74,36,.035);
+    box-shadow:0 0 0 1px rgba(122,74,36,.10) inset;
+  }
+  .visual-edit-row{
+    position:relative;
+    margin:0 0 22px;
+    padding:7px 8px 12px;
+    border:1px dashed #cdbda9;
+    border-radius:9px;
+    background:rgba(255,253,249,.86);
+  }
+  .visual-edit-row .visual-add-label{color:#7a4a24}
+  .visual-edit-row.is-existing{box-shadow:0 0 0 2px rgba(122,74,36,.08)}
+  .visual-edit-hint{margin-top:6px;color:#9a8d7d;font:600 11px/1.35 Arial,sans-serif}
+  .visual-edit-cancel{float:right;padding:3px 7px;min-height:0;font-size:11px;border-radius:6px}
+  @media(max-width:600px){
+    .visual-edit-lyrics{font-size:21px}
+    .visual-edit-chords{font-size:14px}
+  }
+  @media(max-width:600px){
+    .visual-add-lyrics{font-size:21px}
+    .visual-add-chords{font-size:14px}
+  }
+
+  /* =========================
+     PRÉVIA DE CELULAR
+  ========================= */
+
+  .preview-shell.mobile-preview{
+    width:580px;
+    max-width:100%;
+    margin:18px auto;
+    padding:18px 12px 30px;
+    border:10px solid #24211d;
+    border-radius:28px;
+    background:#fffdf9;
+    overflow-x:hidden;
+    overflow-y:auto;
+    box-shadow:0 10px 30px rgba(40,30,20,.20);
+  }
+
+  .preview-shell.mobile-preview .preview-line{
+    width:max-content;
+    min-width:100%;
+  }
+
+  .preview-shell.mobile-preview .lyrics{
+    font-size:21px;
+    white-space:pre;
+  }
+
+  .preview-shell.mobile-preview .anchor-chord{
+    font-size:14px;
+  }
+
+  @media(max-width:900px){
+    .page{grid-template-columns:1fr}
+    .top{padding:7px 9px}
+  }
+  @media(max-width:600px){
+    body{font-size:14px}
+    header{position:sticky;top:0}
+    .top{
+      padding:7px;
+      gap:5px;
+      align-items:center;
+    }
+    .back-arrow{
+      width:34px;
+      height:34px;
+      flex-basis:34px;
+      font-size:22px;
+    }
+    .brand{
+      font-size:.86rem;
+      letter-spacing:.01em;
+      margin-right:0;
+      flex:1 1 auto;
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .mode{
+      width:100%;
+      order:10;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:5px;
+    }
+    .top > #copyBtn{
+      margin-left:auto;
+      min-height:34px;
+      padding:7px 9px;
+      font-size:.76rem;
+    }
+    .top #addBtn{
+      min-height:34px;
+      padding:7px 9px;
+      font-size:.76rem;
+    }
+    .top .mode button{
+      min-height:34px;
+      padding:7px 8px;
+      font-size:.76rem;
+    }
+    .page{
+      padding:8px;
+      gap:10px;
+    }
+    .card{
+      padding:10px;
+      border-radius:12px;
+    }
+    h2{font-size:1rem}
+    .row{grid-template-columns:1fr 1fr}
+    .actions{gap:5px}
+    .actions button{
+      flex:1 1 calc(50% - 5px);
+      min-height:38px;
+      padding:8px 7px;
+      font-size:.78rem;
+    }
+    .preview-shell{
+      padding:10px;
+      min-height:260px;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    .preview-shell.mobile-preview{
+      width:100%;
+      margin:10px 0;
+      padding:14px 9px 24px;
+      border-width:6px;
+      border-radius:20px;
+      box-shadow:0 7px 20px rgba(40,30,20,.16);
+    }
+    .preview-shell.mobile-preview .preview-line{
+      width:max-content;
+      min-width:100%;
+      margin-bottom:18px;
+      padding-top:25px;
+    }
+    .preview-shell.mobile-preview .lyrics{
+      font-size:20px;
+      line-height:1.28;
+      white-space:pre;
+    }
+    .preview-shell.mobile-preview .anchor-chord{
+      font-size:13px;
+    }
+    .lyrics{font-size:20px}
+    .anchor-chord{font-size:13px}
+    .visual-edit-row,.visual-add-row{
+      padding:7px 7px 10px;
+      margin-bottom:16px;
+    }
+    .visual-add-lyrics,.visual-edit-lyrics{
+      font-size:20px;
+      line-height:1.28;
+    }
+    .visual-add-chords,.visual-edit-chords{
+      font-size:13px;
+      min-height:22px;
+    }
+    .code-editor{
+      min-height:280px;
+      font-size:11px;
+    }
+    .code-actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:5px;
+    }
+    .code-actions button{
+      min-height:38px;
+      padding:8px 6px;
+      font-size:.78rem;
+    }
+    .legend{grid-template-columns:1fr}
+    .selected-info{font-size:.76rem}
+    textarea{font-size:13px}
+  }
+  @media(max-width:370px){
+    .brand{font-size:.80rem}
+    .row{grid-template-columns:1fr}
+    .top > #copyBtn{font-size:.70rem}
+    .top #addBtn{font-size:.70rem}
+    .top .mode button{font-size:.70rem}
+    .visual-add-lyrics,.visual-edit-lyrics{font-size:19px}
+    .preview-shell.mobile-preview .lyrics{font-size:19px}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <a class="back-arrow" href="index.html" title="Voltar para a Harpa Cifrada" aria-label="Voltar para a Harpa Cifrada">←</a>
+    <div class="brand">HarpaCifrada — Editor de Cifras</div>
+    <button id="addBtn" class="add-action">ACRESCENTAR</button>
+    <div class="mode" aria-label="Modo do editor">
+      <button id="autoBtn" class="active">AUTOMÁTICO</button>
+      <button id="fineBtn">AJUSTE FINO</button>
+    </div>
+    <button id="copyBtn">COPIAR CÓDIGO</button>
+  </div>
+</header>
+
+
+
+<main class="page">
+  <section class="card">
+    <h2>1. Dados da música</h2>
+
+    <div class="row">
+      <div>
+        <label>Número</label>
+        <input id="songNumber" value="001">
+      </div>
+      <div>
+        <label>Tom original</label>
+        <input id="songKey" value="Bb">
+      </div>
+    </div>
+
+    <label>Título</label>
+    <input id="songTitle" value="Chuvas de Graça">
+
+    <label>Letra + cifras</label>
+    <textarea id="source">Bb              F        Bb       F       Bb
+Deus prometeu com certeza, chuvas de graça mandar
+
+Eb              Bb       Gm       C       F
+Ele nos dá fortaleza e ricas bênçãos sem par</textarea>
+
+    <div class="hint">
+      Cole a cifra acima da letra usando espaços. Cada par de linhas vira uma linha musical.
+      Você também pode inserir <b>1ª estrofe</b>, <b>Coro</b>, <b>2ª estrofe</b> etc.
+      O programa cria automaticamente cada <b>label</b>. O modo automático tenta converter a posição
+      visual em <b>pos</b>. Depois, no ajuste fino, arraste cada cifra até o ponto exato da letra.
+    </div>
+
+    <div class="actions">
+      <button id="parseBtn" class="active">GERAR PRÉVIA</button>
+      <button id="resetBtn">REINICIAR</button>
+      <button id="mobilePreviewBtn">📱 CELULAR</button>
+    </div>
+    <div id="status" class="status"></div>
+
+    <div class="selected-info" id="selectedInfo">
+      Nenhuma cifra selecionada.
+    </div>
+
+    <div class="legend">
+      <span><b>Arrastar:</b> posiciona</span>
+      <span><b>← →:</b> ajuste fino</span>
+      <span><b>Del:</b> remove a cifra</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>2. Prévia e ajuste fino</h2>
+    <div class="hint">
+      No modo <b>AUTOMÁTICO</b>, as posições são estimadas. No modo <b>AJUSTE FINO</b>,
+      clique e arraste as cifras. Elas se encaixam na posição de cada caractere da letra.
+    </div>
+    <div class="preview-shell" id="preview"></div>
+
+    <h2 style="margin-top:16px">3. Código da música</h2>
+    <textarea class="code-editor" id="codeEditor" spellcheck="false"></textarea>
+    <div class="code-actions">
+      <button id="applyCodeBtn" class="active">APLICAR CÓDIGO</button>
+      <button id="updateCodeBtn">ATUALIZAR CÓDIGO</button>
+    </div>
+    <div class="hint">
+      O código agora é editável. <b>APLICAR CÓDIGO</b> leva o que está escrito para as outras telas.
+      <b>ATUALIZAR CÓDIGO</b> faz o caminho inverso: pega o que foi alterado na interface e escreve aqui.
+    </div>
+  </section>
+</main>
+
+<script>
+  const chordRegex = /^[A-G](?:#|b)?(?:m|maj|min|dim|aug|sus|add)?\d*(?:\/[A-G](?:#|b)?)?$/i;
+
+  let parsedLines = [];
+  let selected = null;
+  let drag = null;
+  let fineMode = false;
+
+  const source = document.getElementById('source');
+  const preview = document.getElementById('preview');
+  const mobilePreviewBtn = document.getElementById('mobilePreviewBtn');
+  const codeEditor = document.getElementById('codeEditor');
+  let codeDirty = false;
+  const selectedInfo = document.getElementById('selectedInfo');
+  const status = document.getElementById('status');
+
+  const addBtn = document.getElementById('addBtn');
+  let addMode = false;
+  let addDraft = {section:'', chords:'', lyric:''};
+  let editingLineIndex = null;
+
+  function isChordToken(token){
+    return chordRegex.test(token.trim());
+  }
+
+  function parseChordLine(chordLine, lyric){
+    const matches = [];
+    const re = /[A-G](?:#|b)?(?:m|maj|min|dim|aug|sus|add)?\d*(?:\/[A-G](?:#|b)?)?/g;
+    let m;
+    while((m = re.exec(chordLine)) !== null){
+      const chord = m[0];
+      if(!isChordToken(chord)) continue;
+      matches.push({
+        chord,
+        column:m.index
+      });
+    }
+
+    const lineLen = Math.max(1, chordLine.length);
+    const lyricLen = lyric.length;
+
+    // Estimativa inicial: coluna visual da linha de cifras -> caractere da letra.
+    // O ajuste fino pode então corrigir qualquer diferença da edição impressa.
+    return matches.map(item => ({
+      chord:item.chord,
+      pos:Math.max(0, Math.min(lyricLen, Math.round(item.column / lineLen * lyricLen)))
+    }));
+  }
+
+  function isSectionLabel(text){
+    const value=text.trim();
+    return /^(?:\d+\s*[ªº]\s*|\d+\s+)?estrofe$/i.test(value)
+      || /^coro$/i.test(value)
+      || /^refr[aã]o$/i.test(value);
+  }
+
+  function parseSource(){
+    const raw = source.value.replace(/\r/g,'');
+    const lines = raw.split('\n').map(s=>s.replace(/\t/g,'    '));
+
+    const sections = [];
+    let currentSection = null;
+
+    let i=0;
+    while(i<lines.length){
+      const current = lines[i].trim();
+
+      if(!current){
+        i++;
+        continue;
+      }
+
+      // Reconhece automaticamente: 1ª estrofe, 2ª estrofe, Coro, Refrão etc.
+      if(isSectionLabel(current)){
+        currentSection = {label:current, lines:[]};
+        sections.push(currentSection);
+        i++;
+        continue;
+      }
+
+      // Compatibilidade com o formato antigo, sem cabeçalhos.
+      if(!currentSection){
+        currentSection = {label:'1ª estrofe', lines:[]};
+        sections.push(currentSection);
+      }
+
+      const chordLine = lines[i] || '';
+      const lyric = lines[i+1] || '';
+
+      if(!lyric || isSectionLabel(lyric)){
+        i++;
+        continue;
+      }
+
+      const anchors = parseChordLine(chordLine, lyric);
+      currentSection.lines.push({lyric, anchors});
+      i += 2;
+    }
+
+    parsedLines = sections
+      .filter(section=>section.lines.length)
+      .flatMap(section=>section.lines.map(line=>({
+        ...line,
+        sectionLabel:section.label
+      })));
+
+    selected = null;
+    renderPreview();
+    renderOutput();
+
+    const sectionCount=sections.filter(section=>section.lines.length).length;
+    status.textContent = parsedLines.length
+      ? `${parsedLines.length} linha(s) carregada(s) em ${sectionCount} seção(ões).`
+      : 'Nenhuma linha reconhecida.';
+  }
+
+  function measurePrefix(text, index, font){
+    const canvas = measurePrefix.canvas || (measurePrefix.canvas=document.createElement('canvas'));
+    const ctx = canvas.getContext('2d');
+    ctx.font = font;
+    return ctx.measureText(text.slice(0,index)).width;
+  }
+
+  function positionForIndex(lyricEl, index){
+    const font = getComputedStyle(lyricEl).font;
+    return measurePrefix(lyricEl.textContent,index,font);
+  }
+
+  function nearestIndex(lyricEl, x){
+    const text = lyricEl.textContent;
+    const font = getComputedStyle(lyricEl).font;
+    let lo=0, hi=text.length;
+    while(lo<hi){
+      const mid=Math.floor((lo+hi)/2);
+      const w=measurePrefix(text,mid,font);
+      if(w<x) lo=mid+1; else hi=mid;
+    }
+    const a=Math.max(0,lo-1), b=Math.min(text.length,lo);
+    const wa=measurePrefix(text,a,font);
+    const wb=measurePrefix(text,b,font);
+    return (Math.abs(wa-x) <= Math.abs(wb-x)) ? a : b;
+  }
+
+  function buildChordLineFromAnchors(line){
+    if(!line || !line.anchors?.length) return '';
+    let maxLen=Math.max(line.lyric.length,1);
+    line.anchors.forEach(a=>{
+      const pos=Math.max(0,Math.round(Number(a.pos)||0));
+      maxLen=Math.max(maxLen,pos+String(a.chord||'').length);
+    });
+    const chars=Array(maxLen).fill(' ');
+    line.anchors.forEach(a=>{
+      const pos=Math.max(0,Math.round(Number(a.pos)||0));
+      const chord=String(a.chord||'');
+      for(let i=0;i<chord.length && pos+i<chars.length;i++) chars[pos+i]=chord[i];
+    });
+    return chars.join('').replace(/\s+$/,'');
+  }
+
+  function nearestIndexByText(text,font,x){
+    let lo=0,hi=text.length;
+    while(lo<hi){
+      const mid=Math.floor((lo+hi)/2);
+      const w=measurePrefix(text,mid,font);
+      if(w<x) lo=mid+1; else hi=mid;
+    }
+    const a=Math.max(0,lo-1),b=Math.min(text.length,lo);
+    const wa=measurePrefix(text,a,font),wb=measurePrefix(text,b,font);
+    return Math.abs(wa-x)<=Math.abs(wb-x)?a:b;
+  }
+
+  function textPixelAt(text,index){
+    return measurePrefix(text,index,'400 25px Georgia, "Times New Roman", serif');
+  }
+
+  // Quando somente a letra muda, desloca as cifras pelo número exato de
+  // caracteres inseridos/removidos. Assim, acrescentar 2 letras antes de
+  // uma cifra faz o pos do código aumentar exatamente 2, sem recalibrar
+  // de forma aproximada pela largura visual da fonte.
+  function remapAnchorsAfterTextEdit(oldText,newText,anchors){
+    if(oldText===newText) return anchors.map(a=>({pos:a.pos,chord:a.chord}));
+
+    let prefix=0;
+    const oldLen=oldText.length;
+    const newLen=newText.length;
+    while(prefix<oldLen && prefix<newLen && oldText[prefix]===newText[prefix]) prefix++;
+
+    let oldSuffix=oldLen;
+    let newSuffix=newLen;
+    while(oldSuffix>prefix && newSuffix>prefix &&
+          oldText[oldSuffix-1]===newText[newSuffix-1]){
+      oldSuffix--;
+      newSuffix--;
+    }
+
+    const delta=(newSuffix-prefix)-(oldSuffix-prefix);
+    const oldChangedLen=oldSuffix-prefix;
+
+    return anchors.map(a=>{
+      const pos=Math.max(0,Math.min(oldLen,Math.round(Number(a.pos)||0)));
+      let nextPos=pos;
+
+      if(oldChangedLen===0){
+        // Inserção pura: tudo que está no ponto da inserção ou depois
+        // acompanha o texto novo.
+        if(pos>=prefix) nextPos=pos+delta;
+      }else if(pos<oldSuffix){
+        // A cifra estava dentro do trecho substituído. Mantemos a cifra
+        // no início do trecho alterado para evitar que ela desapareça.
+        nextPos=prefix;
+      }else{
+        // Tudo depois do trecho alterado acompanha a diferença de tamanho.
+        nextPos=pos+delta;
+      }
+
+      return {
+        pos:Math.max(0,Math.min(newLen,nextPos)),
+        chord:a.chord
+      };
+    });
+  }
+
+  function syncExistingVisualEditLive(lineIndex,row){
+    const line=parsedLines[lineIndex];
+    if(!line || !row) return;
+
+    const section=(row.querySelector('.visual-edit-section')?.textContent || line.sectionLabel || '1ª estrofe')
+      .replace(/\n/g,' ')
+      .trim() || '1ª estrofe';
+
+    // PRESERVA TODOS OS ESPAÇOS DA LETRA.
+    // Um espaço digitado antes de uma cifra também é um caractere e
+    // precisa entrar no cálculo de posição e no código gerado.
+    const newLyric=(row.querySelector('.visual-edit-lyrics')?.textContent || '')
+      .replace(/\r?\n/g,' ');
+
+    const newChordLine=(row.querySelector('.visual-edit-chords')?.textContent || '')
+      .replace(/\n/g,'\n');
+
+    const oldLyric=row.dataset.syncedLyric ?? line.lyric;
+    const oldChordLine=row.dataset.syncedChordLine ?? buildChordLineFromAnchors(line);
+    const oldAnchors=(line.anchors||[]).map(a=>({pos:a.pos,chord:a.chord}));
+
+    if(newLyric.trim()){
+      line.sectionLabel=section;
+      if(newLyric!==oldLyric){
+        line.anchors=remapAnchorsAfterTextEdit(oldLyric,newLyric,oldAnchors);
+      }
+      line.lyric=newLyric;
+    }
+
+    if(newChordLine!==oldChordLine){
+      line.anchors=parseChordLine(newChordLine,line.lyric);
+    }
+
+    row.dataset.syncedLyric=line.lyric;
+    row.dataset.syncedChordLine=buildChordLineFromAnchors(line);
+
+    source.value=buildSourceFromData();
+    codeDirty=false;
+    renderOutput(true);
+  }
+
+  function saveExistingVisualEdit(lineIndex,row){
+    const line=parsedLines[lineIndex];
+    if(!line || !row) return false;
+
+    const section=row.querySelector('.visual-edit-section')?.textContent.trim() || line.sectionLabel || '1ª estrofe';
+    // Não use trim/trimEnd aqui: espaços digitados pelo usuário fazem parte
+    // da letra e precisam aparecer também no código final.
+    const newLyric=(row.querySelector('.visual-edit-lyrics')?.textContent || '')
+      .replace(/\r?\n/g,' ');
+    const newChordLine=(row.querySelector('.visual-edit-chords')?.textContent || '').replace(/\n/g,'\n');
+    const originalChordLine=row.dataset.originalChordLine || '';
+    const oldLyric=line.lyric;
+    const oldAnchors=(line.anchors||[]).map(a=>({pos:a.pos,chord:a.chord}));
+
+    if(!newLyric.trim()){
+      status.textContent='A linha não pode ficar vazia. Pressione ESC para cancelar.';
+      row.querySelector('.visual-edit-lyrics')?.focus();
+      return false;
+    }
+
+    line.sectionLabel=section;
+    line.lyric=newLyric;
+
+    if(newChordLine===originalChordLine){
+      // Se só a letra mudou, ajusta as posições por caracteres.
+      // Ex.: +2 letras antes da cifra => pos da cifra +2.
+      line.anchors=remapAnchorsAfterTextEdit(oldLyric,newLyric,oldAnchors);
+    }else{
+      // Se a linha de cifras foi alterada, recalibra pelas posições digitadas.
+      line.anchors=parseChordLine(newChordLine,newLyric);
+    }
+
+    source.value=buildSourceFromData();
+    codeDirty=false;
+    selected=null;
+    editingLineIndex=null;
+    renderPreview();
+    renderOutput(true);
+    status.textContent='Linha editada. As demais linhas foram preservadas.';
+    return true;
+  }
+
+  function cancelExistingVisualEdit(){
+    editingLineIndex=null;
+    renderPreview();
+    status.textContent='Edição da linha cancelada.';
+  }
+
+  function startExistingVisualEdit(lineIndex){
+    if(!addMode || !parsedLines[lineIndex]) return;
+    editingLineIndex=lineIndex;
+    renderPreview();
+    const row=preview.querySelector('.visual-edit-row[data-line-index="'+lineIndex+'"]');
+    const lyricEl=row?.querySelector('.visual-edit-lyrics');
+    if(lyricEl){
+      lyricEl.focus();
+      placeCaretAtEnd(lyricEl);
+      row.scrollIntoView({block:'nearest'});
+    }
+  }
+
+  function appendVisualEditRow(lineData,lineIndex){
+    const row=document.createElement('div');
+    row.className='visual-edit-row is-existing';
+    row.dataset.lineIndex=lineIndex;
+    row.dataset.originalLyric=lineData.lyric;
+    row.dataset.originalChordLine=buildChordLineFromAnchors(lineData);
+    row.dataset.syncedLyric=lineData.lyric;
+    row.dataset.syncedChordLine=row.dataset.originalChordLine;
+
+    const label=document.createElement('div');
+    label.className='visual-add-label';
+    label.textContent='EDIÇÃO DIRETA — ENTER = SALVAR E AVANÇAR · ESC = CANCELAR';
+
+    const cancel=document.createElement('button');
+    cancel.type='button';
+    cancel.className='visual-edit-cancel';
+    cancel.textContent='ESC';
+    cancel.title='Cancelar edição';
+    cancel.addEventListener('click',e=>{e.preventDefault();cancelExistingVisualEdit()});
+    label.appendChild(cancel);
+
+    const section=document.createElement('div');
+    section.className='visual-add-section visual-edit-section';
+    section.contentEditable='true';
+    section.spellcheck=false;
+    section.textContent=lineData.sectionLabel||'1ª estrofe';
+
+    const chords=document.createElement('div');
+    chords.className='visual-add-chords visual-edit-chords';
+    chords.contentEditable='true';
+    chords.spellcheck=false;
+    chords.textContent=row.dataset.originalChordLine;
+
+    const lyrics=document.createElement('div');
+    lyrics.className='visual-add-lyrics visual-edit-lyrics';
+    lyrics.contentEditable='true';
+    lyrics.spellcheck=false;
+    lyrics.textContent=lineData.lyric;
+
+    const hint=document.createElement('div');
+    hint.className='visual-edit-hint';
+    hint.textContent='Edite diretamente: acrescente, apague ou corrija a letra. Nas cifras, mantenha os espaços para reposicionar. Enter salva e avança.';
+
+    const liveSync=()=>syncExistingVisualEditLive(lineIndex,row);
+    section.addEventListener('input',liveSync);
+    chords.addEventListener('input',liveSync);
+    lyrics.addEventListener('input',liveSync);
+
+    row.append(label,section,chords,lyrics,hint);
+    return row;
+  }
+
+  function renderPreview(){
+    preview.innerHTML='';
+    parsedLines.forEach((lineData,lineIndex)=>{
+      if(addMode && editingLineIndex===lineIndex){
+        const editRow=appendVisualEditRow(lineData,lineIndex);
+        preview.appendChild(editRow);
+
+        const saveOnEnter=(e)=>{
+          if(e.key==='Enter'){
+            e.preventDefault();
+            if(saveExistingVisualEdit(lineIndex,editRow) && addMode){
+              if(lineIndex+1<parsedLines.length){
+                editingLineIndex=lineIndex+1;
+                renderPreview();
+                const next=preview.querySelector('.visual-edit-row[data-line-index="'+editingLineIndex+'"]');
+                const nextLyric=next?.querySelector('.visual-edit-lyrics');
+                nextLyric?.focus();
+                placeCaretAtEnd(nextLyric);
+              }
+            }
+          }else if(e.key==='Escape'){
+            e.preventDefault();
+            cancelExistingVisualEdit();
+          }
+        };
+        editRow.querySelectorAll('[contenteditable="true"]').forEach(el=>el.addEventListener('keydown',saveOnEnter));
+        requestAnimationFrame(()=>{
+          const lyric=editRow.querySelector('.visual-edit-lyrics');
+          lyric?.focus();
+          placeCaretAtEnd(lyric);
+        });
+        return;
+      }
+
+      const row=document.createElement('div');
+      row.className='preview-line'+(addMode?' editable-line':'');
+      row.dataset.lineIndex=lineIndex;
+
+      const lyricEl=document.createElement('span');
+      lyricEl.className='lyrics';
+      lyricEl.textContent=lineData.lyric;
+
+      const ruler=document.createElement('div');
+      ruler.className='ruler';
+      row.append(ruler,lyricEl);
+
+      const marker=document.createElement('div');
+      marker.className='pos-marker';
+      marker.style.display='none';
+      row.appendChild(marker);
+
+      lineData.anchors.forEach((anchor,anchorIndex)=>{
+        const chord=document.createElement('div');
+        chord.className='anchor-chord';
+        chord.textContent=anchor.chord;
+        chord.dataset.lineIndex=lineIndex;
+        chord.dataset.anchorIndex=anchorIndex;
+        chord.style.left=`${positionForIndex(lyricEl,anchor.pos)}px`;
+
+        chord.addEventListener('click',(e)=>{
+          e.stopPropagation();
+          if(addMode){
+            startExistingVisualEdit(lineIndex);
+            return;
+          }
+          selected={lineIndex,anchorIndex};
+          updateSelectionUI();
+          document.querySelectorAll('.anchor-chord').forEach(el=>el.classList.remove('selected'));
+          chord.classList.add('selected');
+        });
+
+        chord.addEventListener('pointerdown',(e)=>{
+          if(!fineMode || addMode) return;
+          e.preventDefault();
+          selected={lineIndex,anchorIndex};
+          updateSelectionUI();
+          const startRect=chord.getBoundingClientRect();
+          drag={el:chord,lineIndex,anchorIndex,row,lyricEl,startX:e.clientX,startLeft:startRect.left};
+          chord.setPointerCapture(e.pointerId);
+        });
+
+        chord.addEventListener('pointermove',(e)=>{
+          if(!drag || drag.el!==chord) return;
+          const rowRect=row.getBoundingClientRect();
+          const x=e.clientX-rowRect.left;
+          const newPos=nearestIndex(lyricEl,Math.max(0,x));
+          parsedLines[lineIndex].anchors[anchorIndex].pos=newPos;
+          chord.style.left=`${positionForIndex(lyricEl,newPos)}px`;
+          updateSelectionUI();
+          renderOutput();
+        });
+
+        chord.addEventListener('pointerup',(e)=>{
+          if(drag && drag.el===chord){try{chord.releasePointerCapture(e.pointerId)}catch(_){}}
+          drag=null;
+        });
+
+        row.appendChild(chord);
+      });
+
+      if(addMode){
+        row.addEventListener('click',()=>startExistingVisualEdit(lineIndex));
+      }
+
+      preview.appendChild(row);
+    });
+
+    if(addMode && editingLineIndex===null){
+      appendVisualAddRow();
+    }
+
+    updateSelectionUI();
+  }
+
+  function updateSelectionUI(){
+    if(!selected){
+      selectedInfo.textContent='Nenhuma cifra selecionada.';
+      return;
+    }
+    const a=parsedLines[selected.lineIndex]?.anchors[selected.anchorIndex];
+    const line=parsedLines[selected.lineIndex];
+    if(!a || !line){
+      selected=null;
+      selectedInfo.textContent='Nenhuma cifra selecionada.';
+      return;
+    }
+    const before=line.lyric.slice(0,a.pos);
+    const after=line.lyric.slice(a.pos);
+    selectedInfo.innerHTML =
+      `Cifra: <b>${escapeHtml(a.chord)}</b> · posição: <b>${a.pos}</b><br>` +
+      `<span style="color:#746e64">...${escapeHtml(before.slice(-12))}<b>${escapeHtml(line.lyric[a.pos] || 'fim')}</b>${escapeHtml(after.slice(0,12))}...</span>`;
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g,m=>({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[m]));
+  }
+
+  // Converte o tom digitado na caixa "Tom original" para o índice
+  // usado pelo app principal: C=0, Db=1, ... Bb=10, B=11.
+  function getSourceToneIndex(key){
+    const aliases={
+      'A#':'Bb','C#':'Db','D#':'Eb','F#':'Gb','G#':'Ab'
+    };
+    const normalized=aliases[String(key||'').trim()] || String(key||'').trim();
+    return ['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'].indexOf(normalized);
+  }
+
+  function escapeJsString(s){
+    return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+  }
+
+  function buildSourceFromData(){
+    const blocks=[];
+    let lastLabel=null;
+    parsedLines.forEach(line=>{
+      const label=line.sectionLabel || '1ª estrofe';
+      if(label!==lastLabel){
+        blocks.push(label);
+        lastLabel=label;
+      }
+      const lyric=line.lyric;
+      const chordChars=Array(Math.max(lyric.length,1)).fill(' ');
+      line.anchors.forEach(a=>{
+        const pos=Math.max(0,Math.min(lyric.length,a.pos));
+        for(let j=0;j<a.chord.length && pos+j<chordChars.length;j++) chordChars[pos+j]=a.chord[j];
+      });
+      blocks.push(chordChars.join('').replace(/\s+$/,''));
+      blocks.push(lyric);
+      blocks.push('');
+    });
+    return blocks.join('\n').replace(/\n+$/,'');
+  }
+
+  function normalizeSongObject(song){
+    if(!song || typeof song!=='object') throw new Error('O código não produziu um objeto.');
+    if(!Array.isArray(song.sections)) throw new Error('O código precisa ter sections:[...].');
+    const sections=song.sections.map((section,si)=>{
+      if(!section || typeof section!=='object' || !Array.isArray(section.lines))
+        throw new Error(`Seção ${si+1} inválida.`);
+      return {
+        label:String(section.label ?? `1ª estrofe`),
+        lines:section.lines.map((line,li)=>{
+          if(!line || typeof line!=='object' || typeof line.lyric!=='string' || !Array.isArray(line.anchors))
+            throw new Error(`Linha ${li+1} da seção "${section.label}" inválida.`);
+          return {
+            lyric:line.lyric,
+            anchors:line.anchors.map((a,ai)=>{
+              const pos=Number(a.pos);
+              if(!Number.isFinite(pos)) throw new Error(`Posição inválida na cifra ${ai+1} da linha ${li+1}.`);
+              return {pos:Math.max(0,Math.min(line.lyric.length,Math.round(pos))),chord:String(a.chord||'').trim()};
+            })
+          };
+        })
+      };
+    });
+    return {
+      id:String(song.id ?? song.number ?? ''),
+      number:String(song.number ?? song.id ?? ''),
+      title:String(song.title ?? ''),
+      category:String(song.category ?? 'Harpa Cristã'),
+      sourceToneIndex:Number.isFinite(Number(song.sourceToneIndex)) ? Number(song.sourceToneIndex) : 0,
+      sections
+    };
+  }
+
+  function parseEditableCode(){
+    let code=codeEditor.value.trim();
+    if(!code) throw new Error('O editor de código está vazio.');
+    if(/(?:__proto__|prototype|constructor|window|document|globalThis|Function|eval|import|export|=>|`)/.test(code))
+      throw new Error('O código contém uma construção não permitida. Edite apenas os dados da música.');
+    if(code.endsWith(';')) code=code.slice(0,-1).trim();
+    // O código gerado pelo editor termina com "}," porque foi pensado
+    // originalmente para ser colado dentro de um array. Ao editá-lo
+    // como objeto independente, essa vírgula final precisa ser removida.
+    code=code.replace(/,\s*$/, '');
+    // O formato é o objeto gerado pelo próprio editor: dados, não comandos.
+    const song=Function(`"use strict";return (${code})`)();
+    return normalizeSongObject(song);
+  }
+
+  function applySongObject(song){
+    document.getElementById('songNumber').value=song.number;
+    document.getElementById('songTitle').value=song.title;
+    const chromatic=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
+    document.getElementById('songKey').value=chromatic[song.sourceToneIndex] || 'C';
+
+    parsedLines=song.sections.flatMap(section=>section.lines.map(line=>({
+      lyric:line.lyric,
+      anchors:line.anchors.map(a=>({pos:a.pos,chord:a.chord})),
+      sectionLabel:section.label
+    })));
+
+    source.value=buildSourceFromData();
+    selected=null;
+    renderPreview();
+    codeDirty=false;
+    renderOutput(true);
+    status.textContent='Código aplicado: entrada, prévia e código estão sincronizados.';
+  }
+
+  function renderOutput(force=false){
+
+    const n=escapeHtml(document.getElementById('songNumber').value.trim() || '001');
+    const title=escapeHtml(document.getElementById('songTitle').value.trim() || 'Sem título');
+    const key=escapeHtml(document.getElementById('songKey').value.trim() || 'C');
+
+    const groupedSections = [];
+    parsedLines.forEach(line=>{
+      const label=line.sectionLabel || '1ª estrofe';
+      let section=groupedSections.find(s=>s.label===label);
+
+      if(!section){
+        section={label,lines:[]};
+        groupedSections.push(section);
+      }
+
+      section.lines.push({
+        lyric:line.lyric.replace(/\s+I\s+/g,' '),
+        anchors:line.anchors.map(a=>({pos:a.pos,chord:a.chord}))
+      });
+    });
+
+    const sectionCode = groupedSections.map(section=>`    {
+      label:'${section.label.replace(/'/g,"\\'")}',
+      lines:${formatLines(section.lines)}
+    }`).join(',\n');
+
+    const js = `/* =========================
+   ${n} — ${title.toUpperCase()}
+========================= */
+
+{
+  id:'${n}',
+  number:'${n}',
+  title:'${title.replace(/'/g,"\\'")}',
+  category:'Harpa Cristã',
+  sourceToneIndex:${getSourceToneIndex(key)},
+
+  sections:[
+${sectionCode}
+  ]
+},`;
+    if(force || !codeDirty) codeEditor.value=js;
+  }
+
+  function formatLines(lines){
+    if(!lines.length) return '[]';
+    return '[\n' + lines.map(line=>{
+      const lyric=line.lyric.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      const anchors=line.anchors.map(a=>`{pos:${a.pos},chord:'${a.chord.replace(/'/g,"\\'")}'}`).join(',');
+      return `      {lyric:'${lyric}',anchors:[${anchors}]}`
+    }).join(',\n') + '\n    ]';
+  }
+
+  function lastSectionLabel(){
+    return parsedLines.length
+      ? String(parsedLines[parsedLines.length-1].sectionLabel || '1ª estrofe')
+      : '1ª estrofe';
+  }
+
+  function draftFromVisualRow(){
+    const row=preview.querySelector('.visual-add-row');
+    if(!row) return;
+    const sectionEl=row.querySelector('.visual-add-section');
+    const chordsEl=row.querySelector('.visual-add-chords');
+    const lyricEl=row.querySelector('.visual-add-lyrics');
+    addDraft={
+      // textContent preserva os espaços digitados no editor visual.
+      // Só a seção é normalizada; letra e cifras mantêm o espaçamento exato.
+      section:(sectionEl?.textContent||'').replace(/\r?\n/g,' ').trim(),
+      chords:(chordsEl?.textContent||'').replace(/\r?\n/g,'\n'),
+      lyric:(lyricEl?.textContent||'').replace(/\r?\n/g,' ')
+    };
+  }
+
+  function insertLineFromVisual(){
+    draftFromVisualRow();
+
+    const sectionLabel=(addDraft.section||'1ª estrofe').trim() || '1ª estrofe';
+    const lyric=addDraft.lyric || '';
+    const chordLine=addDraft.chords || '';
+
+    if(!lyric.trim()){
+      const el=preview.querySelector('.visual-add-lyrics');
+      el?.focus();
+      return false;
+    }
+
+    // Se o usuário escrever [Coro], [Ponte] etc., isso vira uma nova seção.
+    const sectionMatch=lyric.match(/^\[([^\]]+)\]$/);
+    if(sectionMatch){
+      addDraft={section:sectionMatch[1].trim()||'1ª estrofe',chords:'',lyric:''};
+      const row=preview.querySelector('.visual-add-row');
+      if(row){
+        row.querySelector('.visual-add-section').textContent=addDraft.section;
+        row.querySelector('.visual-add-chords').textContent='';
+        row.querySelector('.visual-add-lyrics').textContent='';
+        row.querySelector('.visual-add-lyrics').focus();
+      }
+      status.textContent=`Nova seção: “${sectionMatch[1].trim()}”. Digite a primeira linha.`;
+      return true;
+    }
+
+    const anchors=parseChordLine(chordLine,lyric);
+    const newLine={lyric,anchors,sectionLabel};
+
+    let insertAt=parsedLines.length;
+    if(selected){
+      insertAt=Math.min(parsedLines.length,selected.lineIndex+1);
+    }else{
+      for(let i=parsedLines.length-1;i>=0;i--){
+        if(String(parsedLines[i].sectionLabel||'')===sectionLabel){
+          insertAt=i+1;
+          break;
+        }
+      }
+    }
+
+    parsedLines.splice(insertAt,0,newLine);
+    selected=null;
+    source.value=buildSourceFromData();
+    codeDirty=false;
+    addDraft={section:sectionLabel,chords:'',lyric:''};
+    renderPreview();
+    renderOutput(true);
+    status.textContent=`Linha acrescentada em “${sectionLabel}”.`;
+    return true;
+  }
+
+  function appendVisualAddRow(){
+    const row=document.createElement('div');
+    row.className='visual-add-row';
+
+    const label=document.createElement('div');
+    label.className='visual-add-label';
+    label.textContent='EDIÇÃO DIRETA — ENTER = PRÓXIMA LINHA · ESC = SAIR';
+
+    const section=document.createElement('div');
+    section.className='visual-add-section';
+    section.contentEditable='true';
+    section.spellcheck=false;
+    section.textContent=addDraft.section || lastSectionLabel();
+
+    const chords=document.createElement('div');
+    chords.className='visual-add-chords';
+    chords.contentEditable='true';
+    chords.spellcheck=false;
+    chords.textContent=addDraft.chords||'';
+
+    const lyrics=document.createElement('div');
+    lyrics.className='visual-add-lyrics';
+    lyrics.contentEditable='true';
+    lyrics.spellcheck=false;
+    lyrics.textContent=addDraft.lyric||'';
+
+    const hint=document.createElement('div');
+    hint.className='visual-add-hint';
+    hint.textContent='Digite diretamente aqui. Em cifras, mantenha os espaços para posicioná-las. Enter acrescenta a linha.';
+
+    row.append(label,section,chords,lyrics,hint);
+    preview.appendChild(row);
+
+    const focusEl=addDraft.lyric || addDraft.chords ? lyrics : lyrics;
+
+    [section,chords,lyrics].forEach(el=>{
+      el.addEventListener('input',()=>{
+        draftFromVisualRow();
+      });
+      el.addEventListener('keydown',e=>{
+        if(e.key==='Enter'){
+          e.preventDefault();
+          insertLineFromVisual();
+        }else if(e.key==='Escape'){
+          e.preventDefault();
+          addDraft={section:'',chords:'',lyric:''};
+          addMode=false;
+          addBtn.classList.remove('active');
+          preview.classList.remove('visual-add-active');
+          renderPreview();
+          status.textContent='Edição direta encerrada.';
+        }
+      });
+    });
+
+    requestAnimationFrame(()=>{
+      focusEl.focus();
+      placeCaretAtEnd(focusEl);
+      row.scrollIntoView({block:'nearest'});
+    });
+  }
+
+  function placeCaretAtEnd(el){
+    if(!el) return;
+    const range=document.createRange();
+    const sel=window.getSelection();
+    range.selectNodeContents(el);
+    range.collapse(false);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+
+  function toggleVisualAdd(){
+    if(addMode){
+      draftFromVisualRow();
+      addMode=false;
+      editingLineIndex=null;
+      addBtn.classList.remove('active');
+      preview.classList.remove('visual-add-active');
+      renderPreview();
+      status.textContent='Edição direta encerrada.';
+      return;
+    }
+
+    addMode=true;
+    editingLineIndex=null;
+    addDraft={section:selected ? String(parsedLines[selected.lineIndex]?.sectionLabel||lastSectionLabel()) : lastSectionLabel(),chords:'',lyric:''};
+    addBtn.classList.add('active');
+    preview.classList.add('visual-add-active');
+    renderPreview();
+    status.textContent='Modo de edição direta: clique em qualquer linha já feita para editá-la ou use a linha ao final para acrescentar.';
+  }
+
+  function moveSelected(delta){
+    if(!selected) return;
+    const a=parsedLines[selected.lineIndex]?.anchors[selected.anchorIndex];
+    const line=parsedLines[selected.lineIndex];
+    if(!a || !line) return;
+    a.pos=Math.max(0,Math.min(line.lyric.length,a.pos+delta));
+    renderPreview();
+    selected={lineIndex:selected.lineIndex,anchorIndex:selected.anchorIndex};
+    renderOutput();
+  }
+
+  function selectNextAnchor(direction=1){
+    if(!fineMode || !parsedLines.length) return;
+
+    // Se ainda não houver seleção, começa pela primeira cifra.
+    if(!selected){
+      selected=direction>0
+        ? {lineIndex:0,anchorIndex:0}
+        : findLastAnchor();
+    }else{
+      let li=selected.lineIndex;
+      let ai=selected.anchorIndex + direction;
+
+      while(li>=0 && li<parsedLines.length){
+        const anchors=parsedLines[li]?.anchors || [];
+
+        if(ai>=0 && ai<anchors.length){
+          selected={lineIndex:li,anchorIndex:ai};
+          break;
+        }
+
+        li += direction;
+        if(li<0 || li>=parsedLines.length) break;
+
+        const nextAnchors=parsedLines[li]?.anchors || [];
+        ai=direction>0 ? 0 : nextAnchors.length-1;
+      }
+
+      // No fim/início, não sai do editor: permanece na última/primeira cifra.
+      if(li<0 || li>=parsedLines.length){
+        selected=direction>0 ? findLastAnchor() : {lineIndex:0,anchorIndex:0};
+      }
+    }
+
+    renderPreview();
+
+    const el=document.querySelector(
+      `.anchor-chord[data-line-index="${selected.lineIndex}"][data-anchor-index="${selected.anchorIndex}"]`
+    );
+    if(el){
+      el.classList.add('selected');
+      el.scrollIntoView({block:'nearest',inline:'nearest'});
+    }
+
+    updateSelectionUI();
+  }
+
+  function findLastAnchor(){
+    for(let li=parsedLines.length-1;li>=0;li--){
+      const anchors=parsedLines[li]?.anchors || [];
+      if(anchors.length) return {lineIndex:li,anchorIndex:anchors.length-1};
+    }
+    return null;
+  }
+
+  addBtn.addEventListener('click',toggleVisualAdd);
+
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Insert' && !e.target.matches('input,textarea,[contenteditable="true"]')){
+      e.preventDefault();
+      toggleVisualAdd();
+    }
+  });
+
+  document.getElementById('parseBtn').addEventListener('click',parseSource);
+  document.getElementById('resetBtn').addEventListener('click',()=>{
+    source.value=`Bb              F        Bb       F       Bb
+Deus prometeu com certeza, chuvas de graça mandar
+
+Eb              Bb       Gm       C       F
+Ele nos dá fortaleza e ricas bênçãos sem par`;
+    fineMode=false;
+    document.getElementById('autoBtn').classList.add('active');
+    document.getElementById('fineBtn').classList.remove('active');
+    parseSource();
+  });
+
+  document.getElementById('autoBtn').addEventListener('click',()=>{
+    fineMode=false;
+    document.getElementById('autoBtn').classList.add('active');
+    document.getElementById('fineBtn').classList.remove('active');
+    status.textContent='Modo automático: posições estimadas.';
+  });
+
+  document.getElementById('fineBtn').addEventListener('click',()=>{
+    fineMode=true;
+    document.getElementById('fineBtn').classList.add('active');
+    document.getElementById('autoBtn').classList.remove('active');
+    status.textContent='Modo ajuste fino: arraste as cifras.';
+  });
+
+  mobilePreviewBtn.addEventListener('click',()=>{
+    const mobile=preview.classList.toggle('mobile-preview');
+
+    mobilePreviewBtn.textContent=mobile
+      ? '🖥️ TELA NORMAL'
+      : '📱 CELULAR';
+
+    renderPreview();
+  });
+
+  document.getElementById('copyBtn').addEventListener('click',async()=>{
+    const value=codeEditor.value;
+    try{
+      await navigator.clipboard.writeText(value);
+      status.textContent='Código copiado.';
+    }catch(_){
+      const ta=document.createElement('textarea');
+      ta.value=value;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+      status.textContent='Código copiado.';
+    }
+  });
+
+  codeEditor.addEventListener('input',()=>{
+    codeDirty=true;
+    status.textContent='Código editado. Clique em APLICAR CÓDIGO para atualizar as outras telas.';
+  });
+
+  document.getElementById('updateCodeBtn').addEventListener('click',()=>{
+    codeDirty=false;
+    renderOutput(true);
+    status.textContent='Código atualizado a partir da interface.';
+  });
+
+  document.getElementById('applyCodeBtn').addEventListener('click',()=>{
+    try{
+      const song=parseEditableCode();
+      applySongObject(song);
+    }catch(err){
+      status.textContent=`Erro no código: ${err.message}`;
+    }
+  });
+
+  document.addEventListener('keydown',(e)=>{
+    if(!selected) return;
+    if(e.target.matches('input,textarea')) return;
+    if(e.key==='ArrowLeft'){e.preventDefault();moveSelected(-1);}
+    if(e.key==='ArrowRight'){e.preventDefault();moveSelected(1);}
+
+    if(e.key==='Tab' && fineMode){
+      e.preventDefault();
+      selectNextAnchor(e.shiftKey ? -1 : 1);
+      return;
+    }
+
+    if(e.key==='Delete' || e.key==='Backspace'){
+      const anchors=parsedLines[selected.lineIndex]?.anchors;
+      if(anchors){
+        anchors.splice(selected.anchorIndex,1);
+        selected=null;
+        renderPreview();
+        renderOutput();
+        status.textContent='Cifra removida.';
+      }
+    }
+  });
+
+  // Qualquer alteração de texto atualiza a prévia.
+  ['songNumber','songTitle','songKey'].forEach(id=>{
+    document.getElementById(id).addEventListener('input',renderOutput);
+  });
+  window.addEventListener('resize',renderPreview);
+
+  let lastPreviewWidth=0;
+  if('ResizeObserver' in window){
+    const previewObserver=new ResizeObserver(entries=>{
+      const width=Math.round(entries[0]?.contentRect?.width || 0);
+      if(width && width!==lastPreviewWidth){
+        lastPreviewWidth=width;
+        renderPreview();
+      }
+    });
+    previewObserver.observe(document.getElementById('preview'));
+  }
+
+  preview.classList.add('mobile-preview');
+  mobilePreviewBtn.textContent='🖥️ TELA NORMAL';
+
+  parseSource();
+</script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Minha Letra Online</title>
+<style>
+:root{--blue:#244f75;--bg:#f4f4f1;--card:#fff;--line:#ddd}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#202020;font-family:Arial,sans-serif}
+header{background:var(--blue);color:#fff;padding:13px 17px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
+.header-left{display:flex;align-items:center;gap:10px;min-width:0}
+.back-arrow{
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  flex:0 0 34px;
+  color:#fff;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:8px;
+  font:700 22px/1 Arial,sans-serif;
+  background:rgba(255,255,255,.08);
+}
+.back-arrow:hover{
+  background:rgba(255,255,255,.18);
+  filter:none;
+}
+.logo{font-size:20px;font-weight:700}.sub{font-size:12px;opacity:.8}
+main{max-width:950px;margin:auto;padding:14px}
+.card{background:var(--card);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 12px #0000000c}
+input,textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px;font:inherit}
+input{font-size:20px;font-weight:bold}
+textarea{min-height:230px;resize:vertical;line-height:1.7}
+.toolbar{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+button,select{border:1px solid #d7d7d7;border-radius:8px;padding:9px 12px;background:#f1f3f4;cursor:pointer;font-weight:700}
+button:hover{filter:brightness(.95)}
+.tool-yellow{background:#fff38a}.tool-red{background:#ffb0b0}.tool-green{background:#b7e7b7}
+.preview-title{text-align:center;font-size:26px;font-weight:bold;margin-bottom:18px}
+.preview{font-family:Georgia,serif;white-space:pre-wrap;font-size:22px;line-height:1.55}
+.pause{font-family:Arial;color:#555;font-weight:bold}
+.ident{font-family:Arial;font-size:.78em;font-weight:bold;color:#244f75}
+.marker{font-family:Arial;font-size:.78em;font-weight:bold;color:#555}
+.hl-yellow,.hl-red,.hl-green{
+  position:relative;
+  display:inline;
+  padding:0 .035em .03em;
+  border-radius:4px 2px 3px 2px;
+  -webkit-box-decoration-break:clone;
+  box-decoration-break:clone;
+}
+.hl-yellow{
+  background:linear-gradient(transparent 18%,rgba(255,235,35,.72) 18%,rgba(255,235,35,.72) 88%,transparent 88%);
+}
+.hl-red{
+  background:linear-gradient(transparent 18%,rgba(255,70,70,.48) 18%,rgba(255,70,70,.48) 88%,transparent 88%);
+}
+.hl-green{
+  background:linear-gradient(transparent 18%,rgba(60,190,80,.48) 18%,rgba(60,190,80,.48) 88%,transparent 88%);
+}
+.help{font-size:12px;color:#777;line-height:1.45}
+.mode{display:flex;align-items:center;gap:7px;font-size:13px;color:#666}
+ .fullscreen{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  overflow:auto;
+  background:#f4f4f1;
+  padding:18px;
+}
+.fullscreen-inner{max-width:1100px;margin:0 auto}
+.fullscreen-controls{
+  position:sticky;
+  top:0;
+  z-index:2;
+  display:flex;
+  justify-content:flex-end;
+  gap:7px;
+  padding:4px 0 14px;
+  background:#f4f4f1;
+}
+.fullscreen-controls button{
+  font-size:20px;
+  min-width:44px;
+  padding:7px 12px;
+}
+.fullscreen .preview{
+  font-size:34px;
+  line-height:1.65;
+}
+
+.btn-intro {
+  background: rgba(85,205,105,.60);
+}
+
+.btn-todos {
+  background: rgba(255,235,35,.72);
+}
+
+.btn-pausa {
+  background: rgba(255,105,105,.58);
+}
+
+.btn-intro,
+.btn-todos,
+.btn-pausa {
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 8px;
+  padding: 9px 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="header-left">
+   <a class="back-arrow" href="index.html" title="Voltar para a Harpa Cifrada">←</a>
+   <div>
+     <div class="logo">Minha Letra Online</div>
+     <div class="sub">Playback • coral • pausas • marcações</div>
+   </div>
+ </div>
+ <button onclick="abrirTela()">⛶</button>
+</header>
+
+<main>
+<section class="card">
+ <input id="titulo" value="Bondoso Amigo">
+
+ <div class="toolbar">
+   <button class="btn-intro"onclick="inserirIntro()">🎵 Intro</button>
+   <button class="btn-pausa"onclick="inserirPausa()">▶ Pausa</button>
+   <button onclick="inserir(&quot;'&quot;)">' Antes</button>
+   <button onclick="inserir('&quot;')">" Depois</button>
+   <button class="btn-todos"onclick="marcarTodosLouvam()">Todos Louvam</button>
+
+   <select id="cor">
+     <option value="yellow">🟡 Amarelo</option>
+     <option value="red">🔴 Vermelho</option>
+     <option value="green">🟢 Verde</option>
+   </select>
+   <button id="grifarBtn">🖍 Grifar seleção</button>
+   <button onclick="desgrifar()">✕ Tirar grifo</button>
+   <button onclick="limpar()">Limpar</button>
+ </div>
+
+ <div class="mode">
+   <b>'</b> = toque antes &nbsp; • &nbsp;
+   <b>"</b> = toque depois &nbsp; • &nbsp;
+   <b>▶</b> = pausa
+ </div>
+
+ <textarea id="letra">[G:🎵{intro} |]' Quão bondoso amigo é Cristo! "
+Carregou a nossa dor. "
+
+' Que fiel e santo amigo, "
+Ele é nosso Salvador. [R:|▶▶▶▶ {pausa}|]
+
+[Y:TODOS LOUVAM
+Bondoso amigo,
+fiel e santo Salvador.]</textarea>
+
+ <p class="help">
+ Selecione uma parte do texto e escolha 🟡, 🔴 ou 🟢 para aplicar um grifo com aparência de marca-texto.
+ O grifo serve especialmente para destacar as partes do coral.
+ </p>
+</section>
+
+<section class="card">
+ <div class="preview-title" id="tituloPreview"></div>
+ <div class="preview" id="preview"></div>
+</section>
+</main>
+
+<script>
+const letra=document.getElementById('letra');
+const titulo=document.getElementById('titulo');
+const preview=document.getElementById('preview');
+
+function esc(s){
+ return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+
+function render(){
+  const raw = letra.value;
+  let out = "";
+  let pos = 0;
+
+  // Parse highlight blocks BEFORE escaping HTML. This is important because
+  // the editor stores [Y:...], [R:...] and [G:...] as plain text.
+  const re = /\[([YRG]):([\s\S]*?)\]/g;
+  let m;
+
+  function renderPlain(text){
+    let x = esc(text);
+    x = x.replace(/▶/g, '<span class="pause">▶</span>');
+    x = x.replace(/'/g, '<span class="ident before">\'</span>');
+    x = x.replace(/&quot;/g, '<span class="ident after">&quot;</span>');
+    return x;
+  }
+
+  while ((m = re.exec(raw)) !== null) {
+    out += renderPlain(raw.slice(pos, m.index));
+
+    const cls = m[1] === "Y" ? "hl-yellow" :
+                m[1] === "R" ? "hl-red" : "hl-green";
+
+    // Simulates a real highlighter: slightly irregular edges and a soft
+    // translucent band rather than a rigid rectangle.
+    out += '<span class="' + cls + '">' + renderPlain(m[2]) + '</span>';
+    pos = re.lastIndex;
+  }
+
+  out += renderPlain(raw.slice(pos));
+
+  document.getElementById('tituloPreview').textContent =
+    titulo.value || 'Sem título';
+  preview.innerHTML = out;
+  if(fullscreenPreview){
+    fullscreenPreview.innerHTML = out;
+  }
+}
+function inserir(texto){
+ const a=letra.selectionStart,b=letra.selectionEnd;
+ letra.value=letra.value.slice(0,a)+texto+letra.value.slice(b);
+ const p=a+texto.length;
+ letra.focus();letra.setSelectionRange(p,p);
+ render();
+}
+
+function inserirMarcador(tag, texto){
+ const a=letra.selectionStart,b=letra.selectionEnd;
+ const marcado='['+tag+':'+texto+']';
+ letra.value=letra.value.slice(0,a)+marcado+letra.value.slice(b);
+ const p=a+marcado.length;
+ letra.focus();
+ letra.setSelectionRange(p,p);
+ render();
+}
+
+function inserirIntro(){
+ inserirMarcador('G','🎵{intro} |');
+}
+
+function inserirPausa(){
+ inserirMarcador('R','|▶▶▶▶ {pausa}|');
+}
+
+function marcarTodosLouvam(){
+ const a=letra.selectionStart,b=letra.selectionEnd;
+ const selecionado=letra.value.slice(a,b);
+
+ if(selecionado.trim()){
+   const marcado='TODOS LOUVAM\n[Y:'+selecionado+']';
+   letra.value=letra.value.slice(0,a)+marcado+letra.value.slice(b);
+   const p=a+marcado.length;
+   letra.focus();
+   letra.setSelectionRange(p,p);
+ }else{
+   inserir('TODOS LOUVAM\n');
+ }
+ render();
+}
+
+document.getElementById('grifarBtn').onclick=function(){
+ const a=letra.selectionStart,b=letra.selectionEnd;
+ if(a===b){alert('Selecione primeiro o trecho que deseja grifar.');return}
+ const cor=document.getElementById('cor').value;
+ const tag=cor==='yellow'?'Y':cor==='red'?'R':'G';
+ const selecionado=letra.value.slice(a,b);
+ letra.value=letra.value.slice(0,a)+'['+tag+':'+selecionado+']'+letra.value.slice(b);
+ letra.focus();
+ letra.setSelectionRange(a,a+selecionado.length+4);
+ render();
+};
+
+
+function desgrifar(){
+  const a=letra.selectionStart,b=letra.selectionEnd;
+  if(a===b){alert('Selecione o trecho grifado que deseja remover.');return}
+  let selected=letra.value.slice(a,b);
+  selected=selected.replace(/^\[[YRG]:([\s\S]*)\]$/,'$1');
+  selected=selected.replace(/\[([YRG]):([\s\S]*?)\]/g,'$2');
+  letra.value=letra.value.slice(0,a)+selected+letra.value.slice(b);
+  letra.focus();
+  letra.setSelectionRange(a,a+selected.length);
+  render();
+}
+
+function limpar(){letra.value='';render();letra.focus()}
+
+let fullFontSize = 18;
+let fullscreenElement = null;
+let fullscreenPreview = null;
+
+function alterarFonte(delta){
+  fullFontSize = Math.max(10, Math.min(60, fullFontSize + delta));
+  if(fullscreenPreview){
+    fullscreenPreview.style.fontSize = fullFontSize + 'px';
+  }
+}
+
+function abrirTela(){
+  if(fullscreenElement) return;
+
+  fullscreenElement = document.createElement('div');
+  fullscreenElement.className = 'fullscreen';
+
+  const inner = document.createElement('div');
+  inner.className = 'fullscreen-inner';
+
+  const controls = document.createElement('div');
+  controls.className = 'fullscreen-controls';
+
+  const menos = document.createElement('button');
+  menos.textContent = '−';
+  menos.title = 'Diminuir letra';
+  menos.onclick = () => alterarFonte(-2);
+
+  const mais = document.createElement('button');
+  mais.textContent = '+';
+  mais.title = 'Aumentar letra';
+  mais.onclick = () => alterarFonte(2);
+
+  const fechar = document.createElement('button');
+  fechar.textContent = '✕';
+  fechar.title = 'Fechar';
+  fechar.onclick = fecharTela;
+
+  controls.append(menos, mais, fechar);
+
+  const tituloFull = document.createElement('div');
+  tituloFull.textContent = titulo.value || 'Sem título';
+  tituloFull.style.cssText =
+    'font:700 20px Arial,sans-serif;margin:4px 0 22px';
+
+  fullscreenPreview = document.createElement('div');
+  fullscreenPreview.className = 'preview';
+  fullscreenPreview.style.fontSize = fullFontSize + 'px';
+  fullscreenPreview.innerHTML = preview.innerHTML;
+
+  inner.append(controls, tituloFull, fullscreenPreview);
+  fullscreenElement.appendChild(inner);
+  document.body.appendChild(fullscreenElement);
+
+  document.body.style.overflow = 'hidden';
+}
+
+function fecharTela(){
+  if(!fullscreenElement) return;
+  fullscreenElement.remove();
+  fullscreenElement = null;
+  fullscreenPreview = null;
+  document.body.style.overflow = '';
+}
+
+
+letra.addEventListener('input',render);
+titulo.addEventListener('input',render);
+render();
+</script>
+</body>
+</html>

@@ -722,6 +722,58 @@ button.active{
   background:#e5d7c7;
 }
 
+/* APPs */
+
+.library-apps{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  padding:10px 8px;
+  border-bottom:1px solid var(--line);
+}
+
+.library-app-button{
+  width:100%;
+  background:#efe5d8;
+  border:1px solid #dcc6ad;
+  color:var(--ink);
+  font-weight:700;
+  padding:10px 8px;
+  border-radius:9px;
+}
+
+.library-app-button:hover,
+.library-app-button:focus-visible{
+  background:#e5d7c7;
+}
+
+.other-apps-menu{
+  display:none;
+  padding:8px;
+  border-bottom:1px solid var(--line);
+  gap:6px;
+}
+
+.other-apps-menu.aberta{
+  display:grid;
+}
+
+.other-app-button{
+  width:100%;
+  background:#f5f0e8;
+  border:1px solid #d8cbbb;
+  color:var(--ink);
+  padding:9px 10px;
+  border-radius:8px;
+  text-align:left;
+  font-weight:600;
+}
+
+.other-app-button:hover{
+  background:#e9dfd1;
+}
+
+
 </style><span></span></label>
 </head>
 <body>
@@ -776,9 +828,37 @@ button.active{
   <button id="allSongsFilter" class="active">Todas</button>
   </div>
   <div class="library-apps">
+
   <button id="openEarTrainer" class="library-app-button">
     🎧 Adivinhe o Tom
   </button>
+
+  <button id="openOtherApps" class="library-app-button">
+    🧰 Outros apps
+  </button>
+
+</div>
+
+<div class="other-apps-menu" id="otherAppsMenu">
+
+  <button class="other-app-button"
+    onclick="window.location.href='minha-letra.html'">
+    📝 Minha Letra
+  </button>
+
+  <button class="other-app-button"
+    onclick="window.location.href='memorize-notas.html'">
+    🎼 Memorize as Notas
+  </button>
+   
+  <button class="other-app-button"
+    onclick="window.location.href='criador-cifras.html'">
+   ✨ Criador de Cifras
+  </button>
+  
+
+</div>
+
 </div>
   <div class="library-list" id="libraryList"></div>
 </aside>
@@ -1884,6 +1964,16 @@ allSongsFilter.onclick=()=>{
 
 document.getElementById('openEarTrainer').onclick=()=>{
   window.location.href='treinador-ouvido.html';
+};
+
+const openOtherApps=
+  document.getElementById('openOtherApps');
+
+const otherAppsMenu=
+  document.getElementById('otherAppsMenu');
+
+openOtherApps.onclick=()=>{
+  otherAppsMenu.classList.toggle('aberta');
 };
 
 
