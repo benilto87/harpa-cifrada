@@ -10,11 +10,10 @@
 
 :root{
   --bg:#151515;
-  --card:#222;
-  --card-2:#1b1b1b;
+  --card:#242424;
   --line:#3b3b3b;
   --text:#f7f4ee;
-  --muted:#aaa;
+  --muted:#999;
   --accent:#d7b98a;
   --selected:#f3eee5;
   --selected-text:#1c1a18;
@@ -23,21 +22,21 @@
 body{
   margin:0;
   min-height:100vh;
-  background:radial-gradient(circle at top,#292929 0,#1a1a1a 42%,#111 100%);
+  background:radial-gradient(circle at top,#292929 0,#1a1a1a 45%,#111 100%);
   color:var(--text);
   font-family:Arial,sans-serif;
   display:grid;
   place-items:center;
-  padding:24px 0;
+  padding:18px 0;
 }
 
 .app{
   position:relative;
   width:min(680px,94%);
   background:linear-gradient(180deg,#292929 0%,#222 100%);
-  padding:24px;
   border:1px solid #383838;
   border-radius:22px;
+  padding:24px;
   box-shadow:0 24px 70px #000b,0 2px 8px #0008;
 }
 
@@ -49,17 +48,12 @@ body{
   color:#aaa;
   text-decoration:none;
   font-size:14px;
-  font-weight:600;
-  transition:.2s;
+  font-weight:700;
 }
-
 .voltar:hover{color:var(--accent)}
-.voltar span{border-bottom:1px solid transparent}
-.voltar:hover span{border-color:var(--accent)}
 
 .badge{
   display:inline-flex;
-  align-items:center;
   padding:5px 9px;
   border-radius:999px;
   background:#303030;
@@ -70,20 +64,135 @@ body{
   margin-bottom:10px;
 }
 
-h1{
-  margin:0;
-  font-size:31px;
-  line-height:1.15;
-  letter-spacing:-.5px;
-}
+h1{margin:0;font-size:30px;line-height:1.15}
 
 .sub{
   color:#aaa;
-  margin:10px 0 24px;
+  margin:10px 0 20px;
   line-height:1.5;
   font-size:14px;
-  max-width:580px;
 }
+
+/* NÍVEL */
+
+.niveis{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  margin-bottom:18px;
+}
+
+.nivel{
+  padding:11px 7px;
+  background:#2c2c2c;
+  color:#aaa;
+  border:1px solid #414141;
+  border-radius:11px;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  text-align:center;
+}
+
+.nivel:hover{background:#343434;color:#eee}
+
+.nivel.ativo{
+  background:var(--selected);
+  color:var(--selected-text);
+  border-color:#f3eee5;
+}
+
+.nivel.bloqueado{
+  opacity:.42;
+  cursor:not-allowed;
+  position:relative;
+}
+
+.nivel.bloqueado:hover{
+  background:#2c2c2c;
+  color:#aaa;
+}
+
+.progresso-nivel{
+  margin:0 0 18px;
+  padding:13px 14px 12px;
+  background:#1b1b1b;
+  border:1px solid #353535;
+  border-radius:14px;
+}
+
+.progresso-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:9px;
+}
+
+.progresso-top strong{
+  font-size:12px;
+  color:#ddd;
+}
+
+.progresso-placar{
+  color:var(--accent);
+  font-size:12px;
+  font-weight:800;
+}
+
+.barra-nivel{
+  display:grid;
+  grid-template-columns:repeat(10,1fr);
+  gap:4px;
+  height:10px;
+}
+
+.barra-segmento{
+  min-width:0;
+  border-radius:5px;
+  background:#303030;
+  border:1px solid #3c3c3c;
+  transition:background .22s,transform .22s,border-color .22s;
+}
+
+.barra-segmento.verde{
+  background:#4f9a55;
+  border-color:#69b66f;
+}
+
+.barra-segmento.vermelho{
+  background:#9b4a4a;
+  border-color:#b76565;
+}
+
+.barra-segmento.ultimo{
+  transform:scaleY(1.25);
+}
+
+.progresso-status{
+  margin-top:9px;
+  color:#8f8f8f;
+  font-size:11px;
+  line-height:1.35;
+}
+
+.progresso-status.sucesso{
+  color:#7fc886;
+  font-weight:700;
+}
+
+.progresso-status.falha{
+  color:#d08080;
+  font-weight:700;
+}
+
+.nivel strong{
+  display:block;
+  font-size:13px;
+  margin-bottom:3px;
+}
+
+/* LISTA */
 
 .lista-musicas{margin-bottom:18px}
 
@@ -135,8 +244,7 @@ h1{
   border-radius:50%;
   color:#ccc;
   font-size:18px;
-  line-height:1;
-  transition:transform .18s,background .18s;
+  transition:.18s;
 }
 
 .lista-musicas.aberta .lista-seta{
@@ -155,10 +263,6 @@ h1{
 
 .lista-musicas.aberta .musicas{display:grid}
 
-.musicas::-webkit-scrollbar{width:6px}
-.musicas::-webkit-scrollbar-track{background:transparent}
-.musicas::-webkit-scrollbar-thumb{background:#444;border-radius:99px}
-
 .musica{
   width:100%;
   border:1px solid var(--line);
@@ -169,17 +273,14 @@ h1{
   text-align:left;
   cursor:pointer;
   font-size:15px;
-  transition:background .18s,border-color .18s,transform .12s,box-shadow .18s;
 }
 
 .musica:hover{background:#333;border-color:#505050}
-.musica:active{transform:scale(.99)}
 
 .musica.ativa{
   background:var(--selected);
   color:var(--selected-text);
   border-color:#f3eee5;
-  box-shadow:0 4px 15px #0004;
 }
 
 .musica small{
@@ -190,6 +291,8 @@ h1{
 }
 
 .musica.ativa small{color:#6f695f}
+
+/* MÚSICA */
 
 .musica-atual{
   margin:18px 0 9px;
@@ -210,9 +313,10 @@ h1{
 audio{
   width:100%;
   height:44px;
-  margin:0 0 18px;
-  border-radius:12px;
+  margin:0 0 16px;
 }
+
+/* STATUS */
 
 .status{
   min-height:76px;
@@ -228,6 +332,8 @@ audio{
 
 .status strong{font-size:19px;line-height:1.25}
 .status span{color:#999;font-size:13px}
+
+/* AÇÕES */
 
 .acoes{
   display:flex;
@@ -245,7 +351,6 @@ button{
   cursor:pointer;
   background:#f5f2ec;
   color:#171717;
-  transition:background .18s,border-color .18s,transform .12s;
 }
 
 button:hover{background:#fff}
@@ -253,6 +358,8 @@ button:active{transform:scale(.98)}
 button.sec{background:#363636;color:#eee;border-color:#474747}
 button.sec:hover{background:#414141}
 button:disabled{opacity:.4;cursor:not-allowed}
+
+/* GRADE */
 
 .grade{
   display:grid;
@@ -262,7 +369,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
 }
 
 .tom{
-  min-height:48px;
+  min-height:50px;
   padding:11px 8px;
   background:#303030;
   color:#f2f2f2;
@@ -270,11 +377,25 @@ button:disabled{opacity:.4;cursor:not-allowed}
   border-radius:11px;
   cursor:pointer;
   font-size:15px;
-  font-weight:600;
+  font-weight:700;
 }
 
 .tom:hover{background:#3a3a3a;border-color:#555}
 .tom:disabled{opacity:.28;cursor:not-allowed}
+
+.tom.correto{
+  background:#31482d;
+  border-color:#6f9a65;
+  color:#e7f5e1;
+}
+
+.tom.errado{
+  background:#4a2929;
+  border-color:#8f5b5b;
+  color:#f4dddd;
+}
+
+/* RESULTADO */
 
 .resultado{
   min-height:38px;
@@ -305,38 +426,86 @@ button:disabled{opacity:.4;cursor:not-allowed}
 }
 
 @media(max-width:500px){
-  body{padding:10px 0;place-items:start center}
   .app{width:96%;padding:20px 16px;border-radius:18px}
   h1{font-size:27px}
   .sub{font-size:13px}
+  .niveis{gap:5px}
+  .nivel{font-size:11px;padding:10px 4px}
   .grade{grid-template-columns:repeat(2,1fr)}
-  .tom{min-height:50px}
+  .tom{min-height:52px}
 }
 </style>
 </head>
 
 <body>
+
 <div class="app">
 
   <a href="index.html" class="voltar">← <span>Harpa Cifrada</span></a>
 
+  <div class="badge">TESTE 2 — TREINAMENTO AUDITIVO</div>
+
   <h1>🎧 ADIVINHE O TOM</h1>
 
   <div class="sub">
-    Escolha uma música e tente descobrir em qual tom ela está sendo tocada.
-    O deslocamento será sorteado secretamente a cada rodada.
+    Escolha o nível, selecione uma música e tente descobrir em qual tom ela está sendo tocada.
   </div>
 
+  <!-- NÍVEIS -->
+
+  <div class="niveis">
+
+    <button class="nivel ativo" data-nivel="1">
+      <strong>FASE 1</strong>
+      FÁCIL
+    </button>
+
+    <button class="nivel" data-nivel="2">
+      <strong>FASE 2</strong>
+      INTERMEDIÁRIO
+    </button>
+
+    <button class="nivel" data-nivel="3">
+      <strong>FASE 3</strong>
+      COMPLETO
+    </button>
+
+  </div>
+
+  <!-- PROGRESSO DO NÍVEL -->
+
+  <div class="progresso-nivel">
+    <div class="progresso-top">
+      <strong id="progressoTitulo">Progresso da Fase 1</strong>
+      <span class="progresso-placar" id="progressoPlacar">0/10</span>
+    </div>
+
+    <div class="barra-nivel" id="barraNivel" aria-label="Progresso do nível"></div>
+
+    <div class="progresso-status" id="progressoStatus">
+      Acerte 7 de 10 para liberar a próxima fase.
+    </div>
+  </div>
+
+  <!-- LISTA -->
+
   <div class="lista-musicas" id="blocoListaMusicas">
+
     <button type="button" class="lista-toggle" id="toggleListaMusicas" aria-expanded="false">
+
       <span class="lista-toggle-info">
         <span class="lista-toggle-titulo">🎵 Música do teste</span>
-        <span class="lista-toggle-musica" id="musicaSelecionadaLista">Escolha uma música</span>
+        <span class="lista-toggle-musica" id="musicaSelecionadaLista">
+          Escolha uma música
+        </span>
       </span>
+
       <span class="lista-seta">⌄</span>
+
     </button>
 
     <div class="musicas" id="listaMusicas"></div>
+
   </div>
 
   <div class="musica-atual">
@@ -346,28 +515,45 @@ button:disabled{opacity:.4;cursor:not-allowed}
   <audio id="audio" controls preload="none"></audio>
 
   <div class="status">
+
     <div>
-      <strong id="statusPrincipal">Escolha uma música para começar.</strong><br>
-      <span id="statusSecundario">O tom sorteado ficará escondido.</span>
+
+      <strong id="statusPrincipal">
+        Escolha uma música para começar.
+      </strong>
+
+      <br>
+
+      <span id="statusSecundario">
+        O tom sorteado ficará escondido.
+      </span>
+
     </div>
+
   </div>
 
   <div class="acoes">
-    <button id="novo" disabled>🎲 Nova rodada</button>
-    <button id="tocar" class="sec" disabled>▶ Tocar</button>
-    <button id="parar" class="sec" disabled>⏹ Parar</button>
+
+<button id="original">🎵 Original</button>
+<button id="novo">🎲 Nova rodada</button>
+<button id="tocar">▶ Tocar</button>
+<button id="parar">■ Parar</button>
+
   </div>
 
   <div class="grade" id="grade"></div>
 
   <div class="resultado" id="resultado"></div>
 
-  <div class="pontos">Pontos: <span id="pontos">0</span></div>
+  <div class="pontos">
+    Pontos: <span id="pontos">0</span>
+  </div>
 
   <div class="rodape">
-    O tom original de cada música fica cadastrado no programa.
-    O teste sorteia deslocamentos em relação ao tom original.
-    O áudio só é carregado quando a música é iniciada.
+    Fase 1: 2 opções de notas naturais.
+    Fase 2: 7 notas naturais.
+    Fase 3: 12 notas cromáticas.
+    <br>Complete 10 tentativas com pelo menos 7 acertos para liberar a próxima fase.
   </div>
 
 </div>
@@ -375,7 +561,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
 <script>
 
 /* =========================================================
-   MÚSICAS DO TREINADOR
+   MÚSICAS
    ========================================================= */
 
 const musicas=[
@@ -383,218 +569,1217 @@ const musicas=[
     id:'001',
     titulo:'Bondoso Amigo',
     arquivo:'audio/bondoso-amigo.mp3',
-    tomOriginal:'F#'
+    tomOriginal:'Db'
   },
+
   {
     id:'002',
     titulo:'Chuvas de Graça',
     arquivo:'audio/chuvas-de-graca.mp3',
-    tomOriginal:'F#'
+    tomOriginal:'D'
   },
+
   {
     id:'003',
     titulo:'Deus Velará por Ti',
     arquivo:'audio/deus-velara.mp3',
-    tomOriginal:'E'
+    tomOriginal:'F'
   }
 ];
 
-const shifts=[-4,-3,-2,-1,0,1,2];
-const cromatica=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
+
+/* =========================================================
+   NOTAS
+   ========================================================= */
+
+const naturais=[
+  'C','D','E','F','G','A','B'
+];
+
+const cromatica=[
+  'C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'
+];
+
+
+/* =========================================================
+   ELEMENTOS
+   ========================================================= */
 
 const audio=document.getElementById('audio');
-const listaMusicas=document.getElementById('listaMusicas');
-const blocoListaMusicas=document.getElementById('blocoListaMusicas');
-const toggleListaMusicas=document.getElementById('toggleListaMusicas');
-const musicaSelecionadaLista=document.getElementById('musicaSelecionadaLista');
-const nomeMusica=document.getElementById('nomeMusica');
-const novo=document.getElementById('novo');
-const tocar=document.getElementById('tocar');
-const parar=document.getElementById('parar');
-const statusPrincipal=document.getElementById('statusPrincipal');
-const statusSecundario=document.getElementById('statusSecundario');
-const resultado=document.getElementById('resultado');
-const pontosEl=document.getElementById('pontos');
-const grade=document.getElementById('grade');
+
+const listaMusicas=
+  document.getElementById('listaMusicas');
+
+const blocoListaMusicas=
+  document.getElementById('blocoListaMusicas');
+
+const toggleListaMusicas=
+  document.getElementById('toggleListaMusicas');
+
+const musicaSelecionadaLista=
+  document.getElementById('musicaSelecionadaLista');
+
+const nomeMusica=
+  document.getElementById('nomeMusica');
+
+const original=
+  document.getElementById('original');
+
+const novo=
+  document.getElementById('novo');
+
+const tocar=
+  document.getElementById('tocar');
+
+const parar=
+  document.getElementById('parar');
+
+const statusPrincipal=
+  document.getElementById('statusPrincipal');
+
+const statusSecundario=
+  document.getElementById('statusSecundario');
+
+const resultado=
+  document.getElementById('resultado');
+
+const pontosEl=
+  document.getElementById('pontos');
+
+const grade=
+  document.getElementById('grade');
+
+const botoesNivel=
+  document.querySelectorAll('.nivel');
+
+const progressoTitulo=
+  document.getElementById('progressoTitulo');
+
+const progressoPlacar=
+  document.getElementById('progressoPlacar');
+
+const barraNivel=
+  document.getElementById('barraNivel');
+
+const progressoStatus=
+  document.getElementById('progressoStatus');
+
+
+/* =========================================================
+   ESTADO
+   ========================================================= */
 
 let musicaAtual=null;
+
+let nivelAtual=1;
+
 let rodadaAtiva=false;
+
 let shiftSorteado=null;
+
+let tomSorteado=null;
+
 let pontos=0;
 
-function transporTom(tom,semitons){
-  const indice=cromatica.indexOf(tom);
-  if(indice===-1)return tom;
-  return cromatica[(indice+semitons+12)%12];
+let urlAudio=null;
+
+const TENTATIVAS_NIVEL=10;
+const META_ACERTOS=7;
+const PROGRESSO_KEY='treinador_progresso_v1';
+
+let progressoNiveis=carregarProgresso();
+
+
+/* =========================================================
+   PROGRESSO DOS NÍVEIS
+   ========================================================= */
+
+function estadoProgresso(){
+  return {
+    tentativas:0,
+    acertos:0,
+    erros:0,
+    liberado:false
+  };
 }
 
-function nomeDoDeslocamento(shift){
-  if(!musicaAtual)return '';
-  return transporTom(musicaAtual.tomOriginal,shift);
+function carregarProgresso(){
+
+  try{
+
+    const salvo=
+      JSON.parse(
+        localStorage.getItem(PROGRESSO_KEY)||'null'
+      );
+
+    const base={
+      1:estadoProgresso(),
+      2:estadoProgresso(),
+      3:estadoProgresso()
+    };
+
+    if(salvo && typeof salvo==='object'){
+
+      [1,2,3].forEach(n=>{
+
+        if(salvo[n]){
+
+          base[n].tentativas=
+            Math.max(
+              0,
+              Math.min(
+                TENTATIVAS_NIVEL,
+                Number(salvo[n].tentativas)||0
+              )
+            );
+
+          base[n].acertos=
+            Math.max(
+              0,
+              Math.min(
+                base[n].tentativas,
+                Number(salvo[n].acertos)||0
+              )
+            );
+
+          base[n].erros=
+            Math.max(
+              0,
+              Math.min(
+                base[n].tentativas,
+                Number(salvo[n].erros)||0
+              )
+            );
+
+          base[n].liberado=
+            Boolean(salvo[n].liberado);
+        }
+
+      });
+
+    }
+
+    /* A Fase 1 começa sempre liberada. */
+    base[1].liberado=true;
+
+    /* Reconstrói desbloqueios se o progresso salvo já
+       tiver atingido a meta. */
+    if(
+      base[1].tentativas>=TENTATIVAS_NIVEL &&
+      base[1].acertos>=META_ACERTOS
+    ){
+      base[2].liberado=true;
+    }
+
+    if(
+      base[2].tentativas>=TENTATIVAS_NIVEL &&
+      base[2].acertos>=META_ACERTOS
+    ){
+      base[3].liberado=true;
+    }
+
+    return base;
+
+  }catch{
+
+    return {
+      1:{...estadoProgresso(),liberado:true},
+      2:estadoProgresso(),
+      3:estadoProgresso()
+    };
+  }
+
 }
+
+function salvarProgresso(){
+
+  try{
+
+    localStorage.setItem(
+      PROGRESSO_KEY,
+      JSON.stringify(progressoNiveis)
+    );
+
+  }catch{}
+
+}
+
+function atualizarProgressoVisual(){
+
+  const p=
+    progressoNiveis[nivelAtual];
+
+  if(!p)return;
+
+  progressoTitulo.textContent=
+    `Progresso da Fase ${nivelAtual}`;
+
+  progressoPlacar.textContent=
+    `${p.acertos}/${TENTATIVAS_NIVEL}`;
+
+  barraNivel.innerHTML='';
+
+  for(let i=0;i<TENTATIVAS_NIVEL;i++){
+
+    const segmento=
+      document.createElement('span');
+
+    segmento.className='barra-segmento';
+
+    if(i<p.tentativas){
+
+      segmento.classList.add(
+        i<p.acertos
+          ? 'verde'
+          : 'vermelho'
+      );
+
+    }
+
+    if(
+      i===p.tentativas-1 &&
+      p.tentativas>0
+    ){
+      segmento.classList.add('ultimo');
+    }
+
+    barraNivel.appendChild(segmento);
+  }
+
+  progressoStatus.className=
+    'progresso-status';
+
+  if(p.tentativas>=TENTATIVAS_NIVEL){
+
+    if(p.acertos>=META_ACERTOS){
+
+      progressoStatus.textContent=
+        nivelAtual<3
+          ? `🎉 ${p.acertos}/10! Próxima fase liberada.`
+          : '🏆 10 perguntas concluídas. Fase completa!';
+
+      progressoStatus.classList.add('sucesso');
+
+    }else{
+
+      progressoStatus.textContent=
+        `${p.acertos}/10. É preciso acertar pelo menos ${META_ACERTOS} para liberar. Clique em “Nova rodada” para tentar novamente.`;
+
+      progressoStatus.classList.add('falha');
+    }
+
+  }else{
+
+    const faltam=
+      Math.max(
+        0,
+        META_ACERTOS-p.acertos
+      );
+
+    progressoStatus.textContent=
+      `Acerte ${META_ACERTOS} de ${TENTATIVAS_NIVEL} para liberar a próxima fase.`+
+      (faltam ? ` Faltam ${faltam} acerto${faltam===1?'':'s'}.` : '');
+
+  }
+
+}
+
+function atualizarBotoesNivel(){
+
+  botoesNivel.forEach(botao=>{
+
+    const nivel=
+      Number(botao.dataset.nivel);
+
+    const liberado=
+      Boolean(
+        progressoNiveis[nivel]?.liberado
+      );
+
+    botao.classList.toggle(
+      'bloqueado',
+      !liberado
+    );
+
+    botao.disabled=
+      !liberado;
+
+    if(nivel>1){
+
+      const strong=
+        botao.querySelector('strong');
+
+      if(strong){
+
+        strong.textContent=
+          liberado
+            ? `FASE ${nivel}`
+            : `🔒 FASE ${nivel}`;
+
+      }
+
+    }
+
+  });
+
+}
+
+function registrarResposta(certo){
+
+  const p=
+    progressoNiveis[nivelAtual];
+
+  if(!p)return;
+
+  if(
+    p.tentativas>=TENTATIVAS_NIVEL
+  ){
+    return;
+  }
+
+  p.tentativas++;
+
+  if(certo)
+    p.acertos++;
+  else
+    p.erros++;
+
+  /*
+    A próxima fase só é liberada depois de
+    completar as 10 tentativas com pelo menos
+    7 acertos.
+  */
+  if(
+    p.tentativas===TENTATIVAS_NIVEL &&
+    p.acertos>=META_ACERTOS &&
+    nivelAtual<3
+  ){
+
+    progressoNiveis[nivelAtual+1].liberado=true;
+
+    salvarProgresso();
+    atualizarBotoesNivel();
+    atualizarProgressoVisual();
+
+    statusPrincipal.textContent=
+      `🎉 Fase ${nivelAtual+1} desbloqueada!`;
+
+    statusSecundario.textContent=
+      `${p.acertos}/10 na Fase ${nivelAtual}. Você já pode avançar.`;
+
+    return;
+  }
+
+  salvarProgresso();
+  atualizarBotoesNivel();
+  atualizarProgressoVisual();
+
+}
+
+function prepararNovoCiclo(){
+
+  const p=
+    progressoNiveis[nivelAtual];
+
+  if(
+    p &&
+    p.tentativas>=TENTATIVAS_NIVEL &&
+    p.acertos<META_ACERTOS
+  ){
+
+    p.tentativas=0;
+    p.acertos=0;
+    p.erros=0;
+
+    salvarProgresso();
+    atualizarProgressoVisual();
+  }
+
+}
+
+
+/* =========================================================
+   CONVERSÃO DE NOTA
+   ========================================================= */
+
+function indiceNota(nota){
+
+  return cromatica.indexOf(nota);
+}
+
+
+function transporTom(tom,semitons){
+
+  const indice=
+    indiceNota(tom);
+
+  if(indice===-1)
+    return tom;
+
+  return cromatica[
+    (indice+semitons+12)%12
+  ];
+}
+
+
+/* =========================================================
+   NOTAS DISPONÍVEIS EM CADA FASE
+   ========================================================= */
+
+function notasDoNivel(){
+
+  if(nivelAtual===1)
+    return naturais;
+
+  if(nivelAtual===2)
+    return naturais;
+
+  return cromatica;
+}
+
+
+/* =========================================================
+   SORTEIA O TOM
+   ========================================================= */
+
+function sortearTom(){
+
+  const disponiveis=
+    notasDoNivel();
+
+  return disponiveis[
+    Math.floor(
+      Math.random()*disponiveis.length
+    )
+  ];
+}
+
+
+/* =========================================================
+   DESLOCAMENTO NECESSÁRIO
+   ========================================================= */
+
+function calcularShift(tomOriginal,tomDestino){
+
+  const origem=
+    indiceNota(tomOriginal);
+
+  const destino=
+    indiceNota(tomDestino);
+
+  if(origem===-1 || destino===-1)
+    return 0;
+
+  let shift=
+    destino-origem;
+
+  if(shift>6)
+    shift-=12;
+
+  if(shift<-6)
+    shift+=12;
+
+  return shift;
+}
+
+
+/* =========================================================
+   FASE 1
+   DUAS OPÇÕES:
+   UMA CERTA + UMA ERRADA
+   ========================================================= */
+
+function criarOpcoesFacil(){
+
+  const correta=tomSorteado;
+
+  const erradas=
+    naturais
+      .filter(n=>n!==correta)
+      .sort(()=>Math.random()-.5)
+      .slice(0,2);
+
+  return [
+    correta,
+    ...erradas
+  ].sort(()=>Math.random()-.5);
+}
+
+/* =========================================================
+   FASE 2
+   7 NOTAS NATURAIS
+   ========================================================= */
+
+function criarOpcoesIntermediario(){
+
+  return [...naturais];
+}
+
+
+/* =========================================================
+   FASE 3
+   12 NOTAS CROMÁTICAS
+   ========================================================= */
+
+function criarOpcoesCompleto(){
+
+  return [...cromatica];
+}
+
+
+/* =========================================================
+   CRIA OS BOTÕES
+   ========================================================= */
+
+function criarBotoes(){
+
+  grade.innerHTML='';
+
+  if(!rodadaAtiva){
+
+    const disponiveis=
+      notasDoNivel();
+
+    /* Mostra a quantidade de opções,
+       mas mantém os botões desativados. */
+    disponiveis.forEach(nota=>{
+
+      const b=
+        document.createElement('button');
+
+      b.className='tom';
+
+      b.textContent=
+        nota;
+
+      b.disabled=true;
+
+      grade.appendChild(b);
+
+    });
+
+    return;
+  }
+
+
+  let opcoes;
+
+  if(nivelAtual===1)
+    opcoes=criarOpcoesFacil();
+
+  else if(nivelAtual===2)
+    opcoes=criarOpcoesIntermediario();
+
+  else
+    opcoes=criarOpcoesCompleto();
+
+
+  opcoes.forEach(nota=>{
+
+    const b=
+      document.createElement('button');
+
+    b.className='tom';
+
+    b.textContent=
+      nota;
+
+    b.dataset.nota=
+      nota;
+
+    b.onclick=()=>{
+      responder(nota,b);
+    };
+
+    grade.appendChild(b);
+
+  });
+
+}
+
+
+/* =========================================================
+   LISTA DE MÚSICAS
+   ========================================================= */
 
 function criarListaMusicas(){
+
   listaMusicas.innerHTML='';
 
   musicas.forEach(musica=>{
-    const botao=document.createElement('button');
+
+    const botao=
+      document.createElement('button');
+
     botao.className='musica';
-    botao.dataset.id=musica.id;
+
+    botao.dataset.id=
+      musica.id;
 
     botao.innerHTML=`
       ${musica.id} — ${musica.titulo}
       <small>Tom original: ${musica.tomOriginal}</small>
     `;
 
-    botao.onclick=()=>selecionarMusica(musica);
+    botao.onclick=()=>{
+      selecionarMusica(musica);
+    };
+
     listaMusicas.appendChild(botao);
+
   });
+
 }
+
+
+/* =========================================================
+   SELECIONA MÚSICA
+   ========================================================= */
 
 function selecionarMusica(musica){
-  musicaAtual=musica;
+
+  musicaAtual=
+    musica;
+
   rodadaAtiva=false;
+
   shiftSorteado=null;
 
+  tomSorteado=null;
+
+
   audio.pause();
+
   audio.currentTime=0;
+
   audio.removeAttribute('src');
+
   audio.load();
+
   audio.playbackRate=1;
 
-  nomeMusica.textContent=`${musica.id} — ${musica.titulo}`;
-  musicaSelecionadaLista.textContent=`${musica.id} — ${musica.titulo}`;
-  blocoListaMusicas.classList.remove('aberta');
-  toggleListaMusicas.setAttribute('aria-expanded','false');
+
+  nomeMusica.textContent=
+    `${musica.id} — ${musica.titulo}`;
+
+  musicaSelecionadaLista.textContent=
+    `${musica.id} — ${musica.titulo}`;
+
+
+  blocoListaMusicas
+    .classList
+    .remove('aberta');
+
+  toggleListaMusicas
+    .setAttribute(
+      'aria-expanded',
+      'false'
+    );
+
 
   novo.disabled=false;
+
   tocar.disabled=false;
+
   parar.disabled=false;
 
-  statusPrincipal.textContent='Música selecionada.';
-  statusSecundario.textContent=`Tom original: ${musica.tomOriginal}. Clique em “Nova rodada”.`;
+
+  statusPrincipal.textContent=
+    'Música selecionada.';
+
+  statusSecundario.textContent=
+    `Fase ${nivelAtual}. Clique em “Nova rodada”.`;
+
   resultado.textContent='';
+
 
   criarBotoes();
 
-  document.querySelectorAll('.musica').forEach(botao=>{
-    botao.classList.toggle('ativa',botao.dataset.id===musica.id);
-  });
+
+  document
+    .querySelectorAll('.musica')
+    .forEach(botao=>{
+
+      botao.classList.toggle(
+        'ativa',
+        botao.dataset.id===
+        musica.id
+      );
+
+    });
+
 }
 
-function criarBotoes(){
-  grade.innerHTML='';
 
-  shifts.forEach(shift=>{
-    const b=document.createElement('button');
-    b.className='tom';
-    b.textContent=nomeDoDeslocamento(shift)||'—';
-    b.disabled=!rodadaAtiva;
-    b.dataset.shift=shift;
-    b.onclick=()=>responder(Number(b.dataset.shift));
-    grade.appendChild(b);
-  });
-}
+/* =========================================================
+   PREPARA ÁUDIO
+   ========================================================= */
 
 function prepararAudio(){
-  const n=Number(shiftSorteado||0);
-  audio.playbackRate=Math.pow(2,n/12);
 
-  if('preservesPitch' in audio)audio.preservesPitch=false;
-  if('webkitPreservesPitch' in audio)audio.webkitPreservesPitch=false;
-  if('mozPreservesPitch' in audio)audio.mozPreservesPitch=false;
+  const n=
+    Number(shiftSorteado||0);
+
+  /*
+    Mantém a técnica do protótipo:
+    playbackRate altera a altura e também
+    a velocidade proporcionalmente.
+  */
+
+  audio.playbackRate=
+    Math.pow(2,n/12);
+
+  if('preservesPitch' in audio)
+    audio.preservesPitch=false;
+
+  if('webkitPreservesPitch' in audio)
+    audio.webkitPreservesPitch=false;
+
+  if('mozPreservesPitch' in audio)
+    audio.mozPreservesPitch=false;
+
 }
+
+
+/* =========================================================
+   NOVA RODADA
+   ========================================================= */
 
 function novaRodada(){
-  if(!musicaAtual)return;
 
-  shiftSorteado=shifts[Math.floor(Math.random()*shifts.length)];
+  prepararNovoCiclo();
+
+  /* Se nenhuma música foi escolhida,
+     sorteia uma música automaticamente */
+  if(!musicaAtual){
+
+    const indice=
+      Math.floor(
+        Math.random()*musicas.length
+      );
+
+    selecionarMusica(
+      musicas[indice]
+    );
+  }
+
+  /*
+    Escolhe primeiro a nota que será
+    a resposta correta.
+  */
+
+  tomSorteado=
+    sortearTom();
+
+
+  /*
+    Descobre quantos semitons precisamos
+    deslocar a música original.
+  */
+
+  shiftSorteado=
+    calcularShift(
+      musicaAtual.tomOriginal,
+      tomSorteado
+    );
+
+
   rodadaAtiva=true;
 
-  /* O MP3 só é associado ao player neste momento. */
-  audio.src=musicaAtual.arquivo;
+
+  /*
+    O MP3 só é carregado neste momento.
+  */
+
+  audio.src=
+    musicaAtual.arquivo;
+
   audio.preload='none';
+
   audio.load();
 
+
   prepararAudio();
+
   audio.currentTime=0;
+
   audio.pause();
 
-  statusPrincipal.textContent='🎲 Tom sorteado. Agora ouça.';
-  statusSecundario.textContent='O tom está escondido. Escolha quando estiver pronto.';
+
+  statusPrincipal.textContent=
+    '🎲 Tom sorteado. Agora ouça.';
+
+  statusSecundario.textContent=
+    `Fase ${nivelAtual} — escolha o tom que você acredita ser correto.`;
+
   resultado.textContent='';
 
+
   criarBotoes();
+
 
   audio.play().catch(()=>{
-    statusPrincipal.textContent='Clique em “Tocar” para ouvir.';
+
+    statusPrincipal.textContent=
+      'Clique em “Tocar” para ouvir.';
+
   });
+
 }
+
+
+/* =========================================================
+   TOCAR
+   ========================================================= */
 
 function tocarRodada(){
+
   if(!musicaAtual){
-    statusPrincipal.textContent='Escolha uma música primeiro.';
+
+    statusPrincipal.textContent=
+      'Escolha uma música primeiro.';
+
     return;
   }
+
 
   if(!rodadaAtiva){
-    statusPrincipal.textContent='Primeiro clique em “Nova rodada”.';
+
+    statusPrincipal.textContent=
+      'Primeiro clique em “Nova rodada”.';
+
     return;
   }
 
+
   if(!audio.getAttribute('src')){
-    audio.src=musicaAtual.arquivo;
+
+    audio.src=
+      musicaAtual.arquivo;
+
     audio.preload='none';
+
     audio.load();
+
   }
+
 
   prepararAudio();
+
   audio.play();
+
 }
+
+
+/* =========================================================
+   PARAR
+   ========================================================= */
 
 function pararAudio(){
+
   audio.pause();
+
 }
 
-function responder(shiftEscolhido){
-  if(!rodadaAtiva||shiftSorteado===null||!musicaAtual)return;
+
+/* =========================================================
+   RESPONDER
+   ========================================================= */
+
+function responder(
+  notaEscolhida,
+  botao
+){
+
+  if(
+    !rodadaAtiva ||
+    tomSorteado===null ||
+    !musicaAtual
+  )
+    return;
+
 
   rodadaAtiva=false;
+
   audio.pause();
 
-  const certo=shiftEscolhido===shiftSorteado;
-  const tomCerto=nomeDoDeslocamento(shiftSorteado);
+
+  const certo=
+    notaEscolhida===
+    tomSorteado;
+
+  registrarResposta(certo);
+
 
   if(certo){
+
     pontos++;
-    pontosEl.textContent=pontos;
-    resultado.textContent='🎉 Acertou!';
-    statusPrincipal.textContent=`Era ${tomCerto}.`;
+
+    pontosEl.textContent=
+      pontos;
+
+    botao.classList.add(
+      'correto'
+    );
+
+    resultado.textContent=
+      '🎉 Acertou!';
+
+    statusPrincipal.textContent=
+      `Era ${tomSorteado}.`;
+
   }else{
-    resultado.textContent='❌ Errou.';
-    statusPrincipal.textContent=`Era ${tomCerto}.`;
+
+    botao.classList.add(
+      'errado'
+    );
+
+    resultado.textContent=
+      '❌ Errou.';
+
+    statusPrincipal.textContent=
+      `Era ${tomSorteado}.`;
+
+
+    document
+      .querySelectorAll('.tom')
+      .forEach(b=>{
+
+        if(
+          b.dataset.nota===
+          tomSorteado
+        ){
+          b.classList.add(
+            'correto'
+          );
+        }
+
+      });
+
   }
 
-  const diferenca=shiftSorteado===0
-    ? 'Tom original'
-    : `${shiftSorteado>0?'+':''}${shiftSorteado} semitons em relação ao original`;
 
-  statusSecundario.textContent=diferenca;
-  criarBotoes();
+  const diferenca=
+    shiftSorteado===0
+      ? 'Tom original'
+      : `${shiftSorteado>0?'+':''}${shiftSorteado} semitons em relação ao original`;
+
+
+  statusSecundario.textContent=
+    `${diferenca} • Fase ${nivelAtual}`;
+
+
+  /*
+    Mantém os botões visíveis para o usuário
+    enxergar a resposta correta.
+  */
+
+  document
+    .querySelectorAll('.tom')
+    .forEach(b=>{
+      b.disabled=true;
+    });
+
 }
 
+/* =========================================================
+   TOCAR MÚSICA ORIGINAL
+   ========================================================= */
+
+function tocarOriginal(){
+
+  if(!musicaAtual){
+
+    statusPrincipal.textContent=
+      'Escolha uma música primeiro.';
+
+    return;
+  }
+
+  audio.pause();
+
+  audio.src=
+    musicaAtual.arquivo;
+
+  audio.preload='none';
+
+  audio.load();
+
+  /* Tom original */
+  audio.playbackRate=1;
+
+  if('preservesPitch' in audio)
+    audio.preservesPitch=false;
+
+  if('webkitPreservesPitch' in audio)
+    audio.webkitPreservesPitch=false;
+
+  if('mozPreservesPitch' in audio)
+    audio.mozPreservesPitch=false;
+
+  audio.currentTime=0;
+
+  audio.play().catch(()=>{
+
+    statusPrincipal.textContent=
+      'Clique novamente em “Original” para ouvir.';
+
+  });
+
+  statusPrincipal.textContent=
+    `🎵 Música original — tom ${musicaAtual.tomOriginal}`;
+
+  statusSecundario.textContent=
+    'Apenas ouvindo a música original.';
+
+}
+
+/* =========================================================
+   TROCA DE NÍVEL
+   ========================================================= */
+
+function mudarNivel(nivel){
+
+  nivel=
+    Number(nivel);
+
+  if(
+    !progressoNiveis[nivel]?.liberado
+  ){
+
+    statusPrincipal.textContent=
+      `🔒 Fase ${nivel} bloqueada.`;
+
+    statusSecundario.textContent=
+      `Complete 10 tentativas e acerte pelo menos ${META_ACERTOS}.`;
+
+    return;
+  }
+
+  nivelAtual=
+    nivel;
+
+
+  rodadaAtiva=false;
+
+  shiftSorteado=null;
+
+  tomSorteado=null;
+
+
+  audio.pause();
+
+  audio.currentTime=0;
+
+  audio.removeAttribute('src');
+
+  audio.load();
+
+  audio.playbackRate=1;
+
+
+  botoesNivel.forEach(b=>{
+
+    b.classList.toggle(
+      'ativo',
+      Number(b.dataset.nivel)===
+      nivelAtual
+    );
+
+  });
+
+
+  if(musicaAtual){
+
+    statusPrincipal.textContent=
+      `Fase ${nivelAtual} selecionada.`;
+
+    statusSecundario.textContent=
+      nivelAtual===1
+        ? 'Fácil: apenas 2 opções de notas naturais.'
+        : nivelAtual===2
+          ? 'Intermediário: 7 notas naturais.'
+          : 'Completo: 12 notas cromáticas.';
+
+  }
+
+
+  atualizarProgressoVisual();
+  atualizarBotoesNivel();
+  criarBotoes();
+
+}
+
+
+/* =========================================================
+   EVENTOS DOS NÍVEIS
+   ========================================================= */
+
+botoesNivel.forEach(botao=>{
+
+  botao.onclick=()=>{
+
+    if(botao.disabled)
+      return;
+
+    mudarNivel(
+      botao.dataset.nivel
+    );
+
+  };
+
+});
+
+
+/* =========================================================
+   ABRIR / FECHAR LISTA
+   ========================================================= */
+
 toggleListaMusicas.onclick=()=>{
-  const aberta=blocoListaMusicas.classList.toggle('aberta');
-  toggleListaMusicas.setAttribute('aria-expanded',String(aberta));
+
+  const aberta=
+    blocoListaMusicas
+      .classList
+      .toggle('aberta');
+
+  toggleListaMusicas
+    .setAttribute(
+      'aria-expanded',
+      String(aberta)
+    );
+
 };
 
-novo.onclick=novaRodada;
-tocar.onclick=tocarRodada;
-parar.onclick=pararAudio;
+
+/* =========================================================
+   BOTÕES
+   ========================================================= */
+
+original.onclick=
+  tocarOriginal;
+
+novo.onclick=
+  novaRodada;
+
+tocar.onclick=
+  tocarRodada;
+
+parar.onclick=
+  pararAudio;
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+   ========================================================= */
 
 criarListaMusicas();
+
+atualizarBotoesNivel();
+atualizarProgressoVisual();
+
 criarBotoes();
 
 </script>
+
 </body>
 </html>
