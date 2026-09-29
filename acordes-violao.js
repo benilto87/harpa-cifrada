@@ -293,6 +293,7 @@ AcordesViolao.ACORDES = {
    ========================================================= */
 
 AcordesViolao.PESTANAS = {
+  "Eb":      {fret:11, fromString:0, toString:5},
   "F":       {fret:1, fromString:0, toString:5},
   "Fm":      {fret:1, fromString:0, toString:5},
   "F7":      {fret:1, fromString:0, toString:5},
