@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editor de Acordes de Violão</title>
+<style>
+:root{--bg:#f2eee7;--paper:#fffdf9;--ink:#25221e;--muted:#746e64;--accent:#7a4a24;--line:#ddd5ca;--key:#f8f5ef;--hover:#ece5da;--red:#b00000}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,'Times New Roman',serif}
+button,input,select,textarea{font:inherit}
+button{border:1px solid #cec4b7;background:var(--key);color:var(--ink);border-radius:9px;cursor:pointer;padding:8px 10px;font:700 .78rem/1 Arial,sans-serif;transition:.12s}
+button:hover{background:var(--hover);transform:translateY(-1px)}
+button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.app{width:min(1380px,100%);margin:0 auto;padding:16px}
+.header,.panel{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 28px rgba(50,40,30,.07)}
+.header{padding:16px;position:sticky;top:8px;z-index:20}
+.title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{margin:0;font-size:clamp(1.45rem,3vw,2rem)}
+.sub{margin-top:4px;color:var(--muted);font:600 .8rem/1.3 Arial,sans-serif}
+.toolbar{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.control{display:flex;align-items:center;gap:6px;font:700 .75rem/1 Arial,sans-serif;color:var(--muted)}
+input,select,textarea{border:1px solid #cfc6b9;background:#fffdf9;color:var(--ink);border-radius:9px;padding:9px 10px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+#chordName{width:150px;font-weight:800}
+.workspace{display:grid;grid-template-columns:300px minmax(0,1fr) 390px;gap:14px;margin-top:14px;align-items:start}
+.panel{padding:14px}
+.panel-title{font:800 .75rem/1 Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.list{max-height:620px;overflow:auto}
+.item{width:100%;display:grid;grid-template-columns:64px 1fr;text-align:left;padding:8px 9px;border:1px solid transparent;background:transparent;border-radius:9px;gap:7px;margin:2px 0}
+.item:hover{background:#f6f1e9}
+.item.active{background:#efe5d8;border-color:#dcc6ad}
+.item b{color:var(--red)}
+.item span{font:600 .79rem/1.2 Arial,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.diagram-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;border-bottom:1px solid var(--line);padding-bottom:9px}
+.chord-title{font:900 1.5rem/1.1 Arial,sans-serif}
+.chord-note{font:700 .82rem/1.2 Arial,sans-serif;color:var(--muted);margin-top:4px}
+.editor-controls{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+.tool.active{background:var(--accent);color:#fff}
+.guitar-wrap{width:100%;margin:8px auto 0}
+.guitar{position:relative;height:350px;width:100%;border:1px solid #d6cdc0;border-radius:12px;background:#fffdf9;overflow:hidden}
+.board{position:absolute;left:58px;right:58px;top:86px;bottom:72px;border:1px solid #9d8871;border-radius:7px;background:linear-gradient(to bottom,#694a31,#452f20);overflow:visible;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.fret{position:absolute;top:0;bottom:0;width:2px;background:#beb7ae;box-shadow:1px 0 1px rgba(0,0,0,.25)}
+.string{position:absolute;left:0;right:0;height:1px;background:#e0d7cb;box-shadow:0 1px 1px rgba(0,0,0,.25)}
+.dot{position:absolute;width:25px;height:25px;border-radius:50%;background:#f4f1eb;border:1px solid #aaa39a;box-shadow:0 2px 3px rgba(0,0,0,.2),inset 0 1px 1px rgba(255,255,255,.7);transform:translate(-50%,-50%);z-index:7;pointer-events:none}
+.barre{position:absolute;width:11px;border-radius:8px;background:#28231e;box-shadow:0 1px 2px rgba(0,0,0,.35);transform:translateX(-50%);z-index:6;pointer-events:none}
+.status-row{position:absolute;left:58px;right:58px;top:40px;display:grid;grid-template-columns:repeat(6,1fr);text-align:center;z-index:9}
+.status-btn{border:0;background:transparent;box-shadow:none;padding:0;color:#5a554e;font:800 21px/1 Arial,sans-serif;min-height:28px}
+.status-btn:hover{background:transparent;transform:none;color:var(--accent)}
+.labels{position:absolute;top:86px;right:10px;width:38px;height:calc(100% - 158px);display:grid;grid-template-rows:repeat(6,1fr);align-items:center;justify-items:center;z-index:8;pointer-events:none}
+.label{font:800 14px/1 Arial,sans-serif;color:#5a554e}
+.fret-row{position:absolute;left:58px;right:58px;bottom:30px;display:grid;grid-template-columns:repeat(5,1fr);text-align:center;font:700 13px/1 Arial,sans-serif;color:#5a554e}
+.pos-badge{position:absolute;left:8px;top:42px;font:800 11px/1 Arial,sans-serif;color:var(--muted)}
+.legend{text-align:center;margin-top:7px;color:var(--muted);font:600 .72rem/1.3 Arial,sans-serif}
+.board-cell{position:absolute;z-index:5;cursor:pointer}
+.board-cell:hover{background:rgba(255,255,255,.06)}
+.codebox textarea{width:100%;height:260px;font:500 .74rem/1.45 'Courier New',monospace;resize:vertical}
+.codebox + .codebox{margin-top:10px}
+.code-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.helper{color:var(--muted);font:500 .73rem/1.35 Arial,sans-serif;margin-top:7px}
+.range-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.range-row select{padding:7px 8px}
+@media(max-width:1050px){.workspace{grid-template-columns:260px minmax(0,1fr)}.output-panel{grid-column:1/-1}}
+@media(max-width:760px){.app{padding:9px}.workspace{grid-template-columns:1fr}.header{position:static}.list{max-height:260px}.guitar{height:300px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <section class="header">
+    <div class="title-row">
+      <div>
+        <h1>Editor de Acordes de Violão</h1>
+        <div class="sub">Clique no gráfico para mover as notas. O código é atualizado automaticamente.</div>
+      </div>
+      <button id="downloadBtn">⬇ Baixar código .js</button>
+    </div>
+    <div class="toolbar">
+      <label class="control">Acorde
+        <input id="chordName" value="C" list="chords" spellcheck="false">
+      </label>
+      <datalist id="chords"></datalist>
+      <label class="control">Posição
+        <select id="startFret"></select>
+      </label>
+      <button class="tool active" data-tool="note">● Nota</button>
+      <button class="tool" data-tool="mute">X</button>
+      <button class="tool" data-tool="open">O</button>
+      <button class="tool" data-tool="erase">⌫ Apagar</button>
+      <button class="tool" data-tool="barre">▌ Pestana</button>
+      <button id="resetChord">↺ Restaurar</button>
+    </div>
+    <div class="range-row">
+      <span class="control">Pestana da corda</span>
+      <select id="fromString"></select>
+      <span>até</span>
+      <select id="toString"></select>
+      <span class="helper">Depois, ative “Pestana” e clique na casa desejada.</span>
+    </div>
+  </section>
+
+  <div class="workspace">
+    <section class="panel">
+      <div class="panel-title">Acordes</div>
+      <input id="search" placeholder="🔎 Pesquisar acorde..." style="width:100%;margin-bottom:8px">
+      <div id="list" class="list"></div>
+    </section>
+
+    <section class="panel">
+      <div class="diagram-head">
+        <div>
+          <div id="viewerChord" class="chord-title">C</div>
+          <div id="viewerName" class="chord-note">Dó maior</div>
+        </div>
+        <span style="font:800 .66rem/1 Arial,sans-serif;padding:5px 8px;border-radius:999px;background:#eee7dc;color:#6d6257">EDITOR</span>
+      </div>
+      <div id="diagram"></div>
+      <div class="helper">Clique dentro de uma casa para posicionar uma bolinha. Clique nos X/O acima para definir a corda. A pestana pode ser ajustada pelos seletores.</div>
+    </section>
+
+    <section class="panel output-panel">
+      <div class="panel-title">Código gerado</div>
+      <div class="codebox">
+        <div style="font:800 .75rem/1 Arial,sans-serif;margin-bottom:6px">Entrada do acorde</div>
+        <textarea id="chordCode" spellcheck="false"></textarea>
+        <div class="code-actions">
+          <button id="copyChord">📋 Copiar acorde</button>
+        </div>
+      </div>
+      <div class="codebox">
+        <div style="font:800 .75rem/1 Arial,sans-serif;margin-bottom:6px">PESTANAS</div>
+        <textarea id="barreCode" spellcheck="false"></textarea>
+        <div class="code-actions">
+          <button id="copyBarre">📋 Copiar pestana</button>
+        </div>
+      </div>
+      <div class="codebox">
+        <div style="font:800 .75rem/1 Arial,sans-serif;margin-bottom:6px">Código completo</div>
+        <textarea id="fullCode" spellcheck="false"></textarea>
+        <div class="code-actions">
+          <button id="copyFull">📋 Copiar tudo</button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+const ACORDES_VIOLAO = {
+  "A":{
+    cordas:["X",0,2,2,2,0]
+  },
+  "A7":{
+    cordas:["X",0,2,0,2,0]
+  },
+  "Ab":{
+    cordas:[4,6,6,5,4,4]
+  },
+  "Ab7":{
+    cordas:[4,6,4,5,4,4]
+  },
+  "Abm":{
+    cordas:[4,6,6,4,4,4]
+  },
+  "Abm7":{
+    cordas:[4,6,4,4,4,4]
+  },
+  "Absus4":{
+    cordas:[4,6,6,6,4,4]
+  },
+  "Am":{
+    cordas:["X",0,2,2,1,0]
+  },
+  "Am7":{
+    cordas:["X",0,2,0,1,0]
+  },
+  "Asus4":{
+    cordas:["X",0,2,2,3,0]
+  },
+  "B":{
+    cordas:["X",2,4,4,4,2]
+  },
+  "B7":{
+    cordas:["X",2,1,2,0,2]
+  },
+  "Bb":{
+    cordas:[6,8,8,7,6,6]
+  },
+  "Bb7":{
+    cordas:[6,8,6,7,6,6]
+  },
+  "Bbm":{
+    cordas:[6,8,8,6,6,6]
+  },
+  "Bbm7":{
+    cordas:[6,8,6,6,6,6]
+  },
+  "Bbsus4":{
+    cordas:[6,8,8,8,6,6]
+  },
+  "Bm":{
+    cordas:["X",2,4,4,3,2]
+  },
+  "Bm7":{
+    cordas:["X",2,0,2,0,2]
+  },
+  "Bsus4":{
+    cordas:["X",2,4,4,5,2]
+  },
+  "C":{
+    cordas:["X",3,2,0,1,0]
+  },
+  "C7":{
+    cordas:["X",3,2,3,1,0]
+  },
+  "Cm":{
+    cordas:["X",3,5,5,4,3]
+  },
+  "Cm7":{
+    cordas:["X",3,5,3,4,3]
+  },
+  "Csus4":{
+    cordas:["X",3,3,0,1,1]
+  },
+  "D":{
+    cordas:["X","X",0,2,3,2]
+  },
+  "D7":{
+    cordas:["X","X",0,2,1,2]
+  },
+  "Db":{
+    cordas:[9,11,11,10,9,9]
+  },
+  "Db7":{
+    cordas:[9,11,9,10,9,9]
+  },
+  "Dbm":{
+    cordas:[9,11,11,9,9,9]
+  },
+  "Dbm7":{
+    cordas:[9,11,9,9,9,9]
+  },
+  "Dbsus4":{
+    cordas:[9,11,11,11,9,9]
+  },
+  "Dm":{
+    cordas:["X","X",0,2,3,1]
+  },
+  "Dm7":{
+    cordas:["X","X",0,2,1,1]
+  },
+  "Dsus4":{
+    cordas:["X","X",0,2,3,3]
+  },
+  "E":{
+    cordas:[0,2,2,1,0,0]
+  },
+  "E7":{
+    cordas:[0,2,0,1,0,0]
+  },
+  "Eb":{
+    cordas:[11,13,13,12,11,11]
+  },
+  "Eb7":{
+    cordas:[11,13,11,12,11,11]
+  },
+  "Ebm":{
+    cordas:[11,13,13,11,11,11]
+  },
+  "Ebm7":{
+    cordas:[11,13,11,11,11,11]
+  },
+  "Ebsus4":{
+    cordas:[11,13,13,13,11,11]
+  },
+  "Em":{
+    cordas:[0,2,2,0,0,0]
+  },
+  "Em7":{
+    cordas:[0,2,0,0,0,0]
+  },
+  "Esus4":{
+    cordas:[0,2,2,2,0,0]
+  },
+  "F":{
+    cordas:[1,3,3,2,1,1]
+  },
+  "F7":{
+    cordas:[1,3,1,2,1,1]
+  },
+  "Fm":{
+    cordas:[1,3,3,1,1,1]
+  },
+  "Fm7":{
+    cordas:[1,3,1,1,1,1]
+  },
+  "Fsus4":{
+    cordas:[1,3,3,3,1,1]
+  },
+  "G":{
+    cordas:[3,2,0,0,0,3]
+  },
+  "G7":{
+    cordas:[3,2,0,0,0,1]
+  },
+  "Gb":{
+    cordas:[2,4,4,3,2,2]
+  },
+  "Gb7":{
+    cordas:[2,4,2,3,2,2]
+  },
+  "Gbm":{
+    cordas:[2,4,4,2,2,2]
+  },
+  "Gbm7":{
+    cordas:[2,4,2,2,2,2]
+  },
+  "Gbsus4":{
+    cordas:[2,4,4,4,2,2]
+  },
+  "Gm":{
+    cordas:[3,5,5,3,3,3]
+  },
+  "Gm7":{
+    cordas:[3,5,3,3,3,3]
+  },
+  "Gsus4":{
+    cordas:[3,5,5,5,3,3]
+  },
+};
+
+const PESTANAS = {
+  "F": {"fret":1,"fromString":0,"toString":5},
+  "Gb": {"fret":2,"fromString":0,"toString":5},
+  "G": {"fret":3,"fromString":0,"toString":5},
+  "Ab": {"fret":4,"fromString":0,"toString":5},
+  "Bb": {"fret":6,"fromString":0,"toString":5},
+  "Fm": {"fret":1,"fromString":0,"toString":5},
+  "Gbm": {"fret":2,"fromString":0,"toString":5},
+  "Gm": {"fret":3,"fromString":0,"toString":5},
+  "Abm": {"fret":4,"fromString":0,"toString":5},
+  "Bbm": {"fret":6,"fromString":0,"toString":5},
+  "Fsus4": {"fret":1,"fromString":0,"toString":5},
+  "Gbsus4": {"fret":2,"fromString":0,"toString":5},
+  "Gsus4": {"fret":3,"fromString":0,"toString":5},
+  "Absus4": {"fret":4,"fromString":0,"toString":5},
+  "Bbsus4": {"fret":6,"fromString":0,"toString":5},
+  "F7": {"fret":1,"fromString":0,"toString":5},
+  "Gb7": {"fret":2,"fromString":0,"toString":5},
+  "Ab7": {"fret":4,"fromString":0,"toString":5},
+  "Bb7": {"fret":6,"fromString":0,"toString":5},
+  "Fm7": {"fret":1,"fromString":0,"toString":5},
+  "Gbm7": {"fret":2,"fromString":0,"toString":5},
+  "Abm7": {"fret":4,"fromString":0,"toString":5},
+  "Bbm7": {"fret":6,"fromString":0,"toString":5},
+  "Cm": {fret:3, fromString:0, toString:5},
+};
+
+const NOMES_CORDAS=['E','A','D','G','B','E'];
+const ALIASES={C:0,'B#':0,'C#':1,Db:1,D:2,'D#':3,Eb:3,E:4,Fb:4,F:5,'E#':5,'F#':6,Gb:6,G:7,'G#':8,Ab:8,A:9,'A#':10,Bb:10,B:11,Cb:11};
+const NOME_PC=['Dó','Ré♭','Ré','Mi♭','Mi','Fá','Sol♭','Sol','Lá♭','Lá','Si♭','Si'];
+const SUFIXO_NOME={'':'maior','m':'menor','7':'com 7ª','m7':'menor com 7ª','sus4':'com 4ª'};
+const STRING_NAMES=['6ª E','5ª A','4ª D','3ª G','2ª B','1ª E'];
+let selected='C';
+let tool='note';
+let startFret=1;
+let state={cordas:[],barre:null};
+
+function splitChord(chord){const m=String(chord).match(/^([A-G](?:#|b)?)(.*)$/);return m?{root:m[1],suffix:m[2]||''}:{root:chord,suffix:''}}
+function chordName(chord){const {root,suffix}=splitChord(chord);const pc=ALIASES[root];const base=pc==null?root:NOME_PC[pc];return suffix in SUFIXO_NOME?`${base} ${SUFIXO_NOME[suffix]}`:`${base} ${suffix}`}
+function cloneShape(ch){const s=ACORDES_VIOLAO[ch];return s? s.cordas.slice():['X','X','X','X','X','X']}
+function getBarre(ch){return PESTANAS[ch]?{...PESTANAS[ch]}:null}
+function loadChord(ch){selected=ch;state.cordas=cloneShape(ch);state.barre=getBarre(ch);const fretted=state.cordas.map(v=>Number(v)).filter(n=>Number.isFinite(n)&&n>0);startFret=fretted.length?Math.min(...fretted):1;document.getElementById('startFret').value=String(Math.min(12,startFret));renderAll()}
+function ensureChord(){if(!ACORDES_VIOLAO[selected])ACORDES_VIOLAO[selected]={cordas:state.cordas.slice()}}
+function setString(index,value){state.cordas[index]=value;renderAll()}
+function fretAtColumn(col){return startFret+(4-col)}
+
+function renderList(){
+  const q=document.getElementById('search').value.trim().toLowerCase();
+  const list=document.getElementById('list'); list.innerHTML='';
+  Object.keys(ACORDES_VIOLAO).filter(ch=>!q||(`${ch} ${chordName(ch)}`).toLowerCase().includes(q)).sort((a,b)=>a.localeCompare(b,'pt-BR')).forEach(ch=>{
+    const b=document.createElement('button'); b.className='item'+(ch===selected?' active':'');
+    b.innerHTML=`<b>${ch}</b><span>${chordName(ch)}</span>`;
+    b.onclick=()=>{loadChord(ch)}; list.appendChild(b);
+  });
+}
+
+function renderDiagram(){
+  const root=document.getElementById('diagram');root.innerHTML='';
+  const wrap=document.createElement('div');wrap.className='guitar-wrap';
+  const g=document.createElement('div');g.className='guitar';wrap.appendChild(g);
+  const board=document.createElement('div');board.className='board';g.appendChild(board);
+
+  for(let i=1;i<5;i++){const f=document.createElement('div');f.className='fret';f.style.left=`${i*20}%`;board.appendChild(f)}
+  for(let i=0;i<6;i++){const s=document.createElement('div');s.className='string';s.style.top=`${i*20}%`;board.appendChild(s)}
+
+  // Células clicáveis: coluna 0 = casa start+4 (esquerda), coluna 4 = start (direita)
+  for(let row=0;row<6;row++){
+    for(let col=0;col<5;col++){
+      const cell=document.createElement('div');cell.className='board-cell';
+      cell.style.left=`${col*20}%`;cell.style.top=`${row*20}%`;cell.style.width='20%';cell.style.height='20%';
+      cell.onclick=()=>{
+        if(tool==='note'){state.cordas[row]=fretAtColumn(col)}
+        else if(tool==='mute'){state.cordas[row]='X'}
+        else if(tool==='open'){state.cordas[row]=0}
+        else if(tool==='erase'){state.cordas[row]='X'}
+        else if(tool==='barre'){state.barre={fret:fretAtColumn(col),fromString:Number(document.getElementById('fromString').value),toString:Number(document.getElementById('toString').value)}}
+        renderAll();
+      };
+      board.appendChild(cell);
+    }
+  }
+
+  // Pestana
+  if(state.barre){
+    const local=state.barre.fret-startFret+1;
+    if(local>=1&&local<=5){
+      const x=((5-local+0.5)/5)*100;
+      const b=document.createElement('div');b.className='barre';
+      b.style.left=x+'%';
+      b.style.top=(state.barre.fromString/5)*100+'%';
+      b.style.height=((state.barre.toString-state.barre.fromString)/5*100)+'%';
+      board.appendChild(b);
+    }
+  }
+
+  // Nomes das cordas
+  const labels=document.createElement('div');labels.className='labels';
+  NOMES_CORDAS.forEach(n=>{const l=document.createElement('div');l.className='label';l.textContent=n;labels.appendChild(l)});g.appendChild(labels);
+
+  // X / O
+  const status=document.createElement('div');status.className='status-row';
+  state.cordas.forEach((v,i)=>{
+    const b=document.createElement('button');b.className='status-btn';b.textContent=v==='X'?'X':Number(v)===0?'O':'';
+    b.title=STRING_NAMES[i]+' — clique para X/O';
+    b.onclick=()=>{
+      if(v==='X')state.cordas[i]=0; else if(Number(v)===0)state.cordas[i]='X'; else state.cordas[i]='X';
+      renderAll();
+    };
+    status.appendChild(b);
+  });g.appendChild(status);
+
+  const fretRow=document.createElement('div');fretRow.className='fret-row';
+  for(let i=0;i<5;i++){const l=document.createElement('div');l.textContent=startFret+4-i;fretRow.appendChild(l)}
+  g.appendChild(fretRow);
+
+  if(startFret>1){const p=document.createElement('div');p.className='pos-badge';p.textContent=`${startFret}ª posição`;g.appendChild(p)}
+
+  // Bolinhas
+  state.cordas.forEach((v,row)=>{
+    const fret=Number(v);if(!Number.isFinite(fret)||fret<=0)return;
+    const local=fret-startFret+1;if(local<1||local>5)return;
+    const dot=document.createElement('div');dot.className='dot';
+    dot.style.left=`${((5-local+0.5)/5)*100}%`;
+    dot.style.top=`${(row/5)*100}%`;
+    board.appendChild(dot);
+  });
+
+  const legend=document.createElement('div');legend.className='legend';legend.textContent='Clique nas casas para posicionar. X = não tocar · O = corda solta · barra = pestana';wrap.appendChild(legend);
+  root.appendChild(wrap);
+}
+
+function generateChordCode(){
+  const vals=state.cordas.map(v=>typeof v==='string'?`"${v}"`:String(v));
+  return `  "${selected}":{\n    cordas:[${vals.join(',')}]\n  },`;
+}
+function generateBarreCode(){
+  if(!state.barre)return `  // "${selected}": sem pestana,`;
+  return `  "${selected}": {fret:${state.barre.fret}, fromString:${state.barre.fromString}, toString:${state.barre.toString}},`;
+}
+function generateFullCode(){
+  const lines=Object.keys(ACORDES_VIOLAO).sort((a,b)=>a.localeCompare(b,'pt-BR')).map(ch=>{const vals=(ch===selected?state.cordas:ACORDES_VIOLAO[ch].cordas).map(v=>typeof v==='string'?`"${v}"`:String(v));return `  "${ch}":{\n    cordas:[${vals.join(',')}]\n  },`});
+  const barreEntries=[];Object.keys(PESTANAS).forEach(ch=>{barreEntries.push(`  "${ch}": ${JSON.stringify(PESTANAS[ch])},`)});if(state.barre){barreEntries.push(generateBarreCode())}
+  return `const ACORDES_VIOLAO = {\n${lines.join('\n')}\n};\n\nconst PESTANAS = {\n${barreEntries.join('\n')}\n};`;
+}
+function updateCode(){
+  document.getElementById('chordCode').value=generateChordCode();
+  document.getElementById('barreCode').value=generateBarreCode();
+  document.getElementById('fullCode').value=generateFullCode();
+}
+function renderAll(){
+  ensureChord();
+  document.getElementById('viewerChord').textContent=selected;
+  document.getElementById('viewerName').textContent=chordName(selected);
+  renderDiagram();renderList();updateCode();
+}
+function copyText(id){navigator.clipboard?.writeText(document.getElementById(id).value).then(()=>{}).catch(()=>{document.getElementById(id).select();document.execCommand('copy')})}
+function downloadCode(){const blob=new Blob([document.getElementById('fullCode').value],{type:'text/javascript;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='acordes-violao_atualizado.js';a.click();URL.revokeObjectURL(a.href)}
+
+// Preenche controles
+for(let i=1;i<=12;i++){const o=document.createElement('option');o.value=i;o.textContent=i+(i===1?'ª casa':'ª casa');document.getElementById('startFret').appendChild(o)}
+NOMES_CORDAS.forEach((n,i)=>{const o1=document.createElement('option');o1.value=i;o1.textContent=STRING_NAMES[i];document.getElementById('fromString').appendChild(o1);const o2=o1.cloneNode(true);document.getElementById('toString').appendChild(o2)});
+document.getElementById('fromString').value='0';document.getElementById('toString').value='5';
+Object.keys(ACORDES_VIOLAO).sort((a,b)=>a.localeCompare(b,'pt-BR')).forEach(ch=>{const o=document.createElement('option');o.value=ch;document.getElementById('chords').appendChild(o)});
+
+document.querySelectorAll('.tool').forEach(b=>b.onclick=()=>{tool=b.dataset.tool;document.querySelectorAll('.tool').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
+document.getElementById('startFret').onchange=e=>{startFret=Number(e.target.value);renderAll()};
+document.getElementById('fromString').onchange=()=>{if(state.barre){state.barre.fromString=Number(document.getElementById('fromString').value);renderAll()}};
+document.getElementById('toString').onchange=()=>{if(state.barre){state.barre.toString=Number(document.getElementById('toString').value);renderAll()}};
+document.getElementById('chordName').onchange=e=>{const ch=e.target.value.trim();if(!ch)return;if(!ACORDES_VIOLAO[ch])ACORDES_VIOLAO[ch]={cordas:['X','X','X','X','X','X']};loadChord(ch)};
+document.getElementById('search').oninput=renderList;
+document.getElementById('resetChord').onclick=()=>loadChord(selected);
+document.getElementById('copyChord').onclick=()=>copyText('chordCode');
+document.getElementById('copyBarre').onclick=()=>copyText('barreCode');
+document.getElementById('copyFull').onclick=()=>copyText('fullCode');
+document.getElementById('downloadBtn').onclick=downloadCode;
+
+loadChord('C');
+</script>
+</body>
+</html>

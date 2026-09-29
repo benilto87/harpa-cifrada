@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dicionário de Acordes</title>
+<style>
+:root{
+  --bg:#f2eee7;
+  --paper:#fffdf9;
+  --ink:#25221e;
+  --muted:#746e64;
+  --accent:#7a4a24;
+  --line:#ddd5ca;
+  --key:#f8f5ef;
+  --key-hover:#ece5da;
+  --red:#b00000;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Georgia,'Times New Roman',serif;
+}
+button,input{font:inherit}
+button{
+  border:1px solid #cec4b7;
+  background:var(--key);
+  color:var(--ink);
+  border-radius:9px;
+  cursor:pointer;
+  transition:.12s ease;
+}
+button:hover{background:var(--key-hover);transform:translateY(-1px)}
+button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.app{width:min(1180px,100%);margin:0 auto;padding:18px}
+.header{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:0 8px 28px rgba(50,40,30,.07);
+  padding:18px;
+  position:sticky;
+  top:10px;
+  z-index:20;
+}
+.title-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{margin:0;font-size:clamp(1.5rem,3vw,2.1rem)}
+.subtitle{color:var(--muted);font:600 .82rem/1.3 Arial,sans-serif;margin-top:4px}
+.mode-row{display:flex;gap:7px}
+.mode-btn{padding:9px 13px;font:800 .82rem/1 Arial,sans-serif}
+.tools{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:14px}
+.search{
+  width:100%;border:1px solid #cfc6b9;background:#fffdf9;border-radius:10px;padding:11px 12px;outline:none;
+  font:500 .92rem/1.2 Arial,sans-serif;color:var(--ink)
+}
+.search:focus{border-color:var(--accent)}
+.type-filter{display:flex;gap:5px;flex-wrap:wrap}
+.type-filter button{padding:8px 10px;font:700 .74rem/1 Arial,sans-serif}
+.layout{display:grid;grid-template-columns:290px minmax(0,1fr);gap:14px;margin-top:14px;align-items:start}
+.list-card,.viewer{
+  background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 28px rgba(50,40,30,.06)
+}
+.list-card{overflow:hidden}
+.list-head{padding:12px 14px;border-bottom:1px solid var(--line);font:800 .75rem/1 Arial,sans-serif;letter-spacing:.1em;color:var(--accent);text-transform:uppercase}
+.chord-list{max-height:66vh;overflow:auto;padding:8px}
+.chord-item{width:100%;display:grid;grid-template-columns:62px minmax(0,1fr);text-align:left;gap:8px;padding:9px 10px;border:1px solid transparent;background:transparent;border-radius:9px}
+.chord-item:hover{background:#f6f1e9}
+.chord-item.selected{background:#efe5d8;border-color:#dcc6ad}
+.chord-symbol{font:900 .95rem/1 Arial,sans-serif;color:var(--red)}
+.chord-name{font:600 .86rem/1.2 Arial,sans-serif;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.viewer{padding:16px;min-height:410px}
+.viewer-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.viewer-title{font:900 1.5rem/1.1 Arial,sans-serif}
+.viewer-note{color:var(--muted);font:700 .84rem/1.2 Arial,sans-serif;margin-top:4px}
+.viewer-body{padding-top:14px}
+.empty{text-align:center;color:var(--muted);padding:80px 20px;font:600 .9rem/1.5 Arial,sans-serif}
+.not-ready{padding:18px;background:#f5f0e8;border:1px solid #ded1c3;border-radius:12px;color:var(--muted);font:600 .86rem/1.4 Arial,sans-serif}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#eee7dc;color:#6d6257;font:800 .66rem/1 Arial,sans-serif;vertical-align:middle;margin-left:6px}
+
+/* ================= PIANO ================= */
+.piano-wrap{
+  width:100%;
+  max-width:420px;
+}
+
+.piano{
+  position:relative;height:150px;width:100%;overflow:hidden;border:1px solid #a9a096;border-radius:7px;background:#fff;
+}
+.white-key{position:absolute;top:0;bottom:0;width:7.142857%;background:#fff;border:0;border-right:1px solid #c7c0b7;padding:0;border-radius:0;box-shadow:none;cursor:default}
+.white-key.marked::after{content:"";position:absolute;left:50%;bottom:10px;width:10px;height:10px;border-radius:50%;transform:translateX(-50%);background:#777267}
+.black-key{position:absolute;top:0;height:60%;width:4.15%;background:#171717;border:0;padding:0;border-radius:0 0 3px 3px;z-index:2;cursor:default;box-shadow:none}
+.black-key.marked::after{content:"";position:absolute;left:50%;bottom:7px;width:8px;height:8px;border-radius:50%;transform:translateX(-50%);background:#d8d3c8}
+.piano-legend{margin-top:7px;text-align:center;color:var(--muted);font:600 .72rem/1.3 Arial,sans-serif}
+
+/* ================= VIOLÃO ================= */
+.guitar-wrap{
+  width:min(760px,100%);
+  margin:8px auto 0;
+}
+
+.guitar{
+  position:relative;
+  height:285px;
+  width:100%;
+  border:1px solid #d6cdc0;
+  border-radius:12px;
+  background:#fffdf9;
+  overflow:hidden;
+}
+
+.guitar-board{
+  position:absolute;
+  left:56px;
+  right:54px;
+  top:58px;
+  bottom:48px;
+  border:1px solid #9d8871;
+  border-radius:7px;
+  background:linear-gradient(to bottom,#694a31,#452f20);
+  overflow:visible;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)
+}
+
+.guitar-nut{
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:8px;
+  background:#eee7dc;
+  border-right:1px solid #c7beb2;
+  z-index:4
+}
+
+.fret{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:2px;
+  background:#beb7ae;
+  box-shadow:1px 0 1px rgba(0,0,0,.25)
+}
+
+.string{
+  position:absolute;
+  left:0;
+  right:0;
+  height:1px;
+  background:#e0d7cb;
+  box-shadow:0 1px 1px rgba(0,0,0,.25)
+}
+
+.dot{
+  position:absolute;
+  width:23px;
+  height:23px;
+  border-radius:50%;
+  background:#f4f1eb;
+  border:1px solid #aaa39a;
+  box-shadow:0 2px 3px rgba(0,0,0,.2),inset 0 1px 1px rgba(255,255,255,.7);
+  transform:translate(-50%,-50%);
+  z-index:5
+}
+
+/* Pestana: traço vertical atravessando as cordas selecionadas.
+   Como o braço está desenhado de lado, a pestana aparece como
+   uma barra VERTICAL sobre o traste indicado. */
+.barre{
+  position:absolute;
+  width:9px;
+  border-radius:8px;
+  background:#28231e;
+  box-shadow:0 1px 2px rgba(0,0,0,.35);
+  transform:translateX(-50%);
+  z-index:4;
+  pointer-events:none;
+}
+
+.guitar-status-row{
+  position:absolute;
+  left:56px;
+  right:54px;
+  top:23px;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  text-align:center;
+  font:800 19px/1 Arial,sans-serif;
+  color:#5a554e;
+  z-index:6
+}
+
+.string-labels{
+  position:absolute;
+  top:58px;
+  right:0;
+  width:42px;
+  height:calc(100% - 106px);
+  display:grid;
+  grid-template-rows:repeat(6,1fr);
+  align-items:center;
+  justify-items:center;
+  z-index:8;
+  pointer-events:none;
+}
+
+.string-name{
+  width:32px;
+  text-align:center;
+  font:800 14px/1 Arial,sans-serif;
+  color:#5a554e;
+}
+
+.fret-label-row{
+  position:absolute;
+  left:56px;
+  right:54px;
+  bottom:12px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  text-align:center;
+  font:700 13px/1 Arial,sans-serif;
+  color:#5a554e
+}
+
+.guitar-position-label{
+  position:absolute;
+  top:26px;
+  left:8px;
+  color:#746e64;
+  font:800 11px/1 Arial,sans-serif
+}
+
+.guitar-legend{
+  text-align:center;
+  margin-top:7px;
+  color:var(--muted);
+  font:600 .72rem/1.3 Arial,sans-serif
+}
+
+@media(max-width:780px){
+  .app{padding:10px}
+  .layout{grid-template-columns:1fr}
+  .chord-list{max-height:80px}
+  .header{position:static}
+  .tools{grid-template-columns:1fr}
+  .guitar{height:240px}
+}
+
+  .viewer{
+    padding:12px;
+    min-height:320px;
+    width:100%;
+    overflow:hidden;
+  }
+
+  .viewer-body{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    overflow:hidden;
+  }
+
+  .piano-wrap{
+    width:100%;
+    max-width:560px;
+  }
+
+.title-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap
+}
+
+.title-area{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.back-btn{
+  width:38px;
+  height:38px;
+  min-height:38px;
+  padding:0;
+  border-radius:50%;
+  font:900 1.35rem/1 Arial,sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <section class="header">
+<div class="title-row">
+
+  <div class="title-area">
+
+    <button class="back-btn"
+            onclick="window.location.href='index.html'"
+            title="Voltar">
+      ←
+    </button>
+
+    <div>
+      <h1>Dicionário de Acordes</h1>
+      <div class="subtitle">
+        Escolha um acorde e veja sua formação no teclado ou no violão.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="mode-row">
+    <button id="modePiano" class="mode-btn active">🎹 Teclado</button>
+    <button id="modeGuitar" class="mode-btn">🎸 Violão</button>
+  </div>
+
+</div>
+    <div class="tools">
+      <input id="search" class="search" placeholder="🔎 Pesquisar acorde..." autocomplete="off">
+      <div id="typeFilter" class="type-filter"></div>
+    </div>
+  </section>
+
+  <div class="layout">
+    <section class="list-card">
+      <div class="list-head">Acordes</div>
+      <div id="chordList" class="chord-list"></div>
+    </section>
+
+    <section class="viewer" id="viewer">
+      <div class="empty">Selecione um acorde na lista.</div>
+    </section>
+  </div>
+</div>
+
+<script src="acordes-violao.js"></script>
+<script>
+/* =========================================================
+   DADOS DO DICIONÁRIO
+   Baseados no sistema de desenhos manuais da Harpa Cifrada.
+   ========================================================= */
+
+const ALIASES={
+  C:0,'B#':0,'C#':1,Db:1,D:2,'D#':3,Eb:3,E:4,Fb:4,F:5,'E#':5,
+  'F#':6,Gb:6,G:7,'G#':8,Ab:8,A:9,'A#':10,Bb:10,B:11,Cb:11
+};
+
+const NOME_PC=[
+  'Dó','Ré♭','Ré','Mi♭','Mi','Fá','Sol♭','Sol','Lá♭','Lá','Si♭','Si'
+];
+
+const SUFIXO_NOME={
+  '':'maior',
+  'm':'menor',
+  '7':'com 7ª',
+  'm7':'menor com 7ª',
+  'sus4':'com 4ª'
+};
+
+const ACORDES={
+  "C":[{nota:"C",oitava:1},{nota:"E",oitava:1},{nota:"G",oitava:1}],
+  "D":[{nota:"D",oitava:1},{nota:"F#",oitava:1},{nota:"A",oitava:1}],
+  "E":[{nota:"E",oitava:1},{nota:"G#",oitava:1},{nota:"B",oitava:1}],
+  "F":[{nota:"F",oitava:1},{nota:"A",oitava:1},{nota:"C",oitava:2}],
+  "G":[{nota:"G",oitava:1},{nota:"B",oitava:1},{nota:"D",oitava:2}],
+  "A":[{nota:"A",oitava:1},{nota:"C#",oitava:2},{nota:"E",oitava:2}],
+  "B":[{nota:"B",oitava:1},{nota:"D#",oitava:2},{nota:"F#",oitava:2}],
+  "Cm":[{nota:"C",oitava:1},{nota:"Eb",oitava:1},{nota:"G",oitava:1}],
+  "Dm":[{nota:"D",oitava:1},{nota:"F",oitava:1},{nota:"A",oitava:1}],
+  "Em":[{nota:"E",oitava:1},{nota:"G",oitava:1},{nota:"B",oitava:1}],
+  "Fm":[{nota:"F",oitava:1},{nota:"Ab",oitava:1},{nota:"C",oitava:2}],
+  "Gm":[{nota:"G",oitava:1},{nota:"Bb",oitava:1},{nota:"D",oitava:2}],
+  "Am":[{nota:"A",oitava:1},{nota:"C",oitava:2},{nota:"E",oitava:2}],
+  "Bm":[{nota:"B",oitava:1},{nota:"D",oitava:2},{nota:"F#",oitava:2}],
+  "C7":[{nota:"C",oitava:1},{nota:"E",oitava:1},{nota:"G",oitava:1},{nota:"Bb",oitava:1}],
+  "D7":[{nota:"D",oitava:1},{nota:"F#",oitava:1},{nota:"A",oitava:1},{nota:"C",oitava:2}],
+  "E7":[{nota:"E",oitava:1},{nota:"G#",oitava:1},{nota:"B",oitava:1},{nota:"D",oitava:2}],
+  "F7":[{nota:"F",oitava:1},{nota:"A",oitava:1},{nota:"C",oitava:2},{nota:"Eb",oitava:2}],
+  "G7":[{nota:"G",oitava:1},{nota:"B",oitava:1},{nota:"D",oitava:2},{nota:"F",oitava:2}],
+  "A7":[{nota:"A",oitava:1},{nota:"C#",oitava:2},{nota:"E",oitava:2},{nota:"G",oitava:2}],
+  "B7":[{nota:"B",oitava:1},{nota:"D#",oitava:2},{nota:"F#",oitava:2},{nota:"A",oitava:2}],
+  "Cm7":[{nota:"C",oitava:1},{nota:"Eb",oitava:1},{nota:"G",oitava:1},{nota:"Bb",oitava:1}],
+  "Dm7":[{nota:"D",oitava:1},{nota:"F",oitava:1},{nota:"A",oitava:1},{nota:"C",oitava:2}],
+  "Em7":[{nota:"E",oitava:1},{nota:"G",oitava:1},{nota:"B",oitava:1},{nota:"D",oitava:2}],
+  "Fm7":[{nota:"F",oitava:1},{nota:"Ab",oitava:1},{nota:"C",oitava:2},{nota:"Eb",oitava:2}],
+  "Gm7":[{nota:"G",oitava:1},{nota:"Bb",oitava:1},{nota:"D",oitava:2},{nota:"F",oitava:2}],
+  "Am7":[{nota:"A",oitava:1},{nota:"C",oitava:2},{nota:"E",oitava:2},{nota:"G",oitava:2}],
+  "Bm7":[{nota:"B",oitava:1},{nota:"D",oitava:2},{nota:"F#",oitava:2},{nota:"A",oitava:2}],
+  "Csus4":[{nota:"C",oitava:1},{nota:"F",oitava:1},{nota:"G",oitava:1},{nota:"C",oitava:2}],
+  "Dsus4":[{nota:"D",oitava:1},{nota:"G",oitava:1},{nota:"A",oitava:1},{nota:"D",oitava:2}],
+  "Esus4":[{nota:"E",oitava:1},{nota:"A",oitava:1},{nota:"B",oitava:1},{nota:"E",oitava:2}],
+  "Fsus4":[{nota:"F",oitava:1},{nota:"Bb",oitava:1},{nota:"C",oitava:2},{nota:"F",oitava:2}],
+  "Gsus4":[{nota:"G",oitava:1},{nota:"C",oitava:2},{nota:"D",oitava:2},{nota:"G",oitava:2}],
+  "Asus4":[{nota:"A",oitava:1},{nota:"D",oitava:2},{nota:"E",oitava:2},{nota:"A",oitava:2}],
+  "Bsus4":[{nota:"B",oitava:1},{nota:"E",oitava:2},{nota:"F#",oitava:2},{nota:"B",oitava:2}],
+  "Db":[{nota:"Db",oitava:1},{nota:"F",oitava:1},{nota:"Ab",oitava:1}],
+  "Dbm":[{nota:"Db",oitava:1},{nota:"E",oitava:1},{nota:"Ab",oitava:1}],
+  "Dbsus4":[{nota:"Db",oitava:1},{nota:"Gb",oitava:1},{nota:"Ab",oitava:1}],
+  "Db7":[{nota:"Db",oitava:1},{nota:"F",oitava:1},{nota:"Ab",oitava:1},{nota:"Cb",oitava:2}],
+  "Dbm7":[{nota:"Db",oitava:1},{nota:"E",oitava:1},{nota:"Ab",oitava:1},{nota:"Cb",oitava:2}],
+  "Eb":[{nota:"Eb",oitava:1},{nota:"G",oitava:1},{nota:"Bb",oitava:1}],
+  "Ebm":[{nota:"Eb",oitava:1},{nota:"Gb",oitava:1},{nota:"Bb",oitava:1}],
+  "Ebsus4":[{nota:"Eb",oitava:1},{nota:"Ab",oitava:1},{nota:"Bb",oitava:1}],
+  "Eb7":[{nota:"Eb",oitava:1},{nota:"G",oitava:1},{nota:"Bb",oitava:1},{nota:"Db",oitava:2}],
+  "Ebm7":[{nota:"Eb",oitava:1},{nota:"Gb",oitava:1},{nota:"Bb",oitava:1},{nota:"Db",oitava:2}],
+  "Gb":[{nota:"Gb",oitava:1},{nota:"Bb",oitava:1},{nota:"Db",oitava:2}],
+  "Gbm":[{nota:"Gb",oitava:1},{nota:"A",oitava:1},{nota:"Db",oitava:2}],
+  "Gbsus4":[{nota:"Gb",oitava:1},{nota:"Cb",oitava:2},{nota:"Db",oitava:2}],
+  "Gb7":[{nota:"Gb",oitava:1},{nota:"Bb",oitava:1},{nota:"Db",oitava:2},{nota:"E",oitava:2}],
+  "Gbm7":[{nota:"Gb",oitava:1},{nota:"A",oitava:1},{nota:"Db",oitava:2},{nota:"E",oitava:2}],
+  "Ab":[{nota:"Ab",oitava:1},{nota:"C",oitava:2},{nota:"Eb",oitava:2}],
+  "Abm":[{nota:"Ab",oitava:1},{nota:"Cb",oitava:2},{nota:"Eb",oitava:2}],
+  "Absus4":[{nota:"Ab",oitava:1},{nota:"Db",oitava:2},{nota:"Eb",oitava:2}],
+  "Ab7":[{nota:"Ab",oitava:1},{nota:"C",oitava:2},{nota:"Eb",oitava:2},{nota:"Gb",oitava:2}],
+  "Abm7":[{nota:"Ab",oitava:1},{nota:"Cb",oitava:2},{nota:"Eb",oitava:2},{nota:"Gb",oitava:2}],
+  "Bb":[{nota:"Bb",oitava:1},{nota:"D",oitava:2},{nota:"F",oitava:2}],
+  "Bbm":[{nota:"Bb",oitava:1},{nota:"Db",oitava:2},{nota:"F",oitava:2}],
+  "Bbsus4":[{nota:"Bb",oitava:1},{nota:"Eb",oitava:2},{nota:"F",oitava:2}],
+  "Bb7":[{nota:"Bb",oitava:1},{nota:"D",oitava:2},{nota:"F",oitava:2},{nota:"Ab",oitava:2}],
+  "Bbm7":[{nota:"Bb",oitava:1},{nota:"Db",oitava:2},{nota:"F",oitava:2},{nota:"Ab",oitava:2}]
+};
+
+const EQUIV={'A#':'Bb','Bb':'A#','C#':'Db','Db':'C#','D#':'Eb','Eb':'D#','F#':'Gb','Gb':'F#','G#':'Ab','Ab':'G#'};
+
+function splitChord(chord){
+  const m=String(chord).match(/^([A-G](?:#|b)?)(.*)$/);
+  return m?{root:m[1],suffix:m[2]||''}:{root:chord,suffix:''};
+}
+function chordEquivalent(chord){
+  if(ACORDES[chord])return chord;
+  const {root,suffix}=splitChord(chord);
+  return EQUIV[root] ? EQUIV[root]+suffix : chord;
+}
+function chordNotes(chord){return ACORDES[chord]||ACORDES[chordEquivalent(chord)]||[]}
+function noteClass(n){return ALIASES[n]??null}
+function chordRoot(chord){return splitChord(chord).root}
+function chordName(chord){
+  const {root,suffix}=splitChord(chord);
+  const pc=ALIASES[root];
+  const base=pc==null?root:NOME_PC[pc];
+  return suffix in SUFIXO_NOME ? `${base} ${SUFIXO_NOME[suffix]}` : `${base} ${suffix}`;
+}
+
+function pianoDiagram(notes){
+  const el=document.createElement('div');
+  el.className='piano-wrap';
+  const p=document.createElement('div');p.className='piano';el.appendChild(p);
+  const whites=[['C',1],['D',1],['E',1],['F',1],['G',1],['A',1],['B',1],['C',2],['D',2],['E',2],['F',2],['G',2],['A',2],['B',2]];
+  const marked=(n,o)=>notes.some(x=>noteClass(x.nota)===noteClass(n)&&Number(x.oitava)===o);
+  whites.forEach(([n,o],i)=>{const k=document.createElement('div');k.className='white-key';k.style.left=(i*100/14)+'%';if(marked(n,o))k.classList.add('marked');p.appendChild(k)});
+  const blacks=[['C#',1,5],['D#',1,12.15],['F#',1,26.43],['G#',1,33.57],['A#',1,40.72],['C#',2,55],['D#',2,62.15],['F#',2,76.43],['G#',2,83.57],['A#',2,90.72]];
+  blacks.forEach(([n,o,l])=>{const k=document.createElement('div');k.className='black-key';k.style.left=l+'%';if(marked(n,o))k.classList.add('marked');p.appendChild(k)});
+  const leg=document.createElement('div');leg.className='piano-legend';leg.textContent='Teclas marcadas = desenho exato do acorde';el.appendChild(leg);
+  return el;
+}
+
+/* =========================================================
+   PESTANAS
+   =========================================================
+   Índices das cordas: 0=E grave, 1=A, 2=D, 3=G, 4=B, 5=E aguda.
+   Ex.: F maior usa pestana completa na 1ª casa.
+*/
+
+
+function getBarre(chord){
+  if(typeof PESTANAS==='undefined') return null;
+  const exact=PESTANAS[chord];
+  if(exact)return exact;
+  const eq=chordEquivalent(chord);
+  return PESTANAS[eq]||null;
+}
+
+function guitarDiagram(chord){
+  if(typeof ACORDES_VIOLAO==='undefined') return null;
+
+  const normalized =
+    typeof normalizarAcordeViolao==='function'
+      ? normalizarAcordeViolao(chord)
+      : chord;
+
+  const shape =
+    ACORDES_VIOLAO[normalized] ||
+    ACORDES_VIOLAO[chord];
+
+  if(!shape) return null;
+
+  const cordas=shape.cordas;
+  const fretted=cordas
+    .map(v=>Number(v))
+    .filter(n=>Number.isFinite(n)&&n>0);
+
+  const hasOpen=cordas.some(v=>Number(v)===0);
+  const firstFret=fretted.length?Math.min(...fretted):1;
+  const startFret=hasOpen?1:Math.max(1,firstFret);
+  const total=5;
+
+  const wrap=document.createElement('div');
+  wrap.className='guitar-wrap';
+
+  const g=document.createElement('div');
+  g.className='guitar';
+  wrap.appendChild(g);
+
+  const board=document.createElement('div');
+  board.className='guitar-board';
+  g.appendChild(board);
+
+  for(let i=1;i<total;i++){
+    const f=document.createElement('div');
+    f.className='fret';
+    f.style.left=(i*100/total)+'%';
+    board.appendChild(f);
+  }
+
+  const barre=getBarre(chord);
+  if(barre){
+    const b=document.createElement('div');
+    b.className='barre';
+
+    const local=barre.fret-startFret+1;
+
+    if(local>=1&&local<=total){
+      const x=((total-local+0.5)/total)*100;
+      const y1=(barre.fromString/5)*100;
+      const y2=(barre.toString/5)*100;
+
+      b.style.left=x+'%';
+      b.style.top=y1+'%';
+      b.style.height=(y2-y1)+'%';
+
+      board.appendChild(b);
+    }
+  }
+
+  for(let i=0;i<6;i++){
+    const st=document.createElement('div');
+    st.className='string';
+    st.style.top=(i*100/5)+'%';
+    board.appendChild(st);
+  }
+
+  const labels=document.createElement('div');
+  labels.className='string-labels';
+
+  ['E','A','D','G','B','E'].forEach(n=>{
+    const label=document.createElement('div');
+    label.className='string-name';
+    label.textContent=n;
+    labels.appendChild(label);
+  });
+
+  g.appendChild(labels);
+
+  const statusRow=document.createElement('div');
+  statusRow.className='guitar-status-row';
+
+  cordas.forEach(v=>{
+    const mark=document.createElement('div');
+    mark.textContent =
+      v==='X' ? 'X' :
+      Number(v)===0 ? 'O' : '';
+
+    statusRow.appendChild(mark);
+  });
+
+  g.appendChild(statusRow);
+
+  cordas.forEach((v,stringIndex)=>{
+    if(v==='X'||Number(v)===0)return;
+
+    const fret=Number(v);
+    if(!Number.isFinite(fret))return;
+
+    const local=fret-startFret+1;
+    if(local<1||local>total)return;
+
+    const dot=document.createElement('div');
+    dot.className='dot';
+
+    const x=((total-local+0.5)/total)*100;
+    const y=(stringIndex/5)*100;
+
+    dot.style.left=x+'%';
+    dot.style.top=y+'%';
+
+    board.appendChild(dot);
+  });
+
+  const fretLabels=document.createElement('div');
+  fretLabels.className='fret-label-row';
+
+  for(let i=0;i<total;i++){
+    const label=document.createElement('div');
+    label.textContent=String(startFret+total-1-i);
+    fretLabels.appendChild(label);
+  }
+
+  g.appendChild(fretLabels);
+
+  if(startFret>1){
+    const pos=document.createElement('div');
+    pos.className='guitar-position-label';
+    pos.textContent=`${startFret}ª posição`;
+    g.appendChild(pos);
+  }
+
+  const leg=document.createElement('div');
+  leg.className='guitar-legend';
+  leg.textContent='X = não tocar · O = corda solta · bolinha = casa pressionada · barra = pestana';
+
+  wrap.appendChild(leg);
+
+  return wrap;
+}
+
+let mode='piano';
+let selected=null;
+let type='Todos';
+
+const typeButtons=[['Todos',''],['Maior',''],['Menor','m'],['7ª','7'],['m7','m7'],['4ª','sus4']];
+const typeFilter=document.getElementById('typeFilter');
+typeButtons.forEach(([label,suffix])=>{const b=document.createElement('button');b.textContent=label;b.dataset.suffix=suffix;b.classList.toggle('active',label==='Todos');b.onclick=()=>{type=label;[...typeFilter.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');renderList()};typeFilter.appendChild(b)});
+
+function sortedChords(){
+  const order=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
+  const suffixOrder=['','m','7','m7','sus4'];
+  return Object.keys(ACORDES).sort((a,b)=>{
+    const A=splitChord(a),B=splitChord(b);
+    const ra=(ALIASES[A.root]??99),rb=(ALIASES[B.root]??99);
+    if(ra!==rb)return ra-rb;
+    return suffixOrder.indexOf(A.suffix)-suffixOrder.indexOf(B.suffix);
+  });
+}
+
+function renderList(){
+  const q=document.getElementById('search').value.trim().toLowerCase();
+  const list=document.getElementById('chordList');list.innerHTML='';
+  const suffixMap={Todos:null,'Maior':'','Menor':'m','7ª':'7','m7':'m7','4ª':'sus4'};
+  const wanted=suffixMap[type];
+  const items=sortedChords().filter(ch=>{
+    const {suffix}=splitChord(ch);
+    const matchesType=wanted===null || suffix===wanted;
+    return matchesType && (`${chordName(ch)} ${ch}`).toLowerCase().includes(q);
+  });
+  if(!items.length){list.innerHTML='<div class="empty" style="padding:30px 10px">Nenhum acorde encontrado.</div>';return;}
+  items.forEach(ch=>{
+    const b=document.createElement('button');b.className='chord-item'+(ch===selected?' selected':'');
+    b.innerHTML=`<span class="chord-symbol">${ch}</span><span class="chord-name">${chordName(ch)}</span>`;
+    b.onclick=()=>{selected=ch;renderList();renderViewer()};list.appendChild(b);
+  });
+}
+
+function renderViewer(){
+  const viewer=document.getElementById('viewer');
+  if(!selected){viewer.innerHTML='<div class="empty">Selecione um acorde na lista.</div>';return;}
+  const root=chordRoot(selected);
+  viewer.innerHTML=`<div class="viewer-head"><div><div class="viewer-title">${selected}</div><div class="viewer-note">${chordName(selected)}</div></div><div class="badge">${mode==='piano'?'TECLADO':'VIOLÃO'}</div></div><div class="viewer-body"></div>`;
+  const body=viewer.querySelector('.viewer-body');
+  if(mode==='piano'){
+    body.appendChild(pianoDiagram(chordNotes(selected)));
+  }else{
+    const g=guitarDiagram(selected);
+    if(g) body.appendChild(g);
+    else body.innerHTML=`<div class="not-ready">O desenho de violão para <strong>${selected}</strong> ainda não está cadastrado neste primeiro modelo. A estrutura já está pronta para acrescentá-lo sem alterar o dicionário.</div>`;
+  }
+}
+
+document.getElementById('modePiano').onclick=()=>{mode='piano';document.getElementById('modePiano').classList.add('active');document.getElementById('modeGuitar').classList.remove('active');renderViewer()};
+document.getElementById('modeGuitar').onclick=()=>{mode='guitar';document.getElementById('modeGuitar').classList.add('active');document.getElementById('modePiano').classList.remove('active');renderViewer()};
+document.getElementById('search').oninput=renderList;
+
+selected='C';
+renderList();
+renderViewer();
+</script>
+</body>
+</html>
