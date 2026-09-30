@@ -883,8 +883,67 @@ button.active{
 }
 
 </style><span></span></label>
+<script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+
+<style id="salas-maestro-style">
+.room-overlay{display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(20,16,12,.45);padding:16px}
+.room-overlay.open{display:flex}
+.room-box{width:min(500px,95vw);background:#fffdf9;border:1px solid #d8cbbb;border-radius:16px;padding:18px;box-shadow:0 20px 60px #0003;font-family:Arial,sans-serif}
+.room-title{display:flex;justify-content:space-between;align-items:center;font-size:20px}
+.room-title button{min-width:36px}
+.room-status{margin:14px 0;padding:10px;border-radius:9px;background:#f3eee7;color:#555;font-size:13px}
+.room-actions{display:flex;gap:8px}
+.room-actions button{flex:1}
+.room-list{display:grid;gap:8px;margin-top:12px}
+.room-item{display:flex;justify-content:space-between;align-items:center;padding:11px;border:1px solid #ddd3c7;border-radius:10px;background:#fff}
+.room-item small{display:block;color:#777;margin-top:3px}
+.room-topbar{
+  display:none;
+  position:fixed;
+  top:48px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:9000;
+  background:#fffdf9;
+  border:1px solid #d8cbbb;
+  border-radius:20px;
+  padding:6px 12px;
+  font:700 12px Arial,sans-serif;
+  box-shadow:0 4px 16px #0002;
+  white-space:nowrap;
+  pointer-events:none;
+}
+
+.room-topbar.active{
+  display:block;
+}
+</style>
 </head>
 <body>
+
+<div id="roomTopbar" class="room-topbar">
+  🌐 <span id="roomTopId">Grupo----</span> ·
+  <span id="roomTopRole">👑 Maestro</span> ·
+  🎵 <span id="roomTopKey">—</span> ·
+  👥 <span id="roomTopCount">0</span>
+</div>
+
+
+<div id="roomOverlay" class="room-overlay">
+  <div class="room-box">
+    <div class="room-title">
+      <strong>🌐 Salas / Maestro</strong>
+      <button id="closeRooms">✕</button>
+    </div>
+    <div id="roomStatus" class="room-status">Escolha uma opção.</div>
+    <div class="room-actions">
+      <button id="createRoom">👑 CRIAR SALA</button>
+      <button id="refreshRooms">↻ ATUALIZAR</button>
+    </div>
+    <div id="roomList" class="room-list"></div>
+  </div>
+</div>
+
 <header class="topbar">
 <div class="toolbar" aria-label="Controles">
 
@@ -912,6 +971,7 @@ button.active{
   <button class="action" id="toggleSplit" title="Dividir pelo /">*</button>
   <button class="action" id="toggleKeyboard" title="Ativar/desativar tecladinhos">🎹</button>
   <button class="action" id="toggleViolao" title="Ativar modo violão">🎸</button>
+   <button class="action" id="openRooms" title="Salas / Maestro" aria-label="Salas / Maestro">🌐</button>
   <button class="action" id="toggleAutoScroll" title="Rolagem automática — 3 minutos">▶</button>
 
   <div class="tone-pill">
@@ -978,9 +1038,9 @@ button.active{
   <div class="library-list" id="libraryList"></div>
 </aside>
 <main id="score" class="score"><div id="song"></div></main>
-<script src="musicas.js"></script>
-<script src="acordes-piano.js"></script>
-<script src="acordes-violao.js"></script>
+<script src="js/musicas.js"></script>
+<script src="js/acordes-piano.js"></script>
+<script src="js/acordes-violao.js"></script>
 
 <script>
 const chromatic=[{name:'C'},{name:'Db'},{name:'D'},{name:'Eb'},{name:'E'},{name:'F'},{name:'Gb'},{name:'G'},{name:'Ab'},{name:'A'},{name:'Bb'},{name:'B'}];
@@ -2470,4 +2530,7 @@ render();
 centerOriginalTone();
 renderLibrary();
 </script>
+
+<script src="/js/rede-maestro.js"></script>
+
 </body></html>
