@@ -276,6 +276,15 @@ def home():
         BASE_DIR,
         "index.html"
     )
+    
+
+@app.get("/teste-socket")
+def teste_socket():
+    return jsonify({
+        "flask": True,
+        "socketio": True,
+        "async_mode": socketio.async_mode
+    })
 
 
 # =========================================================
