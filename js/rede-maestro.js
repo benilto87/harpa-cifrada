@@ -309,6 +309,64 @@
   }
 
 
+  /* =========================================================
+     AVISOS DA SALA
+     ========================================================= */
+
+  function mostrarAvisoSala(mensagem){
+
+    let aviso = document.getElementById('avisoSalaMaestro');
+
+    if(!aviso){
+      aviso = document.createElement('div');
+      aviso.id = 'avisoSalaMaestro';
+      aviso.style.cssText = `
+        position:fixed;
+        inset:0;
+        z-index:99999;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background:rgba(0,0,0,.55);
+        padding:20px;
+      `;
+      document.body.appendChild(aviso);
+    }
+
+    aviso.innerHTML = `
+      <div style="
+        width:min(420px,100%);
+        background:#fff;
+        color:#222;
+        border-radius:16px;
+        padding:24px;
+        box-shadow:0 12px 40px rgba(0,0,0,.35);
+        text-align:center;
+        font-family:inherit;
+      ">
+        <div style="font-size:32px;margin-bottom:12px;">🌐</div>
+        <div style="font-size:18px;font-weight:700;line-height:1.4;">${mensagem}</div>
+        <button id="fecharAvisoSala" style="
+          margin-top:20px;
+          border:0;
+          border-radius:9px;
+          padding:10px 24px;
+          background:#333;
+          color:#fff;
+          font-weight:700;
+          cursor:pointer;
+        ">OK</button>
+      </div>
+    `;
+
+    aviso.style.display = 'flex';
+
+    document.getElementById('fecharAvisoSala')?.addEventListener(
+      'click',
+      () => { aviso.style.display = 'none'; }
+    );
+  }
+
   function openRooms(){
 
     overlay.classList.add('open');
@@ -1761,11 +1819,25 @@
         }
 
 
+        const participantesAntes =
+          currentRoomState &&
+          Number.isFinite(Number(currentRoomState.participants))
+            ? Number(currentRoomState.participants)
+            : null;
+
         if(currentRoomState){
 
           currentRoomState.participants =
             data.participants;
 
+        }
+
+        if(
+          roomRole === 'maestro' &&
+          data.participantLeft
+        ){
+          status.textContent =
+            'Um participante saiu da sala.';
         }
 
 
@@ -2062,6 +2134,8 @@
     'room_closed',
     data => {
 
+      const roleBeforeClose = roomRole;
+
       apagarSessaoSala();
 
 
@@ -2116,6 +2190,16 @@
       status.textContent =
         data.message ||
         'Sala encerrada.';
+
+      /*
+        O Maestro encerrou a sessão.
+        Mostra a plaquinha somente para quem era participante.
+      */
+      if(data.fromMaestro && roleBeforeClose === 'participante'){
+        mostrarAvisoSala(
+          'O Maestro encerrou esta sessão.'
+        );
+      }
 
     }
   );

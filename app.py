@@ -276,15 +276,6 @@ def home():
         BASE_DIR,
         "index.html"
     )
-    
-
-@app.get("/teste-socket")
-def teste_socket():
-    return jsonify({
-        "flask": True,
-        "socketio": True,
-        "async_mode": socketio.async_mode
-    })
 
 
 # =========================================================
@@ -872,7 +863,7 @@ def resume_room(data):
                     room_id,
 
                 "roomName":
-                    room_name,
+                    room.get("roomName", room_id),
 
                 "role":
                     "maestro",
@@ -1194,7 +1185,10 @@ def leave_room_request(data):
                     room_id,
 
                 "message":
-                    "O Maestro encerrou a sala."
+                    "O Maestro encerrou a sala.",
+
+                "fromMaestro":
+                    True
 
             },
             to=room_id
@@ -1279,7 +1273,10 @@ def leave_room_request(data):
                 room_id,
 
             "participants":
-                count
+                count,
+
+            "participantLeft":
+                True
 
         },
         to=room_id
@@ -1364,3 +1361,4 @@ if __name__ == "__main__":
         port=port,
         debug=True
     )
+# =========================================================
