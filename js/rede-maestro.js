@@ -30,7 +30,8 @@
   let currentRoom = null;
   let currentRoomName = null;
   let roomRole = null;
-
+  let roomTopbarTimer = null;
+  
   let applyingRemote = false;
 
   let remoteScrollTarget = 0;
@@ -39,6 +40,69 @@
   let lastSentSignature = null;
   let stateWatcher = null;
   let currentRoomState = null;
+
+function mostrarRoomTopbar(){
+
+  const topbar =
+    document.getElementById('roomTopbar');
+
+  if(!topbar) return;
+
+  clearTimeout(roomTopbarTimer);
+
+  /*
+    Guarda as informações atuais.
+  */
+  const roomId =
+    document.getElementById('roomTopId')?.textContent
+    || nomeSalaAtual()
+    || 'Sala';
+
+  const role =
+    roomRole === 'maestro'
+      ? '👑 Maestro'
+      : '🎸 Músico';
+
+  const key =
+    document.getElementById('roomTopKey')?.textContent
+    || '—';
+
+  const count =
+    document.getElementById('roomTopCount')?.textContent
+    || '0';
+
+  /*
+    PRIMEIROS 5 SEGUNDOS:
+    mostra a informação completa.
+  */
+  topbar.innerHTML = `
+    <span id="roomTopInfo">
+      🌐 <span id="roomTopId">${escaparHtml(roomId)}</span> ·
+      <span id="roomTopRole">${role}</span> ·
+      🎵 <span id="roomTopKey">${escaparHtml(key)}</span> ·
+      👥 <span id="roomTopCount">${escaparHtml(count)}</span>
+    </span>
+  `;
+
+  topbar.classList.remove('compact');
+  topbar.classList.add('active');
+
+  /*
+    DEPOIS DE 5 SEGUNDOS:
+    deixa somente o papel.
+  */
+  roomTopbarTimer = setTimeout(() => {
+
+    topbar.innerHTML = `
+      <span id="roomTopRole">${role}</span>
+    `;
+
+    topbar.classList.add('compact');
+
+  }, 3000);
+}
+
+
 
   /* =========================================================
      IDENTIDADE PERSISTENTE DO NAVEGADOR / SESSÃO DA SALA
@@ -1035,14 +1099,41 @@
          ===================================================== */
 
       const targetY =
-        Math.max(
-          0,
-          Number(state.position) || 0
-        );
+  Math.max(
+    0,
+    Number(state.position) || 0
+  );
 
+/*
+  Detecta o retorno brusco do Maestro ao topo.
+  Isso acontece, por exemplo, quando a música termina
+  e a rolagem volta para o início.
+*/
+const voltouAoTopo =
+  targetY <= 2 &&
+  remoteScrollTarget > 100;
 
-      remoteScrollTarget =
-        targetY;
+remoteScrollTarget =
+  targetY;
+
+if(voltouAoTopo){
+
+  if(remoteScrollRAF){
+
+    cancelAnimationFrame(
+      remoteScrollRAF
+    );
+
+    remoteScrollRAF = 0;
+
+  }
+
+  window.scrollTo(
+    0,
+    targetY
+  );
+
+}
 
 
       /*
@@ -1082,7 +1173,11 @@
           O participante acompanha.
         */
 
-        iniciarSincronizacaoSuave();
+        if(!voltouAoTopo){
+
+  iniciarSincronizacaoSuave();
+
+}
 
       }else{
 
@@ -1143,7 +1238,11 @@
           exata onde o Maestro parou.
         */
 
-        iniciarSincronizacaoSuave();
+        if(!voltouAoTopo){
+
+          iniciarSincronizacaoSuave();
+
+        }
 
       }
 
@@ -1562,11 +1661,7 @@
         '👑 Maestro';
 
 
-      document.getElementById(
-        'roomTopbar'
-      ).classList.add(
-        'active'
-      );
+      mostrarRoomTopbar();
 
 
       status.textContent =
@@ -1760,11 +1855,7 @@
         '🎸 Músico';
 
 
-      document.getElementById(
-        'roomTopbar'
-      ).classList.add(
-        'active'
-      );
+      mostrarRoomTopbar();
 
 
       definirBotoesSala(true);
@@ -1935,11 +2026,7 @@
           : '🎸 Músico';
 
 
-      document.getElementById(
-        'roomTopbar'
-      ).classList.add(
-        'active'
-      );
+      mostrarRoomTopbar();
 
 
       definirBotoesSala(true);
