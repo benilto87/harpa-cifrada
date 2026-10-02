@@ -403,7 +403,7 @@ const ACORDES = {
 
   "Abm":[
     {nota:"Ab",oitava:1},
-    {nota:"Cb",oitava:2},
+    {nota:"Cb",oitava:1},
     {nota:"Eb",oitava:2}
   ],
 
