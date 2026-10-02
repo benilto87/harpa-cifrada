@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bateria — Cristo Cura, Sim!</title>
+<style>
+:root{
+  --bg:#f2eee7;
+  --paper:#fffdf9;
+  --ink:#25221e;
+  --muted:#746e64;
+  --accent:#7a4a24;
+  --line:#d9d1c6;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font-family:Georgia,"Times New Roman",serif}
+
+.top{
+  position:sticky;top:0;z-index:10;
+  background:rgba(255,253,249,.97);
+  border-bottom:1px solid var(--line);
+  box-shadow:0 3px 14px rgba(60,45,30,.06);
+}
+.toolbar{
+  width:min(900px,100%);margin:auto;
+  min-height:58px;padding:8px 12px;
+  display:flex;align-items:center;gap:7px;
+  font-family:Arial,sans-serif;
+}
+button{
+  border:1px solid #cec4b7;background:#f8f5ef;color:var(--ink);
+  border-radius:8px;padding:8px 11px;min-height:34px;
+  cursor:pointer;font:700 .78rem/1 Arial,sans-serif;
+}
+button:hover{background:#ece5da}
+button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.song{
+  min-width:0;flex:1;position:relative;font:700 .84rem/1.1 Arial,sans-serif;
+}
+.song-picker{position:relative;width:100%;}
+.song-current{width:100%;display:flex;align-items:center;gap:9px;justify-content:flex-start;text-align:left;padding:8px 10px;background:#fffdf9;border-color:#cec4b7;box-shadow:0 1px 4px rgba(60,45,30,.05);}
+.song-current:hover{background:#f5f0e8}
+.song-current .mini-number{font:800 .72rem Arial;color:var(--accent);min-width:32px}
+.song-current .mini-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.song-current .chevron{font-size:11px;color:var(--muted)}
+.song-list-panel{display:none;position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;background:#fffdf9;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 30px rgba(45,35,25,.16);overflow:hidden;}
+.song-list-panel.open{display:block}
+.song-list-search{padding:9px;border-bottom:1px solid var(--line);background:#faf7f1}
+.song-list-search input{width:100%;border:1px solid #d5ccc0;border-radius:8px;padding:8px 10px;background:#fff;font:600 13px Arial;color:var(--ink);outline:none}
+.song-list{max-height:330px;overflow:auto;padding:6px}
+.song-option{width:100%;display:flex;align-items:center;gap:10px;border:0;border-radius:9px;background:transparent;padding:9px 10px;text-align:left;min-height:42px;font:600 13px Arial;color:var(--ink)}
+.song-option:hover{background:#f1ebe2}
+.song-option.active{background:#eee4d7;color:var(--accent)}
+.song-option .song-num{width:34px;font:800 12px Arial;color:var(--accent);flex:none}
+.song-option .song-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.song-option .song-check{font-size:12px;opacity:.8}
+.song-empty{padding:18px;text-align:center;color:var(--muted);font:13px Arial}
+
+.bpm{
+  width:54px;border:1px solid #cec4b7;border-radius:7px;
+  padding:7px 5px;background:#fffdf9;font:700 .78rem Arial;
+}
+
+.score{
+  width:min(900px,100%);margin:auto;
+  padding:28px 18px 80px;
+}
+.heading{
+  margin:0 0 24px;
+  font:bold 18px Arial,sans-serif;
+  letter-spacing:.02em;
+}
+.section{margin:0 0 28px}
+.section-name{
+  color:var(--accent);
+  font:700 .73rem Arial,sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  margin-bottom:8px;
+}
+.line{margin:0 0 18px}
+
+/*
+  A linha musical agora é a referência.
+  Cada caractere ocupa exatamente a posição do seu próprio span.
+  A bolinha é posicionada sobre o caractere correspondente.
+*/
+.rhythm{
+  position:relative;
+  width:100%;
+  overflow-x:auto;
+  overflow-y:visible;
+  padding-top:25px;
+}
+.rhythm-inner{
+  position:relative;
+  width:max-content;
+  min-width:100%;
+}
+.rhythm-track{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:2px;
+  height:1px;
+  background:#d8d0c5;
+}
+.char-line{
+  position:relative;
+  display:block;
+  white-space:pre;
+  font-size:20px;
+  line-height:1.28;
+}
+.char{
+  position:relative;
+  display:inline-block;
+  white-space:pre;
+}
+.dot{
+  position:absolute;
+  left:50%;
+  top:-20px;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  transform:translateX(-50%);
+  background:#111;
+  pointer-events:none;
+}
+.dot.current{
+  width:11px;
+  height:11px;
+  top:-21px;
+  background:var(--accent);
+  box-shadow:0 0 0 4px rgba(122,74,36,.14);
+}
+.char.space{
+  min-width:.28em;
+}
+.chorus .char-line{font-style:italic;font-weight:700}
+
+.help{
+  margin-top:20px;padding:12px 14px;
+  border:1px solid var(--line);border-radius:10px;
+  background:rgba(255,253,249,.7);
+  font:13px/1.45 Arial,sans-serif;color:var(--muted);
+}
+@media(max-width:600px){
+  .toolbar{padding:6px 7px;gap:4px}
+  .toolbar button{padding:7px 8px}
+  .score{padding:22px 9px 60px}
+  .char-line{font-size:18px}
+  .section{margin-bottom:24px}
+}
+</style>
+</head>
+<body>
+ <a class="back-arrow" href="index.html" title="Voltar para a Harpa Cifrada" aria-label="Voltar para a Harpa Cifrada">←</a>
+<header class="top">
+  <div class="toolbar">
+    <button id="play">▶ TOCAR</button>
+    <button id="stop">■</button>
+    <button id="back">↶</button>
+    <div class="song">
+      <div class="song-picker">
+        <button id="songCurrent" class="song-current" type="button" aria-haspopup="listbox" aria-expanded="false">
+          <span class="mini-number" id="currentSongNumber">007</span>
+          <span class="mini-title" id="currentSongTitle">CRISTO CURA, SIM!</span>
+          <span class="chevron">▼</span>
+        </button>
+        <div id="songListPanel" class="song-list-panel">
+          <div class="song-list-search"><input id="songSearch" type="search" placeholder="🔎 Número ou nome da música..." autocomplete="off"></div>
+          <div id="songList" class="song-list" role="listbox"></div>
+        </div>
+      </div>
+    </div>
+    <span style="font:700 12px Arial;color:#746e64">BPM</span>
+    <input id="bpm" class="bpm" type="number" min="40" max="180" value="80">
+  </div>
+</header>
+
+<main class="score">
+  <h1 class="heading" id="songHeading"></h1>
+  <div id="music"></div>
+
+  <div class="help">
+    <b>Novo sistema:</b> a posição da bolinha é determinada pelo número do
+    caractere da letra. Assim, <b>pos:0</b> fica sobre o primeiro caractere,
+    <b>pos:17</b> sobre o 18º caractere, <b>pos:32</b> sobre o 33º e assim por diante.
+    Não existe mais uma grade fixa de 16 posições.<br>
+    <b>Estrutura das músicas:</b> cada música possui <b>id</b>, <b>number</b>,
+    <b>title</b>, <b>category</b>, <b>sourceToneIndex</b> e <b>sections</b>.
+    O campo <b>hits[]</b> guarda as posições dos ritmos pelo índice dos caracteres.
+  </div>
+</main>
+
+<script>
+/*
+  SISTEMA DE POSIÇÕES
+
+  A posição é a mesma lógica usada pelas cifras da Harpa Cifrada:
+
+      pos:0   = primeiro caractere
+      pos:1   = segundo caractere
+      pos:2   = terceiro caractere
+      ...
+
+  Portanto, a bolinha é ancorada à LETRA, e não a uma divisão
+  matemática da largura da linha.
+
+  No futuro, o EDITOR poderá simplesmente transformar:
+      clique no caractere -> {pos:n}
+*/
+
+const songs = [
+  {
+    id:'007',
+    number:'007',
+    title:'CRISTO CURA, SIM!',
+    category:'Harpa Cristã',
+    sourceToneIndex:5,
+
+    sections:[
+      {
+        label:'1ª estrofe',
+        lines:[
+          {text:'Contra os males deste mundo, / Deus nos vale só;',hits:[4,13,20,26,32,41,48]},
+          {text:'Não há mal que Deus não cure, / Pois de nós tem dó.',hits:[0,8,16,25,33,41,49,51]}
+        ]
+      },
+
+      {
+        label:'Coro',
+        lines:[
+          {text:'Cristo cura, sim,',hits:[1,8,15,17]},
+          {text:'Cristo cura, sim,',hits:[1,8,15,17]},
+          {text:'Seu amor por nós é imenso;',hits:[1,6,14,21]},
+          {text:'Ele cura, sim!',hits:[0,5,11]}
+        ]
+      },
+
+      {
+        label:'2ª estrofe',
+        lines:[
+          {text:"Derramou Seu sangue puro / P'ra remir a mim;",hits:[0,6,14,21,29,35,41]},
+          {text:'Quando ungido sou de azeite, / Sou curado, enfim!',hits:[0,10,15,23,32,38,46,49]}
+        ]
+      },
+
+      {
+        label:'3ª estrofe',
+        lines:[
+          {text:"Só noss'alma é bem segura, / Oculta em Jesus;",hits:[0,10,15,23,32,38,46,49]},
+          {text:'Ele o bálsamo da vida, / Derramou na cruz.',hits:[0,10,15,23,32,38,46,49]}
+        ]
+      },
+
+      {
+        label:'4ª estrofe',
+        lines:[
+          {text:'Glória a Deus! Eterna glória, / Demos-Lhe louvor;',hits:[0,10,15,23,32,38,46,49]},
+          {text:'Glória, cânticos e hosanas / Dai ao Redentor!',hits:[0,10,15,23,32,38,46,49]}
+        ]
+      }
+    ]
+  }
+];
+
+let currentSongId = '007';
+
+/* =========================================================
+   VALIDAÇÃO DAS MÚSICAS
+   Evita que um hit fora do tamanho da letra quebre o programa.
+   ========================================================= */
+function normalizeSongs(){
+  songs.forEach(song=>{
+    if(!Array.isArray(song.sections)) song.sections=[];
+
+    song.sections.forEach(section=>{
+      if(!Array.isArray(section.lines)) section.lines=[];
+
+      section.lines.forEach(line=>{
+        if(typeof line.text !== 'string') line.text='';
+        if(!Array.isArray(line.hits)) line.hits=[];
+
+        const max=line.text.length-1;
+        line.hits=[...new Set(
+          line.hits
+            .map(Number)
+            .filter(n=>Number.isInteger(n) && n>=0 && n<=max)
+        )].sort((a,b)=>a-b);
+      });
+    });
+  });
+}
+
+normalizeSongs();
+
+function getCurrentSong(){
+  return songs.find(song => song.id === currentSongId) || songs[0];
+}
+
+const musicEl=document.getElementById("music");
+const songCurrent=document.getElementById("songCurrent");
+const songListPanel=document.getElementById("songListPanel");
+const songList=document.getElementById("songList");
+const songSearch=document.getElementById("songSearch");
+const currentSongNumber=document.getElementById("currentSongNumber");
+const currentSongTitle=document.getElementById("currentSongTitle");
+const songHeading=document.getElementById("songHeading");
+
+let playing=false;
+let timer=null;
+let lineIndex=0;
+let charIndex=-1;
+
+/* =========================
+   MÚSICAS / SELEÇÃO
+   ========================= */
+
+function openSongList(){
+  songListPanel.classList.add('open');
+  songCurrent.setAttribute('aria-expanded','true');
+  songSearch.value='';
+  renderSongList();
+  setTimeout(()=>songSearch.focus(),30);
+}
+
+function closeSongList(){
+  songListPanel.classList.remove('open');
+  songCurrent.setAttribute('aria-expanded','false');
+}
+
+function renderSongList(){
+  const q=songSearch.value.trim().toLowerCase();
+  const filtered=songs.filter(song=>
+    !q || `${song.number} ${song.title}`.toLowerCase().includes(q)
+  );
+
+  songList.innerHTML='';
+
+  if(!filtered.length){
+    songList.innerHTML='<div class="song-empty">Nenhuma música encontrada.</div>';
+    return;
+  }
+
+  filtered.forEach(song=>{
+    const item=document.createElement('button');
+    item.type='button';
+    item.className='song-option'+(song.id===currentSongId?' active':'');
+    item.setAttribute('role','option');
+    item.innerHTML=`<span class="song-num">${song.number}</span><span class="song-title">${song.title}</span>${song.id===currentSongId?'<span class="song-check">✓</span>':''}`;
+    item.onclick=()=>selectSong(song.id);
+    songList.appendChild(item);
+  });
+}
+
+function selectSong(id){
+  if(!songs.some(song=>song.id===id))return;
+  currentSongId=id;
+  stop();
+  lineIndex=0;
+  charIndex=-1;
+  updateSongHeader();
+  render();
+  closeSongList();
+}
+
+function updateSongHeader(){
+  const song=getCurrentSong();
+  currentSongNumber.textContent=song.number;
+  currentSongTitle.textContent=song.title;
+  songHeading.textContent=`${song.number} — ${song.title}`;
+  document.title=`Bateria — ${song.title}`;
+}
+
+songCurrent.addEventListener('click',()=>{
+  songListPanel.classList.contains('open') ? closeSongList() : openSongList();
+});
+
+songSearch.addEventListener('input',renderSongList);
+
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.song-picker'))closeSongList();
+});
+
+/* =========================
+   RENDERIZAÇÃO
+   ========================= */
+
+function render(){
+  musicEl.innerHTML="";
+  const song=getCurrentSong();
+
+  song.sections.forEach((section,si)=>{
+    const sec=document.createElement("section");
+    sec.className="section"+(section.chorus?" chorus":"");
+
+    const name=document.createElement("div");
+    name.className="section-name";
+    name.textContent=section.label;
+    sec.appendChild(name);
+
+    section.lines.forEach((line,li)=>{
+      const row=document.createElement("div");
+      row.className="line";
+      row.dataset.line=globalLine(si,li);
+
+      const rhythm=document.createElement("div");
+      rhythm.className="rhythm";
+
+      const inner=document.createElement("div");
+      inner.className="rhythm-inner";
+
+      const track=document.createElement("div");
+      track.className="rhythm-track";
+      inner.appendChild(track);
+
+      const charLine=document.createElement("div");
+      charLine.className="char-line";
+
+      /*
+        UM SPAN POR CARACTERE.
+
+        Isso é o ponto principal:
+        podemos descobrir a posição física exata de cada letra
+        sem transformar a largura de todos os caracteres em uma
+        largura artificial igual.
+      */
+      [...line.text].forEach((char,index)=>{
+        const span=document.createElement("span");
+        span.className="char"+(char===" "?" space":"");
+        span.dataset.pos=index;
+        span.textContent=char;
+
+        if(line.hits.includes(index)){
+          const dot=document.createElement("span");
+          dot.className="dot";
+          dot.dataset.pos=index;
+          span.appendChild(dot);
+        }
+
+        charLine.appendChild(span);
+      });
+
+      inner.appendChild(charLine);
+      rhythm.appendChild(inner);
+      row.appendChild(rhythm);
+
+      sec.appendChild(row);
+    });
+
+    musicEl.appendChild(sec);
+  });
+}
+
+function globalLine(sectionIndex,lineIndex){
+  let n=0;
+  const song=getCurrentSong();
+
+  for(let i=0;i<sectionIndex;i++){
+    n+=song.sections[i].lines.length;
+  }
+  return n+lineIndex;
+}
+
+function totalLines(){
+  return getCurrentSong().sections.reduce((n,s)=>n+s.lines.length,0);
+}
+
+function locate(n){
+  let count=0;
+  const song=getCurrentSong();
+
+  for(let si=0;si<song.sections.length;si++){
+    for(let li=0;li<song.sections[si].lines.length;li++){
+      if(count===n)return [si,li];
+      count++;
+    }
+  }
+
+  return [0,0];
+}
+
+/* =========================
+   REPRODUÇÃO
+   ========================= */
+
+function clearCurrent(){
+  document.querySelectorAll(".dot.current")
+    .forEach(x=>x.classList.remove("current"));
+}
+
+function highlight(){
+  clearCurrent();
+
+  const row=document.querySelector(
+    '.line[data-line="'+lineIndex+'"]'
+  );
+
+  if(!row)return;
+
+  const dot=row.querySelector(
+    '.dot[data-pos="'+charIndex+'"]'
+  );
+
+  if(dot)dot.classList.add("current");
+}
+
+function beep(){
+  const C=window.AudioContext||window.webkitAudioContext;
+  if(!C)return;
+
+  if(!window.audio)window.audio=new C();
+
+  const ctx=window.audio;
+  const o=ctx.createOscillator();
+  const g=ctx.createGain();
+
+  o.type="square";
+
+  /*
+    Aqui ainda usamos o caractere como referência temporal.
+    Depois podemos separar:
+      - posição da letra
+      - instrumento
+      - duração
+      - intensidade
+  */
+  o.frequency.value=(charIndex%4===0)?1000:700;
+
+  g.gain.setValueAtTime(.0001,ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(.055,ctx.currentTime+.003);
+  g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+.035);
+
+  o.connect(g).connect(ctx.destination);
+  o.start();
+  o.stop(ctx.currentTime+.04);
+}
+
+function tick(){
+  if(!playing)return;
+
+  const [si,li]=locate(lineIndex);
+  const song=getCurrentSong();
+  const line=song.sections[si].lines[li];
+
+  charIndex++;
+
+  /*
+    Agora percorremos a quantidade REAL de caracteres da linha.
+    Não existe mais "16 passos".
+  */
+  if(charIndex>=line.text.length){
+    charIndex=0;
+    lineIndex++;
+
+    if(lineIndex>=totalLines()){
+      stop();
+      return;
+    }
+  }
+
+  highlight();
+
+  const [s,l]=locate(lineIndex);
+
+  if(song.sections[s].lines[l].hits.includes(charIndex)){
+    beep();
+  }
+
+  const bpm=Math.max(
+    40,
+    Math.min(
+      180,
+      Number(document.getElementById("bpm").value)||80
+    )
+  );
+
+  /*
+    Cada caractere recebe uma unidade temporal.
+    Mais tarde podemos trocar isso por uma grade musical
+    independente sem perder o vínculo posicional com a letra.
+  */
+  timer=setTimeout(tick,60000/bpm);
+}
+
+function start(){
+  if(playing)return;
+
+  playing=true;
+  document.getElementById("play").classList.add("active");
+
+  lineIndex=0;
+  charIndex=-1;
+
+  tick();
+}
+
+function stop(){
+  playing=false;
+  clearTimeout(timer);
+  timer=null;
+
+  clearCurrent();
+
+  document.getElementById("play").classList.remove("active");
+}
+
+document.getElementById("play").onclick=start;
+document.getElementById("stop").onclick=stop;
+
+document.getElementById("back").onclick=()=>{
+  stop();
+  lineIndex=0;
+  charIndex=-1;
+};
+
+populateSongList();
+updateSongHeader();
+updateSongHeader();
+renderSongList();
+render();
+</script>
+</body>
+</html>
