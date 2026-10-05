@@ -943,15 +943,15 @@ const songs=[
   number:'048',
   title:'O DIA DO TRIUNFO DE JESUS',
   category:'Harpa Cristã',
-  sourceToneIndex:8,
+  sourceToneIndex:10,
 
   sections:[
     {
       label:'1ª estrofe',
       lines:[
-      {lyric:'Quando lá do céu desçendo, para os Seus, Jesus voltar,',anchors:[{pos:6,chord:'Ab'},{pos:35,chord:'Db'},{pos:50,chord:'Ab'}]},
+      {lyric:'Quando lá do céu desçendo, / para os Seus, Jesus voltar,',anchors:[{pos:6,chord:'Ab'},{pos:37,chord:'Db'},{pos:52,chord:'Ab'}]},
       {lyric:'E o clarim de Deus a todos proclamar,',anchors:[{pos:7,chord:'Ab'},{pos:33,chord:'Eb'}]},
-      {lyric:'Que chegou o grande dia do triunfar do meu Rei,',anchors:[{pos:7,chord:'Ab'},{pos:30,chord:'Db'},{pos:43,chord:'Ab'}]},
+      {lyric:'Que chegou o grande dia / do triunfar do meu Rei,',anchors:[{pos:7,chord:'Ab'},{pos:32,chord:'Db'},{pos:45,chord:'Ab'}]},
       {lyric:'Eu, por Sua imensa graça, lá estarei.',anchors:[{pos:8,chord:'Ab'},{pos:19,chord:'Eb'},{pos:33,chord:'Ab'}]}
     ]
     },
@@ -967,7 +967,7 @@ const songs=[
     {
       label:'2ª estrofe',
       lines:[
-      {lyric:'Nesse dia, quando os mortos hão de a voz de Cristo ouvir,',anchors:[{pos:6,chord:'Ab'},{pos:37,chord:'Db'},{pos:53,chord:'Ab'}]},
+      {lyric:'Nesse dia, quando os mortos / hão de a voz de Cristo ouvir,',anchors:[{pos:6,chord:'Ab'},{pos:39,chord:'Db'},{pos:55,chord:'Ab'}]},
       {lyric:'E dos seus sepulcros hão de ressurgir,',anchors:[{pos:6,chord:'Ab'},{pos:33,chord:'Eb'}]},
       {lyric:'Os remidos reunidos, logo aclamarão seu Rei,',anchors:[{pos:5,chord:'Ab'},{pos:27,chord:'Db'},{pos:40,chord:'Ab'}]},
       {lyric:'E, por Sua imensa graça, lá estarei.',anchors:[{pos:7,chord:'Ab'},{pos:18,chord:'Eb'},{pos:32,chord:'Ab'}]}
@@ -978,17 +978,17 @@ const songs=[
       lines:[
       {lyric:'Pelo mundo, rejeitado foi, Jesus, meu Salvador.',anchors:[{pos:5,chord:'Ab'},{pos:29,chord:'Db'},{pos:43,chord:'Ab'}]},
       {lyric:'Desprezaram, insultaram meu Senhor,',anchors:[{pos:6,chord:'Ab'},{pos:31,chord:'Eb'}]},
-      {lyric:'Mas, faustoso, vem o dia do triunfar do meu Rei,',anchors:[{pos:9,chord:'Ab'},{pos:31,chord:'Db'},{pos:44,chord:'Ab'}]},
+      {lyric:'Mas, faustoso, vem o dia / do triunfar do meu Rei,',anchors:[{pos:9,chord:'Ab'},{pos:33,chord:'Db'},{pos:46,chord:'Ab'}]},
       {lyric:'E, por Sua imensa graça, lá estarei.',anchors:[{pos:7,chord:'Ab'},{pos:19,chord:'Eb'},{pos:32,chord:'Ab'}]}
     ]
     },
     {
       label:'4ª estrofe',
       lines:[
-      {lyric:'Em mim mesmo, nada tenho em que possa confiar,',anchors:[{pos:7,chord:'Ab'},{pos:32,chord:'Db'},{pos:42,chord:'Ab'}]},
+      {lyric:'Em mim mesmo, nada tenho / em que possa confiar,',anchors:[{pos:7,chord:'Ab'},{pos:34,chord:'Db'},{pos:45,chord:'Ab'}]},
       {lyric:'Mas Jesus morreu na cruz p’ra me salvar;',anchors:[{pos:6,chord:'Ab'},{pos:36,chord:'Eb'}]},
-      {lyric:'Tão somente nEle espero, sim, e sempre esperarei,',anchors:[{pos:6,chord:'Ab'},{pos:33,chord:'Db'},{pos:45,chord:'Ab'}]},
-      {lyric:'Pois, por Sua imensa graça, lá estarei.',anchors:[{pos:10,chord:'Ab'},{pos:21,chord:'Eb'},{pos:35,chord:'Ab'}]}
+      {lyric:'Tão somente nEle espero, / sim, e sempre esperarei,',anchors:[{pos:6,chord:'Ab'},{pos:34,chord:'Db'},{pos:47,chord:'Ab'}]},
+      {lyric:'Pois, por Sua imensa graça, lá estarei.',anchors:[{pos:10,chord:'Ab'},{pos:22,chord:'Eb'},{pos:35,chord:'Ab'}]}
     ]
     }
   ]
