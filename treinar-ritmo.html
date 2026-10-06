@@ -58,6 +58,78 @@ button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .song-option .song-check{font-size:12px;opacity:.8}
 .song-empty{padding:18px;text-align:center;color:var(--muted);font:13px Arial}
 
+/* =========================
+   ROLAGEM AUTOMÁTICA
+========================= */
+.auto-scroll-panel{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  padding:6px 12px 8px;
+  border-top:1px solid var(--line);
+  background:rgba(255,253,249,.10);
+}
+.auto-scroll-panel.hidden{display:none}
+.auto-scroll-panel.fade-50{background:rgba(255,253,249,.10)}
+.auto-scroll-panel.fade-50 button{
+  background:rgba(248,245,239,.10);
+  border-color:rgba(206,196,183,.10);
+}
+.auto-scroll-panel.fade-50 button:hover,
+.auto-scroll-panel.fade-50 button:focus-visible{
+  background:rgba(236,229,218,.10);
+}
+.auto-scroll-panel.fade-50 .auto-scroll-speed{opacity:.2}
+.auto-scroll-panel.fade-50 .memory-check,
+.auto-scroll-panel.fade-50 .auto-scroll-value,
+.auto-scroll-panel.fade-50 .auto-scroll-label{opacity:.10}
+.auto-scroll-panel .memory-check{
+  display:flex;align-items:center;gap:3px;
+  font:700 .78rem/1 Arial,sans-serif;
+  cursor:pointer;user-select:none;
+}
+.auto-scroll-panel .memory-check input{
+  width:16px;height:16px;margin:0;
+  accent-color:var(--accent);
+}
+.auto-scroll-panel .speed-btn{
+  min-width:30px;min-height:30px;padding:4px 8px;border-radius:7px;
+}
+.auto-scroll-speed{
+  width:min(220px,42vw);
+  accent-color:var(--accent);
+  cursor:pointer;
+}
+.auto-scroll-value{
+  min-width:22px;text-align:center;
+  font:700 .76rem/1 Arial,sans-serif;color:var(--muted);
+}
+.auto-scroll-label{
+  margin-left:4px;font:600 .72rem/1 Arial,sans-serif;
+  color:var(--muted);white-space:nowrap;
+}
+.auto-scroll-close{
+  position:absolute;right:4px;top:2px;
+  min-width:22px;min-height:22px;width:22px;height:22px;padding:0;
+  border:0;background:transparent;color:#8d1c1c;
+  font:700 18px/20px Arial,sans-serif;border-radius:50%;z-index:5;
+}
+.auto-scroll-close:hover{
+  background:rgba(141,28,28,.10);color:#b00000;transform:none;
+}
+
+@media(max-width:600px){
+  .auto-scroll-panel{
+    position:relative;width:100%;max-width:100%;
+    padding:6px 30px 7px 8px;gap:4px;flex-wrap:nowrap;
+  }
+  .auto-scroll-panel .speed-btn{min-width:28px;min-height:28px;padding:3px 6px}
+  .auto-scroll-speed{width:min(125px,35vw);min-width:80px}
+  .auto-scroll-value{min-width:18px;font-size:.70rem}
+  .auto-scroll-label{font-size:.68rem;margin-left:1px}
+}
+
 .bpm{
   width:54px;border:1px solid #cec4b7;border-radius:7px;
   padding:7px 5px;background:#fffdf9;font:700 .78rem Arial;
@@ -140,6 +212,7 @@ button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 .char.space{
   min-width:.28em;
 }
+.chorus .section-name,
 .chorus .char-line{font-style:italic;font-weight:700}
 
 .help{
@@ -164,6 +237,7 @@ button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
     <button id="play">▶ TOCAR</button>
     <button id="stop">■</button>
     <button id="back">↶</button>
+    <button id="toggleAutoScroll" title="Rolagem automática">▶</button>
     <div class="song">
       <div class="song-picker">
         <button id="songCurrent" class="song-current" type="button" aria-haspopup="listbox" aria-expanded="false">
@@ -178,7 +252,19 @@ button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
       </div>
     </div>
     <span style="font:700 12px Arial;color:#746e64">BPM</span>
-    <input id="bpm" class="bpm" type="number" min="40" max="180" value="80">
+    <input id="bpm" class="bpm" type="number" min="30" max="999" value="80">
+  </div>
+  <div id="autoScrollPanel" class="auto-scroll-panel hidden" aria-label="Velocidade da rolagem automática">
+    <button type="button" id="closeAutoScroll" class="auto-scroll-close" title="Sair do modo de rolagem" aria-label="Sair do modo de rolagem">×</button>
+    <label class="memory-check" title="Memorizar o tempo desta música">
+      <input type="checkbox" id="autoScrollMemory">
+      <span>⏱</span>
+    </label>
+    <button type="button" class="speed-btn" id="autoScrollSlow" title="Mais devagar">−</button>
+    <input class="auto-scroll-speed" id="autoScrollSpeed" type="range" min="-5" max="5" step="1" value="0" aria-label="Velocidade da rolagem">
+    <span class="auto-scroll-value" id="autoScrollValue">0</span>
+    <button type="button" class="speed-btn" id="autoScrollFast" title="Mais rápido">+</button>
+    <span class="auto-scroll-label" id="autoScrollTime">3:00</span>
   </div>
 </header>
 
@@ -191,9 +277,12 @@ button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
     caractere da letra. Assim, <b>pos:0</b> fica sobre o primeiro caractere,
     <b>pos:17</b> sobre o 18º caractere, <b>pos:32</b> sobre o 33º e assim por diante.
     Não existe mais uma grade fixa de 16 posições.<br>
+    <b>Tempo:</b> cada bolinha representa <b>1 tempo</b> da música, definido pelo BPM,
+    independentemente da distância visual entre as bolinhas. A distância entre
+    as letras serve apenas para posicionar a bolinha sobre a palavra.<br>
     <b>Estrutura das músicas:</b> cada música possui <b>id</b>, <b>number</b>,
     <b>title</b>, <b>category</b>, <b>sourceToneIndex</b> e <b>sections</b>.
-    O campo <b>hits[]</b> guarda as posições dos ritmos pelo índice dos caracteres.
+    O campo <b>hits[]</b> guarda as posições visuais dos ritmos pelo índice dos caracteres.
   </div>
 </main>
 
@@ -215,6 +304,10 @@ button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
       clique no caractere -> {pos:n}
 */
 
+/* =========================
+   007 — CRISTO CURA, SIM!
+========================= */
+
 const songs = [
   {
     id:'007',
@@ -224,52 +317,95 @@ const songs = [
     sourceToneIndex:5,
 
     sections:[
-      {
-        label:'1ª estrofe',
-        lines:[
-          {text:'Contra os males deste mundo, / Deus nos vale só;',hits:[4,13,20,26,32,41,48]},
-          {text:'Não há mal que Deus não cure, / Pois de nós tem dó.',hits:[0,8,16,25,33,41,49,51]}
-        ]
-      },
+    {
+      label:'1ª estrofe',
+      lines:[
+      {text:'Contra os males deste mundo, ',hits:[0,4,13,20,26]},
+      {text:'Deus nos vale só;',hits:[3,10,16]},
+      {text:'Não há mal que Deus não cure, ',hits:[1,8,16,25]},
+      {text:'Pois de nós tem dó.',hits:[1,9,17,18]},
+      {text:'Cristo cura, sim,',hits:[1,8,15,16]},
+      {text:'Cristo cura, sim,',hits:[1,8,15,16]},
+      {text:'Seu amor por nós é imenso;',hits:[1,6,14,21]},
+      {text:'Ele cura, sim!',hits:[1,6,11]},
+      {text:'Derramou Seu sangue puro ',hits:[1,6,14,21]},
+      {text:'P\'ra remir a mim;',hits:[1,8,14]},
+      {text:'Quando ungido sou de azeite,  ',hits:[2,10,15,23]},
+      {text:'Sou curado, enfim!',hits:[1,7,16,17]},
+      {text:'Só noss\'alma é bem segura, / Oculta em Jesus;',hits:[1,9,16,22,30,35,42]},
+      {text:'Ele o bálsamo da vida, ',hits:[0,7,12,18]},
+      {text:'Derramou na cruz.',hits:[1,6,15,16]},
+      {text:'Glória a Deus! Eterna glória, ',hits:[1,10,17,24]},
+      {text:'Demos-Lhe louvor;',hits:[1,7,15,16]},
+      {text:'Glória, cânticos e hosanas ',hits:[1,9,17,22]},
+      {text:'Dai ao Redentor!',hits:[1,8,13,15]}
+      ]
+    }
+    ]
+  },
 
-      {
-        label:'Coro',
-        lines:[
-          {text:'Cristo cura, sim,',hits:[1,8,15,17]},
-          {text:'Cristo cura, sim,',hits:[1,8,15,17]},
-          {text:'Seu amor por nós é imenso;',hits:[1,6,14,21]},
-          {text:'Ele cura, sim!',hits:[0,5,11]}
-        ]
-      },
+{
+    id:'015',
+    number:'015',
+    title:'CONVERSÃO',
+    category:'Harpa Cristã',
+    sourceToneIndex:5,
 
-      {
-        label:'2ª estrofe',
-        lines:[
-          {text:"Derramou Seu sangue puro / P'ra remir a mim;",hits:[0,6,14,21,29,35,41]},
-          {text:'Quando ungido sou de azeite, / Sou curado, enfim!',hits:[0,10,15,23,32,38,46,49]}
-        ]
-      },
-
-      {
-        label:'3ª estrofe',
-        lines:[
-          {text:"Só noss'alma é bem segura, / Oculta em Jesus;",hits:[0,10,15,23,32,38,46,49]},
-          {text:'Ele o bálsamo da vida, / Derramou na cruz.',hits:[0,10,15,23,32,38,46,49]}
-        ]
-      },
-
-      {
-        label:'4ª estrofe',
-        lines:[
-          {text:'Glória a Deus! Eterna glória, / Demos-Lhe louvor;',hits:[0,10,15,23,32,38,46,49]},
-          {text:'Glória, cânticos e hosanas / Dai ao Redentor!',hits:[0,10,15,23,32,38,46,49]}
-        ]
-      }
+    sections:[
+    {
+      label:'1ª Estrofe',
+      lines:[
+      {text:'Oh! quão cego andei ',hits:[0,10,19]},
+      {text:'e perdido vaguei, ',hits:[6,14]},
+      {text:'Longe, longe do meu Salvador!',hits:[9,17,27]},
+      {text:'Mas do céu Ele desceu, ',hits:[1,13]},
+      {text:'e Seu sangue verteu ',hits:[1,12]},
+      {text:'P\'ra salvar um tão pobre pecador.',hits:[1,13,26,32]}
+      ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {text:'Foi na cruz, foi na cruz,',hits:[1,14]},
+      {text:'Onde um dia eu vi',hits:[1,11]},
+      {text:'Meu pecado castigado em Jesus;',hits:[1,13,22]},
+      {text:'Foi ali, pela fé, que os olhos abri,',hits:[1,11,20,29]},
+      {text:'E agora me alegro em Sua luz',hits:[0,6,22]}
+      ]
+    },
+    {
+      label:'2ª Estrofe',
+      lines:[
+      {text:'Eu ouvia falar dessa graça sem par, ',hits:[1,7,16,25]},
+      {text:'Que do céu trouxe nosso Jesus;',hits:[1,12,22,29]},
+      {text:'Mas eu surdo me fiz, ',hits:[1,11]},
+      {text:'converter-me não quis ',hits:[2,11]},
+      {text:'Ao Senhor, que por mim morreu na cruz.',hits:[1,12,27]}
+      ]
+    },
+    {
+      label:'3ª Estrofe',
+      lines:[
+      {text:'Mas um dia senti meu pecado, e vi ',hits:[1,10,19,27]},
+      {text:'Sobre mim a espada da lei;',hits:[1,10,17,24]},
+      {text:'Apressado fugi, em Jesus me escondi, ',hits:[0,8,17,26]},
+      {text:'E abrigo seguro nEle achei.',hits:[0,7,17,25]}
+      ]
+    },
+    {
+      label:'4ª Estrofe',
+      lines:[
+      {text:'Quão ditoso, então, este meu coração, ',hits:[1,10,21,30]},
+      {text:'Conhecendo o excelso amor',hits:[1,9,19,24]},
+      {text:'Que levou meu Jesus a sofrer lá na cruz; ',hits:[1,11,20,30]},
+      {text:'P\'ra salvar a um ·tão pobre pecador.',hits:[2,15,29,34]}
+      ]
+    }
     ]
   }
 ];
 
-let currentSongId = '007';
+let currentSongId = '015';
 
 /* =========================================================
    VALIDAÇÃO DAS MÚSICAS
@@ -316,6 +452,263 @@ let playing=false;
 let timer=null;
 let lineIndex=0;
 let charIndex=-1;
+let hitIndex=0;
+
+/* =========================
+   ROLAGEM AUTOMÁTICA
+   Mesma lógica geral da Harpa Cifrada:
+   rolagem suave, pausa/retomada, velocidade e memória.
+   ========================= */
+let autoScrollMode=false;
+let autoScrollRunning=false;
+let autoScrollSpeedLevel=0;
+let autoScrollFrame=0;
+let autoScrollFadeTimer=0;
+let autoScrollSegmentStartTime=0;
+let autoScrollSegmentStartY=0;
+let autoScrollSegmentDuration=180000;
+let autoScrollResumeY=null;
+
+function getAutoScrollMax(){
+  return Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+}
+
+function getAutoScrollMultiplier(){
+  return Math.pow(1.15,autoScrollSpeedLevel);
+}
+
+function getAutoScrollDurationMs(){
+  return 180000/getAutoScrollMultiplier();
+}
+
+function formatAutoScrollTime(ms){
+  const total=Math.max(1,Math.round(ms/1000));
+  const minutes=Math.floor(total/60);
+  const seconds=total%60;
+  return `${minutes}:${String(seconds).padStart(2,'0')}`;
+}
+
+function autoScrollMemoryKey(songId){
+  return `treinador_scroll_tempo_${songId}`;
+}
+
+function loadAutoScrollMemory(songId){
+  try{
+    const raw=localStorage.getItem(autoScrollMemoryKey(songId));
+    const n=raw===null?0:Number(raw);
+    return Number.isFinite(n)?Math.max(-5,Math.min(5,n)):0;
+  }catch{return 0;}
+}
+
+function isAutoScrollMemorySaved(){
+  try{
+    return localStorage.getItem(autoScrollMemoryKey(currentSongId))===String(autoScrollSpeedLevel);
+  }catch{return false;}
+}
+
+function updateAutoScrollMemoryButton(){
+  const checkbox=document.getElementById('autoScrollMemory');
+  if(!checkbox)return;
+  checkbox.checked=isAutoScrollMemorySaved();
+  checkbox.title=checkbox.checked
+    ? 'Tempo memorizado para esta música'
+    : 'Memorizar o tempo desta música';
+}
+
+function updateAutoScrollPanel(){
+  const panel=document.getElementById('autoScrollPanel');
+  const value=document.getElementById('autoScrollValue');
+  const range=document.getElementById('autoScrollSpeed');
+  const time=document.getElementById('autoScrollTime');
+  if(range)range.value=String(autoScrollSpeedLevel);
+  if(value)value.textContent=autoScrollSpeedLevel>0?`+${autoScrollSpeedLevel}`:String(autoScrollSpeedLevel);
+  if(time)time.textContent=formatAutoScrollTime(getAutoScrollDurationMs());
+  updateAutoScrollMemoryButton();
+
+  const button=document.getElementById('toggleAutoScroll');
+  if(button){
+    button.classList.toggle('active',autoScrollMode);
+    button.textContent=autoScrollRunning?'⏸':'▶';
+    button.title=autoScrollRunning?'Parar rolagem automática':'Rolagem automática';
+  }
+}
+
+function cancelAutoScrollFrame(){
+  if(autoScrollFrame){
+    cancelAnimationFrame(autoScrollFrame);
+    autoScrollFrame=0;
+  }
+}
+
+function resetAutoScrollForNewSong(){
+  cancelAutoScrollFrame();
+  clearTimeout(autoScrollFadeTimer);
+  autoScrollFadeTimer=0;
+  autoScrollRunning=false;
+  autoScrollMode=false;
+  autoScrollResumeY=null;
+
+  const panel=document.getElementById('autoScrollPanel');
+  if(panel){
+    panel.classList.add('hidden');
+    panel.classList.remove('fade-50');
+  }
+  updateAutoScrollPanel();
+}
+
+function despertarAutoScrollPanel(){
+  const panel=document.getElementById('autoScrollPanel');
+  if(!panel)return;
+  clearTimeout(autoScrollFadeTimer);
+  panel.classList.remove('fade-50');
+  autoScrollFadeTimer=setTimeout(()=>{
+    if(autoScrollMode)panel.classList.add('fade-50');
+  },5000);
+}
+
+function finishAutoScroll(){
+  cancelAutoScrollFrame();
+  autoScrollRunning=false;
+  autoScrollMode=true;
+  clearTimeout(autoScrollFadeTimer);
+  autoScrollFadeTimer=0;
+  const panel=document.getElementById('autoScrollPanel');
+  if(panel)panel.classList.remove('hidden','fade-50');
+  autoScrollResumeY=null;
+  window.scrollTo(0,getAutoScrollMax());
+  updateAutoScrollPanel();
+}
+
+function autoScrollTick(now){
+  if(!autoScrollRunning)return;
+  const maxY=getAutoScrollMax();
+  const elapsed=now-autoScrollSegmentStartTime;
+  const p=Math.min(1,elapsed/Math.max(1,autoScrollSegmentDuration));
+  const y=autoScrollSegmentStartY+(maxY-autoScrollSegmentStartY)*p;
+  window.scrollTo(0,y);
+  if(p>=1){
+    finishAutoScroll();
+    return;
+  }
+  autoScrollFrame=requestAnimationFrame(autoScrollTick);
+}
+
+function startAutoScroll(){
+  const panel=document.getElementById('autoScrollPanel');
+  if(panel){
+    panel.classList.remove('hidden','fade-50');
+    despertarAutoScrollPanel();
+  }
+
+  cancelAutoScrollFrame();
+  const retomando=autoScrollResumeY!==null;
+  autoScrollMode=true;
+  autoScrollRunning=true;
+  updateAutoScrollPanel();
+
+  // Na primeira entrada no modo de rolagem, reconstrói a letra
+  // com o Coro repetido após cada estrofe, como no Index.
+  if(!retomando) render();
+
+  requestAnimationFrame(()=>{
+    const maxY=getAutoScrollMax();
+    if(maxY<=0){
+      finishAutoScroll();
+      return;
+    }
+
+    const startY=retomando?Math.min(autoScrollResumeY,maxY):0;
+    autoScrollSegmentStartY=startY;
+    autoScrollSegmentStartTime=performance.now();
+    autoScrollSegmentDuration=getAutoScrollDurationMs()*Math.max(0,(maxY-startY)/maxY);
+    autoScrollResumeY=null;
+    window.scrollTo(0,startY);
+    autoScrollFrame=requestAnimationFrame(autoScrollTick);
+  });
+}
+
+function stopAutoScroll(){
+  autoScrollResumeY=window.scrollY;
+  cancelAutoScrollFrame();
+  autoScrollRunning=false;
+  autoScrollMode=true;
+  updateAutoScrollPanel();
+}
+
+function setAutoScrollSpeed(level){
+  const next=Math.max(-5,Math.min(5,Number(level)||0));
+  if(next===autoScrollSpeedLevel){
+    updateAutoScrollPanel();
+    return;
+  }
+
+  if(autoScrollRunning){
+    const now=performance.now();
+    const maxY=getAutoScrollMax();
+    const currentY=Math.min(window.scrollY,maxY);
+    const remaining=Math.max(0,maxY-currentY);
+    const remainingRatio=maxY>0?remaining/maxY:0;
+    autoScrollSpeedLevel=next;
+    autoScrollSegmentStartY=currentY;
+    autoScrollSegmentStartTime=now;
+    autoScrollSegmentDuration=getAutoScrollDurationMs()*remainingRatio;
+  }else{
+    autoScrollSpeedLevel=next;
+  }
+  updateAutoScrollPanel();
+}
+
+function isChorusSection(section){
+  return /^(coro|refrão)$/i.test(String(section?.label||'').trim());
+}
+
+function isVerseSection(section){
+  return /^\s*\d+ª?\s*estrofe/i.test(String(section?.label||''));
+}
+
+/*
+  No modo de rolagem, o Index repete visualmente o Coro depois
+  de cada estrofe, sem alterar a estrutura original da música.
+  Aqui fazemos a mesma coisa no Treinador de Ritmos.
+*/
+function getAutoScrollSections(sections){
+  const choruses=sections.filter(isChorusSection);
+  if(!choruses.length)return sections;
+
+  const result=[];
+
+  sections.forEach(section=>{
+    if(isChorusSection(section))return;
+
+    result.push(section);
+
+    if(isVerseSection(section)){
+      choruses.forEach(chorus=>result.push(chorus));
+    }
+  });
+
+  return result.length?result:sections;
+}
+
+function sairModoRolagem(){
+  cancelAutoScrollFrame();
+  clearTimeout(autoScrollFadeTimer);
+  autoScrollFadeTimer=0;
+  autoScrollRunning=false;
+  autoScrollMode=false;
+  autoScrollResumeY=null;
+
+  const panel=document.getElementById('autoScrollPanel');
+  if(panel){
+    panel.classList.add('hidden');
+    panel.classList.remove('fade-50');
+  }
+
+  updateAutoScrollPanel();
+  render();
+  window.scrollTo(0,0);
+}
+
 
 /* =========================
    MÚSICAS / SELEÇÃO
@@ -360,12 +753,16 @@ function renderSongList(){
 
 function selectSong(id){
   if(!songs.some(song=>song.id===id))return;
+  resetAutoScrollForNewSong();
   currentSongId=id;
   stop();
   lineIndex=0;
   charIndex=-1;
+  hitIndex=0;
+  autoScrollSpeedLevel=loadAutoScrollMemory(currentSongId);
   updateSongHeader();
   render();
+  updateAutoScrollPanel();
   closeSongList();
 }
 
@@ -387,6 +784,12 @@ document.addEventListener('click',e=>{
   if(!e.target.closest('.song-picker'))closeSongList();
 });
 
+window.addEventListener('scroll',()=>{
+  if(autoScrollMode && !autoScrollRunning){
+    autoScrollResumeY=window.scrollY;
+  }
+},{passive:true});
+
 /* =========================
    RENDERIZAÇÃO
    ========================= */
@@ -395,9 +798,17 @@ function render(){
   musicEl.innerHTML="";
   const song=getCurrentSong();
 
-  song.sections.forEach((section,si)=>{
+  // Fora da rolagem: ordem original.
+  // Durante a rolagem: Coro após cada estrofe.
+  const sectionsToRender=autoScrollMode
+    ? getAutoScrollSections(song.sections)
+    : song.sections;
+
+  sectionsToRender.forEach(section=>{
+    const originalSi=song.sections.indexOf(section);
     const sec=document.createElement("section");
-    sec.className="section"+(section.chorus?" chorus":"");
+    const isChorus=/^(coro|refrão)$/i.test(String(section?.label||'').trim());
+    sec.className="section"+(isChorus?" chorus":"");
 
     const name=document.createElement("div");
     name.className="section-name";
@@ -407,7 +818,9 @@ function render(){
     section.lines.forEach((line,li)=>{
       const row=document.createElement("div");
       row.className="line";
-      row.dataset.line=globalLine(si,li);
+      // Mesmo que o Coro apareça mais de uma vez visualmente,
+      // ele continua apontando para a mesma linha lógica da música.
+      row.dataset.line=globalLine(originalSi,li);
 
       const rhythm=document.createElement("div");
       rhythm.className="rhythm";
@@ -523,12 +936,9 @@ function beep(){
   o.type="square";
 
   /*
-    Aqui ainda usamos o caractere como referência temporal.
-    Depois podemos separar:
-      - posição da letra
-      - instrumento
-      - duração
-      - intensidade
+    A posição da bolinha é apenas visual.
+    O tempo não depende mais da quantidade de caracteres
+    entre uma bolinha e outra.
   */
   o.frequency.value=(charIndex%4===0)?1000:700;
 
@@ -541,51 +951,64 @@ function beep(){
   o.stop(ctx.currentTime+.04);
 }
 
-function tick(){
-  if(!playing)return;
+function getLineHits(line){
+  if(!line || !Array.isArray(line.hits))return [];
 
-  const [si,li]=locate(lineIndex);
-  const song=getCurrentSong();
-  const line=song.sections[si].lines[li];
+  return line.hits
+    .map(Number)
+    .filter(n=>Number.isFinite(n) && n>=0 && n<line.text.length)
+    .sort((a,b)=>a-b);
+}
 
-  charIndex++;
-
-  /*
-    Agora percorremos a quantidade REAL de caracteres da linha.
-    Não existe mais "16 passos".
-  */
-  if(charIndex>=line.text.length){
-    charIndex=0;
-    lineIndex++;
-
-    if(lineIndex>=totalLines()){
-      stop();
-      return;
-    }
-  }
-
-  highlight();
-
-  const [s,l]=locate(lineIndex);
-
-  if(song.sections[s].lines[l].hits.includes(charIndex)){
-    beep();
-  }
-
+function getBpmInterval(){
   const bpm=Math.max(
-    40,
+    30,
     Math.min(
-      180,
+      999,
       Number(document.getElementById("bpm").value)||80
     )
   );
 
+  return 60000/bpm;
+}
+
+function tick(){
+  if(!playing)return;
+
+  const song=getCurrentSong();
+
   /*
-    Cada caractere recebe uma unidade temporal.
-    Mais tarde podemos trocar isso por uma grade musical
-    independente sem perder o vínculo posicional com a letra.
+    Cada HIT (bolinha) vale exatamente 1 tempo.
+    A distância entre as bolinhas na palavra NÃO altera o intervalo.
+    hits[] continua servindo para a posição visual, enquanto hitIndex
+    controla a ordem temporal da execução.
   */
-  timer=setTimeout(tick,60000/bpm);
+  while(lineIndex<totalLines()){
+    const [si,li]=locate(lineIndex);
+    const line=song.sections[si].lines[li];
+    const hits=getLineHits(line);
+
+    if(hitIndex<hits.length){
+      charIndex=hits[hitIndex];
+      highlight();
+      beep();
+      hitIndex++;
+
+      timer=setTimeout(tick,getBpmInterval());
+      return;
+    }
+
+    /*
+      A linha terminou. Passamos para a próxima linha sem criar
+      um tempo extra. Assim, do último hit de uma linha ao primeiro
+      hit da próxima continua existindo exatamente 1 tempo.
+    */
+    lineIndex++;
+    hitIndex=0;
+    charIndex=-1;
+  }
+
+  stop();
 }
 
 function start(){
@@ -596,6 +1019,7 @@ function start(){
 
   lineIndex=0;
   charIndex=-1;
+  hitIndex=0;
 
   tick();
 }
@@ -617,11 +1041,51 @@ document.getElementById("back").onclick=()=>{
   stop();
   lineIndex=0;
   charIndex=-1;
+  hitIndex=0;
 };
 
-populateSongList();
+document.getElementById('toggleAutoScroll').onclick=()=>{
+  if(autoScrollRunning){
+    stopAutoScroll();
+    return;
+  }
+  startAutoScroll();
+};
+
+document.getElementById('autoScrollMemory').onchange=e=>{
+  try{
+    if(e.target.checked){
+      localStorage.setItem(
+        autoScrollMemoryKey(currentSongId),
+        String(autoScrollSpeedLevel)
+      );
+    }else{
+      localStorage.removeItem(autoScrollMemoryKey(currentSongId));
+    }
+  }catch{}
+  updateAutoScrollPanel();
+};
+
+document.getElementById('autoScrollSlow').onclick=()=>
+  setAutoScrollSpeed(autoScrollSpeedLevel-1);
+
+document.getElementById('autoScrollFast').onclick=()=>
+  setAutoScrollSpeed(autoScrollSpeedLevel+1);
+
+document.getElementById('autoScrollSpeed').oninput=e=>
+  setAutoScrollSpeed(e.target.value);
+
+document.getElementById('autoScrollPanel').addEventListener('pointerdown',()=>{
+  despertarAutoScrollPanel();
+});
+
+document.getElementById('closeAutoScroll').onclick=()=>{
+  sairModoRolagem();
+};
+
 updateSongHeader();
-updateSongHeader();
+autoScrollSpeedLevel=loadAutoScrollMemory(currentSongId);
+updateAutoScrollPanel();
 renderSongList();
 render();
 </script>

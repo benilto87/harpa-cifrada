@@ -995,6 +995,123 @@ const songs=[
 },
 
 /* =========================
+   061 — DEUS TOMARÁ CONTA DE TI
+========================= */
+
+{
+  id:'061',
+  number:'061',
+  title:'DEUS TOMARÁ CONTA DE TI',
+  category:'Harpa Cristã',
+  sourceToneIndex:10,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Em todo o tempo, irmão, o Senhor / Tomará conta de ti.',anchors:[{pos:0,chord:'Bb'},{pos:10,chord:'Eb'},{pos:20,chord:'Bb'},{pos:35,chord:'Bb'},{pos:43,chord:'F'},{pos:50,chord:'Bb'}]},
+      {lyric:'Cristo, que fala de vida e amor, / Tomará conta de ti.',anchors:[{pos:1,chord:'Bb'},{pos:12,chord:'Eb'},{pos:20,chord:'Bb'},{pos:35,chord:'F'},{pos:51,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Deus tomará conta de ti,',anchors:[{pos:1,chord:'Bb'}]},
+      {lyric:'Deus tomará conta de ti,',anchors:[{pos:1,chord:'F'}]},
+      {lyric:'NEle descansa, sempre aqui,',anchors:[{pos:0,chord:'Bb'},{pos:16,chord:'Eb'}]},
+      {lyric:'Pois tem cuidado Deus, de ti.',anchors:[{pos:0,chord:'Bb/F'},{pos:18,chord:'F'},{pos:25,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Em toda prova, irmão, o Senhor / Tomará conta de ti.',anchors:[{pos:0,chord:'Bb'},{pos:8,chord:'Eb'},{pos:18,chord:'Bb'},{pos:33,chord:'Bb'},{pos:41,chord:'F'},{pos:48,chord:'Bb'}]},
+      {lyric:'Cristo, que é teu amado Pastor, / Tomará conta de ti.',anchors:[{pos:1,chord:'Bb'},{pos:11,chord:'Eb'},{pos:19,chord:'Bb'},{pos:34,chord:'F'},{pos:49,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Em toda parte, irmão, o Senhor / Tomará conta de ti.',anchors:[{pos:0,chord:'Bb'},{pos:8,chord:'Eb'},{pos:18,chord:'Bb'},{pos:32,chord:'Bb'},{pos:41,chord:'F'},{pos:48,chord:'Bb'}]},
+      {lyric:'Cristo, que nos dá poder e valor, / Tomará conta de ti.',anchors:[{pos:1,chord:'Bb'},{pos:12,chord:'Eb'},{pos:21,chord:'Bb'},{pos:36,chord:'F'},{pos:51,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Chegando a morte, irmão, o Senhor / Tomará conta de ti.',anchors:[{pos:1,chord:'Bb'},{pos:12,chord:'Eb'},{pos:21,chord:'Bb'},{pos:35,chord:'Bb'},{pos:44,chord:'F'},{pos:51,chord:'Bb'}]},
+      {lyric:'Cristo será teu fiel condutor: / Tomará conta de ti.',anchors:[{pos:1,chord:'Bb'},{pos:9,chord:'Eb'},{pos:17,chord:'Bb'},{pos:34,chord:'F'},{pos:48,chord:'Bb'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   063 — ACORDAI, ACORDAI
+========================= */
+
+{
+  id:'063',
+  number:'063',
+  title:'ACORDAI, ACORDAI',
+  category:'Harpa Cristã',
+  sourceToneIndex:8,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Eis marchamos para aquele bom país,',anchors:[{pos:8,chord:'Ab'},{pos:20,chord:'Bbm'}]},
+      {lyric:'Onde o crente (sim, é Cristo quem o diz),',anchors:[{pos:8,chord:'Eb'},{pos:23,chord:'Ab'}]},
+      {lyric:'Com seu Salvador, p’ra sempre ali feliz,',anchors:[{pos:8,chord:'Ab'},{pos:22,chord:'Bbm'}]},
+      {lyric:'Vai com Ele descansar.',anchors:[{pos:7,chord:'Eb'},{pos:18,chord:'Ab'}]},
+      {lyric:'Trabalhemos, pois, com zelo e com vigor,',anchors:[{pos:6,chord:'Ab'},{pos:22,chord:'Bbm'}]},
+      {lyric:'Constrangidos pelo Seu imenso amor;',anchors:[{pos:8,chord:'Eb'},{pos:19,chord:'Ab'}]},
+      {lyric:'Trabalhemos pelo nosso Salvador:',anchors:[{pos:6,chord:'Ab'},{pos:16,chord:'Bbm'}]},
+      {lyric:'Eis que a vida vai findar!',anchors:[{pos:9,chord:'Eb'},{pos:22,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Acordai! Acordai! Despertai! Despertai!',anchors:[{pos:4,chord:'Ab'},{pos:24,chord:'Eb'},{pos:36,chord:'Ab'}]},
+      {lyric:'E cantai! Sim, cantai! O Senhor não tardará.',anchors:[{pos:6,chord:'Ab'},{pos:28,chord:'Bb'},{pos:41,chord:'Eb'}]},
+      {lyric:'Eis marchamos para aquele bom país,',anchors:[{pos:8,chord:'Ab'},{pos:20,chord:'Bbm'}]},
+      {lyric:'Onde o crente (sim, é Cristo quem o diz),',anchors:[{pos:8,chord:'Eb'}]},
+      {lyric:'Com seu Salvador, p’ra sempre ali feliz,',anchors:[{pos:8,chord:'Ab'},{pos:22,chord:'Bbm'}]},
+      {lyric:'Vai com Ele descansar.',anchors:[{pos:7,chord:'Eb'},{pos:18,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Eis conosco nosso insigne Capitão,',anchors:[{pos:6,chord:'Ab'},{pos:18,chord:'Bbm'}]},
+      {lyric:'Que nos assegura eterna salvação!',anchors:[{pos:8,chord:'Eb'},{pos:18,chord:'Ab'}]},
+      {lyric:'Eis da santa fé, o invicto pavilhão!',anchors:[{pos:7,chord:'Ab'},{pos:20,chord:'Bbm'}]},
+      {lyric:'Vamos, vamos trabalhar!',anchors:[{pos:7,chord:'Eb'},{pos:19,chord:'Ab'}]},
+      {lyric:'Eis avante! Nada temos que temer;',anchors:[{pos:5,chord:'Ab'},{pos:16,chord:'Bbm'}]},
+      {lyric:'Por Jesus, havemos sempre de vencer,',anchors:[{pos:6,chord:'Eb'},{pos:19,chord:'Ab'}]},
+      {lyric:'Trabalhemos, pois até o amanhecer,',anchors:[{pos:6,chord:'Ab'},{pos:18,chord:'Bbm'}]},
+      {lyric:'E o trabalho aqui findar!',anchors:[{pos:7,chord:'Eb'},{pos:22,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Revestidos da couraça de Jesus,',anchors:[{pos:4,chord:'Ab'},{pos:16,chord:'Bbm'}]},
+      {lyric:'Como servos Seus e filhos, sim, da luz,',anchors:[{pos:5,chord:'Eb'},{pos:18,chord:'Ab'}]},
+      {lyric:'Gloriando-nos em Cristo e Sua cruz!',anchors:[{pos:4,chord:'Ab'},{pos:17,chord:'Bbm'}]},
+      {lyric:'Vamos, vamos, trabalhar!',anchors:[{pos:7,chord:'Eb'},{pos:20,chord:'Ab'}]},
+      {lyric:'Os perdidos, vamos com amor buscar,',anchors:[{pos:6,chord:'Ab'},{pos:19,chord:'Bbm'}]},
+      {lyric:'Aos desesperados, vamos declarar',anchors:[{pos:6,chord:'Eb'},{pos:18,chord:'Ab'}]},
+      {lyric:'Que Jesus ’stá pronto todos a salvar!',anchors:[{pos:6,chord:'Ab'},{pos:21,chord:'Bbm'}]},
+      {lyric:'Ó sim, vamos trabalhar!',anchors:[{pos:7,chord:'Eb'},{pos:19,chord:'Ab'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    077 — GUARDA O CONTACTO
 ========================= */
 
