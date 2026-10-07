@@ -145,6 +145,12 @@ button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
   letter-spacing:.02em;
 }
 .section{margin:0 0 28px}
+
+/* Espaço inicial no modo de rolagem: deixa o começo da letra afastado do topo para o aprendiz se preparar. */
+#music.auto-scroll-prep{
+  padding-top:110px;
+}
+
 .section-name{
   color:var(--accent);
   font:700 .73rem Arial,sans-serif;
@@ -227,6 +233,7 @@ button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
   .score{padding:22px 9px 60px}
   .char-line{font-size:18px}
   .section{margin-bottom:24px}
+  #music.auto-scroll-prep{padding-top:90px}
 }
 </style>
 </head>
@@ -234,10 +241,10 @@ button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
  <a class="back-arrow" href="index.html" title="Voltar para a Harpa Cifrada" aria-label="Voltar para a Harpa Cifrada">←</a>
 <header class="top">
   <div class="toolbar">
-    <button id="play">▶ TOCAR</button>
+    <button id="toggleAutoScroll" title="Rolagem automática">▶</button>   
+	<button id="play">bpm</button>
     <button id="stop">■</button>
     <button id="back">↶</button>
-    <button id="toggleAutoScroll" title="Rolagem automática">▶</button>
     <div class="song">
       <div class="song-picker">
         <button id="songCurrent" class="song-current" type="button" aria-haspopup="listbox" aria-expanded="false">
@@ -320,21 +327,41 @@ const songs = [
     {
       label:'1ª estrofe',
       lines:[
-      {text:'Contra os males deste mundo, ',hits:[0,4,13,20,26]},
+      {text:'Contra os males deste mundo, ',hits:[4,13,20,26]},
       {text:'Deus nos vale só;',hits:[3,10,16]},
       {text:'Não há mal que Deus não cure, ',hits:[1,8,16,25]},
       {text:'Pois de nós tem dó.',hits:[1,9,17,18]},
+      ]
+    },
+    {	  
+	  label:'Coro',
+      lines:[
       {text:'Cristo cura, sim,',hits:[1,8,15,16]},
       {text:'Cristo cura, sim,',hits:[1,8,15,16]},
-      {text:'Seu amor por nós é imenso;',hits:[1,6,14,21]},
-      {text:'Ele cura, sim!',hits:[1,6,11]},
-      {text:'Derramou Seu sangue puro ',hits:[1,6,14,21]},
-      {text:'P\'ra remir a mim;',hits:[1,8,14]},
+      {text:'Seu amor por nós é imenso;',hits:[1,6,14,21,25]},
+      {text:'Ele cura, sim!',hits:[1,6,11,12]},
+      ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+	  {text:'Derramou Seu sangue puro ',hits:[1,6,14,21]},
+      {text:'P\'ra remir a mim;',hits:[1,8,14,16]},
       {text:'Quando ungido sou de azeite,  ',hits:[2,10,15,23]},
       {text:'Sou curado, enfim!',hits:[1,7,16,17]},
-      {text:'Só noss\'alma é bem segura, / Oculta em Jesus;',hits:[1,9,16,22,30,35,42]},
+      ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[      
+	  {text:'Só noss\'alma é bem segura, / Oculta em Jesus;',hits:[1,9,16,22,29,34,43,44]},
       {text:'Ele o bálsamo da vida, ',hits:[0,7,12,18]},
       {text:'Derramou na cruz.',hits:[1,6,15,16]},
+      ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
       {text:'Glória a Deus! Eterna glória, ',hits:[1,10,17,24]},
       {text:'Demos-Lhe louvor;',hits:[1,7,15,16]},
       {text:'Glória, cânticos e hosanas ',hits:[1,9,17,22]},
@@ -355,50 +382,50 @@ const songs = [
     {
       label:'1ª Estrofe',
       lines:[
-      {text:'Oh! quão cego andei ',hits:[0,10,19]},
+      {text:'Oh! quão cego andei ',hits:[10,19]},
       {text:'e perdido vaguei, ',hits:[6,14]},
       {text:'Longe, longe do meu Salvador!',hits:[9,17,27]},
-      {text:'Mas do céu Ele desceu, ',hits:[1,13]},
-      {text:'e Seu sangue verteu ',hits:[1,12]},
-      {text:'P\'ra salvar um tão pobre pecador.',hits:[1,13,26,32]}
+      {text:'Mas do céu Ele desceu, ',hits:[9,20]},
+      {text:'e Seu sangue verteu ',hits:[8,17]},
+      {text:'P\'ra salvar um tão pobre pecador.',hits:[9,20,30,32]}
       ]
     },
     {
       label:'Coro',
       lines:[
-      {text:'Foi na cruz, foi na cruz,',hits:[1,14]},
-      {text:'Onde um dia eu vi',hits:[1,11]},
-      {text:'Meu pecado castigado em Jesus;',hits:[1,13,22]},
-      {text:'Foi ali, pela fé, que os olhos abri,',hits:[1,11,20,29]},
-      {text:'E agora me alegro em Sua luz',hits:[0,6,22]}
+      {text:'Foi na cruz, foi na cruz,',hits:[9,22]},
+      {text:'Onde um dia eu vi',hits:[9,16]},
+      {text:'Meu pecado castigado em Jesus;',hits:[7,17,27,29]},
+      {text:'Foi ali, pela fé, que os olhos abri,',hits:[6,15,26,34]},
+      {text:'E agora me alegro em Sua luz',hits:[5,13,26,28]}
       ]
     },
     {
       label:'2ª Estrofe',
       lines:[
-      {text:'Eu ouvia falar dessa graça sem par, ',hits:[1,7,16,25]},
-      {text:'Que do céu trouxe nosso Jesus;',hits:[1,12,22,29]},
-      {text:'Mas eu surdo me fiz, ',hits:[1,11]},
-      {text:'converter-me não quis ',hits:[2,11]},
-      {text:'Ao Senhor, que por mim morreu na cruz.',hits:[1,12,27]}
+      {text:'Eu ouvia falar dessa graça sem par, ',hits:[7,13,23,32]},
+      {text:'Que do céu trouxe nosso Jesus;',hits:[8,19,28,30]},
+      {text:'Mas eu surdo me fiz, ',hits:[9,17]},
+      {text:'converter-me não quis ',hits:[7,18]},
+      {text:'Ao Senhor, que por mim morreu na cruz.',hits:[7,20,35,37]}
       ]
     },
     {
       label:'3ª Estrofe',
       lines:[
-      {text:'Mas um dia senti meu pecado, e vi ',hits:[1,10,19,27]},
-      {text:'Sobre mim a espada da lei;',hits:[1,10,17,24]},
-      {text:'Apressado fugi, em Jesus me escondi, ',hits:[0,8,17,26]},
-      {text:'E abrigo seguro nEle achei.',hits:[0,7,17,25]}
+      {text:'Mas um dia senti meu pecado, e vi ',hits:[9,15,24,32]},
+      {text:'Sobre mim a espada da lei;',hits:[8,15,24,26]},
+      {text:'Apressado fugi, em Jesus me escondi, ',hits:[6,13,22,34]},
+      {text:'E abrigo seguro nEle achei.',hits:[5,12,25,27]}
       ]
     },
     {
       label:'4ª Estrofe',
       lines:[
-      {text:'Quão ditoso, então, este meu coração, ',hits:[1,10,21,30]},
-      {text:'Conhecendo o excelso amor',hits:[1,9,19,24]},
-      {text:'Que levou meu Jesus a sofrer lá na cruz; ',hits:[1,11,20,30]},
-      {text:'P\'ra salvar a um ·tão pobre pecador.',hits:[2,15,29,34]}
+      {text:'Quão ditoso, então, este meu coração, ',hits:[8,17,27,35]},
+      {text:'Conhecendo o excelso amor',hits:[6,16,23,25]},
+      {text:'Que levou meu Jesus a sofrer lá na cruz; ',hits:[7,17,26,37]},
+      {text:'P\'ra salvar a um ·tão pobre pecador.',hits:[9,23,34,36]}
       ]
     }
     ]
@@ -796,6 +823,7 @@ window.addEventListener('scroll',()=>{
 
 function render(){
   musicEl.innerHTML="";
+  musicEl.classList.toggle("auto-scroll-prep",autoScrollMode);
   const song=getCurrentSong();
 
   // Fora da rolagem: ordem original.
