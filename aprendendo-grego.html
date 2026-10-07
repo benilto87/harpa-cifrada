@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grego do Novo Testamento — Aprendendo as letras</title>
+<style>
+:root{
+  --bg:#f4f1e9;--paper:#fffdf8;--ink:#20262b;--muted:#6c7378;
+  --blue:#245c7a;--blue2:#eaf2f6;--gold:#c9962e;--gold2:#fbf4df;
+  --green:#2e8659;--green2:#edf8f1;--red:#bd4b4b;--red2:#fff0f0;
+  --line:#ddd8ce;--shadow:0 18px 55px rgba(31,43,50,.12);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:linear-gradient(180deg,#edf2f4 0,#f5f2eb 48%,#efeae0 100%);color:var(--ink)}
+button{font:inherit;cursor:pointer}
+.app{max-width:1180px;margin:auto;padding:18px;min-height:100vh}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:16px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:50px;height:50px;border-radius:15px;background:var(--blue);color:#fff;display:grid;place-items:center;font-family:"Times New Roman",serif;font-size:25px;font-weight:700;box-shadow:var(--shadow)}
+.brand h1{margin:0;font-size:18px}.brand small{color:var(--muted)}
+.stats{display:flex;gap:9px;flex-wrap:wrap}.pill{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-size:13px}
+.layout{display:grid;grid-template-columns:285px 1fr;gap:17px;align-items:start}.panel{background:rgba(255,253,248,.95);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+.sidebar{padding:17px;position:sticky;top:15px}.sidebar h2{margin:0 0 10px;font-size:15px}.sidebar-note{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:14px}
+.path{display:grid;gap:9px}.node{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:15px;padding:10px;background:#fff;cursor:pointer}.node.locked{opacity:1}.node.current{border-color:var(--blue);box-shadow:0 0 0 3px rgba(36,92,122,.08)}.node.done{background:var(--green2);border-color:#cde5d5}.node-circle{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#eef2f3;font-size:13px;font-weight:800}.node.done .node-circle{background:#d6efdf;color:var(--green)}.node strong{display:block;font-size:13px}.node span{font-size:11px;color:var(--muted)}
+.main{padding:21px}.hero{display:flex;justify-content:space-between;gap:15px;align-items:end;margin-bottom:14px}.hero h2{margin:0;font-size:28px}.hero p{margin:6px 0 0;color:var(--muted)}
+.intro{background:#f3f6f7;border:1px solid #dde6ea;border-radius:18px;padding:18px;margin-bottom:17px}.intro-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.intro-head h3{margin:0;font-size:16px}.skip{border:0;background:transparent;color:var(--blue);font-weight:800}.intro p{font-family:Georgia,serif;line-height:1.65;color:#414a50;margin:12px 0}.source-box{font-size:12px;color:var(--muted);background:#fff;border:1px solid var(--line);padding:10px 12px;border-radius:12px}
+.progress-row{display:flex;align-items:center;gap:10px;margin:12px 0 18px}.progress-track{flex:1;height:9px;background:#e7e3da;border-radius:99px;overflow:hidden}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--blue),#5b9ab9);border-radius:99px;transition:.25s}.progress-label{font-size:12px;color:var(--muted);white-space:nowrap}
+.game{position:relative;min-height:510px}.card{position:relative;min-height:510px;border-radius:26px;border:1px solid var(--line);background:var(--paper);box-shadow:0 20px 65px rgba(31,43,50,.14);padding:24px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}.card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 88% 13%,rgba(36,92,122,.09),transparent 24%),radial-gradient(circle at 11% 87%,rgba(201,150,46,.10),transparent 23%);pointer-events:none}.card>*{position:relative}
+.flip-card{width:min(390px,86%);margin:8px auto 0;transform-style:preserve-3d;backface-visibility:hidden;perspective:1000px;will-change:transform;border-radius:18px}
+.flip-card.flip{animation:flipAnswer .72s cubic-bezier(.22,.61,.36,1)}
+@keyframes flipAnswer{0%{transform:rotateY(0deg) scale(1)}18%{transform:rotateY(38deg) scale(.985)}50%{transform:rotateY(90deg) scale(.96)}82%{transform:rotateY(38deg) scale(.985)}100%{transform:rotateY(0deg) scale(1)}}
+.card-top{display:flex;justify-content:space-between;align-items:center}.tag{background:var(--blue2);color:var(--blue);padding:6px 10px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.05em}.counter{font-size:12px;color:var(--muted)}
+.question{margin-top:25px;text-align:center;color:var(--muted);font-size:13px}.greek{font-family:"Times New Roman",Georgia,serif;font-size:100px;text-align:center;line-height:1;margin:18px 0 10px}.greek.word-mode{font-size:66px;letter-spacing:.01em}.known-stage{display:none}.known-stage.show{display:block}.known-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-top:18px}.known-item{background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px;text-align:left}.known-item .kg{font-family:"Times New Roman",Georgia,serif;font-size:28px;font-weight:700}.known-item .kp{font-size:15px;font-weight:850}.known-item .ke{display:block;color:var(--muted);font-size:11px;margin-top:5px;line-height:1.35}.stage-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}.stage-intro-title{display:flex;justify-content:space-between;gap:12px;align-items:center}.stage-intro-title h3{margin:0}.known-example{display:grid;grid-template-columns:1fr 1fr;gap:8px 26px;margin-top:16px}.known-example p{margin:0;font-family:Georgia,serif;line-height:1.55}.known-example b{font-family:"Times New Roman",Georgia,serif;font-size:19px}.derived{color:var(--muted);font-size:12px}.phonetic{font-size:24px;text-align:center;font-weight:800;min-height:33px}.phonetic small{font-size:13px;color:var(--muted);font-weight:500}.prompt{text-align:center;font-weight:800;margin:18px 0 11px}.options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:680px;margin:0 auto;width:100%}.option{background:#fff;border:1px solid var(--line);border-radius:15px;padding:13px 15px;text-align:center;font-weight:750;transition:.15s}.option:hover{transform:translateY(-2px);border-color:#aebfc8}.option.correct{background:var(--green2);border-color:#87c3a0;color:#236a47}.option.wrong{background:var(--red2);border-color:#dc9b9b;color:#923b3b}.option:disabled{cursor:default;transform:none}
+.feedback{text-align:center;min-height:28px;margin-top:13px;font-weight:800}.feedback.good{color:var(--green)}.feedback.bad{color:var(--red)}.feedback.neutral{color:var(--muted)}
+.actions{display:flex;justify-content:center;gap:10px;margin-top:12px}.btn{border:0;border-radius:14px;padding:13px 20px;font-weight:850}.primary{background:var(--blue);color:#fff}.secondary{background:#ece8df;color:var(--ink)}.primary:disabled{opacity:.42;cursor:not-allowed}
+.results{display:none;text-align:center;padding:45px 20px}.results.show{display:block}.trophy{font-size:55px}.results h3{font-size:29px;margin:8px 0}.results p{color:var(--muted);line-height:1.6}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:620px;margin:22px auto}.sum{border:1px solid var(--line);border-radius:15px;background:#fff;padding:15px}.sum b{display:block;font-size:25px;margin-bottom:3px}.bottom-note{text-align:center;color:var(--muted);font-size:11px;margin-top:12px}
+.consult-card{max-height:min(82vh,760px);overflow:auto}.consult-head{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.consult-head h2{margin:0 0 5px}.consult-sub{margin:0!important;font-family:Inter,system-ui,sans-serif!important;font-size:13px}.close-consult{border:0;background:#ece8df;width:38px;height:38px;border-radius:50%;font-size:25px;line-height:1}.consult-list{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:18px}.consult-item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px;text-align:center}.consult-item .cg{display:block;font-family:"Times New Roman",Georgia,serif;font-size:30px;margin-bottom:4px}.consult-item .cp{font-weight:800}.consult-item small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.consult-highlight{border-color:#9bbdcd;background:#f5fafc}.consult-btn{min-width:120px}@media(max-width:600px){.consult-list{grid-template-columns:repeat(2,1fr)}.known-example{grid-template-columns:1fr}.greek.word-mode{font-size:48px}}
+.modal{position:fixed;inset:0;background:rgba(25,32,38,.58);display:grid;place-items:center;padding:18px;z-index:20}.modal.hide{display:none}.modal-card{width:min(720px,100%);background:var(--paper);border-radius:25px;padding:27px;box-shadow:0 35px 90px rgba(0,0,0,.28)}.modal-card h2{margin-top:0}.modal-card p,.modal-card li{font-family:Georgia,serif;line-height:1.65;color:#40494f}.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+.hide{display:none!important}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{position:static}.path{grid-template-columns:repeat(2,1fr)}.hero{flex-direction:column;align-items:flex-start}}
+@media(max-width:600px){.app{padding:10px}.main{padding:14px}.path{grid-template-columns:1fr}.options{grid-template-columns:1fr}.greek{font-size:76px}.card{min-height:530px}.stats{width:100%}.pill{flex:1;text-align:center}.modal-card{padding:21px}}
+
+/* ===== Lição 2 ===== */
+.lesson2-screen{display:none}
+.lesson2-screen.show{display:block}
+.l2-presentation,.l2-context{background:#f3f6f7;border:1px solid #dde6ea;border-radius:18px;padding:20px;margin-bottom:17px}
+.l2-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.l2-head h3{margin:0;font-size:19px}
+.l2-head .skip{white-space:nowrap}
+.l2-presentation h2{font-family:Georgia,serif;font-size:27px;margin:0 0 5px}
+.l2-subtitle{color:var(--muted);margin:0 0 14px}
+.l2-context h3{font-family:Georgia,serif;margin:6px 0 9px;font-size:21px}
+.l2-context p{font-family:Georgia,serif;line-height:1.68;color:#414a50}
+.l2-kicker{display:inline-block;background:var(--blue2);color:var(--blue);padding:6px 10px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.04em}
+.l2-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:14px}
+.l2-grid span{background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px;font-family:Georgia,serif;text-align:center}
+.l2-grid b{font-size:18px}
+.l2-pair-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:13px}
+.l2-pair{background:#fff;border:1px solid var(--line);border-radius:13px;padding:11px}
+.l2-pair b{font-family:Georgia,serif;font-size:18px}
+.l2-pair small{display:block;color:var(--muted);margin-top:4px}
+.l2-gamma{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.l2-gamma span{background:#fff;border:1px solid var(--line);border-radius:13px;padding:10px 14px;font-family:Georgia,serif;font-size:18px}
+.l2-reading{display:grid;grid-template-columns:1fr 1fr;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:14px}
+.l2-reading div{display:grid;gap:7px;font-family:Georgia,serif;line-height:1.45}
+.l2-reading .translation{color:var(--muted);font-size:13px}
+.l2-quote{margin-top:14px;padding:12px 14px;border-left:4px solid var(--gold);background:var(--gold2);border-radius:8px;font-family:Georgia,serif;color:#53504a}
+.l2-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:17px}
+.l2-page{font-size:12px;color:var(--muted)}
+.l2-word-grid,.l2-translate-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:15px}
+.l2-word,.l2-translation{background:#fff;border:1px solid var(--line);border-radius:13px;padding:12px}
+.l2-word b,.l2-translation b{font-family:Georgia,serif;font-size:19px}
+.l2-word span,.l2-translation span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+.l2-test-skip{display:none}
+.lesson2-node.current,.phase-link.current{border-color:var(--blue);box-shadow:0 0 0 3px rgba(36,92,122,.08)}
+.phase-link:hover{border-color:#aebfc8;transform:translateY(-1px);transition:.15s}
+.lesson2-node.done{background:var(--green2);border-color:#cde5d5}
+@media(max-width:700px){
+  .l2-grid{grid-template-columns:repeat(2,1fr)}
+  .l2-pair-grid,.l2-word-grid,.l2-translate-preview{grid-template-columns:1fr 1fr}
+  .l2-reading{grid-template-columns:1fr}
+}
+@media(max-width:500px){
+  .l2-pair-grid,.l2-word-grid,.l2-translate-preview{grid-template-columns:1fr}
+}
+
+
+.l24-game{margin-top:12px;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 16px 45px rgba(31,43,50,.10)}
+.l24-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.l24-tag{background:var(--blue2);color:var(--blue);padding:6px 10px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.05em}
+.l24-counter{font-size:12px;color:var(--muted)}
+.l24-card{width:min(640px,100%);margin:0 auto;min-height:240px;border:1px solid var(--line);border-radius:20px;background:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:26px;position:relative;overflow:hidden}
+.l24-card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 90% 10%,rgba(36,92,122,.08),transparent 28%),radial-gradient(circle at 8% 92%,rgba(201,150,46,.08),transparent 25%);pointer-events:none}
+.l24-card>*{position:relative}
+.l24-flip{width:100%;transform-style:preserve-3d;backface-visibility:hidden;perspective:1000px;border-radius:16px}
+.l24-flip.flip{animation:flipAnswer .72s cubic-bezier(.22,.61,.36,1)}
+.l24-question{font-size:13px;color:var(--muted);margin-bottom:14px;text-align:center}
+.l24-greek{font-family:"Times New Roman",Georgia,serif;font-size:36px;text-align:center;line-height:1.25;margin-bottom:10px}
+.l24-answer{font-family:Georgia,serif;font-size:25px;font-weight:700;text-align:center;min-height:34px}
+.l24-answer small{font-family:Inter,system-ui,sans-serif;color:var(--muted);font-size:11px;font-weight:500}
+.l24-prompt{text-align:center;font-weight:850;margin:16px 0 10px}
+.l24-options{display:grid;grid-template-columns:1fr;gap:9px;max-width:640px;margin:0 auto}
+.l24-option{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;text-align:center;font-family:Georgia,serif;font-size:15px;line-height:1.35;font-weight:700;transition:.15s}
+.l24-option:hover{transform:translateY(-1px);border-color:#aebfc8}
+.l24-option.correct{background:var(--green2);border-color:#87c3a0;color:#236a47}
+.l24-option.wrong{background:var(--red2);border-color:#dc9b9b;color:#923b3b}
+.l24-feedback{text-align:center;min-height:28px;margin-top:11px;font-weight:800}
+.l24-feedback.good{color:var(--green)}.l24-feedback.bad{color:var(--red)}.l24-feedback.neutral{color:var(--muted)}
+.l24-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:12px}
+@media(max-width:600px){.l24-greek{font-size:28px}.l24-answer{font-size:21px}}
+
+<style>
+.l2-rules{font-family:Georgia,serif;line-height:1.65;color:#414a50;padding-left:25px}.l2-rules li{margin-bottom:10px}.l2-rules b{font-weight:700}.l2-rules li::marker{font-family:Georgia,serif}
+</style></style>
+</head>
+<body>
+<a class="back-arrow" href="index.html" title="Voltar para a Harpa Cifrada" aria-label="Voltar para a Harpa Cifrada">←</a>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="logo">αβ</div><div><h1>Grego do Novo Testamento</h1><small>Lição 1 · aprendendo as letras</small></div></div>
+    <div class="stats"><div class="pill">🔥 <b id="streak">1</b> dia</div><div class="pill">⭐ <b id="xp">0</b> XP</div><div class="pill">❤️ <b id="hearts">5</b></div></div>
+  </header>
+
+  <div class="layout">
+    <aside class="panel sidebar">
+      <h2>Progressão das letras</h2>
+      <div class="sidebar-note">Nesta lição, você começa pelas <b>letras e seus equivalentes fonéticos</b> e depois passa às palavras gregas que já são familiares em português. Os grupos de letras ficam para uma etapa posterior.</div>
+      <div id="path" class="path"></div>
+      <div id="lesson2Node" class="node lesson2-node" style="margin-top:9px" data-open-phase="lesson2Presentation">
+        <div class="node-circle">2</div>
+        <div><strong>Lição 2</strong><span>ἐν ἀρχῇ · no princípio</span></div>
+      </div>
+      <div id="allPhases" class="path" style="margin-top:8px">
+        <div class="node phase-link" data-open-phase="lesson2Context" data-index="0"><div class="node-circle">2.1</div><div><strong>O alfabeto</strong><span>Letras minúsculas</span></div></div>
+        <div class="node phase-link" data-open-phase="lesson2Context" data-index="1"><div class="node-circle">2.2</div><div><strong>Duas vogais</strong><span>Encontro de vogais</span></div></div>
+        <div class="node phase-link" data-open-phase="lesson2Context" data-index="2"><div class="node-circle">2.3</div><div><strong>Som do γ</strong><span>γγ · γκ · γχ</span></div></div>
+        <div class="node phase-link" data-open-phase="lesson2Context" data-index="3"><div class="node-circle">2.4</div><div><strong>Leitura</strong><span>Jogo de leitura</span></div></div>
+        <div class="node phase-link" data-open-phase="lesson2WordsIntro"><div class="node-circle">2.5</div><div><strong>Palavras</strong><span>Jogo de cartas</span></div></div>
+        <div class="node phase-link" data-open-phase="lesson2TranslateIntro"><div class="node-circle">2.6</div><div><strong>Leia e traduza</strong><span>Jogo de tradução</span></div></div>
+        <div class="node phase-link" data-open-phase="lesson2Context" data-index="4"><div class="node-circle">2.7</div><div><strong>Tradução</strong><span>Sentido e expressão</span></div></div>
+        <div class="node phase-link" data-open-phase="lesson2Context" data-index="5"><div class="node-circle">2.8</div><div><strong>Acentos</strong><span>Marcas e regras de acentuação</span></div></div>
+      </div>
+
+    </aside>
+
+    <main class="panel main">
+      <div class="hero">
+        <div><h2 id="heroTitle">αβγ — aprendendo as letras</h2><p id="subtitle">Primeiro conheça as equivalências; depois teste sua memória.</p></div>
+      </div>
+
+      <section class="intro" id="intro">
+        <div class="intro-head"><h3>1.1 · O alfabeto grego</h3><button class="skip" id="skipIntro">Pular introdução</button></div>
+        <p>O primeiro passo para aprender o grego do Novo Testamento é reconhecer as letras do alfabeto grego. Várias são similares às letras do português, apesar de que algumas vezes isso é enganoso (por exemplo, parece com “p”, mas tem som de “r”).</p>
+        <p>Na primeira coluna você encontra as letras gregas com seus equivalentes mais próximos em português. Nesta etapa, vamos trabalhar apenas essas letras e sua pronúncia básica. Quando estiver estudando cuidadosamente, tente reconhecer a letra antes de consultar a resposta.</p>
+        <div class="source-box">A introdução pode ser lida agora ou pulada. Depois dela começa a trilha de cartas.</div>
+      </section>
+
+      <div class="progress-row"><div class="progress-track"><div class="progress-fill" id="progress"></div></div><div class="progress-label" id="progressLabel">0 / 24</div></div>
+
+      <section id="knownIntro" class="intro known-stage">
+        <div class="stage-intro-title"><h3>1.2 · O grego que você já sabe</h3><button class="skip" id="skipKnownIntro">Pular introdução</button></div>
+        <p>Quando começar a ler o grego, perceberá que já entende algumas palavras, porque há palavras parecidas em português. Você não parte do zero: muitas palavras conhecidas ajudam a abrir caminho para a leitura do Novo Testamento.</p>
+        <p>Note, por exemplo:</p>
+        <div class="known-example">
+          <p><b>ἀπόστολος</b> — apóstolo</p><p><b>προφήτης</b> — profeta</p>
+          <p><b>θρόνος</b> — trono</p><p><b>Χριστός</b> — Cristo</p>
+        </div>
+        <p style="margin-top:18px">Você reconhecerá rapidamente outras palavras, porque palavras do português são derivadas delas:</p>
+        <div class="known-example">
+          <p><b>θεός</b> — Deus <span class="derived">· teologia</span></p>
+          <p><b>λόγος</b> — palavra <span class="derived">· teologia, lógica</span></p>
+          <p><b>ἄνθρωπος</b> — homem <span class="derived">· antropologia</span></p>
+          <p><b>ἀρχή</b> — princípio <span class="derived">· arqueologia</span></p>
+          <p><b>γράφω</b> — escrevo <span class="derived">· gráfico, parágrafo</span></p>
+          <p><b>ἐν</b> — em <span class="derived">· enfim</span></p>
+          <p><b>φῶς</b> — luz <span class="derived">· fósforo</span></p>
+        </div>
+        <div class="stage-actions"><button class="btn primary" id="startKnown">Começar esta fase</button></div>
+      </section>
+
+
+      <section id="lesson2Presentation" class="lesson2-screen">
+        <div class="l2-presentation">
+          <div class="l2-head">
+            <div>
+              <span class="l2-kicker">LIÇÃO 2</span>
+              <h2>ἐν ἀρχῇ — <em>no princípio</em></h2>
+              <p class="l2-subtitle">Agora você começa a transformar o reconhecimento das letras em leitura.</p>
+            </div>
+            <button class="skip" id="skipLesson2Presentation">Pular apresentação</button>
+          </div>
+          <p>Esta lição introduz alguns princípios de leitura do grego do Novo Testamento. Primeiro você estuda as explicações; só depois o conteúdo passa a ser cobrado em jogos de cartas.</p>
+          <div class="source-box">As seções 2.1 a 2.4, 2.7 e 2.8 (incluindo as regras básicas de acentuação) são estudo contextual. A seção 2.5 começa o jogo de palavras. A seção 2.6 transforma o exercício de “cobrir a coluna” em um desafio de leitura e tradução.</div>
+          <div class="stage-actions"><button class="btn primary" id="startLesson2Study">Começar Lição 2</button></div>
+        </div>
+      </section>
+
+      <section id="lesson2Context" class="lesson2-screen">
+        <div class="l2-context">
+          <div class="l2-head">
+            <div>
+              <span class="l2-kicker" id="l2Kicker">2.1</span>
+              <h3 id="l2ContextTitle">O alfabeto grego — letras minúsculas</h3>
+            </div>
+            <button class="skip" id="skipContextToWords">Pular estudo e ir para 2.5</button>
+          </div>
+          <div id="l2ContextBody"></div>
+          <div class="l2-nav">
+            <button class="btn secondary" id="l2Prev" disabled>Anterior</button>
+            <span class="l2-page" id="l2Page">2.1 · 1 / 4</span>
+            <button class="btn primary" id="l2Next">Próxima</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="lesson2WordsIntro" class="lesson2-screen">
+        <div class="l2-context">
+          <div class="l2-head">
+            <div>
+              <span class="l2-kicker">2.5</span>
+              <h3>Palavras</h3>
+            </div>
+            <button class="skip" id="skipWordsIntro">Pular introdução</button>
+          </div>
+          <p>Agora as palavras que apareceram na leitura passam para as cartas. Primeiro você as vê e associa ao português; depois será convidado a reconhecê-las de memória.</p>
+          <div class="l2-word-grid">
+            <div class="l2-word"><b>ἀρχή</b><span>princípio</span></div>
+            <div class="l2-word"><b>λόγος</b><span>palavra</span></div>
+            <div class="l2-word"><b>θεός</b><span>Deus</span></div>
+            <div class="l2-word"><b>ἦν</b><span>era, estava</span></div>
+            <div class="l2-word"><b>ἐν</b><span>em</span></div>
+            <div class="l2-word"><b>πρός</b><span>para, com</span></div>
+            <div class="l2-word"><b>καί</b><span>e</span></div>
+            <div class="l2-word"><b>ὁ</b><span>o</span></div>
+            <div class="l2-word"><b>τόν</b><span>o</span></div>
+          </div>
+          <div class="stage-actions"><button class="btn primary" id="startLesson2Words">Começar jogo de palavras</button></div>
+        </div>
+      </section>
+
+      <section id="lesson2TranslateIntro" class="lesson2-screen">
+        <div class="l2-context">
+          <div class="l2-head">
+            <div>
+              <span class="l2-kicker">2.6</span>
+              <h3>Leia e traduza</h3>
+            </div>
+            <button class="skip" id="skipTranslateIntro">Pular introdução</button>
+          </div>
+          <p>O texto manda cobrir a coluna da direita e tentar traduzir sozinho. Aqui essa instrução vira um jogo: você recebe a linha grega, escolhe a tradução e a carta vira para mostrar a resposta.</p>
+          <div class="l2-translate-preview">
+            <div class="l2-translation"><b>ἐν ἀρχῇ</b><span>no princípio</span></div>
+            <div class="l2-translation"><b>ἦν ὁ λόγος</b><span>era a Palavra</span></div>
+            <div class="l2-translation"><b>καὶ ὁ λόγος ἦν</b><span>e a Palavra estava</span></div>
+            <div class="l2-translation"><b>πρὸς τὸν θεόν</b><span>com Deus</span></div>
+            <div class="l2-translation"><b>καὶ θεὸς ἦν ὁ λόγος.</b><span>e a Palavra era Deus.</span></div>
+          </div>
+          <div class="stage-actions"><button class="btn primary" id="startTranslate">Começar leia e traduza</button></div>
+        </div>
+      </section>
+
+      <section id="game" class="game">
+        <div class="card">
+          <div class="card-top"><span class="tag" id="tag">RECONHECIMENTO</span><span class="counter" id="counter">1 / 24</span></div>
+          <div>
+            <div class="flip-card" id="flipCard">
+              <div class="question" id="question">Aprenda esta equivalência:</div>
+              <div class="greek" id="greek">α</div>
+              <div class="phonetic" id="phonetic"></div>
+            </div>
+            <div class="prompt" id="prompt">Esta letra representa o som:</div>
+            <div class="options" id="options"></div>
+            <div class="feedback neutral" id="feedback"></div>
+          </div>
+          <div class="actions"><button class="btn secondary consult-btn" id="consult">Consultar</button><button class="btn secondary l2-test-skip" id="skipTranslateTest">Pular esta fase</button><button class="btn secondary" id="reveal">Mostrar resposta</button><button class="btn primary" id="next" disabled>Próxima letra</button></div>
+        </div>
+      </section>
+
+      <section id="results" class="results">
+        <div class="trophy">🏛️</div><h3 id="resultTitle">Fase concluída!</h3><p id="resultText">Você concluiu esta etapa. As palavras conhecidas podem voltar em exercícios de revisão antes de avançarmos para os grupos de letras.</p>
+        <div class="summary"><div class="sum"><b id="rCorrect">0</b>acertos</div><div class="sum"><b id="rXp">0</b>XP</div><div class="sum"><b id="rAccuracy">0%</b>aproveitamento</div></div>
+        <button class="btn primary" id="restart">Recomeçar a lição</button>
+      </section>
+      <div class="bottom-note">Lição 1: letras e palavras conhecidas. Lição 2: leitura, palavras, tradução e introdução à acentuação. Os grupos de letras ficam para uma etapa posterior.</div>
+    </main>
+  </div>
+</div>
+
+<div class="modal hide" id="consultModal">
+  <div class="modal-card consult-card">
+    <div class="consult-head"><div><h2 id="consultTitle">Consultar equivalências</h2><p class="consult-sub" id="consultSub">Use esta tabela sempre que quiser relembrar o conteúdo.</p></div><button class="close-consult" id="closeConsult">×</button></div>
+    <div id="consultList" class="consult-list"></div>
+  </div>
+</div>
+
+<div class="modal" id="welcome">
+  <div class="modal-card">
+    <h2>Lição 1 — antes do jogo</h2>
+    <p>Leia a introdução para entender o objetivo. A primeira parte da lição ensina as letras; depois você continua com <b>O grego que você já sabe</b>, reconhecendo palavras que já lhe são familiares em português.</p>
+    <ul><li>Etapa 1: reconhecimento — as equivalências são mostradas.</li><li>Etapa 2: adivinhação — você escolhe o equivalente de memória.</li><li>Depois: palavras gregas conhecidas e suas relações com o português.</li><li>Os grupos de letras das outras colunas serão acrescentados em uma etapa posterior.</li></ul>
+    <div class="modal-actions"><button class="btn secondary" id="modalSkip">Pular e jogar</button><button class="btn primary" id="modalStart">Ler e começar</button></div>
+  </div>
+</div>
+
+<script>
+const letters = [
+  {g:'α',p:'a'},
+  {g:'β',p:'b'},
+  {g:'γ',p:'g'},
+  {g:'δ',p:'d'},
+  {g:'ε',p:'e'},
+  {g:'ζ',p:'dz',note:'também apresentado como ds ou sd'},
+  {g:'η',p:'e',note:'e longo'},
+  {g:'θ',p:'t',note:'t soprado — “th” no inglês'},
+  {g:'ι',p:'i'},
+  {g:'κ',p:'k'},
+  {g:'λ',p:'l'},
+  {g:'μ',p:'m'},
+  {g:'ν',p:'n'},
+  {g:'ξ',p:'x'},
+  {g:'ο',p:'o'},
+  {g:'π',p:'p'},
+  {g:'ρ',p:'r'},
+  {g:'σ / ς',p:'s',note:'ς é usado só no fim das palavras'},
+  {g:'τ',p:'t'},
+  {g:'υ',p:'i'},
+  {g:'φ',p:'f'},
+  {g:'χ',p:'kh'},
+  {g:'ψ',p:'ps'},
+  {g:'ω',p:'o',note:'o longo, como em “fone”'}
+];
+
+// No reconhecimento, as letras são apresentadas em listas de 8. A primeira lista começa pelas vogais.
+const recognitionBatches = [
+  ['α','ε','η','ι','ο','υ','ω','β'],
+  ['γ','δ','ζ','θ','κ','λ','μ','ν'],
+  ['ξ','π','ρ','σ / ς','τ','φ','χ','ψ']
+];
+const recognitionLetters = recognitionBatches.flat().map(g => letters.find(x => x.g===g)).filter(Boolean);
+
+const knownWords = [
+  {g:'ἀπόστολος',p:'apóstolo'},
+  {g:'θρόνος',p:'trono'},
+  {g:'προφήτης',p:'profeta'},
+  {g:'Χριστός',p:'Cristo'},
+  {g:'θεός',p:'Deus',examples:'teologia'},
+  {g:'λόγος',p:'palavra',examples:'teologia, lógica'},
+  {g:'ἄνθρωπος',p:'homem',examples:'antropologia'},
+  {g:'ἀρχή',p:'princípio',examples:'arqueologia'},
+  {g:'γράφω',p:'escrevo',examples:'gráfico, parágrafo'},
+  {g:'ἐν',p:'em',examples:'enfim'},
+  {g:'φῶς',p:'luz',examples:'fósforo'}
+];
+const knownBatches = [knownWords.slice(0,6), knownWords.slice(6)];
+
+const lesson2Words = [
+  {g:'ἀρχή',p:'princípio'},
+  {g:'λόγος',p:'palavra'},
+  {g:'θεός',p:'Deus'},
+  {g:'ἦν',p:'era, estava'},
+  {g:'ἐν',p:'em'},
+  {g:'πρός',p:'para, com'},
+  {g:'καί',p:'e'},
+  {g:'ὁ',p:'o'},
+  {g:'τόν',p:'o'}
+];
+
+const lesson2Translations = [
+  {g:'ἐν ἀρχῇ',p:'no princípio'},
+  {g:'ἦν ὁ λόγος',p:'era a Palavra'},
+  {g:'καὶ ὁ λόγος ἦν',p:'e a Palavra estava'},
+  {g:'πρὸς τὸν θεόν',p:'com Deus'},
+  {g:'καὶ θεὸς ἦν ὁ λόγος.',p:'e a Palavra era Deus.'}
+];
+
+const lesson24Readings = [
+  {g:'ἐν ἀρχῇ ἦν ὁ λόγος', p:'en arkhê en ho lógos'},
+  {g:'καὶ ὁ λόγος ἦν πρὸς τὸν θεόν', p:'kai ho lógos en pros ton theón'},
+  {g:'καὶ θεὸς ἦν ὁ λόγος.', p:'kai theós en ho lógos'}
+];
+
+const lesson2ContextPages = [
+  {
+    k:'2.1',title:'O alfabeto grego — letras minúsculas',
+    body:`<p>Olhe novamente para o alfabeto. Nesta lição, as letras passam a ser lidas dentro de combinações e palavras.</p>
+    <div class="l2-grid">
+      <span><b>α</b> · a</span><span><b>β</b> · b</span><span><b>γ</b> · g</span><span><b>δ</b> · d</span>
+      <span><b>ε</b> · e</span><span><b>ζ</b> · dz</span><span><b>η</b> · e</span><span><b>θ</b> · th</span>
+      <span><b>ι</b> · i</span><span><b>κ</b> · k</span><span><b>λ</b> · l</span><span><b>μ</b> · m</span>
+      <span><b>ν</b> · n</span><span><b>ξ</b> · x</span><span><b>ο</b> · o</span><span><b>π</b> · p</span>
+      <span><b>ρ</b> · r</span><span><b>σ, ς</b> · s</span><span><b>τ</b> · t</span><span><b>υ</b> · u</span>
+      <span><b>φ</b> · f</span><span><b>χ</b> · kh</span><span><b>ψ</b> · ps</span><span><b>ω</b> · o</span>
+    </div>`
+  },
+  {
+    k:'2.2',title:'O encontro de duas vogais',
+    body:`<p>O encontro de duas vogais é normalmente lido como em português. Observe as combinações antes de encontrá-las dentro das palavras.</p>
+    <div class="l2-pair-grid">
+      <div class="l2-pair"><b>αι</b> — ai<small>(como em pai)</small></div>
+      <div class="l2-pair"><b>οι</b> — oi<small>(como em constrói)</small></div>
+      <div class="l2-pair"><b>ει</b> — ei<small>(como em fiéis)</small></div>
+      <div class="l2-pair"><b>ηι</b> — ie<small>(feira)</small></div>
+      <div class="l2-pair"><b>υι</b> — ui<small>(como em fui)</small></div>
+      <div class="l2-pair"><b>αυ</b> — au<small>(como em grau)</small></div>
+    </div>
+    <p>Assim, <b>αἱ</b> é lido como “raí”, <b>εὐ</b> como “eu” e <b>Ἰησοῦς</b> é pronunciado “Ie-sus”.</p>
+    <div class="l2-quote">Esta página é estudo: leia, releia e memorize as associações. O teste virá depois.</div>`
+  },
+  {
+    k:'2.3',title:'O γ sempre tem som “duro”',
+    body:`<p>O γ sempre tem som “duro”, como em gato, gole, gula. Nunca tem o som de “j”, como em gelo, gênero e girafa.</p>
+    <p>Quando γ ocorre antes de κ, χ ou outro γ, é pronunciado como “n”, ao invés de “g”.</p>
+    <div class="l2-gamma"><span>γγ — ng</span><span>γκ — nk</span><span>γχ — nkh</span></div>
+    <p>Desta forma, <b>ἄγγελος</b> é pronunciado como “ânguelos”.</p>`
+  },
+  {
+    k:'2.4',title:'Leia cuidadosamente as próximas linhas',
+    body:`<p>Leia cada linha grega e tente reconhecê-la sem olhar a leitura à direita. O exercício abaixo transforma a instrução de “cobrir a coluna” em um jogo.</p><div id="lesson24GameMount"></div>`
+  },
+  {
+    k:'2.7',title:'Tradução',
+    body:`<p>Você leu e traduziu João 1.1. Percebeu que ideias podem ser traduzidas em diferentes palavras em grego e em português.</p>
+    <p>Traduzir não é colocar as <em>palavras</em> de uma língua em outra: é expressar o <em>sentido</em> das palavras em outra língua.</p>
+    <div class="l2-quote">O objetivo da tradução é comunicar o sentido, e não simplesmente substituir palavra por palavra.</div>`
+  },
+  {
+    k:'2.8',title:'Acentos',
+    body:`<p>O Novo Testamento foi originalmente escrito inteiramente em letras minúsculas. Não havia marcas para indicar um tom alto (<b>´</b>), um tom baixo (<b>\`</b>) ou um tom ascendente e descendente (<b>ˆ</b>).</p>
+    <p>O sistema de marcas, chamadas de acentos, é encontrado em manuscritos do nono século AD para a frente. Você os encontrará nos textos impressos do Novo Testamento e pode completar este curso e ler o Novo Testamento sem saber mais nada sobre acentos. Aqueles que precisarem de informações adicionais devem consultar as seguintes informações.</p>
+    <p>Em edições impressas do Novo Testamento, você encontrará três acentos, conhecidos como <b>agudo</b>, <b>grave</b> e <b>circunflexo</b>. Estes acentos não faziam parte do texto original do Novo Testamento; eles apareceram apenas em manuscritos do século nono em diante. O sistema foi idealizado pelos escritores do grego clássico como uma ajuda para a pronúncia, com o agudo indicando um tom alto, o grave um tom baixo e o circunflexo um tom ascendente e descendente.</p>
+    <p>Em uns poucos casos, os acentos distinguem palavras que, de outra forma, pareceriam iguais. Por exemplo: <b>εἰ</b> significa “se”, mas <b>εἴ</b> significa “és”. É possível ler o Novo Testamento sem saber mais nada sobre os acentos. As regras de acentuação são complicadas, e a maior parte dos estudantes não precisa aprendê-las. Para os que têm um interesse especial, o sumário seguinte provê uma introdução básica.</p>
+    <p>Note que sílaba longa é geralmente aquela que contém uma vogal longa (<b>η</b>, <b>ω</b>) ou um ditongo. Todavia, <b>αι</b> e <b>οι</b> são consideradas curtas quando ocorrem no fim de uma palavra (desta forma, a sílaba final é curta em <b>λόγοι</b>, longa em <b>λόγοις</b>). Em ditongos, é costume colocar o acento sobre a segunda vogal.</p>
+    <div class="l2-quote">Nesta etapa, os acentos entram como conteúdo de estudo. As regras detalhadas estão na próxima seção.</div><h3 style="margin-top:22px">Regras básicas de acentuação</h3><p>As regras abaixo formam uma introdução básica. O objetivo aqui é conhecer a lógica geral da acentuação antes de aprofundar o assunto.</p>
+    <ol class="l2-rules">
+      <li>O acento pode ser colocado sobre uma das três últimas sílabas da palavra (<b>Jo 1.3: πάντα δι’ αὐτοῦ ἐγένετο</b>).</li>
+      <li>Se a última sílaba de uma palavra é <b>longa</b>, o acento pode ser colocado só em uma das duas últimas sílabas (<b>πνεύματα</b>, mas <b>πνευμάτων</b>).</li>
+      <li>O <b>acento circunflexo</b> pode ser colocado sobre uma das duas últimas sílabas da palavra, e só sobre uma sílaba longa (<b>δῶμα, δοῦ</b>, <b>Ῥωμαῖοι</b>).</li>
+      <li>Em verbos, o acento agudo é colocado tão longe do fim da palavra quanto permitem as regras 1 e 2 (<b>δίδωμι, ἐδίδου</b>). Quando um verbo é contraído, o acento agudo é colocado sobre a vogal contraída, e é substituído por um acento circunflexo sobre a vogal contraída (<b>φιλέω</b> torna-se <b>φιλῶ</b>).</li>
+      <li>Excetuando-se as regras 1 e 2, não há regras para indicar onde os acentos são colocados em <b>substantivos</b>. É necessário aprender a colocar o acento ao aprender-se a palavra. Mas note que, na maior parte das vezes, um substantivo conserva seu acento, nos demais casos, na mesma sílaba em que ele cai no nominativo (<b>ἀρχή, ἀρχῆς</b>), a menos que outras regras exijam uma mudança (<b>πνεῦμα, πνεύματος</b>).</li>
+      <li>Quando uma palavra que, naturalmente, leva um acento agudo na <b>última sílaba</b> é seguida por outra na mesma frase, o acento agudo é substituído por um acento grave (<b>τοὺς ἀδελφοὺς βλέπω</b>, mas <b>βλέπω τοὺς ἀδελφούς</b>).</li>
+      <li>Em circunstâncias normais, uma palavra leva só um acento. Há, contudo, diversas palavras curtas (por exemplo <b>ὅτι, με, τις, πως</b>) que lançam o acento que elas tentam para trás, para a palavra anterior, quando isso é possível. Por exemplo, <b>ἄνθρωπός τις</b> — um certo homem, <b>δοῦλός τις</b> — um escravo, <b>ἠφάπτο μού τις</b> — alguém me tocou (note que antes de <b>μου</b> há duas, sobre o <b>ἥψατο</b>, e o acento de <b>τις</b> sobre o <b>μου</b>).</li>
+      <li><b>ὁ, ἡ, οἱ, αἱ, εἰς, ἐν, ἐκ, οὐ</b> e <b>ὡς</b> não têm acentos.</li>
+    </ol>
+    <div class="source-box">A acentuação pode ser aprofundada mais adiante. Nesta lição, o objetivo é reconhecer os três sinais e compreender as regras básicas apresentadas aqui.</div>`
+  }
+];
+
+let state={phase:'recognition',index:0,correct:0,knownCorrect:0,answered:false,xp:Number(localStorage.getItem('gregoLetrasXP')||0),hearts:5};
+const $=id=>document.getElementById(id);
+function save(){localStorage.setItem('gregoLetrasXP',state.xp)}
+function phaseName(){
+  if(state.phase==='recognition'||state.phase==='knownRecognition') return 'RECONHECIMENTO';
+  return 'ADIVINHAÇÃO';
+}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function getChoices(correct,source=letters){
+  const pool=source.map(x=>x.p).filter((x,i,arr)=>x!==correct&&arr.indexOf(x)===i);
+  const chosen=[]; while(chosen.length<3 && pool.length) chosen.push(pool[Math.floor(Math.random()*pool.length)]);
+  return shuffle([correct,...chosen]);
+}
+function updateProgress(){
+  if(state.phase==='recognition'){
+    $('progress').style.width=`${Math.round(state.index/3*100)}%`; $('progressLabel').textContent=`Reconhecimento · lista ${state.index+1}/3`;
+  } else if(state.phase==='quiz'){
+    $('progress').style.width=`${Math.round(state.index/letters.length*100)}%`; $('progressLabel').textContent=`Adivinhação · ${state.index} / ${letters.length}`;
+  } else if(state.phase==='knownIntro'){
+    $('progress').style.width='0%'; $('progressLabel').textContent='Grego que você já sabe';
+  } else if(state.phase==='knownRecognition'){
+    $('progress').style.width=`${Math.round(state.index/knownBatches.length*100)}%`; $('progressLabel').textContent=`Grego que você já sabe · lista ${state.index+1}/${knownBatches.length}`;
+  } else if(state.phase==='knownQuiz'){
+    $('progress').style.width=`${Math.round(state.index/knownWords.length*100)}%`; $('progressLabel').textContent=`Grego que você já sabe · ${state.index} / ${knownWords.length}`;
+  }
+}
+function openConsult(){
+  const isKnown=state.phase==='knownRecognition'||state.phase==='knownQuiz';
+  const l2Words=state.phase==='l2WordRecognition'||state.phase==='l2WordQuiz';
+  const l2Translate=state.phase==='l2TranslateQuiz';
+  const current=l2Translate?lesson2Translations:(l2Words?lesson2Words:(isKnown?knownWords:recognitionLetters));
+  $('consultTitle').textContent=(l2Words||l2Translate||isKnown)?'Consultar palavras':'Consultar equivalências';
+  $('consultSub').textContent=(l2Words||l2Translate||isKnown)?'Use esta tabela para relembrar antes de responder.':'Use esta tabela sempre que quiser relembrar uma letra.';
+  $('consultList').innerHTML=current.map(item=>{
+    const hi=(state.phase==='quiz'&&item.g===letters[state.index]?.g)
+      ||(state.phase==='knownQuiz'&&item.g===knownWords[state.index]?.g)
+      ||((state.phase==='l2WordRecognition'||state.phase==='l2WordQuiz')&&item.g===lesson2Words[state.index]?.g)
+      ||(state.phase==='l2TranslateQuiz'&&item.g===lesson2Translations[state.index]?.g);
+    return `<div class="consult-item ${hi?'consult-highlight':''}"><span class="cg">${item.g}</span><span class="cp">→ ${item.p}</span>${item.note?`<small>${item.note}</small>`:''}</div>`;
+  }).join('');
+  $('consultModal').classList.remove('hide');
+}
+function closeConsult(){$('consultModal').classList.add('hide')}
+
+
+function setLesson2Visible(id){
+  ['lesson2Presentation','lesson2Context','lesson2WordsIntro','lesson2TranslateIntro']
+    .forEach(x=>{if($(x))$(x).classList.remove('show')});
+  ['game','knownIntro','intro','results']
+    .forEach(x=>{if($(x))$(x).classList.add('hide')});
+  if($(id)){
+    $(id).classList.remove('hide');
+    if($(id).classList.contains('lesson2-screen')) $(id).classList.add('show');
+  }
+}
+function startLesson2Presentation(){
+  $('results').classList.remove('show');
+  setLesson2Visible('lesson2Presentation');
+  state.phase='lesson2Presentation'; state.index=0; state.lesson2Correct=0; state.translateCorrect=0;
+  $('heroTitle').textContent='Lição 2 · ἐν ἀρχῇ';
+  $('subtitle').textContent='Primeiro estude as explicações; depois transforme o conteúdo em jogo.';
+  $('lesson2Node').classList.remove('locked','done'); $('lesson2Node').classList.add('current');
+  updateProgressL2('Lição 2 · apresentação');
+}
+function startLesson2Study(){
+  state.phase='lesson2Context'; state.index=0; state.l24Index=0; state.l24Answered=false;
+  setLesson2Visible('lesson2Context');
+  renderLesson2Context();
+}
+function renderLesson2Context(){
+  const p=lesson2ContextPages[state.index];
+  $('l2Kicker').textContent=p.k; $('l2ContextTitle').textContent=p.title;
+  $('l2Page').textContent=state.index===3?'2.4 · jogo de leitura':`${p.k} · ${state.index+1} / ${lesson2ContextPages.length}`;
+  $('l2Prev').disabled=state.index===0;
+  $('l2Next').textContent=state.index===3?'Ir para 2.5 · Palavras':'Próxima';
+  updateProgressL2(`${p.k} · ${state.index===3?'jogo':'estudo'}`);
+  if(state.index===3){
+    $('l2ContextBody').innerHTML=p.body;
+    renderLesson24Game();
+  }else{
+    $('l2ContextBody').innerHTML=p.body;
+  }
+}
+function updateProgressL2(label){
+  $('progress').style.width='0%';
+  $('progressLabel').textContent=label;
+}
+function renderLesson24Game(){
+  const i=state.l24Index||0; const item=lesson24Readings[i];
+  const mount=$('lesson24GameMount');
+  if(!mount)return;
+  const choices=shuffle([item.p,...lesson24Readings.filter((x,j)=>j!==i).map(x=>x.p)]);
+  mount.innerHTML=`
+    <div class="l24-game">
+      <div class="l24-top"><span class="l24-tag">JOGO DE LEITURA</span><span class="l24-counter">Linha ${i+1} / ${lesson24Readings.length}</span></div>
+      <div class="l24-card">
+        <div class="l24-flip" id="l24Flip">
+          <div class="l24-question">Como esta linha se lê?</div>
+          <div class="l24-greek">${item.g}</div>
+          <div class="l24-answer" id="l24Answer"></div>
+        </div>
+      </div>
+      <div class="l24-prompt">Escolha a leitura equivalente:</div>
+      <div class="l24-options" id="l24Options">${choices.map(ch=>`<button class="l24-option" data-answer="${ch.replace(/"/g,'&quot;')}">${ch}</button>`).join('')}</div>
+      <div class="l24-feedback neutral" id="l24Feedback"></div>
+      <div class="l24-actions">
+        <button class="btn secondary" id="l24Reveal">Mostrar resposta</button>
+        <button class="btn primary" id="l24Next" disabled>${i===lesson24Readings.length-1?'Ir para 2.5 · Palavras':'Próxima linha'}</button>
+      </div>
+    </div>`;
+  mount.querySelectorAll('.l24-option').forEach(btn=>btn.onclick=()=>answerLesson24(btn,btn.dataset.answer,item));
+  $('l24Reveal').onclick=()=>revealLesson24(item);
+  $('l24Next').onclick=nextLesson24;
+}
+function flipLesson24(){
+  const card=$('l24Flip'); if(!card)return;
+  card.classList.remove('flip'); void card.offsetWidth; card.classList.add('flip');
+}
+function answerLesson24(btn,ch,item){
+  if(state.l24Answered)return; state.l24Answered=true; flipLesson24();
+  document.querySelectorAll('.l24-option').forEach(b=>b.disabled=true);
+  if(ch===item.p){
+    btn.classList.add('correct'); state.xp+=10; $('xp').textContent=state.xp; save();
+    $('l24Feedback').textContent='Correto. Você reconheceu a leitura.'; $('l24Feedback').className='l24-feedback good';
+  }else{
+    btn.classList.add('wrong'); document.querySelectorAll('.l24-option').forEach(b=>{if(b.dataset.answer===item.p)b.classList.add('correct')});
+    state.hearts=Math.max(0,state.hearts-1); $('hearts').textContent=state.hearts;
+    $('l24Feedback').textContent=`A leitura correta é “${item.p}”. Reforce a associação.`; $('l24Feedback').className='l24-feedback bad';
+  }
+  $('l24Answer').textContent=item.p; $('l24Next').disabled=false; updateProgressL24();
+}
+function revealLesson24(item){
+  if(state.l24Answered)return; state.l24Answered=true; flipLesson24();
+  document.querySelectorAll('.l24-option').forEach(b=>{b.disabled=true;if(b.dataset.answer===item.p)b.classList.add('correct')});
+  $('l24Answer').textContent=item.p;
+  $('l24Feedback').textContent='Resposta revelada. Leia a linha novamente.'; $('l24Feedback').className='l24-feedback neutral';
+  $('l24Next').disabled=false; updateProgressL24();
+}
+function updateProgressL24(){
+  const n=(state.l24Index||0)+1; $('progress').style.width=`${Math.round(n/lesson24Readings.length*100)}%`; $('progressLabel').textContent=`2.4 · jogo de leitura · ${n} / ${lesson24Readings.length}`;
+}
+function nextLesson24(){
+  state.l24Index=(state.l24Index||0)+1; state.l24Answered=false;
+  if(state.l24Index>=lesson24Readings.length){state.l24Index=0; startLesson2WordsIntro(); return;}
+  renderLesson2Context();
+}
+function startLesson2WordsIntro(){
+  state.phase='lesson2WordsIntro'; state.index=0;
+  setLesson2Visible('lesson2WordsIntro');
+  $('heroTitle').textContent='2.5 · Palavras';
+  $('subtitle').textContent='Agora as palavras passam para o jogo de cartas.';
+  updateProgressL2('2.5 · preparação');
+}
+function startLesson2Words(){
+  state.phase='l2WordRecognition'; state.index=0; state.lesson2Correct=0;
+  setLesson2Visible('game');
+  $('heroTitle').textContent='2.5 · Palavras';
+  $('subtitle').textContent='Primeiro reconheça as palavras; depois teste sua memória.';
+  renderLesson2Game();
+}
+function startLesson2TranslateIntro(){
+  state.phase='lesson2TranslateIntro'; state.index=0;
+  setLesson2Visible('lesson2TranslateIntro');
+  $('heroTitle').textContent='2.6 · Leia e traduza';
+  $('subtitle').textContent='Leia a linha grega, escolha a tradução e vire a carta.';
+  updateProgressL2('2.6 · preparação');
+}
+function startLesson2Translate(){
+  state.phase='l2TranslateQuiz'; state.index=0; state.translateCorrect=0;
+  setLesson2Visible('game');
+  $('heroTitle').textContent='2.6 · Leia e traduza';
+  $('subtitle').textContent='Tente traduzir antes de consultar a resposta.';
+  renderLesson2Game();
+}
+function renderLesson2Game(){
+  const translate=state.phase==='l2TranslateQuiz';
+  const words=translate?lesson2Translations:lesson2Words;
+  const item=words[state.index];
+  $('tag').textContent=translate?'LEIA E TRADUZA':'PALAVRAS';
+  $('counter').textContent=`${state.index+1} / ${words.length}`;
+  $('question').textContent=translate?'Leia e traduza:':'Você conhece esta palavra?';
+  $('greek').textContent=item.g; $('greek').classList.remove('hide');
+  $('phonetic').innerHTML=''; $('phonetic').classList.remove('hide');
+  $('flipCard').classList.add('word-mode');
+  $('prompt').textContent='Escolha a tradução em português:';
+  $('feedback').textContent=''; $('feedback').className='feedback neutral';
+  $('options').innerHTML=''; $('options').style.gridTemplateColumns='repeat(2,1fr)';
+  $('reveal').classList.remove('hide'); $('reveal').disabled=false;
+  $('next').disabled=true; $('next').textContent=translate?'Próxima passagem':'Próxima palavra';
+  $('consult').classList.remove('hide');
+  $('skipTranslateTest').style.display=translate?'inline-block':'none';
+  state.answered=false;
+  getChoices(item.p,words).forEach(ch=>{
+    const b=document.createElement('button'); b.className='option'; b.textContent=ch;
+    b.onclick=()=>answerLesson2(b,ch,item);
+    $('options').appendChild(b);
+  });
+  $('progress').style.width=`${Math.round(state.index/words.length*100)}%`;
+  $('progressLabel').textContent=translate?`2.6 · ${state.index} / ${words.length}`:`2.5 · ${state.index} / ${words.length}`;
+}
+function answerLesson2(btn,ch,item){
+  if(state.answered)return;
+  state.answered=true; turnCard();
+  document.querySelectorAll('.option').forEach(b=>b.disabled=true);
+  const translate=state.phase==='l2TranslateQuiz';
+  if(ch===item.p){
+    btn.classList.add('correct');
+    if(translate)state.translateCorrect++;else state.lesson2Correct++;
+    state.xp+=10; $('xp').textContent=state.xp; save();
+    $('feedback').textContent='Correto. Você reconheceu a associação.';
+    $('feedback').className='feedback good';
+  }else{
+    btn.classList.add('wrong');
+    document.querySelectorAll('.option').forEach(b=>{if(b.textContent===item.p)b.classList.add('correct')});
+    state.hearts=Math.max(0,state.hearts-1); $('hearts').textContent=state.hearts;
+    $('feedback').textContent=`A resposta é “${item.p}”. Reforce a associação.`;
+    $('feedback').className='feedback bad';
+  }
+  $('phonetic').innerHTML=`${item.p}`;
+  $('next').disabled=false; $('reveal').disabled=true;
+  const total=translate?lesson2Translations.length:lesson2Words.length;
+  $('progress').style.width=`${Math.round((state.index+1)/total*100)}%`;
+  $('progressLabel').textContent=translate?`2.6 · ${state.index+1} / ${total}`:`2.5 · ${state.index+1} / ${total}`;
+}
+function revealLesson2(){
+  if(state.answered)return;
+  const translate=state.phase==='l2TranslateQuiz';
+  const words=translate?lesson2Translations:lesson2Words;
+  const item=words[state.index];
+  state.answered=true; turnCard();
+  document.querySelectorAll('.option').forEach(b=>{b.disabled=true;if(b.textContent===item.p)b.classList.add('correct')});
+  $('phonetic').innerHTML=item.p;
+  $('feedback').textContent='Resposta revelada. Reforce a associação antes de seguir.';
+  $('feedback').className='feedback neutral';
+  $('next').disabled=false; $('reveal').disabled=true;
+}
+function nextLesson2(){
+  const translate=state.phase==='l2TranslateQuiz';
+  const words=translate?lesson2Translations:lesson2Words;
+  $('flipCard').classList.remove('flip');
+  state.index++;
+  if(state.index<words.length){renderLesson2Game();return;}
+  if(state.phase==='l2WordRecognition'){
+    state.phase='l2WordQuiz'; state.index=0;
+    $('subtitle').textContent='Agora teste se você reconhece as palavras.';
+    renderLesson2Game(); return;
+  }
+  if(state.phase==='l2WordQuiz'){
+    startLesson2TranslateIntro(); return;
+  }
+  if(state.phase==='l2TranslateQuiz'){
+    startPost2_6Context(); return;
+  }
+}
+function startPost2_6Context(){
+  state.phase='lesson2Context';state.index=4;state.l24Index=0;state.l24Answered=false;
+  setLesson2Visible('lesson2Context');
+  $('heroTitle').textContent='Lição 2 · continuação';
+  $('subtitle').textContent='Agora avance com a tradução e a acentuação.';
+  renderLesson2Context();
+}
+function finishLesson2(){
+  setLesson2Visible('results'); $('results').classList.add('show');
+  $('resultTitle').textContent='Lição 2 concluída!';
+  $('resultText').textContent='Você concluiu as fases de palavras e de leitura e tradução. Os grupos de letras ficam para a próxima etapa.';
+  $('rCorrect').textContent=state.translateCorrect;
+  $('rXp').textContent=state.xp;
+  $('rAccuracy').textContent=Math.round(state.translateCorrect/lesson2Translations.length*100)+'%';
+  $('lesson2Node').classList.remove('current'); $('lesson2Node').classList.add('done');
+  state.phase='lesson2Done';
+  renderPath();
+  $('restart').textContent='Recomeçar Lição 2';
+  $('restart').onclick=()=>startLesson2Presentation();
+}
+
+function render(){
+  const isKnown=state.phase==='knownRecognition'||state.phase==='knownQuiz';
+  const item=isKnown?knownWords[state.index]:letters[state.index];
+  $('tag').textContent=phaseName();
+  $('counter').textContent=state.phase==='recognition'?`Lista ${state.index+1} / 3`:state.phase==='quiz'?`${state.index+1} / ${letters.length}`:state.phase==='knownRecognition'?`Lista ${state.index+1} / ${knownBatches.length}`:`${state.index+1} / ${knownWords.length}`;
+  $('feedback').textContent=''; $('feedback').className='feedback neutral'; $('next').disabled=true; $('reveal').disabled=false; state.answered=false; $('options').innerHTML='';
+  $('consult').classList.toggle('hide',state.phase==='recognition'||state.phase==='knownRecognition');
+  $('flipCard').classList.toggle('word-mode',isKnown);
+  updateProgress();
+  if(state.phase==='recognition'){
+    const batch=recognitionBatches[state.index]; $('greek').classList.add('hide'); $('phonetic').classList.add('hide');
+    $('question').textContent=`Lista ${state.index+1} de 3 · reconheça estas equivalências:`; $('prompt').textContent='Veja, leia em voz alta e memorize';
+    $('options').style.gridTemplateColumns='repeat(2,1fr)'; $('options').innerHTML=batch.map(g=>{const x=letters.find(l=>l.g===g);return `<div class="consult-item" style="display:flex;align-items:center;justify-content:center;gap:10px;min-height:70px"><span class="cg" style="margin:0">${x.g}</span><span style="font-size:20px;color:#6c7378">→</span><span style="font-size:21px;font-weight:850">${x.p}</span>${x.note?`<small style="margin-left:4px">${x.note}</small>`:''}</div>`}).join('');
+    $('reveal').classList.add('hide'); $('next').disabled=false; $('next').textContent=state.index===recognitionBatches.length-1?'Começar adivinhação':'Próxima lista';
+  } else if(state.phase==='quiz'){
+    $('greek').classList.remove('hide'); $('phonetic').classList.remove('hide'); $('greek').textContent=item.g; $('question').textContent='Você se lembra?'; $('prompt').textContent='Escolha o equivalente fonético:'; $('phonetic').innerHTML='';
+    $('options').style.gridTemplateColumns='repeat(2,1fr)'; $('reveal').classList.remove('hide'); $('next').textContent='Próxima letra';
+    getChoices(item.p,letters).forEach(ch=>{const b=document.createElement('button');b.className='option';b.textContent=ch;b.onclick=()=>answer(b,ch,item);$('options').appendChild(b)});
+  } else if(state.phase==='knownRecognition'){
+    const batch=knownBatches[state.index]; $('greek').classList.add('hide'); $('phonetic').classList.add('hide');
+    $('question').textContent=`Lista ${state.index+1} de ${knownBatches.length} · palavras que você já conhece:`; $('prompt').textContent='Reconheça a palavra grega e relacione-a ao português';
+    $('options').style.gridTemplateColumns='repeat(2,1fr)'; $('options').innerHTML=batch.map(x=>`<div class="known-item"><span class="kg">${x.g}</span><span style="font-size:18px;color:#6c7378;margin:0 7px">→</span><span class="kp">${x.p}</span>${x.examples?`<span class="ke">Você também verá em: ${x.examples}</span>`:''}</div>`).join('');
+    $('reveal').classList.add('hide'); $('next').disabled=false; $('next').textContent=state.index===knownBatches.length-1?'Começar adivinhação':'Próxima lista';
+  } else if(state.phase==='knownQuiz'){
+    $('greek').classList.remove('hide'); $('phonetic').classList.remove('hide'); $('greek').textContent=item.g; $('question').textContent='Você já conhece esta palavra?'; $('prompt').textContent='Escolha o equivalente em português:'; $('phonetic').innerHTML='';
+    $('options').style.gridTemplateColumns='repeat(2,1fr)'; $('reveal').classList.remove('hide'); $('next').textContent='Próxima palavra';
+    getChoices(item.p,knownWords).forEach(ch=>{const b=document.createElement('button');b.className='option';b.textContent=ch;b.onclick=()=>answer(b,ch,item);$('options').appendChild(b)});
+  }
+  renderPath();
+}
+
+function renderPath(){
+  const path=$('path');
+  if(!path)return;
+  const phase=state.phase;
+  const l1Done=['knownIntro','knownRecognition','knownQuiz','done'].includes(phase);
+  const l2Active=phase.startsWith('lesson2')||phase.startsWith('l2')||phase==='translateQuiz'||phase==='lesson2Done';
+  path.innerHTML=`
+    <div class="node ${l2Active?'':'current'} phase-link" data-open-phase="lesson1">
+      <div class="node-circle">1</div>
+      <div><strong>Lição 1</strong><span>letras e palavras</span></div>
+    </div>`;
+  document.querySelectorAll('[data-open-phase]').forEach(el=>el.classList.remove('current'));
+  const active = document.querySelector(`[data-open-phase="${phase}"]`);
+  if(active) active.classList.add('current');
+}
+
+function turnCard(){
+  const card=document.getElementById('flipCard');
+  if(!card)return;
+  card.classList.remove('flip');
+  void card.offsetWidth;
+  card.classList.add('flip');
+}
+function answer(btn,ch,item){
+  if(state.answered)return; state.answered=true; turnCard(); document.querySelectorAll('.option').forEach(b=>b.disabled=true);
+  const known=state.phase==='knownQuiz';
+  if(ch===item.p){btn.classList.add('correct');state.correct++;if(known)state.knownCorrect++;state.xp+=10;$('feedback').textContent=known?'Correto. Você reconheceu a palavra.':'Correto. Você reconheceu a equivalência.';$('feedback').className='feedback good';}
+  else{btn.classList.add('wrong');state.hearts=Math.max(0,state.hearts-1);$('hearts').textContent=state.hearts;document.querySelectorAll('.option').forEach(b=>{if(b.textContent===item.p)b.classList.add('correct')});$('feedback').textContent=known?`A resposta é “${item.p}”. Reforce a associação: ${item.g} → ${item.p}.`:`A resposta é “${item.p}”. Observe novamente: ${item.g} → ${item.p}.`;$('feedback').className='feedback bad';}
+  $('phonetic').innerHTML=`${item.p}${item.note?` <small>· ${item.note}</small>`:''}`; $('next').disabled=false; $('reveal').disabled=true;
+  const total=known?knownWords.length:letters.length; $('progress').style.width=`${Math.round((state.index+1)/total*100)}%`; $('progressLabel').textContent=known?`Grego que você já sabe · ${state.index+1} / ${total}`:`Adivinhação · ${state.index+1} / ${total}`; $('xp').textContent=state.xp; save();
+}
+function reveal(){
+  if(state.answered)return; const known=state.phase==='knownQuiz'; const item=known?knownWords[state.index]:letters[state.index]; state.answered=true; turnCard();
+  document.querySelectorAll('.option').forEach(b=>{b.disabled=true;if(b.textContent===item.p)b.classList.add('correct')}); $('phonetic').innerHTML=`${item.p}${item.note?` <small>· ${item.note}</small>`:''}`;
+  $('feedback').textContent=known?'Resposta revelada. Veja a associação e prossiga quando estiver pronto.':'Resposta revelada. Reforce a associação antes de seguir.'; $('feedback').className='feedback neutral'; $('next').disabled=false; $('reveal').disabled=true;
+  const total=known?knownWords.length:letters.length; $('progress').style.width=`${Math.round((state.index+1)/total*100)}%`; $('progressLabel').textContent=known?`Grego que você já sabe · ${state.index+1} / ${total}`:`Adivinhação · ${state.index+1} / ${total}`;
+}
+function next(){
+  const card=document.getElementById('flipCard'); if(card)card.classList.remove('flip'); state.index++;
+  const total=state.phase==='recognition'?recognitionBatches.length:state.phase==='quiz'?letters.length:state.phase==='knownRecognition'?knownBatches.length:knownWords.length;
+  if(state.index>=total){
+    if(state.phase==='recognition'){state.phase='quiz';state.index=0;$('subtitle').textContent='Agora teste se você realmente reconheceu as equivalências. Se precisar, use Consultar.';render();return;}
+    if(state.phase==='quiz'){state.phase='knownIntro';state.index=0;state.correct=0;$('game').classList.add('hide');$('knownIntro').classList.add('show');$('heroTitle').textContent='O grego que você já sabe';$('subtitle').textContent='Palavras gregas que já fazem parte do seu vocabulário em português.';updateProgress();renderPath();return;}
+    if(state.phase==='knownRecognition'){state.phase='knownQuiz';state.index=0;state.correct=0;$('subtitle').textContent='Agora teste se você reconhece as palavras gregas que acabou de conhecer.';render();return;}
+    finish();return;
+  }
+  render();
+}
+function finish(){
+  $('game').classList.add('hide'); $('knownIntro').classList.remove('show'); $('results').classList.add('show');
+  $('resultTitle').textContent='Fase “O grego que você já sabe” concluída!';
+  $('resultText').textContent='Você reconheceu palavras gregas que já aparecem, de uma forma ou de outra, no português. A próxima etapa é a Lição 2.';
+  $('rCorrect').textContent=state.knownCorrect; $('rXp').textContent=state.knownCorrect*10; $('rAccuracy').textContent=Math.round(state.knownCorrect/knownWords.length*100)+'%';
+  $('progress').style.width='100%'; $('progressLabel').textContent=`Grego que você já sabe · ${knownWords.length} / ${knownWords.length}`;
+  state.phase='done'; renderPath();
+  $('results').querySelector('#restart').textContent='Ir para a Lição 2';
+  $('results').querySelector('#restart').onclick=()=>startLesson2Presentation();
+}
+function restart(){state={phase:'recognition',index:0,correct:0,answered:false,xp:Number(localStorage.getItem('gregoLetrasXP')||0),hearts:5}; $('hearts').textContent=state.hearts;$('subtitle').textContent='Primeiro conheça as equivalências; depois teste sua memória.'; $('game').classList.remove('hide');$('results').classList.remove('show');render();}
+$('reveal').onclick=()=>{if(state.phase==='l2WordRecognition'||state.phase==='l2WordQuiz'||state.phase==='l2TranslateQuiz')revealLesson2();else reveal();};
+$('next').onclick=()=>{if(state.phase==='l2WordRecognition'||state.phase==='l2WordQuiz'||state.phase==='l2TranslateQuiz')nextLesson2();else next();};
+$('consult').onclick=openConsult; $('closeConsult').onclick=closeConsult; $('consultModal').onclick=e=>{if(e.target.id==='consultModal')closeConsult();};
+$('xp').textContent=state.xp; $('hearts').textContent=state.hearts; $('streak').textContent='1';
+
+$('startLesson2Study').onclick=startLesson2Study;
+$('skipLesson2Presentation').onclick=startLesson2WordsIntro;
+$('l2Prev').onclick=()=>{if(state.index>0){state.index--;state.l24Index=0;state.l24Answered=false;renderLesson2Context();}};
+$('l2Next').onclick=()=>{
+  if(state.index===3){ startLesson2WordsIntro(); return; }
+  if(state.index<lesson2ContextPages.length-1){
+    state.index++;state.l24Index=0;state.l24Answered=false;renderLesson2Context();
+  } else {
+    finishLesson2();
+  }
+};
+$('skipContextToWords').onclick=startLesson2WordsIntro;
+$('startLesson2Words').onclick=startLesson2Words;
+$('skipWordsIntro').onclick=startLesson2Words;
+$('startTranslate').onclick=startLesson2Translate;
+$('skipTranslateIntro').onclick=()=>skipLesson2Translate();
+$('skipTranslateTest').onclick=()=>skipLesson2Translate();
+
+function skipLesson2Translate(){
+  setLesson2Visible('results'); $('results').classList.add('show');
+  $('resultTitle').textContent='Fase 2.6 pulada';
+  $('resultText').textContent='Você pulou o teste de leitura e tradução. Pode voltar a esta fase quando quiser.';
+  $('rCorrect').textContent=state.translateCorrect;
+  $('rXp').textContent=state.xp;
+  $('rAccuracy').textContent='—';
+  $('lesson2Node').classList.remove('current');
+  $('lesson2Node').classList.add('done');
+  state.phase='lesson2Done';
+  renderPath();
+  $('restart').textContent='Voltar à Lição 2';
+  $('restart').onclick=()=>startLesson2Translate();
+}
+
+function openPhase(phase,index=0){
+  // Todas as fases ficam acessíveis a qualquer momento.
+  if(phase==='lesson1'){
+    document.querySelectorAll('.lesson2-screen').forEach(el=>el.classList.remove('show'));
+    $('game').classList.remove('hide'); $('results').classList.remove('show'); $('intro').classList.remove('hide');
+    state.phase='recognition'; state.index=0; render(); return;
+  }
+  if(phase==='lesson2Presentation'){startLesson2Presentation();return;}
+  if(phase==='lesson2Context'){
+    state.phase='lesson2Context';state.index=index;state.l24Index=0;state.l24Answered=false;setLesson2Visible('lesson2Context');renderLesson2Context();return;
+  }
+  if(phase==='lesson2WordsIntro'){startLesson2WordsIntro();return;}
+  if(phase==='lesson2TranslateIntro'){startLesson2TranslateIntro();return;}
+}
+document.querySelectorAll('[data-open-phase]').forEach(el=>{
+  el.addEventListener('click',()=>{
+    const phase=el.dataset.openPhase;
+    const index=Number(el.dataset.index||0);
+    if(phase) openPhase(phase,index);
+  });
+});
+
+$('startKnown').onclick=()=>{state.phase='knownRecognition';state.index=0;state.correct=0;$('knownIntro').classList.remove('show');$('game').classList.remove('hide');$('heroTitle').textContent='O grego que você já sabe';$('subtitle').textContent='Primeiro conheça estas palavras; depois teste sua memória.';render()};
+$('skipKnownIntro').onclick=()=>{$('startKnown').click()};
+$('skipIntro').onclick=()=>{$('intro').classList.add('hide')};
+$('modalSkip').onclick=()=>{$('welcome').classList.add('hide');$('intro').classList.add('hide')};
+$('modalStart').onclick=()=>{$('welcome').classList.add('hide')};
+$('restart').onclick=restart;
+render();
+</script>
+</body>
+</html>
