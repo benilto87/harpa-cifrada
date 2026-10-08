@@ -473,8 +473,8 @@ button.active{
   padding:16px clamp(14px,3vw,44px) 48px;
 }
 
-.score.auto-scroll-mode{        /*  EXTRA — MODO DE RECUO INICIAL */
-  padding-top:116px;
+.score.auto-scroll-mode{        /*  EXTRA — MODO DE ROLAGEM */
+  padding-top:52px;
 }
 
 .stanza{
@@ -693,71 +693,6 @@ button.active{
 
 }
 
-/* =========================================================
-   PLAQUINHA DE ROLAGEM — AJUSTE PARA CELULAR
-   ========================================================= */
-
-@media(max-width:760px){
-
-  .auto-scroll-panel{
-    position:relative;
-    width:100%;
-    max-width:100%;
-    padding:6px 30px 7px 8px;
-    gap:4px;
-    flex-wrap:nowrap;
-  }
-
-  .auto-scroll-panel .memory-check{
-    flex:0 0 auto;
-  }
-
-  .auto-scroll-panel .speed-btn{
-    min-width:28px;
-    min-height:28px;
-    padding:3px 6px;
-  }
-
-  .auto-scroll-panel .auto-scroll-speed{
-    width:min(125px,35vw);
-    min-width:80px;
-  }
-
-  .auto-scroll-panel .auto-scroll-value{
-    min-width:18px;
-    font-size:.70rem;
-  }
-
-  .auto-scroll-panel .auto-scroll-label{
-    font-size:.68rem;
-    margin-left:1px;
-  }
-
-  .auto-scroll-panel .auto-scroll-close{
-    position:absolute;
-    right:4px;
-    top:50%;
-    transform:translateY(-50%);
-
-    width:22px;
-    height:22px;
-    min-width:22px;
-    min-height:22px;
-
-    padding:0;
-
-    font-size:17px;
-    line-height:20px;
-  }
-
-  .auto-scroll-panel .auto-scroll-close:hover{
-    transform:translateY(-50%);
-  }
-
-}
-
-
-
 /* TOM ORIGINAL NA FILEIRA DE NOTAS */
 .tone-panel button.original-tone:not(.active){
   background:#eee7dc;
@@ -948,132 +883,8 @@ button.active{
 }
 
 </style><span></span></label>
-<script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
-
-<style id="salas-maestro-style">
-.room-overlay{display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(20,16,12,.45);padding:16px}
-.room-overlay.open{display:flex}
-.room-box{width:min(500px,95vw);background:#fffdf9;border:1px solid #d8cbbb;border-radius:16px;padding:18px;box-shadow:0 20px 60px #0003;font-family:Arial,sans-serif}
-.room-title{display:flex;justify-content:space-between;align-items:center;font-size:20px}
-.room-title button{min-width:36px}
-.room-status{margin:14px 0;padding:10px;border-radius:9px;background:#f3eee7;color:#555;font-size:13px}
-.room-actions{display:flex;gap:8px}
-.room-actions button{flex:1}
-.room-list{display:grid;gap:8px;margin-top:12px}
-.room-item{display:flex;justify-content:space-between;align-items:center;padding:11px;border:1px solid #ddd3c7;border-radius:10px;background:#fff}
-.room-item small{display:block;color:#777;margin-top:3px}
-.room-topbar{
-  display:none;
-  position:fixed;
-  top:48px;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:9000;
-  background:#fffdf9;
-  border:1px solid #d8cbbb;
-  border-radius:20px;
-  padding:6px 12px;
-  font:700 12px Arial,sans-serif;
-  box-shadow:0 4px 16px #0002;
-  white-space:nowrap;
-  pointer-events:none;
-}
-
-.room-topbar.active{
-  display:block;
-}
-
-.room-topbar{
-  transition:
-    padding .35s ease,
-    font-size .35s ease,
-    border-radius .35s ease;
-}
-
-.room-topbar.compact{
-  padding:6px 12px;
-  font-size:12px;
-  border-radius:20px;
-  opacity:0.75;
-}
-
-.room-topbar.compact #roomTopDetails{
-  display:none;
-}
-
-.auto-scroll-panel{
-  position:relative;
-}
-
-.auto-scroll-close{
-  position:absolute;
-  right:4px;
-  top:2px;
-
-  min-width:22px;
-  min-height:22px;
-
-  width:22px;
-  height:22px;
-
-  padding:0;
-
-  border:0;
-  background:transparent;
-
-  color:#8d1c1c;
-
-  font:700 18px/20px Arial,sans-serif;
-
-  border-radius:50%;
-
-  cursor:pointer;
-
-  z-index:5;
-}
-
-.auto-scroll-close:hover{
-  background:rgba(141,28,28,.10);
-  color:#b00000;
-  transform:none;
-}
-
-#down,
-#up{
-  display:none !important;
-}
-</style>
 </head>
 <body>
-
-<div id="roomTopbar" class="room-topbar">
-
-  <span id="roomTopDetails">
-    🌐 <span id="roomTopId">Grupo----</span> ·
-    🎵 <span id="roomTopKey">—</span> ·
-    👥 <span id="roomTopCount">0</span>
-  </span>
-
-  <span id="roomTopRole">👑 Maestro</span>
-
-</div>
-
-
-<div id="roomOverlay" class="room-overlay">
-  <div class="room-box">
-    <div class="room-title">
-      <strong>🌐 Salas / Maestro</strong>
-      <button id="closeRooms">✕</button>
-    </div>
-    <div id="roomStatus" class="room-status">Escolha uma opção.</div>
-    <div class="room-actions">
-      <button id="createRoom">👑 CRIAR SALA</button>
-      <button id="refreshRooms">↻ ATUALIZAR</button>
-    </div>
-    <div id="roomList" class="room-list"></div>
-  </div>
-</div>
-
 <header class="topbar">
 <div class="toolbar" aria-label="Controles">
 
@@ -1088,7 +899,7 @@ button.active{
 
   <button class="action" id="down" title="Descer 1 semitom">−½</button>
   <button class="action" id="up" title="Subir 1 semitom">+½</button>
-
+  <button class="action" id="reset" title="Tom original">↺</button>
 
   <button class="action" id="fontDown" title="Diminuir fonte">−</button>
   <button class="action" id="fontUp" title="Aumentar fonte">+</button>
@@ -1098,13 +909,11 @@ button.active{
 
   <button class="action" id="toggleProgression" title="Progressão numérica">#</button>
   <button class="action" id="toggleInline" title="Cifras dentro da letra">.</button>
-    <button class="action" id="toggleSplit" title="Dividir pelo /">🔍</button>
-    <button class="action" id="toggleAutoScroll" title="Rolagem automática — 3 minutos">▶</button>
+  <button class="action" id="toggleSplit" title="Dividir pelo /">*</button>
   <button class="action" id="toggleKeyboard" title="Ativar/desativar tecladinhos">🎹</button>
   <button class="action" id="toggleViolao" title="Ativar modo violão">🎸</button>
-   <button class="action" id="openRooms" title="Salas / Maestro" aria-label="Salas / Maestro">🌐</button>
-  <button class="action" id="reset" title="Tom original">↺</button>
-  
+  <button class="action" id="toggleAutoScroll" title="Rolagem automática — 3 minutos">▶</button>
+
   <div class="tone-pill">
     Tom atual
     <strong id="currentTone">Bb</strong>
@@ -1113,40 +922,13 @@ button.active{
 </div>
   <div id="tonePanel" class="tone-panel" role="group" aria-label="Tons"></div>
   <div id="autoScrollPanel" class="auto-scroll-panel hidden" aria-label="Velocidade da rolagem automática">
-
-  <button
-    type="button"
-    id="closeAutoScroll"
-    class="auto-scroll-close"
-    title="Sair do modo de rolagem"
-    aria-label="Sair do modo de rolagem"
-  >×</button>
-
-  <label class="memory-check" title="Memorizar o tempo desta música">
-    <input type="checkbox" id="autoScrollMemory">
-    <span>⏱</span>
-  </label>
-
-  <button type="button" class="speed-btn" id="autoScrollSlow" title="Mais devagar">−</button>
-
-  <input
-    class="auto-scroll-speed"
-    id="autoScrollSpeed"
-    type="range"
-    min="-5"
-    max="5"
-    step="1"
-    value="0"
-    aria-label="Velocidade da rolagem"
-  >
-
-  <span class="auto-scroll-value" id="autoScrollValue">0</span>
-
-  <button type="button" class="speed-btn" id="autoScrollFast" title="Mais rápido">+</button>
-
-  <span class="auto-scroll-label" id="autoScrollTime">3:00</span>
-
-</div>
+    <label class="memory-check" title="Memorizar o tempo desta música"><input type="checkbox" id="autoScrollMemory"><span>⏱</span></label>
+    <button type="button" class="speed-btn" id="autoScrollSlow" title="Mais devagar">−</button>
+    <input class="auto-scroll-speed" id="autoScrollSpeed" type="range" min="-5" max="5" step="1" value="0" aria-label="Velocidade da rolagem">
+    <span class="auto-scroll-value" id="autoScrollValue">0</span>
+    <button type="button" class="speed-btn" id="autoScrollFast" title="Mais rápido">+</button>
+    <span class="auto-scroll-label" id="autoScrollTime">3:00</span>
+  </div>
 </header>
 <div class="library-backdrop" id="libraryBackdrop"></div>
 <aside class="library-drawer" id="libraryDrawer" aria-hidden="true">
@@ -1184,23 +966,6 @@ button.active{
    ✨ Criador de Cifras
   </button>
   
-  <button class="other-app-button"
-    onclick="window.location.href='dicionario-acordes.html'">
-   🎸 Dicionário de Acordes
-  </button>
-  
-    <button class="other-app-button"
-    onclick="window.location.href='treinar-ritmo.html'">
-   🥁 Treinar Ritmo
-      
-	 <button class="other-app-button"
-    onclick="window.location.href='aprendendo-grego.html'">
-   📜 Aprendendo Grego
-   
-   <button class="other-app-button"
-  onclick="window.location.href='https://contexto-biblico.onrender.com'">
-  🏺 Contexto Bíblico
-  </button>
 
 </div>
 
@@ -1208,9 +973,9 @@ button.active{
   <div class="library-list" id="libraryList"></div>
 </aside>
 <main id="score" class="score"><div id="song"></div></main>
-<script src="js/musicas.js"></script>
-<script src="js/acordes-piano.js"></script>
-<script src="js/acordes-violao.js"></script>
+<script src="musicas.js"></script>
+<script src="acordes-piano.js"></script>
+<script src="acordes-violao.js"></script>
 
 <script>
 const chromatic=[{name:'C'},{name:'Db'},{name:'D'},{name:'Eb'},{name:'E'},{name:'F'},{name:'Gb'},{name:'G'},{name:'Ab'},{name:'A'},{name:'Bb'},{name:'B'}];
@@ -1273,88 +1038,7 @@ function spellNote(note){
 }
 
 function transposeChord(chord,semitones){const m=chord.match(/^([A-G](?:#|b)?)(.*)$/);if(!m)return chord;const root=m[1],suffix=m[2]||'';if(!(root in aliases))return chord;return spellNote((['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'])[(aliases[root]+semitones+120)%12])+suffix}
-function chordToProgression(chord,keyName){
-
-  const m=chord.match(/^([A-G](?:#|b)?)(.*)$/);
-
-  if(!m)
-    return '('+chord+')';
-
-  const root=m[1],
-        suffix=m[2]||'',
-        scale=[0,2,4,5,7,9,11],
-        key=aliases[keyName],
-        r=aliases[root];
-
-  if(key===undefined||r===undefined)
-    return '('+chord+')';
-
-  const interval=(r-key+12)%12,
-        degree=scale.indexOf(interval);
-
-  let degreeText;
-
-  if(degree>=0){
-
-    degreeText=String(degree+1);
-
-  }else{
-
-    const nearest=scale.reduce((best,val,i)=>{
-
-      const d=Math.min(
-        (interval-val+12)%12,
-        (val-interval+12)%12
-      );
-
-      return !best||d<best.d
-        ? {
-            d,
-            i,
-            dir:
-              ((interval-val+12)%12)
-              <=
-              ((val-interval+12)%12)
-              ?1:-1
-          }
-        :best;
-
-    },null);
-
-    degreeText=nearest
-      ? (nearest.dir<0?"♭":"♯")+(nearest.i+1)
-      : String(interval);
-  }
-
-  /*
-    Detecta acordes menores.
-
-    Exemplos:
-    Gm   → 6m
-    Am   → 2m
-    Cm7  → 4m,7
-
-    Não considera "maj" como menor.
-  */
-  const acordeMenor=
-    /^(?:m(?!aj)|min|-)/i.test(suffix);
-
-  if(acordeMenor){
-    degreeText+='m';
-  }
-
-  const ext=[];
-
-  if(/7/.test(suffix))
-    ext.push('7');
-
-  if(/4/.test(suffix)&&!/7/.test(suffix))
-    ext.push('4');
-
-  return ext.length
-    ? `${degreeText},${ext.join(',')}`
-    : `${degreeText}`;
-}
+function chordToProgression(chord,keyName){const m=chord.match(/^([A-G](?:#|b)?)(.*)$/);if(!m)return '('+chord+')';const root=m[1],suffix=m[2]||'',scale=[0,2,4,5,7,9,11],key=aliases[keyName],r=aliases[root];if(key===undefined||r===undefined)return '('+chord+')';const interval=(r-key+12)%12,degree=scale.indexOf(interval);let degreeText;if(degree>=0)degreeText=String(degree+1);else{const nearest=scale.reduce((best,val,i)=>{const d=Math.min((interval-val+12)%12,(val-interval+12)%12);return !best||d<best.d?{d,i,dir:((interval-val+12)%12)<=( (val-interval+12)%12)?1:-1}:best},null);degreeText=nearest?(nearest.dir<0?'♭':'♯')+(nearest.i+1):String(interval)}const ext=[];if(/7/.test(suffix))ext.push('7');if(/4/.test(suffix)&&!/7/.test(suffix))ext.push('4');return ext.length?`${degreeText},${ext.join(',')}`:`${degreeText}`}
 function applyFontScale(){document.getElementById('score').style.setProperty('--font-scale',fontScale.toFixed(2));document.getElementById('fontDown').disabled=fontScale<=MIN_FONT_SCALE+.001;document.getElementById('fontUp').disabled=fontScale>=MAX_FONT_SCALE-.001}
 
 /*
@@ -1751,15 +1435,6 @@ function finishAutoScroll(){
   // A rolagem terminou, mas continua no modo de rolagem
   autoScrollRunning=false;
   autoScrollMode=true;
-  
-  clearTimeout(autoScrollFadeTimer);
-autoScrollFadeTimer=0;
-
-const panel=document.getElementById('autoScrollPanel');
-
-if(panel){
-  panel.classList.remove('hidden','fade-50');
-}
 
   // Não há mais posição para retomar
   autoScrollResumeY=null;
@@ -1788,39 +1463,17 @@ function autoScrollTick(now){
   if(p>=1){finishAutoScroll();return;}
   autoScrollFrame=requestAnimationFrame(autoScrollTick);
 }
-
-function despertarAutoScrollPanel(){
-
-  const panel=document.getElementById('autoScrollPanel');
-
-  if(!panel)return;
-
-  // Cancela o temporizador anterior
-  clearTimeout(autoScrollFadeTimer);
-
-  // Volta imediatamente à opacidade normal
-  panel.classList.remove('fade-50');
-
-  // Depois de 5 segundos sem interação,
-  // volta a ficar transparente
-  autoScrollFadeTimer=setTimeout(()=>{
-
-    if(autoScrollMode){
-
-      panel.classList.add('fade-50');
-
-    }
-
-  },5000);
-}
-
 function startAutoScroll(){
   const panel=document.getElementById('autoScrollPanel');
 
   if(panel){
-  panel.classList.remove('hidden','fade-50');
-  despertarAutoScrollPanel();
-}
+    clearTimeout(autoScrollFadeTimer);
+    panel.classList.remove('hidden','fade-50');
+
+    autoScrollFadeTimer=setTimeout(()=>{
+      if(autoScrollRunning)panel.classList.add('fade-50');
+    },5000);
+  }
 
   cancelAutoScrollFrame();
   const retomando=autoScrollResumeY!==null;
@@ -1882,57 +1535,6 @@ function setAutoScrollSpeed(level){
   }
   updateAutoScrollPanel();
 }
-
-function sairModoRolagem(){
-
-  // Cancela qualquer animação em andamento
-  cancelAutoScrollFrame();
-
-  // Cancela o temporizador da transparência
-  clearTimeout(autoScrollFadeTimer);
-  autoScrollFadeTimer=0;
-
-  // Sai completamente do modo de rolagem
-  autoScrollRunning=false;
-  autoScrollMode=false;
-  autoScrollResumeY=null;
-
-  // Volta para o modo normal
-  splitMode=false;
-
-  // Volta ao tamanho normal da apresentação
-  fontScale=.80;
-  applyFontScale();
-
-  // Esconde a plaquinha
-  const panel=document.getElementById('autoScrollPanel');
-
-  if(panel){
-    panel.classList.add('hidden');
-    panel.classList.remove('fade-50');
-  }
-
-  // Atualiza os controles
-  updateAutoScrollPanel();
-
-  // Reconstrói a música no modo normal
-  render();
-
-  // Volta ao começo da música
-  window.scrollTo(0,0);
-}
-
-document.getElementById('closeAutoScroll').onclick=()=>{
-
-  sairModoRolagem();
-
-};
-
-document.getElementById('autoScrollPanel').addEventListener('pointerdown',()=>{
-
-  despertarAutoScrollPanel();
-
-});
 
 function getCurrentSong(){return songs.find(s=>s.id===currentSongId)||songs[0]}
 
@@ -2623,18 +2225,7 @@ librarySearch=document.getElementById('librarySearch'),
 favoritesFilter=document.getElementById('favoritesFilter'),
 allSongsFilter=document.getElementById('allSongsFilter');
 
-const ocultarComNotas=[
-  'down',
-  'up',
-  'reset',
-  'fontDown',
-  'fontUp',
-  'toggleKeyboard',
-  'toggleViolao',
-  'tonePanel',
-  'toggleSections',
-  'toggleInline'
-];
+const ocultarComNotas=['down','up','reset','fontDown','fontUp','tonePanel'];
 
 down.onclick=()=>{
   currentIndex=(currentIndex+11)%12;
@@ -2874,7 +2465,4 @@ render();
 centerOriginalTone();
 renderLibrary();
 </script>
-
-<script src="/js/rede-maestro.js"></script>
-
 </body></html>
