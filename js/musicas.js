@@ -1112,6 +1112,57 @@ const songs=[
 },
 
 /* =========================
+   075 — EM JESUS TENS A PALMA DA VITÓRIA
+========================= */
+
+{
+  id:'075',
+  number:'075',
+  title:'EM JESUS TENS A PALMA DA VITÓRIA',
+  category:'Harpa Cristã',
+  sourceToneIndex:10,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Tentado, não cedas, ceder é pecar',anchors:[{pos:0,chord:'Bb'},{pos:13,chord:'F'},{pos:20,chord:'Gm'},{pos:31,chord:'D'}]},
+      {lyric:'Melhor e mais nobre, será triunfar,',anchors:[{pos:0,chord:'Eb'},{pos:14,chord:'Bb'},{pos:22,chord:'F'},{pos:32,chord:'Bb'}]},
+      {lyric:'Coragem, ó crente, domina o teu mal',anchors:[{pos:0,chord:'Bb'},{pos:12,chord:'F'},{pos:18,chord:'Gm'},{pos:33,chord:'D'}]},
+      {lyric:'Deus pode livrar-te de queda fatal.',anchors:[{pos:0,chord:'Eb'},{pos:13,chord:'Bb'},{pos:20,chord:'F'},{pos:31,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Em Jesus tens a palma',anchors:[{pos:0,chord:'Bb'}]},
+      {lyric:'Da vitória, minh’alma;',anchors:[{pos:1,chord:'F'},{pos:15,chord:'Bb'}]},
+      {lyric:'E também doce calma',anchors:[{pos:0,chord:'Eb'},{pos:14,chord:'Bb'}]},
+      {lyric:'Pelo sangue da cruz!',anchors:[{pos:0,chord:'Bb/F'},{pos:6,chord:'F'},{pos:16,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Evita o pecado, procura agradar',anchors:[{pos:0,chord:'Bb'},{pos:10,chord:'F'},{pos:16,chord:'Gm'},{pos:29,chord:'D'}]},
+      {lyric:'A Deus, a quem deves no corpo exaltar;',anchors:[{pos:0,chord:'Eb'},{pos:15,chord:'Bb'},{pos:21,chord:'F'},{pos:35,chord:'Bb'}]},
+      {lyric:'Não manches teus lábios com impura voz:',anchors:[{pos:0,chord:'Bb'},{pos:17,chord:'F'},{pos:24,chord:'Gm'},{pos:36,chord:'D'}]},
+      {lyric:'Defende tua alma do vício atroz.',anchors:[{pos:0,chord:'Eb'},{pos:11,chord:'Bb'},{pos:18,chord:'F'},{pos:28,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Sê manso e benigno, qual morto até.',anchors:[{pos:0,chord:'Bb'},{pos:14,chord:'F'},{pos:21,chord:'Gm'},{pos:32,chord:'D'}]},
+      {lyric:'Na rocha eterna, firma tua fé;',anchors:[{pos:0,chord:'Eb'},{pos:10,chord:'Bb'},{pos:18,chord:'F'},{pos:27,chord:'Bb'}]},
+      {lyric:'Veraz é teu dito: de Deus és teu ser?',anchors:[{pos:0,chord:'Bb'},{pos:8,chord:'F'},{pos:17,chord:'Gm'},{pos:34,chord:'D'}]},
+      {lyric:'T’espera a coroa, tu podes vencer.',anchors:[{pos:1,chord:'Eb'},{pos:13,chord:'Bb'},{pos:19,chord:'F'},{pos:30,chord:'Bb'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    077 — GUARDA O CONTACTO
 ========================= */
 
@@ -1166,6 +1217,67 @@ const songs=[
       {lyric:'O amor de Cristo, divinal prazer;',anchors:[{pos:0,chord:'G'},{pos:32,chord:'C'}]},
       {lyric:'Queres, neste mundo, todo o mal vencer?',anchors:[{pos:0,chord:'C'},{pos:38,chord:'F'}]},
       {lyric:'Guarda o contacto e terás poder!',anchors:[{pos:0,chord:'F'},{pos:12,chord:'C/G'},{pos:18,chord:'G'},{pos:31,chord:'C'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   084 — O GRANDE “EU SOU”
+========================= */
+
+{
+  id:'084',
+  number:'084',
+  title:'O GRANDE “EU SOU”',
+  category:'Harpa Cristã',
+  sourceToneIndex:7,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Não perturbeis o coração, / Porque Eu sempre sou fiel;',anchors:[{pos:4,chord:'G'},{pos:32,chord:'D'}]},
+      {lyric:'Eu fecho a boca do “leão”, / Na cova estou com Daniel.',anchors:[{pos:3,chord:'G'},{pos:33,chord:'D'},{pos:48,chord:'G'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Sou Eu aquele, o grande “EU SOU”',anchors:[{pos:4,chord:'D'},{pos:19,chord:'G'}]},
+      {lyric:'E, onde estais, também estou;',anchors:[{pos:3,chord:'C'},{pos:20,chord:'G'}]},
+      {lyric:'Não disse, Eu, há muito já:',anchors:[{pos:4,chord:'D'}]},
+      {lyric:'“Pedi, pedi... dar-se-vos-á”?',anchors:[{pos:3,chord:'G'}]},
+      {lyric:'Pedi com fé e com fervor',anchors:[{pos:2,chord:'C'},{pos:15,chord:'G'}]},
+      {lyric:'E vos darei o Consolador.',anchors:[{pos:2,chord:'D'},{pos:17,chord:'G'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Quem tem a fé de Abraão, / O mundo sempre há de vencer;',anchors:[{pos:5,chord:'G'},{pos:30,chord:'D'}]},
+      {lyric:'Quem quer ter firme o coração, / Precisa igualmente crer.',anchors:[{pos:6,chord:'G'},{pos:36,chord:'D'},{pos:53,chord:'G'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Um terremoto e vento, após, / Do céu, um fogo e mui furor,',anchors:[{pos:3,chord:'G'},{pos:34,chord:'D'}]},
+      {lyric:'Ouviu Elias a minha voz, / Voz do Eterno, voz de amor.',anchors:[{pos:2,chord:'G'},{pos:31,chord:'D'},{pos:51,chord:'G'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Um certo dia, Estêvão viu / O céu aberto e viu-me a mim;',anchors:[{pos:3,chord:'G'},{pos:31,chord:'D'}]},
+      {lyric:'Apedrejado, sucumbiu, / Mas foi fiel, até o fim.',anchors:[{pos:1,chord:'G'},{pos:28,chord:'D'},{pos:45,chord:'G'}]}
+    ]
+    },
+    {
+      label:'5ª estrofe',
+      lines:[
+      {lyric:'Firmado em Mim, Rocha Eterna, / Assim jamais o crente cai;',anchors:[{pos:4,chord:'G'},{pos:34,chord:'D'}]},
+      {lyric:'Buscai o dom celestial, / Que vem da casa de Meu Pai.',anchors:[{pos:4,chord:'G'},{pos:31,chord:'D'},{pos:50,chord:'G'}]}
     ]
     }
   ]
@@ -1589,7 +1701,45 @@ const songs=[
     ]
     }
   ]
-},   
+},  
+
+/* =========================
+   545 — PORQUE ELE VIVE
+========================= */
+
+{
+  id:'545',
+  number:'545',
+  title:'PORQUE ELE VIVE',
+  category:'Harpa Cristã',
+  sourceToneIndex:8,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Deus enviou seu Filho amado / Pra perdoar, pra me salvar.',anchors:[{pos:9,chord:'Ab'},{pos:23,chord:'Db'},{pos:39,chord:'Ab'},{pos:52,chord:'Bbm'}]},
+      {lyric:'Na cruz morreu por meu pecado, / Mas ressurgiu e vivo com o Pai está.',anchors:[{pos:0,chord:'Eb'},{pos:12,chord:'Ab'},{pos:25,chord:'Db'},{pos:43,chord:'Ab'},{pos:54,chord:'Eb'},{pos:66,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Porque Ele vive, posso crer no amanhã.',anchors:[{pos:11,chord:'Ab'},{pos:31,chord:'Db'}]},
+      {lyric:'Porque Ele vive, temor não há.',anchors:[{pos:11,chord:'Ab'},{pos:27,chord:'Bbm'}]},
+      {lyric:'Mas eu bem sei, eu sei, que a minha vida',anchors:[{pos:0,chord:'Eb'},{pos:19,chord:'Ab'},{pos:36,chord:'Db'}]},
+      {lyric:'Está nas mãos de meu Jesus, que vivo está.',anchors:[{pos:9,chord:'Ab'},{pos:24,chord:'Eb'},{pos:39,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'E quando, enfim, chegar a hora / Em que a morte enfrentarei,',anchors:[{pos:12,chord:'Ab'},{pos:26,chord:'Db'},{pos:42,chord:'Ab'},{pos:55,chord:'Bbm'}]},
+      {lyric:'Sem medo, então, terei vitória: / Irei à Glória, ao meu Jesus que vivo está.',anchors:[{pos:0,chord:'Eb'},{pos:13,chord:'Ab'},{pos:25,chord:'Db'},{pos:41,chord:'Ab'},{pos:74,chord:'Eb'},{pos:73,chord:'Ab'}]}
+    ]
+    }
+  ]
+}, 
 
 /* =========================
    1000 — DE CORAÇÃO PRA CORAÇÃO - SHIRLEY CARVALHAES
