@@ -1284,6 +1284,57 @@ const songs=[
 },
 
 /* =========================
+   086 — SATISFEITO COM CRISTO
+========================= */
+
+{
+  id:'086',
+  number:'086',
+  title:'SATISFEITO COM CRISTO',
+  category:'Harpa Cristã',
+  sourceToneIndex:7,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Oh! ’stou satisfeito com Cristo,',anchors:[{pos:6,chord:'G'},{pos:26,chord:'C'}]},
+      {lyric:'Porque Ele minh’alma salvou;',anchors:[{pos:4,chord:'D'},{pos:25,chord:'G'}]},
+      {lyric:'E sobre o madeiro, sofrendo,',anchors:[{pos:3,chord:'G'},{pos:22,chord:'C'}]},
+      {lyric:'O Seu grande amor revelou.',anchors:[{pos:3,chord:'D'},{pos:23,chord:'G'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Oh! ’stou satisfeito com Cristo,',anchors:[{pos:7,chord:'G'},{pos:27,chord:'C'}]},
+      {lyric:'Confesso-O por meu Salvador:',anchors:[{pos:3,chord:'G'},{pos:25,chord:'D'}]},
+      {lyric:'Embora de nada ser digno,',anchors:[{pos:2,chord:'G'},{pos:20,chord:'C'}]},
+      {lyric:'Desfruto do Seu grande amor.',anchors:[{pos:4,chord:'D'},{pos:25,chord:'G'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Oh! ’stou satisfeito com Cristo,',anchors:[{pos:6,chord:'G'},{pos:27,chord:'C'}]},
+      {lyric:'De triste, tornei-me feliz,',anchors:[{pos:5,chord:'D'},{pos:23,chord:'G'}]},
+      {lyric:'Ouvindo o Seu santo Evangelho,',anchors:[{pos:3,chord:'G'},{pos:24,chord:'C'}]},
+      {lyric:'E crendo no que Ele me diz.',anchors:[{pos:3,chord:'D'},{pos:24,chord:'G'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Oh! ’stou satisfeito com Cristo,',anchors:[{pos:6,chord:'G'},{pos:26,chord:'C'}]},
+      {lyric:'E sei que vai logo voltar;',anchors:[{pos:3,chord:'D'},{pos:22,chord:'G'}]},
+      {lyric:'Virà com poder glorioso,',anchors:[{pos:2,chord:'G'},{pos:20,chord:'C'}]},
+      {lyric:'A fim de Seu povo levar.',anchors:[{pos:2,chord:'D'},{pos:21,chord:'G'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    123 — CRISTO VOLTARÁ
 ========================= */
 
