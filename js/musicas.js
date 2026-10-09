@@ -1335,6 +1335,66 @@ const songs=[
 },
 
 /* =========================
+   088 — REVELA A NÓS, SENHOR
+========================= */
+
+{
+  id:'088',
+  number:'088',
+  title:'REVELA A NÓS, SENHOR',
+  category:'Harpa Cristã',
+  sourceToneIndex:3,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Jesus, meu Rei, Mestre e Senhor,',anchors:[{pos:11,chord:'Eb'}]},
+      {lyric:'O Teu amor revela a mim,',anchors:[{pos:7,chord:'Bb'},{pos:20,chord:'Eb'}]},
+      {lyric:'Enquanto eu aqui viver,',anchors:[{pos:9,chord:'Eb'}]},
+      {lyric:'Até eu ver da vida o fim.',anchors:[{pos:7,chord:'Bb'},{pos:21,chord:'Eb'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Revela a nós, Senhor Jesus, meu Salvador,',anchors:[{pos:2,chord:'Eb'},{pos:37,chord:'Bb'}]},
+      {lyric:'As maravilhas mil do Teu divino amor;',anchors:[{pos:14,chord:'Bb'},{pos:33,chord:'Eb'}]},
+      {lyric:'E com veraz louvor, fervente gratidão;',anchors:[{pos:2,chord:'Eb'},{pos:35,chord:'Ab'}]},
+      {lyric:'Eleva a Ti, Jesus Senhor, o nosso coração.',anchors:[{pos:1,chord:'Eb'},{pos:14,chord:'Bb'},{pos:38,chord:'Eb'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'As bênçãos mil do Teu amor,',anchors:[{pos:11,chord:'Eb'}]},
+      {lyric:'Qual esplendor me cercarão;',anchors:[{pos:11,chord:'Bb'},{pos:23,chord:'Eb'}]},
+      {lyric:'O Teu olhar será, Jesus,',anchors:[{pos:8,chord:'Eb'}]},
+      {lyric:'A grata luz do coração.',anchors:[{pos:8,chord:'Bb'},{pos:20,chord:'Eb'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Sorrisos Teus verei brilhar,',anchors:[{pos:9,chord:'Eb'}]},
+      {lyric:'Se não andar no mundo vil:',anchors:[{pos:9,chord:'Bb'},{pos:22,chord:'Eb'}]},
+      {lyric:'Desfrutarei prazer veraz,',anchors:[{pos:8,chord:'Eb'}]},
+      {lyric:'Tempo de paz primaveril.',anchors:[{pos:9,chord:'Bb'},{pos:20,chord:'Eb'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'E, quando for no céu morar,',anchors:[{pos:10,chord:'Eb'}]},
+      {lyric:'E descansar dos dias meus,',anchors:[{pos:8,chord:'Bb'},{pos:22,chord:'Eb'}]},
+      {lyric:'Feliz viver receberei',anchors:[{pos:8,chord:'Eb'}]},
+      {lyric:'De Ti, meu Rei, meu santo Deus!',anchors:[{pos:11,chord:'Bb'},{pos:26,chord:'Eb'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    123 — CRISTO VOLTARÁ
 ========================= */
 
