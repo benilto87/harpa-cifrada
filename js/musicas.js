@@ -1588,6 +1588,49 @@ const songs=[
       {lyric:'Aceita Cristo já.',anchors:[{pos:1,chord:'Db'},{pos:7,chord:'Eb'},{pos:13,chord:'Ab'}]}
     ]
     }
+  ]
+},   
+
+/* =========================
+   1000 — DE CORAÇÃO PRA CORAÇÃO - SHIRLEY CARVALHAES
+========================= */
+
+{
+  id:'1100',
+  number:'1100',
+  title:'De Coração Pra Coração - Shirley Carvalhaes',
+  category:'Harpa Cristã',
+  sourceToneIndex:7,
+
+  sections:[
+    {
+      label:'1ª Estrofe',
+      lines:[
+      {lyric:'Quero cantar milhões e milhões de vezes',anchors:[{pos:1,chord:'G'}]},
+      {lyric:'Com os meus amigos e irmãos',anchors:[{pos:8,chord:'G'},{pos:24,chord:'Am'}]},
+      {lyric:'Assim como os anjos cantam lá na glória',anchors:[{pos:0,chord:'C'},{pos:35,chord:'G'}]},
+      {lyric:'Eu dou louvor a Deus aqui na terra',anchors:[{pos:31,chord:'D'}]},
+      {lyric:'De todo o meu coração',anchors:[{pos:0,chord:'C'},{pos:10,chord:'D'},{pos:18,chord:'G'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'De coração pra coração',anchors:[{pos:1,chord:'G'},{pos:17,chord:'Am'}]},
+      {lyric:'Porque o Senhor mudou a minha vida',anchors:[{pos:0,chord:'C'},{pos:19,chord:'D'},{pos:33,chord:'G'}]},
+      {lyric:'De coração, pra coração',anchors:[{pos:8,chord:'G'},{pos:21,chord:'Am'}]},
+      {lyric:'Estou feliz só porque te encontrei',anchors:[{pos:2,chord:'C'},{pos:18,chord:'D'},{pos:31,chord:'G'}]}
+    ]
+    },
+    {
+      label:'2ª Estrofe',
+      lines:[
+      {lyric:'Milagres acontecem em minha vida',anchors:[{pos:0,chord:'G'}]},
+      {lyric:'Por isso que eu não paro de cantar',anchors:[{pos:0,chord:'G'},{pos:28,chord:'Am'}]},
+      {lyric:'Assim como os anjos cantam lá na glória',anchors:[{pos:0,chord:'C'},{pos:33,chord:'G'}]},
+      {lyric:'Eu dou louvor a Deus aqui na terra',anchors:[{pos:26,chord:'D'}]},
+      {lyric:'De todo o meu coração',anchors:[{pos:0,chord:'C'},{pos:11,chord:'D'},{pos:19,chord:'G'}]}
+    ]
+    }
   ]}
 ];
-

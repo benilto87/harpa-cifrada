@@ -27,6 +27,11 @@ button{font:inherit;cursor:pointer}
 .progress-row{display:flex;align-items:center;gap:10px;margin:12px 0 18px}.progress-track{flex:1;height:9px;background:#e7e3da;border-radius:99px;overflow:hidden}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--blue),#5b9ab9);border-radius:99px;transition:.25s}.progress-label{font-size:12px;color:var(--muted);white-space:nowrap}
 .game{position:relative;min-height:510px}.card{position:relative;min-height:510px;border-radius:26px;border:1px solid var(--line);background:var(--paper);box-shadow:0 20px 65px rgba(31,43,50,.14);padding:24px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}.card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 88% 13%,rgba(36,92,122,.09),transparent 24%),radial-gradient(circle at 11% 87%,rgba(201,150,46,.10),transparent 23%);pointer-events:none}.card>*{position:relative}
 .flip-card{width:min(390px,86%);margin:8px auto 0;transform-style:preserve-3d;backface-visibility:hidden;perspective:1000px;will-change:transform;border-radius:18px}
+.flip-card.revealed .greek{font-size:38px;line-height:1.12;margin:14px 0 5px}
+.flip-card.revealed .greek.word-mode{font-size:38px}
+.flip-card.revealed .phonetic{font-family:Georgia,"Times New Roman",serif;font-size:56px;line-height:1.1;min-height:62px;margin:2px 0 8px}
+.flip-card.revealed .phonetic small{font-size:14px}
+@media(max-width:600px){.flip-card.revealed .greek,.flip-card.revealed .greek.word-mode{font-size:30px}.flip-card.revealed .phonetic{font-size:44px;min-height:50px}}
 .flip-card.flip{animation:flipAnswer .72s cubic-bezier(.22,.61,.36,1)}
 @keyframes flipAnswer{0%{transform:rotateY(0deg) scale(1)}18%{transform:rotateY(38deg) scale(.985)}50%{transform:rotateY(90deg) scale(.96)}82%{transform:rotateY(38deg) scale(.985)}100%{transform:rotateY(0deg) scale(1)}}
 .card-top{display:flex;justify-content:space-between;align-items:center}.tag{background:var(--blue2);color:var(--blue);padding:6px 10px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.05em}.counter{font-size:12px;color:var(--muted)}
@@ -72,7 +77,8 @@ button{font:inherit;cursor:pointer}
 .l2-word b,.l2-translation b{font-family:Georgia,serif;font-size:19px}
 .l2-word span,.l2-translation span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
 .l2-test-skip{display:none}
-.lesson2-node.current,.phase-link.current{border-color:var(--blue);box-shadow:0 0 0 3px rgba(36,92,122,.08)}
+.lesson2-node.current,.phase-link.current,.phase-link.current-sub{border-color:var(--blue);box-shadow:0 0 0 3px rgba(36,92,122,.08)}
+.sidebar-lesson-label{font-size:10px;font-weight:900;letter-spacing:.08em;color:var(--muted);margin:14px 2px 6px}
 .phase-link:hover{border-color:#aebfc8;transform:translateY(-1px);transition:.15s}
 .lesson2-node.done{background:var(--green2);border-color:#cde5d5}
 @media(max-width:700px){
@@ -111,10 +117,12 @@ button{font:inherit;cursor:pointer}
 
 <style>
 .l2-rules{font-family:Georgia,serif;line-height:1.65;color:#414a50;padding-left:25px}.l2-rules li{margin-bottom:10px}.l2-rules b{font-weight:700}.l2-rules li::marker{font-family:Georgia,serif}
+
+.pass-requirement-notice{margin:8px auto 12px;padding:9px 12px;max-width:650px;border:1px solid #d9e6ed;border-radius:11px;background:#eef5f8;color:#31596b;font-size:12px;line-height:1.45;text-align:center}
+.pass-requirement-notice b{font-weight:800}
 </style></style>
 </head>
 <body>
-<a class="back-arrow" href="index.html" title="Voltar para a Harpa Cifrada" aria-label="Voltar para a Harpa Cifrada">←</a>
 <div class="app">
   <header class="topbar">
     <div class="brand"><div class="logo">αβ</div><div><h1>Grego do Novo Testamento</h1><small>Lição 1 · aprendendo as letras</small></div></div>
@@ -126,7 +134,8 @@ button{font:inherit;cursor:pointer}
       <h2>Progressão das letras</h2>
       <div class="sidebar-note">Nesta lição, você começa pelas <b>letras e seus equivalentes fonéticos</b> e depois passa às palavras gregas que já são familiares em português. Os grupos de letras ficam para uma etapa posterior.</div>
       <div id="path" class="path"></div>
-      <div id="lesson2Node" class="node lesson2-node" style="margin-top:9px" data-open-phase="lesson2Presentation">
+      <div class="sidebar-lesson-label">LIÇÃO 2</div>
+      <div id="lesson2Node" class="node lesson2-node" style="margin-top:0" data-open-phase="lesson2Presentation">
         <div class="node-circle">2</div>
         <div><strong>Lição 2</strong><span>ἐν ἀρχῇ · no princípio</span></div>
       </div>
@@ -268,7 +277,8 @@ button{font:inherit;cursor:pointer}
               <div class="greek" id="greek">α</div>
               <div class="phonetic" id="phonetic"></div>
             </div>
-            <div class="prompt" id="prompt">Esta letra representa o som:</div>
+            <div id="passRequirementNotice" class="pass-requirement-notice">Para prosseguir, você precisa acertar pelo menos <b>80%</b>. Se não alcançar a meta, use <b>↻ Refazer jogo</b> e tente novamente.</div>
+      <div class="prompt" id="prompt">Esta letra representa o som:</div>
             <div class="options" id="options"></div>
             <div class="feedback neutral" id="feedback"></div>
           </div>
@@ -492,9 +502,13 @@ function closeConsult(){$('consultModal').classList.add('hide')}
 
 function setLesson2Visible(id){
   ['lesson2Presentation','lesson2Context','lesson2WordsIntro','lesson2TranslateIntro']
-    .forEach(x=>{if($(x))$(x).classList.remove('show')});
+    .forEach(id2=>{const el=$(id2); if(el){el.classList.remove('show'); el.classList.add('hide');}});
   ['game','knownIntro','intro','results']
-    .forEach(x=>{if($(x))$(x).classList.add('hide')});
+    .forEach(id2=>{
+      const el=$(id2); if(!el)return;
+      el.classList.add('hide');
+      if(id2==='results'||id2==='knownIntro')el.classList.remove('show');
+    });
   if($(id)){
     $(id).classList.remove('hide');
     if($(id).classList.contains('lesson2-screen')) $(id).classList.add('show');
@@ -599,10 +613,11 @@ function startLesson2WordsIntro(){
   updateProgressL2('2.5 · preparação');
 }
 function startLesson2Words(){
-  state.phase='l2WordRecognition'; state.index=0; state.lesson2Correct=0;
+  state.phase='l2WordQuiz'; state.index=0; state.lesson2Correct=0;
+  state.gameCorrect=0; state.gameTotal=lesson2Words.length; state.gameId='lesson2Words';
   setLesson2Visible('game');
   $('heroTitle').textContent='2.5 · Palavras';
-  $('subtitle').textContent='Primeiro reconheça as palavras; depois teste sua memória.';
+  $('subtitle').textContent='Associe cada palavra grega ao seu significado em português.';
   renderLesson2Game();
 }
 function startLesson2TranslateIntro(){
@@ -614,6 +629,7 @@ function startLesson2TranslateIntro(){
 }
 function startLesson2Translate(){
   state.phase='l2TranslateQuiz'; state.index=0; state.translateCorrect=0;
+  state.gameCorrect=0; state.gameTotal=lesson2Translations.length; state.gameId='lesson2Translate';
   setLesson2Visible('game');
   $('heroTitle').textContent='2.6 · Leia e traduza';
   $('subtitle').textContent='Tente traduzir antes de consultar a resposta.';
@@ -628,7 +644,7 @@ function renderLesson2Game(){
   $('question').textContent=translate?'Leia e traduza:':'Você conhece esta palavra?';
   $('greek').textContent=item.g; $('greek').classList.remove('hide');
   $('phonetic').innerHTML=''; $('phonetic').classList.remove('hide');
-  $('flipCard').classList.add('word-mode');
+  $('flipCard').classList.add('word-mode'); $('flipCard').classList.remove('revealed');
   $('prompt').textContent='Escolha a tradução em português:';
   $('feedback').textContent=''; $('feedback').className='feedback neutral';
   $('options').innerHTML=''; $('options').style.gridTemplateColumns='repeat(2,1fr)';
@@ -647,12 +663,13 @@ function renderLesson2Game(){
 }
 function answerLesson2(btn,ch,item){
   if(state.answered)return;
-  state.answered=true; turnCard();
+  state.answered=true; turnCard(); $('flipCard').classList.add('revealed');
   document.querySelectorAll('.option').forEach(b=>b.disabled=true);
   const translate=state.phase==='l2TranslateQuiz';
   if(ch===item.p){
     btn.classList.add('correct');
     if(translate)state.translateCorrect++;else state.lesson2Correct++;
+    state.gameCorrect=(state.gameCorrect||0)+1;
     state.xp+=10; $('xp').textContent=state.xp; save();
     $('feedback').textContent='Correto. Você reconheceu a associação.';
     $('feedback').className='feedback good';
@@ -674,7 +691,7 @@ function revealLesson2(){
   const translate=state.phase==='l2TranslateQuiz';
   const words=translate?lesson2Translations:lesson2Words;
   const item=words[state.index];
-  state.answered=true; turnCard();
+  state.answered=true; turnCard(); $('flipCard').classList.add('revealed');
   document.querySelectorAll('.option').forEach(b=>{b.disabled=true;if(b.textContent===item.p)b.classList.add('correct')});
   $('phonetic').innerHTML=item.p;
   $('feedback').textContent='Resposta revelada. Reforce a associação antes de seguir.';
@@ -684,12 +701,12 @@ function revealLesson2(){
 function nextLesson2(){
   const translate=state.phase==='l2TranslateQuiz';
   const words=translate?lesson2Translations:lesson2Words;
-  $('flipCard').classList.remove('flip');
+  $('flipCard').classList.remove('flip','revealed');
   state.index++;
   if(state.index<words.length){renderLesson2Game();return;}
   if(state.phase==='l2WordRecognition'){
-    state.phase='l2WordQuiz'; state.index=0;
-    $('subtitle').textContent='Agora teste se você reconhece as palavras.';
+    state.phase='l2WordQuiz'; state.index=0; state.lesson2Correct=0;
+    $('subtitle').textContent='Associe cada palavra grega ao seu significado em português.';
     renderLesson2Game(); return;
   }
   if(state.phase==='l2WordQuiz'){
@@ -727,7 +744,7 @@ function render(){
   $('counter').textContent=state.phase==='recognition'?`Lista ${state.index+1} / 3`:state.phase==='quiz'?`${state.index+1} / ${letters.length}`:state.phase==='knownRecognition'?`Lista ${state.index+1} / ${knownBatches.length}`:`${state.index+1} / ${knownWords.length}`;
   $('feedback').textContent=''; $('feedback').className='feedback neutral'; $('next').disabled=true; $('reveal').disabled=false; state.answered=false; $('options').innerHTML='';
   $('consult').classList.toggle('hide',state.phase==='recognition'||state.phase==='knownRecognition');
-  $('flipCard').classList.toggle('word-mode',isKnown);
+  $('flipCard').classList.toggle('word-mode',isKnown); $('flipCard').classList.remove('revealed');
   updateProgress();
   if(state.phase==='recognition'){
     const batch=recognitionBatches[state.index]; $('greek').classList.add('hide'); $('phonetic').classList.add('hide');
@@ -755,17 +772,30 @@ function renderPath(){
   const path=$('path');
   if(!path)return;
   const phase=state.phase;
-  const l1Done=['knownIntro','knownRecognition','knownQuiz','done'].includes(phase);
-  const l2Active=phase.startsWith('lesson2')||phase.startsWith('l2')||phase==='translateQuiz'||phase==='lesson2Done';
+  const l1Intro = phase==='recognition';
+  const l1Quiz = phase==='quiz';
+  const l12Intro = phase==='knownIntro';
+  const l12Rec = phase==='knownRecognition';
+  const l12Quiz = phase==='knownQuiz';
+  const l2Active = phase.startsWith('lesson2') || phase.startsWith('l2') || phase==='translateQuiz' || phase==='lesson2Done';
+
   path.innerHTML=`
-    <div class="node ${l2Active?'':'current'} phase-link" data-open-phase="lesson1">
+    <div class="node ${l1Intro||l1Quiz?'current':''} phase-link" data-open-phase="lesson1">
       <div class="node-circle">1</div>
-      <div><strong>Lição 1</strong><span>letras e palavras</span></div>
+      <div><strong>Lição 1</strong><span>aprendendo as letras</span></div>
+    </div>
+    <div class="node phase-link ${l1Intro||l1Quiz?'current-sub':''}" data-open-phase="lesson1Intro">
+      <div class="node-circle">1.1</div>
+      <div><strong>O alfabeto grego</strong><span>reconhecimento + adivinhação</span></div>
+    </div>
+    <div class="node phase-link ${l12Intro||l12Rec||l12Quiz?'current':''}" data-open-phase="knownIntro">
+      <div class="node-circle">1.2</div>
+      <div><strong>O grego que você já sabe</strong><span>demonstração + jogo</span></div>
     </div>`;
-  document.querySelectorAll('[data-open-phase]').forEach(el=>el.classList.remove('current'));
-  const active = document.querySelector(`[data-open-phase="${phase}"]`);
-  if(active) active.classList.add('current');
+
+  $('lesson2Node')?.classList.toggle('current', l2Active && phase==='lesson2Presentation');
 }
+
 
 function turnCard(){
   const card=document.getElementById('flipCard');
@@ -775,7 +805,7 @@ function turnCard(){
   card.classList.add('flip');
 }
 function answer(btn,ch,item){
-  if(state.answered)return; state.answered=true; turnCard(); document.querySelectorAll('.option').forEach(b=>b.disabled=true);
+  if(state.answered)return; state.answered=true; turnCard(); $('flipCard').classList.add('revealed'); document.querySelectorAll('.option').forEach(b=>b.disabled=true);
   const known=state.phase==='knownQuiz';
   if(ch===item.p){btn.classList.add('correct');state.correct++;if(known)state.knownCorrect++;state.xp+=10;$('feedback').textContent=known?'Correto. Você reconheceu a palavra.':'Correto. Você reconheceu a equivalência.';$('feedback').className='feedback good';}
   else{btn.classList.add('wrong');state.hearts=Math.max(0,state.hearts-1);$('hearts').textContent=state.hearts;document.querySelectorAll('.option').forEach(b=>{if(b.textContent===item.p)b.classList.add('correct')});$('feedback').textContent=known?`A resposta é “${item.p}”. Reforce a associação: ${item.g} → ${item.p}.`:`A resposta é “${item.p}”. Observe novamente: ${item.g} → ${item.p}.`;$('feedback').className='feedback bad';}
@@ -783,13 +813,13 @@ function answer(btn,ch,item){
   const total=known?knownWords.length:letters.length; $('progress').style.width=`${Math.round((state.index+1)/total*100)}%`; $('progressLabel').textContent=known?`Grego que você já sabe · ${state.index+1} / ${total}`:`Adivinhação · ${state.index+1} / ${total}`; $('xp').textContent=state.xp; save();
 }
 function reveal(){
-  if(state.answered)return; const known=state.phase==='knownQuiz'; const item=known?knownWords[state.index]:letters[state.index]; state.answered=true; turnCard();
+  if(state.answered)return; const known=state.phase==='knownQuiz'; const item=known?knownWords[state.index]:letters[state.index]; state.answered=true; turnCard(); $('flipCard').classList.add('revealed');
   document.querySelectorAll('.option').forEach(b=>{b.disabled=true;if(b.textContent===item.p)b.classList.add('correct')}); $('phonetic').innerHTML=`${item.p}${item.note?` <small>· ${item.note}</small>`:''}`;
   $('feedback').textContent=known?'Resposta revelada. Veja a associação e prossiga quando estiver pronto.':'Resposta revelada. Reforce a associação antes de seguir.'; $('feedback').className='feedback neutral'; $('next').disabled=false; $('reveal').disabled=true;
   const total=known?knownWords.length:letters.length; $('progress').style.width=`${Math.round((state.index+1)/total*100)}%`; $('progressLabel').textContent=known?`Grego que você já sabe · ${state.index+1} / ${total}`:`Adivinhação · ${state.index+1} / ${total}`;
 }
 function next(){
-  const card=document.getElementById('flipCard'); if(card)card.classList.remove('flip'); state.index++;
+  const card=document.getElementById('flipCard'); if(card)card.classList.remove('flip','revealed'); state.index++;
   const total=state.phase==='recognition'?recognitionBatches.length:state.phase==='quiz'?letters.length:state.phase==='knownRecognition'?knownBatches.length:knownWords.length;
   if(state.index>=total){
     if(state.phase==='recognition'){state.phase='quiz';state.index=0;$('subtitle').textContent='Agora teste se você realmente reconheceu as equivalências. Se precisar, use Consultar.';render();return;}
@@ -821,7 +851,10 @@ $('l2Prev').onclick=()=>{if(state.index>0){state.index--;state.l24Index=0;state.
 $('l2Next').onclick=()=>{
   if(state.index===3){ startLesson2WordsIntro(); return; }
   if(state.index<lesson2ContextPages.length-1){
-    state.index++;state.l24Index=0;state.l24Answered=false;renderLesson2Context();
+    state.index++;
+    if(state.index===3){state.l24Index=0;state.l24Answered=false;state.l24GameCorrect=0;state.l24Session=true;}
+    else {state.l24Index=0;state.l24Answered=false;state.l24Session=false;}
+    renderLesson2Context();
   } else {
     finishLesson2();
   }
@@ -850,24 +883,46 @@ function skipLesson2Translate(){
 
 function openPhase(phase,index=0){
   // Todas as fases ficam acessíveis a qualquer momento.
-  if(phase==='lesson1'){
+  if(phase==='lesson1' || phase==='lesson1Intro'){
     document.querySelectorAll('.lesson2-screen').forEach(el=>el.classList.remove('show'));
-    $('game').classList.remove('hide'); $('results').classList.remove('show'); $('intro').classList.remove('hide');
-    state.phase='recognition'; state.index=0; render(); return;
+    $('game').classList.remove('hide'); $('results').classList.remove('show'); $('knownIntro').classList.remove('show'); $('intro').classList.remove('hide');
+    state.phase='recognition'; state.index=0;
+    $('heroTitle').textContent='αβγ — aprendendo as letras';
+    $('subtitle').textContent='Primeiro conheça as equivalências; depois teste sua memória.';
+    render(); return;
+  }
+  if(phase==='knownIntro'){
+    document.querySelectorAll('.lesson2-screen').forEach(el=>el.classList.remove('show'));
+    $('intro').classList.add('hide'); $('game').classList.add('hide'); $('results').classList.remove('show'); $('knownIntro').classList.add('show');
+    state.phase='knownIntro'; state.index=0;
+    $('heroTitle').textContent='O grego que você já sabe';
+    $('subtitle').textContent='Palavras gregas que já fazem parte do seu vocabulário em português.';
+    updateProgress(); renderPath(); return;
+  }
+  if(phase==='knownQuiz'){
+    document.querySelectorAll('.lesson2-screen').forEach(el=>el.classList.remove('show'));
+    $('intro').classList.add('hide'); $('knownIntro').classList.add('hide'); $('game').classList.remove('hide'); $('results').classList.remove('show');
+    state.phase='knownRecognition'; state.index=0; state.knownCorrect=0;
+    $('heroTitle').textContent='O grego que você já sabe';
+    $('subtitle').textContent='Primeiro conheça estas palavras; depois teste sua memória.';
+    render(); return;
   }
   if(phase==='lesson2Presentation'){startLesson2Presentation();return;}
   if(phase==='lesson2Context'){
-    state.phase='lesson2Context';state.index=index;state.l24Index=0;state.l24Answered=false;setLesson2Visible('lesson2Context');renderLesson2Context();return;
+    state.phase='lesson2Context';state.index=index;
+    if(index===3){state.l24Index=0;state.l24Answered=false;state.l24GameCorrect=0;state.l24Session=true;}
+    else {state.l24Index=0;state.l24Answered=false;state.l24Session=false;}
+    setLesson2Visible('lesson2Context');renderLesson2Context();return;
   }
   if(phase==='lesson2WordsIntro'){startLesson2WordsIntro();return;}
   if(phase==='lesson2TranslateIntro'){startLesson2TranslateIntro();return;}
 }
-document.querySelectorAll('[data-open-phase]').forEach(el=>{
-  el.addEventListener('click',()=>{
-    const phase=el.dataset.openPhase;
-    const index=Number(el.dataset.index||0);
-    if(phase) openPhase(phase,index);
-  });
+document.addEventListener('click',e=>{
+  const el=e.target.closest('[data-open-phase]');
+  if(!el)return;
+  const phase=el.dataset.openPhase;
+  const index=Number(el.dataset.index||0);
+  if(phase) openPhase(phase,index);
 });
 
 $('startKnown').onclick=()=>{state.phase='knownRecognition';state.index=0;state.correct=0;$('knownIntro').classList.remove('show');$('game').classList.remove('hide');$('heroTitle').textContent='O grego que você já sabe';$('subtitle').textContent='Primeiro conheça estas palavras; depois teste sua memória.';render()};
@@ -877,6 +932,292 @@ $('modalSkip').onclick=()=>{$('welcome').classList.add('hide');$('intro').classL
 $('modalStart').onclick=()=>{$('welcome').classList.add('hide')};
 $('restart').onclick=restart;
 render();
+</script>
+
+<style id="game-system-upgrade">
+.actions{flex-wrap:wrap}
+.redo-game,.result-actions{display:none}
+.result-actions{justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.result-actions .btn{min-width:145px}
+.result-fail{color:var(--red);font-weight:800}
+.result-pass{color:var(--green);font-weight:800}
+.pass-note{font-size:12px;color:var(--muted);margin-top:8px}
+</style>
+
+<script id="game-system-upgrade-js">
+/* ===== SISTEMA GERAL DOS JOGOS =====
+   - Cada jogo pode ser refeito a qualquer momento.
+   - Para prosseguir pela sequência, o jogo exige 80% de acerto.
+   - O menu lateral continua aberto no protótipo e pode levar a qualquer fase.
+*/
+(function(){
+  const PASS_RATE = 0.80;
+  const $ = id => document.getElementById(id);
+
+  function ensureRedoButton(){
+    const actions=$('consult')?.parentElement;
+    if(!actions) return null;
+    let b=$('redoGame');
+    if(!b){
+      b=document.createElement('button');
+      b.id='redoGame'; b.className='btn secondary redo-game'; b.textContent='↻ Refazer jogo';
+      actions.insertBefore(b,$('reveal')||null);
+    }
+    return b;
+  }
+
+  function ensureResultControls(){
+    const r=$('results');
+    if(!r) return null;
+    let box=$('resultActions');
+    if(!box){
+      box=document.createElement('div'); box.id='resultActions'; box.className='result-actions';
+      const restart=$('restart');
+      (restart?.parentElement||r).insertBefore(box,restart||null);
+    }
+    let redo=$('resultRedo');
+    if(!redo){redo=document.createElement('button');redo.id='resultRedo';redo.className='btn secondary';redo.textContent='↻ Refazer jogo';box.appendChild(redo);}
+    let proceed=$('resultProceed');
+    if(!proceed){proceed=document.createElement('button');proceed.id='resultProceed';proceed.className='btn primary';proceed.textContent='Prosseguir';box.appendChild(proceed);}
+    if($('restart')) $('restart').style.display='none';
+    return {box,redo,proceed};
+  }
+
+  function setGameState(correct,total,id){
+    state.gameCorrect=correct; state.gameTotal=total; state.gameId=id;
+  }
+  function accuracy(){ return state.gameTotal ? Math.round(state.gameCorrect/state.gameTotal*100) : 0; }
+  function passed(){ return state.gameTotal>0 && state.gameCorrect/state.gameTotal >= PASS_RATE; }
+
+  function showResult(title,redoFn,proceedLabel,proceedFn){
+    const c=ensureResultControls();
+    if(!c) return;
+    $('game')?.classList.add('hide');
+    $('knownIntro')?.classList.remove('show');
+    document.querySelectorAll('.lesson2-screen').forEach(el=>{el.classList.remove('show'); el.classList.add('hide');});
+    // Some navigation screens had previously added .hide to #results.
+    // Remove it here as well as adding .show, or the results/proceed buttons remain invisible.
+    $('results').classList.remove('hide');
+    $('results').classList.add('show');
+    const ok=passed(), a=accuracy();
+    $('resultTitle').textContent=title;
+    $('resultText').innerHTML=ok
+      ? `Você fez <b>${state.gameCorrect}/${state.gameTotal}</b> (${a}%). <span class="result-pass">Aproveitamento mínimo de ${PASS_RATE*100}% atingido.</span>`
+      : `Você fez <b>${state.gameCorrect}/${state.gameTotal}</b> (${a}%). <span class="result-fail">É preciso alcançar pelo menos ${PASS_RATE*100}% para prosseguir.</span><div class="pass-note">Você pode refazer este jogo quantas vezes quiser.</div>`;
+    $('rCorrect').textContent=`${state.gameCorrect}/${state.gameTotal}`;
+    $('rXp').textContent=state.xp;
+    $('rAccuracy').textContent=a+'%';
+    c.box.style.display='flex';
+    c.redo.textContent='↻ Refazer jogo';
+    c.redo.disabled=false;
+    c.redo.onclick=()=>{ $('results').classList.remove('show'); $('results').classList.add('hide'); redoFn(); };
+    c.proceed.textContent=proceedLabel;
+    c.proceed.disabled=!ok;
+    c.proceed.onclick=()=>{ if(ok){$('results').classList.remove('show'); $('results').classList.add('hide'); proceedFn();} };
+    if($('restart')) $('restart').style.display='none';
+  }
+
+  function openKnownIntro(){
+    document.querySelectorAll('.lesson2-screen').forEach(el=>el.classList.remove('show'));
+    $('intro')?.classList.add('hide'); $('game')?.classList.add('hide'); $('results')?.classList.remove('show');
+    $('knownIntro')?.classList.add('show');
+    state.phase='knownIntro'; state.index=0; state.correct=0; state.knownCorrect=0;
+    $('heroTitle').textContent='O grego que você já sabe';
+    $('subtitle').textContent='Palavras gregas que já fazem parte do seu vocabulário em português.';
+    updateProgress(); renderPath();
+  }
+
+  function redoLetters(){
+    document.querySelectorAll('.lesson2-screen').forEach(el=>el.classList.remove('show'));
+    $('intro')?.classList.add('hide'); $('knownIntro')?.classList.remove('show'); $('results')?.classList.remove('show'); $('game')?.classList.remove('hide');
+    state.phase='quiz'; state.index=0; state.correct=0; state.answered=false; setGameState(0,letters.length,'letters');
+    $('heroTitle').textContent='αβγ — aprendendo as letras'; $('subtitle').textContent='Teste novamente as equivalências fonéticas.';
+    render();
+  }
+
+  function redoKnown(){
+    document.querySelectorAll('.lesson2-screen').forEach(el=>el.classList.remove('show'));
+    $('intro')?.classList.add('hide'); $('knownIntro')?.classList.add('hide'); $('results')?.classList.remove('show'); $('game')?.classList.remove('hide');
+    state.phase='knownQuiz'; state.index=0; state.correct=0; state.knownCorrect=0; state.answered=false; setGameState(0,knownWords.length,'knownWords');
+    $('heroTitle').textContent='O grego que você já sabe'; $('subtitle').textContent='Teste novamente as palavras familiares.';
+    render();
+  }
+
+  function redo24(){
+    state.phase='lesson2Context'; state.index=3; state.l24Index=0; state.l24Answered=false; state.l24GameCorrect=0; state.l24Session=true;
+    document.querySelectorAll('.lesson2-screen').forEach(el=>el.classList.remove('show'));
+    $('game')?.classList.add('hide'); $('results')?.classList.remove('show');
+    $('lesson2Context')?.classList.remove('hide'); $('lesson2Context')?.classList.add('show');
+    $('heroTitle').textContent='Lição 2 · 2.4 Leitura'; $('subtitle').textContent='Tente reconhecer a leitura antes de consultar.';
+    renderLesson2Context();
+  }
+
+  // 2.4: keep its reading game, but add scoring/refazer and a threshold before 2.5.
+  if(typeof answerLesson24==='function'){
+    const originalAnswer24=answerLesson24;
+    window.answerLesson24=function(btn,ch,item){
+      const already=state.l24Answered;
+      const right=ch===item.p;
+      originalAnswer24(btn,ch,item);
+      if(!already && right){ state.l24GameCorrect=(state.l24GameCorrect||0)+1; }
+    };
+  }
+  if(typeof renderLesson24Game==='function'){
+    const originalRender24=renderLesson24Game;
+    window.renderLesson24Game=function(){
+      originalRender24();
+      const actions=document.querySelector('#lesson24GameMount .l24-actions');
+      if(actions && !$('l24Redo')){
+        const b=document.createElement('button'); b.id='l24Redo'; b.className='btn secondary'; b.textContent='↻ Refazer jogo';
+        actions.insertBefore(b,actions.firstChild); b.onclick=redo24;
+      }
+      if($('l24Next')) $('l24Next').textContent=(state.l24Index>=lesson24Readings.length-1)?'Concluir jogo':'Próxima linha';
+    };
+  }
+  window.nextLesson24=function(){
+    state.l24Index=(state.l24Index||0)+1; state.l24Answered=false;
+    if(state.l24Index>=lesson24Readings.length){
+      state.l24Index=0; state.l24Session=false;
+      setGameState(state.l24GameCorrect||0,lesson24Readings.length,'lesson24');
+      showResult('Jogo 2.4 · Leitura',redo24,'Continuar para 2.5 · Palavras',()=>startLesson2WordsIntro());
+      return;
+    }
+    renderLesson2Context();
+  };
+
+  // Intercepta o botão principal "Próxima". Todas as fases continuam abertas no menu,
+  // mas a passagem sequencial exige 80%.
+  const nextBtn=$('next');
+  if(nextBtn){
+    nextBtn.onclick=function(){
+      if(state.phase==='quiz' && state.index===letters.length-1){
+        setGameState(state.correct,letters.length,'letters');
+        showResult('Adivinhação das letras',redoLetters,'Continuar para 1.2 · O grego que você já sabe',openKnownIntro); return;
+      }
+      if(state.phase==='knownQuiz' && state.index===knownWords.length-1){
+        setGameState(state.knownCorrect,knownWords.length,'knownWords');
+        showResult('Jogo · O grego que você já sabe',redoKnown,'Continuar para a Lição 2',()=>startLesson2Presentation()); return;
+      }
+      if((state.phase==='l2WordQuiz') && state.index===lesson2Words.length-1){
+        setGameState(state.lesson2Correct||0,lesson2Words.length,'lesson2Words');
+        showResult('Jogo 2.5 · Palavras',()=>startLesson2Words(),'Continuar para 2.6 · Leia e traduza',()=>startLesson2TranslateIntro()); return;
+      }
+      if((state.phase==='l2TranslateQuiz') && state.index===lesson2Translations.length-1){
+        setGameState(state.translateCorrect||0,lesson2Translations.length,'lesson2Translate');
+        showResult('Jogo 2.6 · Leia e traduza',()=>startLesson2Translate(),'Continuar para 2.7 · Tradução',()=>startPost2_6Context()); return;
+      }
+      // Transições normais dentro das fases que não estão terminando agora.
+      if(state.phase==='l2WordRecognition' || state.phase==='l2WordQuiz' || state.phase==='l2TranslateQuiz') nextLesson2();
+      else next();
+    };
+  }
+
+  // Refaça button sempre visível durante os jogos.
+  const rb=ensureRedoButton();
+  if(rb){
+    rb.onclick=function(){
+      if(state.phase==='quiz') redoLetters();
+      else if(state.phase==='knownQuiz') redoKnown();
+      else if(state.phase==='l2WordQuiz') startLesson2Words();
+      else if(state.phase==='l2TranslateQuiz') startLesson2Translate();
+      else if(state.phase==='l2WordRecognition') startLesson2Words();
+    };
+  }
+
+  // Quando o jogo de palavras/tradução for renderizado, garanta o botão.
+  const originalRenderLesson2Game = window.renderLesson2Game;
+  if(typeof originalRenderLesson2Game==='function'){
+    window.renderLesson2Game=function(){
+      originalRenderLesson2Game();
+      const b=ensureRedoButton();
+      if(b){
+        b.style.display='inline-block';
+        b.onclick=function(){
+          if(state.phase==='l2WordQuiz'||state.phase==='l2WordRecognition') startLesson2Words();
+          else if(state.phase==='l2TranslateQuiz') startLesson2Translate();
+        };
+      }
+    };
+  }
+
+  // Inicializa o sistema visualmente.
+  ensureRedoButton(); ensureResultControls();
+  const resultActions=$('resultActions'); if(resultActions) resultActions.style.display='none';
+
+  // Expõe as funções usadas pelo controlador final de navegação.
+  // Sem isso, o clique final pode gerar ReferenceError e a fase parece travada.
+  window.showResult = showResult;
+  window.setGameState = setGameState;
+  window.redoLetters = redoLetters;
+  window.redoKnown = redoKnown;
+  window.openKnownIntro = openKnownIntro;
+})();
+</script>
+
+<script id="game-system-fix2">
+(function(){
+  const $=id=>document.getElementById(id);
+  function syncRedo(){
+    const b=$('redoGame'); if(!b)return;
+    const visible=['quiz','knownQuiz','l2WordRecognition','l2WordQuiz','l2TranslateQuiz'].includes(state.phase);
+    b.style.display=visible?'inline-block':'none';
+  }
+  if(typeof window.render==='function'){
+    const oldRender=window.render;
+    window.render=function(){oldRender();syncRedo();};
+  }
+  const nextBtn=$('next');
+  if(nextBtn){
+    nextBtn.onclick=function(){
+      // Lição 1: fechar reconhecimento e abrir teste.
+      if(state.phase==='recognition' && state.index===recognitionBatches.length-1){
+        state.phase='quiz';state.index=0;state.correct=0;state.answered=false;state.gameCorrect=0;state.gameTotal=letters.length;state.gameId='letters';
+        $('subtitle').textContent='Agora teste se você realmente reconheceu as equivalências. Se precisar, use Consultar.';
+        $('game').classList.remove('hide');$('knownIntro').classList.remove('show');$('results').classList.remove('show');
+        render();syncRedo();return;
+      }
+      // 1.1 quiz
+      if(state.phase==='quiz' && state.index===letters.length-1){
+        state.gameCorrect=state.correct;state.gameTotal=letters.length;state.gameId='letters';
+        showResult('Adivinhação das letras',redoLetters,'Continuar para 1.2 · O grego que você já sabe',openKnownIntro);return;
+      }
+      // 1.2 reconhecimento -> teste
+      if(state.phase==='knownRecognition' && state.index===knownBatches.length-1){
+        state.phase='knownQuiz';state.index=0;state.knownCorrect=0;state.gameCorrect=0;state.gameTotal=knownWords.length;state.gameId='knownWords';
+        $('subtitle').textContent='Agora teste se você reconhece as palavras gregas que acabou de conhecer.';render();syncRedo();return;
+      }
+      // 1.2 quiz
+      if(state.phase==='knownQuiz' && state.index===knownWords.length-1){
+        state.gameCorrect=state.knownCorrect;state.gameTotal=knownWords.length;state.gameId='knownWords';
+        showResult('Jogo · O grego que você já sabe',redoKnown,'Continuar para a Lição 2',()=>startLesson2Presentation());return;
+      }
+      // 2.5 recognition -> quiz
+      if(state.phase==='l2WordRecognition' && state.index===0 && lesson2Words.length>1){
+        // deixe o fluxo existente cuidar das listas; não intercepta a primeira carta.
+      }
+      if(state.phase==='l2WordRecognition'){
+        nextLesson2();syncRedo();return;
+      }
+      if(state.phase==='l2WordQuiz' && state.index===lesson2Words.length-1){
+        state.gameCorrect=state.lesson2Correct||0;state.gameTotal=lesson2Words.length;state.gameId='lesson2Words';
+        showResult('Jogo 2.5 · Palavras',()=>startLesson2Words(),'Continuar para 2.6 · Leia e traduza',()=>startLesson2TranslateIntro());return;
+      }
+      if(state.phase==='l2WordQuiz'){
+        nextLesson2();syncRedo();return;
+      }
+      if(state.phase==='l2TranslateQuiz' && state.index===lesson2Translations.length-1){
+        state.gameCorrect=state.translateCorrect||0;state.gameTotal=lesson2Translations.length;state.gameId='lesson2Translate';
+        showResult('Jogo 2.6 · Leia e traduza',()=>startLesson2Translate(),'Continuar para 2.7 · Tradução',()=>startPost2_6Context());return;
+      }
+      if(state.phase==='l2TranslateQuiz'){
+        nextLesson2();syncRedo();return;
+      }
+      // Para demais casos, usa a navegação original.
+      next();syncRedo();
+    };
+  }
+  syncRedo();
+})();
 </script>
 </body>
 </html>
