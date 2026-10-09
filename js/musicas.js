@@ -1395,6 +1395,65 @@ const songs=[
 },
 
 /* =========================
+   096 — DEIXA PENETRAR A LUZ
+========================= */
+
+{
+  id:'096',
+  number:'096',
+  title:'DEIXA PENETRAR A LUZ',
+  category:'Harpa Cristã',
+  sourceToneIndex:8,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Se ao inimigo temes combater, / Se estás em trevas e não tens poder,',anchors:[{pos:0,chord:'Ab'},{pos:20,chord:'Bbm'},{pos:32,chord:'Eb'},{pos:57,chord:'Ab'}]},
+      {lyric:'Que a formosa luz de Deus fulgure em ti, / E serás feliz assim.',anchors:[{pos:0,chord:'Ab'},{pos:29,chord:'Db'},{pos:43,chord:'Eb'},{pos:59,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Deixa penetrar a luz!',anchors:[{pos:0,chord:'Ab'},{pos:18,chord:'Eb'}]},
+      {lyric:'Deixa penetrar a luz!',anchors:[{pos:0,chord:'Eb'},{pos:18,chord:'Ab'}]},
+      {lyric:'Que a formosa luz de Deus fulgure em ti;',anchors:[{pos:0,chord:'Ab'},{pos:29,chord:'Db'}]},
+      {lyric:'E serás feliz assim.',anchors:[{pos:0,chord:'Eb'},{pos:17,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Se a tua fé é fraca no Senhor, / E não mostras fruto ou nenhum fervor,',anchors:[{pos:0,chord:'Ab'},{pos:18,chord:'Bbm'},{pos:33,chord:'Eb'},{pos:59,chord:'Ab'}]},
+      {lyric:'Que a formosa luz de Deus fulgure em ti / E serás feliz assim.',anchors:[{pos:0,chord:'Ab'},{pos:29,chord:'Db'},{pos:41,chord:'Eb'},{pos:57,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Se na luz estamos, que divina luz! / Se nos limpa sempre o sangue de Jesus,',anchors:[{pos:0,chord:'Ab'},{pos:23,chord:'Bbm'},{pos:36,chord:'Eb'},{pos:66,chord:'Ab'}]},
+      {lyric:'Temos claridade em nosso coração, / E vivemos nós na luz.',anchors:[{pos:0,chord:'Ab'},{pos:25,chord:'Db'},{pos:36,chord:'Eb'},{pos:53,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Se de Deus, o Espírito Consolador, / Traz a luz do céu, divino resplendor,',anchors:[{pos:0,chord:'Ab'},{pos:25,chord:'Bbm'},{pos:37,chord:'Eb'},{pos:63,chord:'Ab'}]},
+      {lyric:'Penetrando Ele, no teu coração, / Viverás então de amor.',anchors:[{pos:0,chord:'Ab'},{pos:23,chord:'Db'},{pos:33,chord:'Eb'},{pos:53,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'5ª estrofe',
+      lines:[
+      {lyric:'Se alegre fores à mansão sem par, / Ó enfrenta as trevas, que vão se afastar,',anchors:[{pos:0,chord:'Ab'},{pos:20,chord:'Bbm'},{pos:35,chord:'Eb'},{pos:66,chord:'Ab'}]},
+      {lyric:'Que a formosa luz de Deus fulgure em ti, / E serás feliz assim.',anchors:[{pos:0,chord:'Ab'},{pos:29,chord:'Db'},{pos:42,chord:'Eb'},{pos:59,chord:'Ab'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    123 — CRISTO VOLTARÁ
 ========================= */
 
