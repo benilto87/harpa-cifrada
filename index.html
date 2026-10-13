@@ -947,9 +947,22 @@ button.active{
   text-align:center;
 }
 
-/* Esconde o nome do hino durante a rolagem */
+                                               /* Esconde o nome do hino durante a rolagem */
 body.rolagem-ativa #currentSongLabel > strong {
   display: none;
+}
+
+body.rolagem-ativa #currentSongLabel .tone-memory-check {
+  display: none;
+}
+
+/* Barra superior durante a rolagem */
+header.topbar {
+  transition: opacity .4s ease;
+}
+
+body.rolagem-ativa header.topbar.topbar-fade-rolagem {
+  opacity: .18;
 }
 
 </style><span></span></label>
@@ -1770,6 +1783,12 @@ function finishAutoScroll(){
   clearTimeout(autoScrollFadeTimer);
 autoScrollFadeTimer=0;
 
+clearTimeout(topbarFadeTimer);
+topbarFadeTimer = 0;
+
+document.querySelector('header.topbar')
+  ?.classList.remove('topbar-fade-rolagem');
+
 const panel=document.getElementById('autoScrollPanel');
 
 if(panel){
@@ -1829,6 +1848,38 @@ function despertarAutoScrollPanel(){
   },5000);
 }
 
+let topbarFadeTimer = 0;
+
+function despertarTopbarRolagem() {
+  const topbar = document.querySelector('header.topbar');
+  if (!topbar) return;
+
+  clearTimeout(topbarFadeTimer);
+  topbarFadeTimer = 0;
+
+  topbar.classList.remove('topbar-fade-rolagem');
+
+  if (!autoScrollMode) return;
+
+  topbarFadeTimer = setTimeout(() => {
+    topbarFadeTimer = 0;
+
+    if (autoScrollMode) {
+      topbar.classList.add('topbar-fade-rolagem');
+    }
+  }, 5000);
+}
+
+document.querySelector('header.topbar')?.addEventListener(
+  'pointerdown',
+  () => {
+    if (autoScrollMode) {
+      despertarTopbarRolagem();
+    }
+  },
+  true
+);
+
 function startAutoScroll(){
   const panel=document.getElementById('autoScrollPanel');
 
@@ -1841,6 +1892,7 @@ function startAutoScroll(){
   const retomando=autoScrollResumeY!==null;
   autoScrollMode=true;
   autoScrollRunning=true;
+  despertarTopbarRolagem();
 
   const notesButton=document.getElementById('toggleNotes');
   const tonePanel=document.getElementById('tonePanel');
@@ -2654,7 +2706,8 @@ const ocultarComNotas=[
   'tonePanel',
   'toggleSections',
   'toggleInline',
-  'toggleProgression'
+  'toggleProgression',
+  'toggleSplit'
 ];
 
 down.onclick=()=>{

@@ -738,7 +738,9 @@ document.addEventListener('pointerdown', function(event) {
   'toggleViolao',
   'tonePanel',
   'toggleSections',
-  'toggleInline'
+  'toggleInline',
+  'toggleProgression',
+  'toggleSplit'
 ];
 
     ids.forEach(id => {
@@ -1029,6 +1031,13 @@ document.addEventListener('pointerdown', function(event) {
 
         lastRemoteStructural =
           structural;
+		  
+		  if (
+  state.autoScrollMode &&
+  typeof despertarTopbarRolagem === 'function'
+) {
+  despertarTopbarRolagem();
+}
 
       }
 
@@ -1037,11 +1046,13 @@ document.addEventListener('pointerdown', function(event) {
          POSIÇÃO / PLAY / PAUSA
          ===================================================== */
 
-      const targetY =
-        Math.max(
-          0,
-          Number(state.position) || 0
-        );
+      const RECUO_PARTICIPANTE = 37; // aproximadamente 2 cm na tela
+
+const targetY =
+  Math.max(
+    0,
+    (Number(state.position) || 0) - RECUO_PARTICIPANTE
+  );
 
 
       remoteScrollTarget =
