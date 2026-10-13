@@ -1763,6 +1763,298 @@ const songs=[
 },
 
 /* =========================
+   202 — LUGAR DE DELÍCIAS
+========================= */
+
+{
+  id:'202',
+  number:'202',
+  title:'LUGAR DE DELÍCIAS',
+  category:'Harpa Cristã',
+  sourceToneIndex:0,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Junto ao trono de Deus preparado,',anchors:[{pos:6,chord:'C'},{pos:19,chord:'F'},{pos:29,chord:'C'}]},
+      {lyric:'Há, cristão, um lugar para ti;',anchors:[{pos:9,chord:'G'},{pos:27,chord:'C'}]},
+      {lyric:'Há perfumes, há gozo exaltado,',anchors:[{pos:6,chord:'C'},{pos:17,chord:'F'},{pos:25,chord:'C'}]},
+      {lyric:'Há delícias profusas ali;',anchors:[{pos:5,chord:'D'},{pos:23,chord:'G'}]},
+      {lyric:'Sim, ali; sim, ali,',anchors:[{pos:6,chord:'G'},{pos:16,chord:'C'}]},
+      {lyric:'De Seus anjos fiéis rodeado,',anchors:[{pos:9,chord:'F'},{pos:16,chord:'D'},{pos:24,chord:'G'}]},
+      {lyric:'Numa esfera de glória e de luz,',anchors:[{pos:7,chord:'C'},{pos:28,chord:'F'}]},
+      {lyric:'Junto a Deus nos espera Jesus.',anchors:[{pos:9,chord:'G'},{pos:27,chord:'C'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Os encantos da terra não podem,',anchors:[{pos:6,chord:'C'},{pos:16,chord:'F'},{pos:26,chord:'C'}]},
+      {lyric:'Dar idéia do gozo dali;',anchors:[{pos:6,chord:'G'},{pos:20,chord:'C'}]},
+      {lyric:'Se na terra os prazeres acodem,',anchors:[{pos:7,chord:'C'},{pos:19,chord:'F'},{pos:26,chord:'C'}]},
+      {lyric:'São prazeres que acabam-se aqui;',anchors:[{pos:8,chord:'D'},{pos:29,chord:'G'}]},
+      {lyric:'Mas ali, mal ali,',anchors:[{pos:5,chord:'G'},{pos:14,chord:'C'}]},
+      {lyric:'As venturas eternas concorrem',anchors:[{pos:7,chord:'F'},{pos:14,chord:'D'},{pos:24,chord:'G'}]},
+      {lyric:'Co’a existência perpétua da luz,',anchors:[{pos:10,chord:'C'},{pos:29,chord:'F'}]},
+      {lyric:'A tornar-nos felizes com Jesus.',anchors:[{pos:6,chord:'G'},{pos:28,chord:'C'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Conservemos em nossa lembrança,',anchors:[{pos:6,chord:'C'},{pos:15,chord:'F'},{pos:25,chord:'C'}]},
+      {lyric:'As riquezas do lindo país,',anchors:[{pos:6,chord:'G'},{pos:23,chord:'C'}]},
+      {lyric:'E guardemos conosco a esperança,',anchors:[{pos:7,chord:'C'},{pos:15,chord:'F'},{pos:27,chord:'C'}]},
+      {lyric:'De uma vida melhor, mais feliz;',anchors:[{pos:7,chord:'D'},{pos:27,chord:'G'}]},
+      {lyric:'Pois dali, pois dali,',anchors:[{pos:7,chord:'G'},{pos:18,chord:'C'}]},
+      {lyric:'Uma voz verdadeira não cansa',anchors:[{pos:5,chord:'F'},{pos:14,chord:'D'},{pos:24,chord:'G'}]},
+      {lyric:'De oferecer-nos do reino da luz,',anchors:[{pos:8,chord:'C'},{pos:29,chord:'F'}]},
+      {lyric:'O amor protetor de Jesus.',anchors:[{pos:4,chord:'G'},{pos:22,chord:'C'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Se quisermos gozar da ventura,',anchors:[{pos:6,chord:'C'},{pos:16,chord:'F'},{pos:26,chord:'C'}]},
+      {lyric:'Que no belo país haverá,',anchors:[{pos:7,chord:'G'},{pos:22,chord:'C'}]},
+      {lyric:'É somente pedir de alma pura,',anchors:[{pos:5,chord:'C'},{pos:13,chord:'F'},{pos:25,chord:'C'}]},
+      {lyric:'Que de graça Jesus nos dará.',anchors:[{pos:8,chord:'D'},{pos:25,chord:'G'}]},
+      {lyric:'Pois dali, pois dali,',anchors:[{pos:7,chord:'G'},{pos:18,chord:'C'}]},
+      {lyric:'Todo cheio de amor, de ternura,',anchors:[{pos:7,chord:'F'},{pos:16,chord:'D'},{pos:27,chord:'G'}]},
+      {lyric:'Desse amor que mostrou-nos na cruz,',anchors:[{pos:8,chord:'C'},{pos:31,chord:'F'}]},
+      {lyric:'Nos escuta, nos ouve Jesus.',anchors:[{pos:6,chord:'G'},{pos:24,chord:'C'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   205 — GRAÇA, GRAÇA
+========================= */
+
+{
+  id:'205',
+  number:'205',
+  title:'GRAÇA, GRAÇA',
+  category:'Harpa Cristã',
+  sourceToneIndex:10,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'A graça de Deus revelada,',anchors:[{pos:2,chord:'Bb'},{pos:11,chord:'Eb'},{pos:20,chord:'Bb'}]},
+      {lyric:'Em Cristo Jesus, meu Senhor,',anchors:[{pos:3,chord:'Bb'},{pos:13,chord:'C'},{pos:25,chord:'F'}]},
+      {lyric:'Ao mundo perdido é dada,',anchors:[{pos:4,chord:'Bb'},{pos:12,chord:'Eb'},{pos:19,chord:'Bb'}]},
+      {lyric:'Por Deus d\'infinito favor.',anchors:[{pos:4,chord:'Eb'},{pos:15,chord:'F'},{pos:23,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Graça, graça,',anchors:[{pos:0,chord:'Bb'},{pos:7,chord:'Eb'}]},
+      {lyric:'A mim basta a graça de Deus: Jesus;',anchors:[{pos:3,chord:'F'},{pos:24,chord:'Bb'}]},
+      {lyric:'Graça, graça,',anchors:[{pos:0,chord:'Bb'},{pos:7,chord:'Eb'},{pos:10,chord:'C'}]},
+      {lyric:'A graça eu achei em Jesus.',anchors:[{pos:3,chord:'F'},{pos:23,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'A graça de Deus é mais doce,',anchors:[{pos:2,chord:'Bb'},{pos:12,chord:'Eb'},{pos:23,chord:'Bb'}]},
+      {lyric:'Do que bens terrestres daqui;',anchors:[{pos:3,chord:'Bb'},{pos:15,chord:'C'},{pos:26,chord:'F'}]},
+      {lyric:'Em gozo meu choro tornou-se,',anchors:[{pos:3,chord:'Bb'},{pos:13,chord:'Eb'},{pos:21,chord:'Bb'}]},
+      {lyric:'Correndo Sua graça p\'ra mim.',anchors:[{pos:2,chord:'Eb'},{pos:14,chord:'F'},{pos:25,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Mais alta que nuvens celestes,',anchors:[{pos:5,chord:'Bb'},{pos:14,chord:'Eb'},{pos:23,chord:'Bb'}]},
+      {lyric:'Mais funda que profundo mar,',anchors:[{pos:5,chord:'Bb'},{pos:16,chord:'C'},{pos:25,chord:'F'}]},
+      {lyric:'A fonte da vida fizeste,',anchors:[{pos:2,chord:'Bb'},{pos:11,chord:'Eb'},{pos:18,chord:'Bb'}]},
+      {lyric:'Na qual nos podemos fartar.',anchors:[{pos:4,chord:'Eb'},{pos:15,chord:'F'},{pos:23,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'A graça de Deus hoje prova,',anchors:[{pos:2,chord:'Bb'},{pos:12,chord:'Eb'},{pos:22,chord:'Bb'}]},
+      {lyric:'Tu que vives na perdição,',anchors:[{pos:3,chord:'Bb'},{pos:13,chord:'C'},{pos:22,chord:'F'}]},
+      {lyric:'Pois Ele te salva, renova,',anchors:[{pos:4,chord:'Bb'},{pos:12,chord:'Eb'},{pos:21,chord:'Bb'}]},
+      {lyric:'Também limpa teu coração.',anchors:[{pos:3,chord:'Eb'},{pos:14,chord:'F'},{pos:21,chord:'Bb'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   210 — FALA, FALA, SENHOR
+========================= */
+
+{
+  id:'210',
+  number:'210',
+  title:'FALA, FALA, SENHOR',
+  category:'Harpa Cristã',
+  sourceToneIndex:7,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Fala, fala, Senhor, nesta hora,',anchors:[{pos:7,chord:'G'},{pos:27,chord:'D'}]},
+      {lyric:'Que ansioso te quero ouvir;',anchors:[{pos:8,chord:'D'},{pos:24,chord:'G'}]},
+      {lyric:'Teu falar dá valor e restaura,',anchors:[{pos:6,chord:'C'},{pos:25,chord:'G'}]},
+      {lyric:'E mais sábio me faz no porvir.',anchors:[{pos:8,chord:'D'},{pos:27,chord:'G'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Oh! Bendito o Teu nome em eterno,',anchors:[{pos:7,chord:'G'},{pos:28,chord:'D'}]},
+      {lyric:'Que Tu falas a quem escutar,',anchors:[{pos:7,chord:'D'},{pos:25,chord:'G'}]},
+      {lyric:'De saúde e repouso superno,',anchors:[{pos:5,chord:'C'},{pos:22,chord:'G'}]},
+      {lyric:'De alegria e paz eternal.',anchors:[{pos:7,chord:'D'},{pos:22,chord:'G'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Fala, fala, Senhor, que conservo,',anchors:[{pos:7,chord:'G'},{pos:28,chord:'D'}]},
+      {lyric:'Tuas palavras de vida e vigor;',anchors:[{pos:7,chord:'D'},{pos:27,chord:'G'}]},
+      {lyric:'Estou pronto a seguir-Te com zelo,',anchors:[{pos:7,chord:'C'},{pos:29,chord:'G'}]},
+      {lyric:'Pelas Tuas veredas de amor.',anchors:[{pos:7,chord:'D'},{pos:24,chord:'G'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Fala, fala, Senhor, que eu ouço,',anchors:[{pos:7,chord:'G'},{pos:27,chord:'D'}]},
+      {lyric:'Tuas palavras com todo fervor,',anchors:[{pos:7,chord:'D'},{pos:23,chord:'G'}]},
+      {lyric:'Pois conduzem ao eterno repouso,',anchors:[{pos:9,chord:'C'},{pos:27,chord:'G'}]},
+      {lyric:'São conselhos mui ricos de amor.',anchors:[{pos:8,chord:'D'},{pos:29,chord:'G'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   212 — OS GUERREIROS SE PREPARAM
+========================= */
+
+{
+  id:'212',
+  number:'212',
+  title:'OS GUERREIROS SE PREPARAM',
+  category:'Harpa Cristã',
+  sourceToneIndex:10,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Os guerreiros se preparam para a grande luta',anchors:[{pos:0,chord:'Bb'},{pos:27,chord:'F'},{pos:40,chord:'Bb'}]},
+      {lyric:'É Jesus, o Capitão, que avante os levará.',anchors:[{pos:0,chord:'Eb'},{pos:11,chord:'Bb'},{pos:26,chord:'C'},{pos:38,chord:'F'}]},
+      {lyric:'A milícia dos remidos marcha impoluta;',anchors:[{pos:0,chord:'Bb'},{pos:23,chord:'F'},{pos:33,chord:'Bb'}]},
+      {lyric:'Certa que vitória alcançará!',anchors:[{pos:0,chord:'Eb'},{pos:11,chord:'Bb'},{pos:21,chord:'F'},{pos:25,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Eu quero estar com Cristo,',anchors:[{pos:0,chord:'Bb'}]},
+      {lyric:'Onde a luta se travar,',anchors:[{pos:7,chord:'Bb'},{pos:18,chord:'F'}]},
+      {lyric:'No lance imprevisto',anchors:[{pos:5,chord:'F'},{pos:14,chord:'Bb'}]},
+      {lyric:'Na frente m’encontrar.',anchors:[{pos:5,chord:'C'},{pos:19,chord:'F'}]},
+      {lyric:'Até que O possa ver na glória,',anchors:[{pos:11,chord:'Bb'}]},
+      {lyric:'Se alegrando da vitória,',anchors:[{pos:7,chord:'Eb'},{pos:17,chord:'Bb'}]},
+      {lyric:'Onde Deus vai me coroar!',anchors:[{pos:5,chord:'Bb'},{pos:17,chord:'F'},{pos:21,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Eis os batalhões de Cristo prosseguindo avante,',anchors:[{pos:0,chord:'Bb'},{pos:29,chord:'F'},{pos:41,chord:'Bb'}]},
+      {lyric:'Não os vês com que valor combatem contra o mal?',anchors:[{pos:0,chord:'Eb'},{pos:15,chord:'Bb'},{pos:28,chord:'C'},{pos:44,chord:'F'}]},
+      {lyric:'Podes tu ficar dormindo, mesmo vacilante,',anchors:[{pos:0,chord:'Bb'},{pos:26,chord:'F'},{pos:35,chord:'Bb'}]},
+      {lyric:'Quando atacam outros a Belial?',anchors:[{pos:1,chord:'Eb'},{pos:14,chord:'Bb'},{pos:24,chord:'F'},{pos:27,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Dá-te pressa, não vaciles, hoje Deus te chama',anchors:[{pos:0,chord:'Bb'},{pos:28,chord:'F'},{pos:41,chord:'Bb'}]},
+      {lyric:'Para vires pelejar ao lado do Senhor;',anchors:[{pos:0,chord:'Eb'},{pos:11,chord:'Bb'},{pos:23,chord:'C'},{pos:33,chord:'F'}]},
+      {lyric:'Entra na batalha onde mais o fogo inflama,',anchors:[{pos:0,chord:'Bb'},{pos:23,chord:'F'},{pos:36,chord:'Bb'}]},
+      {lyric:'E peleja contra o vil tentador!',anchors:[{pos:0,chord:'Eb'},{pos:9,chord:'Bb'},{pos:19,chord:'F'},{pos:28,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'A peleja é tremenda, torna-se renhida,',anchors:[{pos:0,chord:'Bb'},{pos:22,chord:'F'},{pos:33,chord:'Bb'}]},
+      {lyric:'Mas são poucos os soldados para batalhar;',anchors:[{pos:1,chord:'Eb'},{pos:15,chord:'Bb'},{pos:28,chord:'C'},{pos:37,chord:'F'}]},
+      {lyric:'Ó vem libertar as pobres almas oprimidas',anchors:[{pos:0,chord:'Bb'},{pos:25,chord:'F'},{pos:35,chord:'Bb'}]},
+      {lyric:'De quem furioso, as quer tragar!',anchors:[{pos:0,chord:'Eb'},{pos:11,chord:'Bb'},{pos:21,chord:'F'},{pos:28,chord:'Bb'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   214 — DESEJAMOS IR LÁ
+========================= */
+
+{
+  id:'214',
+  number:'214',
+  title:'DESEJAMOS IR LÁ',
+  category:'Harpa Cristã',
+  sourceToneIndex:5,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Nosso Redentor foi preparar,',anchors:[{pos:7,chord:'F'},{pos:16,chord:'C'},{pos:24,chord:'F'}]},
+      {lyric:'Um lugar de repouso e esplendor;',anchors:[{pos:5,chord:'F'}]},
+      {lyric:'Brevemente chamará para a casa a descansar,',anchors:[{pos:6,chord:'F'},{pos:26,chord:'C'},{pos:40,chord:'F'}]},
+      {lyric:'Nós, os salvos, do mundo enganador.',anchors:[{pos:9,chord:'F'},{pos:20,chord:'C'},{pos:32,chord:'F'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Desejamos ir lá,',anchors:[{pos:5,chord:'F'},{pos:12,chord:'Dm'}]},
+      {lyric:'Desejamos ir lá;',anchors:[{pos:5,chord:'C'},{pos:13,chord:'F'}]},
+      {lyric:'Que alegria será,',anchors:[{pos:8,chord:'F'}]},
+      {lyric:'Quando nós nos encontrarmos lá.',anchors:[{pos:8,chord:'F'},{pos:15,chord:'C'},{pos:28,chord:'F'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Nesta terra tesouros não há,',anchors:[{pos:7,chord:'F'},{pos:15,chord:'C'},{pos:25,chord:'F'}]},
+      {lyric:'Que nos possam aqui segurar;',anchors:[{pos:9,chord:'F'}]},
+      {lyric:'Desejamos ir ao céu onde Cristo já está,',anchors:[{pos:5,chord:'F'},{pos:26,chord:'C'},{pos:37,chord:'F'}]},
+      {lyric:'Ao lugar onde iremos descansar.',anchors:[{pos:6,chord:'F'},{pos:15,chord:'C'},{pos:28,chord:'F'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Neste lar com Jesus, o Senhor,',anchors:[{pos:7,chord:'F'},{pos:16,chord:'C'},{pos:26,chord:'F'}]},
+      {lyric:'Nós havemos de sempre reinar.',anchors:[{pos:7,chord:'F'}]},
+      {lyric:'Vamos nós ali cantar, novos hinos de louvor,',anchors:[{pos:7,chord:'F'},{pos:29,chord:'C'},{pos:40,chord:'F'}]},
+      {lyric:'Ao Cordeiro que veio nos salvar.',anchors:[{pos:7,chord:'F'},{pos:17,chord:'C'},{pos:29,chord:'F'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    299 — HÁ UM CANTO NOVO
 ========================= */
 
@@ -1808,6 +2100,75 @@ const songs=[
       lines:[
       {lyric:'Pelas águas fundas me levou, / Provas muitas encontrei;',anchors:[{pos:0,chord:'Ab'},{pos:17,chord:'Bb'},{pos:34,chord:'Eb'},{pos:52,chord:'Ab'}]},
       {lyric:'Mas Jesus bendito me guiou / Por Seu sangue vencerei.',anchors:[{pos:0,chord:'Ab'},{pos:17,chord:'Bb'},{pos:33,chord:'Eb'},{pos:50,chord:'Ab'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   301 — “VEM CEAR”
+========================= */
+
+{
+  id:'301',
+  number:'301',
+  title:'“VEM CEAR”',
+  category:'Harpa Cristã',
+  sourceToneIndex:0,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Cristo já nos preparou,',anchors:[{pos:7,chord:'C'}]},
+      {lyric:'Um manjar que nos comprou,',anchors:[{pos:7,chord:'F'}]},
+      {lyric:'E, agora, nos convida a cear;',anchors:[{pos:6,chord:'G'},{pos:26,chord:'C'}]},
+      {lyric:'Com celestial maná',anchors:[{pos:6,chord:'C'}]},
+      {lyric:'Que de graça Deus te dá,',anchors:[{pos:8,chord:'F'}]},
+      {lyric:'Vem, faminto, tua alma saciar.',anchors:[{pos:7,chord:'G'},{pos:27,chord:'C'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'“Vem cear”, o Mestre chama - “vem cear”.',anchors:[{pos:7,chord:'G'},{pos:36,chord:'C'}]},
+      {lyric:'Mesmo hoje tu te podes saciar;',anchors:[{pos:6,chord:'F'},{pos:17,chord:'D'},{pos:27,chord:'G'}]},
+      {lyric:'Poucos pães multiplicou,',anchors:[{pos:8,chord:'C'}]},
+      {lyric:'Água em vinho transformou,',anchors:[{pos:8,chord:'C'},{pos:23,chord:'F'}]},
+      {lyric:'Vem, faminto, a Jesus, “vem cear”.',anchors:[{pos:8,chord:'G'},{pos:30,chord:'C'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Eis discípulos a voltar,',anchors:[{pos:7,chord:'C'}]},
+      {lyric:'Sem os peixes apanhar,',anchors:[{pos:8,chord:'F'}]},
+      {lyric:'Mas Jesus os manda outra vez partir,',anchors:[{pos:7,chord:'G'},{pos:32,chord:'C'}]},
+      {lyric:'Ao tornar à praia, então,',anchors:[{pos:7,chord:'C'}]},
+      {lyric:'Vêem no fogo peixe e pão,',anchors:[{pos:8,chord:'F'}]},
+      {lyric:'E Jesus, que os convida à ceia vir.',anchors:[{pos:5,chord:'G'},{pos:32,chord:'C'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Quem sedento se achar,',anchors:[{pos:8,chord:'C'}]},
+      {lyric:'Venha a Cristo sem tardar,',anchors:[{pos:9,chord:'F'}]},
+      {lyric:'Pois o vinho sem mistura Ele dá,',anchors:[{pos:7,chord:'G'},{pos:29,chord:'C'}]},
+      {lyric:'E também dá vida, o pão,',anchors:[{pos:6,chord:'C'}]},
+      {lyric:'Que nos traz consolação;',anchors:[{pos:9,chord:'F'}]},
+      {lyric:'Eis que tudo preparado já está.',anchors:[{pos:9,chord:'G'},{pos:28,chord:'C'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Breve Cristo vai descer,',anchors:[{pos:7,chord:'C'}]},
+      {lyric:'E a Noiva receber',anchors:[{pos:5,chord:'F'}]},
+      {lyric:'Seu lugar ao lado do Senhor Jesus;',anchors:[{pos:7,chord:'G'},{pos:31,chord:'C'}]},
+      {lyric:'Quem a fome suportou,',anchors:[{pos:8,chord:'C'}]},
+      {lyric:'E a sede já passou,',anchors:[{pos:5,chord:'F'}]},
+      {lyric:'Lá no céu irá cear em santa luz.',anchors:[{pos:7,chord:'G'},{pos:29,chord:'C'}]}
     ]
     }
   ]
@@ -1911,8 +2272,10 @@ const songs=[
   ]
 }, 
 
+
+
 /* =========================
-   1000 — DE CORAÇÃO PRA CORAÇÃO - SHIRLEY CARVALHAES
+   1100 — DE CORAÇÃO PRA CORAÇÃO - SHIRLEY CARVALHAES
 ========================= */
 
 {

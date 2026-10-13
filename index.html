@@ -267,7 +267,7 @@ button.active{
   opacity:0;
   padding-top:0;
   padding-bottom:0;
-  pointer-events:none;
+  pointer-events:auto;
 }
 
 .tone-panel button{
@@ -947,6 +947,11 @@ button.active{
   text-align:center;
 }
 
+/* Esconde o nome do hino durante a rolagem */
+body.rolagem-ativa #currentSongLabel > strong {
+  display: none;
+}
+
 </style><span></span></label>
 <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
 
@@ -1001,6 +1006,15 @@ button.active{
   display:none;
 }
 
+#roomTopbar {
+  transition: opacity .4s ease;
+  pointer-events: none;
+}
+
+#roomTopbar.fade-participante {
+  opacity: .18;
+}
+
 .auto-scroll-panel{
   position:relative;
 }
@@ -1042,6 +1056,7 @@ button.active{
 #up{
   display:none !important;
 }
+
 </style>
 </head>
 <body>
@@ -2185,6 +2200,11 @@ document.getElementById('score').classList.toggle(
   autoScrollMode
 );
 
+document.body.classList.toggle(
+  'rolagem-ativa',
+  autoScrollMode
+);
+
   const sb=document.getElementById('toggleSections');
   sb.classList.toggle('active',sectionsHidden);
   sb.textContent=sectionsHidden?'/':'🎵';
@@ -2633,7 +2653,8 @@ const ocultarComNotas=[
   'toggleViolao',
   'tonePanel',
   'toggleSections',
-  'toggleInline'
+  'toggleInline',
+  'toggleProgression'
 ];
 
 down.onclick=()=>{

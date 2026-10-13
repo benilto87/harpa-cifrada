@@ -30,8 +30,7 @@
   let currentRoom = null;
   let currentRoomName = null;
   let roomRole = null;
-  let roomTopbarTimer = null;
-  
+
   let applyingRemote = false;
 
   let remoteScrollTarget = 0;
@@ -40,68 +39,62 @@
   let lastSentSignature = null;
   let stateWatcher = null;
   let currentRoomState = null;
+  
+  
+let topbarFadeTimer = 0;
 
-function mostrarRoomTopbar(){
+function atualizarTransparenciaPlaquinha() {
+  const bar = document.getElementById('roomTopbar');
+  if (!bar) return;
 
-  const topbar =
-    document.getElementById('roomTopbar');
+  if (
+    !currentRoom ||
+    (roomRole !== 'participante' && roomRole !== 'maestro')
+  ) {
+    clearTimeout(topbarFadeTimer);
+    topbarFadeTimer = 0;
+    bar.classList.remove('fade-participante');
+    return;
+  }
 
-  if(!topbar) return;
+  if (
+    topbarFadeTimer ||
+    bar.classList.contains('fade-participante')
+  ) {
+    return;
+  }
 
-  clearTimeout(roomTopbarTimer);
+  topbarFadeTimer = setTimeout(() => {
+    topbarFadeTimer = 0;
 
-  /*
-    Guarda as informações atuais.
-  */
-  const roomId =
-    document.getElementById('roomTopId')?.textContent
-    || nomeSalaAtual()
-    || 'Sala';
-
-  const role =
-    roomRole === 'maestro'
-      ? '👑 Maestro'
-      : '🎸 Músico';
-
-  const key =
-    document.getElementById('roomTopKey')?.textContent
-    || '—';
-
-  const count =
-    document.getElementById('roomTopCount')?.textContent
-    || '0';
-
-  /*
-    PRIMEIROS 5 SEGUNDOS:
-    mostra a informação completa.
-  */
-  topbar.innerHTML = `
-    <span id="roomTopInfo">
-      🌐 <span id="roomTopId">${escaparHtml(roomId)}</span> ·
-      <span id="roomTopRole">${role}</span> ·
-      🎵 <span id="roomTopKey">${escaparHtml(key)}</span> ·
-      👥 <span id="roomTopCount">${escaparHtml(count)}</span>
-    </span>
-  `;
-
-  topbar.classList.remove('compact');
-  topbar.classList.add('active');
-
-  /*
-    DEPOIS DE 5 SEGUNDOS:
-    deixa somente o papel.
-  */
-  roomTopbarTimer = setTimeout(() => {
-
-    topbar.innerHTML = `
-      <span id="roomTopRole">${role}</span>
-    `;
-
-    topbar.classList.add('compact');
-
-  }, 3000);
+    if (
+      currentRoom &&
+      (roomRole === 'participante' || roomRole === 'maestro')
+    ) {
+      bar.classList.add('fade-participante');
+    }
+  }, 5000);
 }
 
+function despertarPlaquinhaParticipante() {
+  const bar = document.getElementById('roomTopbar');
+  if (!bar) return;
+
+  clearTimeout(topbarFadeTimer);
+  topbarFadeTimer = 0;
+  bar.classList.remove('fade-participante');
+
+  atualizarTransparenciaPlaquinha();
+}
+
+document.addEventListener('pointerdown', function(event) {
+  const bar = document.getElementById('roomTopbar');
+
+  if (!bar || !bar.contains(event.target)) return;
+  if (roomRole !== 'participante' || !currentRoom) return;
+
+  despertarPlaquinhaParticipante();
+}, true);
 
 
   /* =========================================================
@@ -372,64 +365,6 @@ function mostrarRoomTopbar(){
 
   }
 
-
-  /* =========================================================
-     AVISOS DA SALA
-     ========================================================= */
-
-  function mostrarAvisoSala(mensagem){
-
-    let aviso = document.getElementById('avisoSalaMaestro');
-
-    if(!aviso){
-      aviso = document.createElement('div');
-      aviso.id = 'avisoSalaMaestro';
-      aviso.style.cssText = `
-        position:fixed;
-        inset:0;
-        z-index:99999;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        background:rgba(0,0,0,.55);
-        padding:20px;
-      `;
-      document.body.appendChild(aviso);
-    }
-
-    aviso.innerHTML = `
-      <div style="
-        width:min(420px,100%);
-        background:#fff;
-        color:#222;
-        border-radius:16px;
-        padding:24px;
-        box-shadow:0 12px 40px rgba(0,0,0,.35);
-        text-align:center;
-        font-family:inherit;
-      ">
-        <div style="font-size:32px;margin-bottom:12px;">🌐</div>
-        <div style="font-size:18px;font-weight:700;line-height:1.4;">${mensagem}</div>
-        <button id="fecharAvisoSala" style="
-          margin-top:20px;
-          border:0;
-          border-radius:9px;
-          padding:10px 24px;
-          background:#333;
-          color:#fff;
-          font-weight:700;
-          cursor:pointer;
-        ">OK</button>
-      </div>
-    `;
-
-    aviso.style.display = 'flex';
-
-    document.getElementById('fecharAvisoSala')?.addEventListener(
-      'click',
-      () => { aviso.style.display = 'none'; }
-    );
-  }
 
   function openRooms(){
 
@@ -794,13 +729,17 @@ function mostrarRoomTopbar(){
     if(atual === desejado) return;
 
     const ids = [
-      'down',
-      'up',
-      'reset',
-      'fontDown',
-      'fontUp',
-      'tonePanel'
-    ];
+  'down',
+  'up',
+  'reset',
+  'fontDown',
+  'fontUp',
+  'toggleKeyboard',
+  'toggleViolao',
+  'tonePanel',
+  'toggleSections',
+  'toggleInline'
+];
 
     ids.forEach(id => {
 
@@ -1099,41 +1038,14 @@ function mostrarRoomTopbar(){
          ===================================================== */
 
       const targetY =
-  Math.max(
-    0,
-    Number(state.position) || 0
-  );
+        Math.max(
+          0,
+          Number(state.position) || 0
+        );
 
-/*
-  Detecta o retorno brusco do Maestro ao topo.
-  Isso acontece, por exemplo, quando a música termina
-  e a rolagem volta para o início.
-*/
-const voltouAoTopo =
-  targetY <= 2 &&
-  remoteScrollTarget > 100;
 
-remoteScrollTarget =
-  targetY;
-
-if(voltouAoTopo){
-
-  if(remoteScrollRAF){
-
-    cancelAnimationFrame(
-      remoteScrollRAF
-    );
-
-    remoteScrollRAF = 0;
-
-  }
-
-  window.scrollTo(
-    0,
-    targetY
-  );
-
-}
+      remoteScrollTarget =
+        targetY;
 
 
       /*
@@ -1173,11 +1085,7 @@ if(voltouAoTopo){
           O participante acompanha.
         */
 
-        if(!voltouAoTopo){
-
-  iniciarSincronizacaoSuave();
-
-}
+        iniciarSincronizacaoSuave();
 
       }else{
 
@@ -1238,11 +1146,7 @@ if(voltouAoTopo){
           exata onde o Maestro parou.
         */
 
-        if(!voltouAoTopo){
-
-          iniciarSincronizacaoSuave();
-
-        }
+        iniciarSincronizacaoSuave();
 
       }
 
@@ -1661,8 +1565,13 @@ if(voltouAoTopo){
         '👑 Maestro';
 
 
-      mostrarRoomTopbar();
+      document.getElementById(
+        'roomTopbar'
+      ).classList.add(
+        'active'
+      );
 
+      atualizarTransparenciaPlaquinha();
 
       status.textContent =
         'Sala ' +
@@ -1855,7 +1764,11 @@ if(voltouAoTopo){
         '🎸 Músico';
 
 
-      mostrarRoomTopbar();
+      document.getElementById(
+        'roomTopbar'
+      ).classList.add(
+        'active'
+      );
 
 
       definirBotoesSala(true);
@@ -1880,8 +1793,9 @@ if(voltouAoTopo){
       applyRemoteState(
         data.state
       );
-
-    }
+atualizarTransparenciaPlaquinha();
+  
+  }
   );
 
 
@@ -1910,25 +1824,11 @@ if(voltouAoTopo){
         }
 
 
-        const participantesAntes =
-          currentRoomState &&
-          Number.isFinite(Number(currentRoomState.participants))
-            ? Number(currentRoomState.participants)
-            : null;
-
         if(currentRoomState){
 
           currentRoomState.participants =
             data.participants;
 
-        }
-
-        if(
-          roomRole === 'maestro' &&
-          data.participantLeft
-        ){
-          status.textContent =
-            'Um participante saiu da sala.';
         }
 
 
@@ -1946,45 +1846,41 @@ if(voltouAoTopo){
     }
   );
 
+/* =========================================================
+   ESTADO DO MAESTRO
+   ========================================================= */
 
-  /* =========================================================
-     ESTADO DO MAESTRO
-     ========================================================= */
+socket.on(
+  'maestro_state',
+  state => {
 
-  socket.on(
-    'maestro_state',
-    state => {
+    if (
+      state.roomId !== currentRoom
+    ) {
+      return;
+    }
 
-      if(
-        state.roomId !== currentRoom
-      ){
+    currentRoomState = state;
 
-        return;
+    if (
+      roomRole === 'participante'
+    ) {
 
-      }
-
-
-      currentRoomState =
-        state;
-
-
-      if(
-        roomRole === 'participante'
-      ){
-
-        applyRemoteState(
-          state
-        );
-
-      }
-
-
-      updateRoomTop(
+      applyRemoteState(
         state
       );
 
+      atualizarTransparenciaPlaquinha();
+
     }
-  );
+
+    updateRoomTop(
+      state
+    );
+
+  }
+);
+
 
 
   /* =========================================================
@@ -2026,8 +1922,12 @@ if(voltouAoTopo){
           : '🎸 Músico';
 
 
-      mostrarRoomTopbar();
-
+      document.getElementById(
+        'roomTopbar'
+      ).classList.add(
+        'active'
+      );
+      atualizarTransparenciaPlaquinha();
 
       definirBotoesSala(true);
 
@@ -2221,8 +2121,6 @@ if(voltouAoTopo){
     'room_closed',
     data => {
 
-      const roleBeforeClose = roomRole;
-
       apagarSessaoSala();
 
 
@@ -2277,16 +2175,6 @@ if(voltouAoTopo){
       status.textContent =
         data.message ||
         'Sala encerrada.';
-
-      /*
-        O Maestro encerrou a sessão.
-        Mostra a plaquinha somente para quem era participante.
-      */
-      if(data.fromMaestro && roleBeforeClose === 'participante'){
-        mostrarAvisoSala(
-          'O Maestro encerrou esta sessão.'
-        );
-      }
 
     }
   );

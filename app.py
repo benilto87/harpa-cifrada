@@ -464,7 +464,7 @@ def create_room(data=None):
                     0,
 
                 "fontSize":
-                    18,
+                    0.80,
 
                 "speed":
                     0,
@@ -1185,10 +1185,7 @@ def leave_room_request(data):
                     room_id,
 
                 "message":
-                    "O Maestro encerrou a sala.",
-
-                "fromMaestro":
-                    True
+                    "O Maestro encerrou a sala."
 
             },
             to=room_id
@@ -1273,10 +1270,7 @@ def leave_room_request(data):
                 room_id,
 
             "participants":
-                count,
-
-            "participantLeft":
-                True
+                count
 
         },
         to=room_id
@@ -1361,4 +1355,3 @@ if __name__ == "__main__":
         port=port,
         debug=True
     )
-# =========================================================
