@@ -965,6 +965,26 @@ body.rolagem-ativa header.topbar.topbar-fade-rolagem {
   opacity: .18;
 }
 
+/* Transição suave da plaquinha de rolagem */
+.auto-scroll-panel {
+  transition: opacity .4s ease;
+}
+
+/* Visibilidade parcial durante a rolagem */
+.auto-scroll-panel.parcial-rolagem {
+  opacity: .60;
+}
+
+/* Barra superior parcialmente visível ao tocar */
+body.rolagem-ativa header.topbar.topbar-parcial-rolagem {
+  opacity: .60;
+}
+
+/* Barra superior bastante transparente após 5 segundos */
+body.rolagem-ativa header.topbar.topbar-fade-rolagem {
+  opacity: .18;
+}
+
 </style><span></span></label>
 <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
 
@@ -1787,12 +1807,15 @@ clearTimeout(topbarFadeTimer);
 topbarFadeTimer = 0;
 
 document.querySelector('header.topbar')
-  ?.classList.remove('topbar-fade-rolagem');
+  ?.classList.remove(
+    'topbar-fade-rolagem',
+    'topbar-parcial-rolagem'
+  );
 
 const panel=document.getElementById('autoScrollPanel');
 
 if(panel){
-  panel.classList.remove('hidden','fade-50');
+  panel.classList.remove('hidden', 'fade-50', 'parcial-rolagem');
 }
 
   // Não há mais posição para retomar
@@ -1823,48 +1846,55 @@ function autoScrollTick(now){
   autoScrollFrame=requestAnimationFrame(autoScrollTick);
 }
 
-function despertarAutoScrollPanel(){
+function despertarAutoScrollPanel(inicio = false) {
+  const panel = document.getElementById('autoScrollPanel');
+  if (!panel) return;
 
-  const panel=document.getElementById('autoScrollPanel');
-
-  if(!panel)return;
-
-  // Cancela o temporizador anterior
   clearTimeout(autoScrollFadeTimer);
 
-  // Volta imediatamente à opacidade normal
-  panel.classList.remove('fade-50');
+  if (inicio) {
+    // No início da rolagem: nitidez completa
+    panel.classList.remove('fade-50', 'parcial-rolagem');
+  } else {
+    // Ao tocar durante a rolagem: visibilidade parcial
+    panel.classList.remove('fade-50');
+    panel.classList.add('parcial-rolagem');
+  }
 
-  // Depois de 5 segundos sem interação,
-  // volta a ficar transparente
-  autoScrollFadeTimer=setTimeout(()=>{
-
-    if(autoScrollMode){
-
+  autoScrollFadeTimer = setTimeout(() => {
+    if (autoScrollMode) {
+      panel.classList.remove('parcial-rolagem');
       panel.classList.add('fade-50');
-
     }
-
-  },5000);
+  }, 5000);
 }
 
 let topbarFadeTimer = 0;
 
-function despertarTopbarRolagem() {
+function despertarTopbarRolagem(inicio = false) {
   const topbar = document.querySelector('header.topbar');
   if (!topbar) return;
 
   clearTimeout(topbarFadeTimer);
   topbarFadeTimer = 0;
 
-  topbar.classList.remove('topbar-fade-rolagem');
+  topbar.classList.remove(
+    'topbar-fade-rolagem',
+    'topbar-parcial-rolagem'
+  );
 
   if (!autoScrollMode) return;
+
+  if (!inicio) {
+    // Ao tocar durante a rolagem: opacidade parcial
+    topbar.classList.add('topbar-parcial-rolagem');
+  }
 
   topbarFadeTimer = setTimeout(() => {
     topbarFadeTimer = 0;
 
     if (autoScrollMode) {
+      topbar.classList.remove('topbar-parcial-rolagem');
       topbar.classList.add('topbar-fade-rolagem');
     }
   }, 5000);
@@ -1886,13 +1916,14 @@ function startAutoScroll(){
   if(panel){
   panel.classList.remove('hidden','fade-50');
   despertarAutoScrollPanel();
+  despertarAutoScrollPanel(true);
 }
 
   cancelAutoScrollFrame();
   const retomando=autoScrollResumeY!==null;
   autoScrollMode=true;
   autoScrollRunning=true;
-  despertarTopbarRolagem();
+  despertarTopbarRolagem(true);
 
   const notesButton=document.getElementById('toggleNotes');
   const tonePanel=document.getElementById('tonePanel');

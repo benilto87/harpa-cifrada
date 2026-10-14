@@ -1046,7 +1046,7 @@ document.addEventListener('pointerdown', function(event) {
          POSIÇÃO / PLAY / PAUSA
          ===================================================== */
 
-      const RECUO_PARTICIPANTE = 37; // aproximadamente 2 cm na tela
+      const RECUO_PARTICIPANTE = 7; // aproximadamente 2 cm na tela
 
 const targetY =
   Math.max(
@@ -1202,7 +1202,9 @@ const targetY =
       'openRooms',
       'closeRooms',
       'refreshRooms',
-      'createRoom'
+      'createRoom',
+	  'toggleKeyboard',
+	  'toggleViolao'
     ]);
 
 
@@ -1213,9 +1215,10 @@ const targetY =
       .forEach(el => {
 
         if(
-          permitidos.has(el.id) ||
-          el.closest('#roomOverlay')
-        ){
+  permitidos.has(el.id) ||
+  el.closest('#roomOverlay') ||
+  el.closest('.chord-keyboard-popup')
+){
 
           el.disabled = false;
           return;
@@ -1303,13 +1306,14 @@ const targetY =
 
 
       if(
-        el.id === 'openRooms' ||
-        el.closest('#roomOverlay')
-      ){
-
-        return;
-
-      }
+  el.id === 'openRooms' ||
+  el.id === 'toggleKeyboard' ||
+  el.id === 'toggleViolao' ||
+  el.closest('#roomOverlay') ||
+  el.closest('.chord-keyboard-popup')
+){
+  return;
+}
 
 
       e.preventDefault();
