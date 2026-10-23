@@ -638,6 +638,26 @@ button.active{
   vertical-align:baseline;
 }
 
+/* =========================================================
+   ESTILO DAS CANÇÕES DE LOUVOR — inspirado em cifras online
+   ========================================================= */
+.score.louvor-mode .aligned-line,
+.score.louvor-mode .lyrics-inline{
+  font-family:'Courier New',Courier,monospace;
+  font-style:normal;
+  font-weight:400;
+  letter-spacing:0;
+}
+
+.score.louvor-mode .chord-label,
+.score.louvor-mode .inline-chord{
+  color:#ed7b18;
+}
+
+.score.louvor-mode .verse-title{
+  color:#ed7b18;
+}
+
 
 /* =========================
    CELULAR
@@ -680,6 +700,19 @@ button.active{
     font-size:calc(1.08rem*var(--font-scale));
     line-height:1.26;
   }
+
+/* No celular, letras de Louvor mais compactas */
+.score.louvor-mode .aligned-line {
+  font-size: calc(1.09rem * var(--font-scale));
+  line-height: 1.20;
+  letter-spacing: -0.12em;
+}
+
+.score.louvor-mode .lyrics-inline {
+  font-size: calc(1.09rem * var(--font-scale));
+  line-height: 1.22;
+  letter-spacing: -0.12em;
+}
 
   .tone-panel{
     padding-left:8px;
@@ -985,6 +1018,37 @@ body.rolagem-ativa header.topbar.topbar-fade-rolagem {
   opacity: .18;
 }
 
+/* Fundo branco somente nas músicas da categoria Louvor */
+.score.louvor-mode .stanza {
+  background-color: #ffffff;
+  border-radius: 6px;
+  padding: 6px 5px;
+  margin-bottom: 10px;
+}
+
+
+/* Título elegante das músicas de Louvor */
+.score.louvor-mode .louvor-song-title {
+  background: #ffffff;
+  color: #704323;
+  border: 0px solid #f0dfcf;
+  border-left: 2px solid #f58220;
+  border-radius: 8px;
+
+  padding: 14px 14px;
+  margin: 0 7px 9px;
+
+  font-family: Bahnschrift Light;
+  font-size: .93rem;
+  font-weight: 900;
+  line-height: 1.4;
+  letter-spacing: .015em;
+
+  text-transform: none;
+  overflow-wrap: anywhere;
+  box-shadow: 0 2px 5px rgba(80, 48, 20, .06);
+}
+
 </style><span></span></label>
 <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
 
@@ -1201,6 +1265,7 @@ body.rolagem-ativa header.topbar.topbar-fade-rolagem {
   <div class="library-head"><div class="library-head-row"><div class="library-title">MÚSICAS</div><div class="library-options"><label class="library-check" title="Usar sustenidos"><input type="checkbox" id="toggleSharp">#</label><label class="library-check" title="Entrar meio tom abaixo"><input type="checkbox" id="toggleHalfDown">−½</label></div><button class="library-close" id="closeLibrary">×</button></div><input id="librarySearch" class="library-search" type="search" inputmode="numeric" pattern="[0-9]*" placeholder="🔎  Número do hino..."></div>
   <div class="library-tools">
   <button id="favoritesFilter">⭐ Favoritos</button>
+  <button id="louvorFilter">🎵 Louvor</button>
   <button id="allSongsFilter" class="active">Todas</button>
   </div>
   <div class="library-apps">
@@ -1293,7 +1358,8 @@ function getSongStartIndex(songId){
 
 let currentSongId=localStorage.getItem('harpa_current_song')||'001'; // MEMORIZA HINO ABERTO //
 let currentIndex=getSongStartIndex(currentSongId);
-let sectionsHidden=true;
+let sectionsHidden =
+  getSongCategory(songs.find(s => s.id === currentSongId) || songs[0]) !== 'Louvor';
 let progressionMode=false;
 let inlineMode=false;
 let splitMode=false;
@@ -1741,7 +1807,7 @@ function isChorusSection(section) {
 function isVerseSection(section) {
   const label = normalizarNomeSecao(section?.label);
 
-  return /^(?:(?:\d+\s*[ao]?\s*)|(?:primeira|segunda|terceira|quarta|quinta|sexta|setima|oitava|nona|decima)\s+)?(?:estrofe|parte)$/.test(label);
+  return /^(?:(?:\d+\s*(?:[ªºao])?\s*)|(?:(?:primeira|segunda|terceira|quarta|quinta|sexta|setima|oitava|nona|decima)\s+))?(?:estrofe|parte)$/.test(label);
 }
 
 function isChorusOrRefrainSection(section) {
@@ -2246,8 +2312,26 @@ function render(){
   document.getElementById('currentTone').textContent=current;
   document.getElementById('currentSongLabel').innerHTML=`<strong>${s.number} — ${s.title}</strong><label class="tone-memory-check" title="Memorizar o tom desta música"><input type="checkbox" id="toneMemory"><span>tom</span></label>`;
   const root=document.getElementById('song');
+  // Mostra o título antes da letra somente em Louvor.
+if (String(s.category || '').trim().toLowerCase() === 'louvor') {
+  const tituloLouvor = document.createElement('div');
+  tituloLouvor.className = 'louvor-song-title';
+  tituloLouvor.textContent = s.title;
+  root.appendChild(tituloLouvor);
+}
   root.innerHTML='';
 
+  document.getElementById('score').classList.toggle(
+    'louvor-mode',
+    getSongCategory(s)==='Louvor'
+  );
+
+  if (getSongCategory(s) === 'Louvor') {
+    const tituloLouvor = document.createElement('div');
+    tituloLouvor.className = 'louvor-song-title';
+    tituloLouvor.textContent = s.title;
+    root.appendChild(tituloLouvor);
+  }
   const sectionsToRender=autoScrollMode?getAutoScrollSections(s.sections):s.sections;
 
   sectionsToRender.forEach(sectionData=>{
@@ -2421,6 +2505,22 @@ try{
 }catch{}
 
 let favoritesOnly=false;
+let louvorOnly=false;
+
+// A partir do número 1000, a música é classificada como Louvor.
+function getSongCategory(song){
+  const number=Number(song?.number ?? song?.id);
+  return Number.isFinite(number) && number>=1000
+    ? 'Louvor'
+    : 'Harpa Cristã';
+}
+
+// Atualiza a categoria em memória para busca e demais recursos da biblioteca.
+if(Array.isArray(songs)){
+  songs.forEach(song=>{
+    song.category=getSongCategory(song);
+  });
+}
 
 function saveFav(){
   safeSet(
@@ -2466,142 +2566,82 @@ function resetAutoScrollForNewSong(){
    ========================================================= */
 
 function renderLibrary(){
-
   const list=document.getElementById('libraryList');
+  const q=document.getElementById('librarySearch').value.trim().toLowerCase();
 
-  const q=document
-    .getElementById('librarySearch')
-    .value
-    .trim()
-    .toLowerCase();
-
-  const filtered=songs.filter(s=>
-    (!q||`${s.number} ${s.title} ${s.category}`
-      .toLowerCase()
-      .includes(q))
-    &&
-    (!favoritesOnly||favoriteSongs.has(s.id))
-  );
+  const filtered=songs.filter(s=>{
+    const category=getSongCategory(s);
+    return (!q||`${s.number} ${s.title} ${category}`.toLowerCase().includes(q))
+      && (!favoritesOnly||favoriteSongs.has(s.id))
+      && (!louvorOnly||category==='Louvor');
+  });
 
   list.innerHTML='';
 
-
-  /* Título da seção */
-  const lab=document.createElement('div');
-  lab.className='library-section-label';
-  lab.textContent='Harpa Cristã';
-  list.appendChild(lab);
-
-
-  /* Nenhuma música encontrada */
   if(!filtered.length){
-
-    const e=document.createElement('div');
-
-    e.className='library-empty';
-
-    e.textContent=
-      favoritesOnly
+    const empty=document.createElement('div');
+    empty.className='library-empty';
+    empty.textContent=favoritesOnly
       ? 'Nenhuma música favorita.'
-      : 'Nenhuma música encontrada.';
-
-    list.appendChild(e);
-
+      : louvorOnly
+        ? 'Nenhuma canção de louvor encontrada.'
+        : 'Nenhuma música encontrada.';
+    list.appendChild(empty);
     return;
   }
 
-
-  /* =======================================================
-     CADA MÚSICA DA BIBLIOTECA
-     ======================================================= */
-
-  filtered.forEach(s=>{
-
-    const row=document.createElement('div');
-
-    row.className=
-      'song-item'+
-      (s.id===currentSongId?' active':'');
-
-
-    /* Botão principal para abrir a música */
-    const open=document.createElement('button');
-
-    open.className='song-open';
-
-    open.innerHTML=
-      `<span class="song-number">${s.number}</span>`+
-      `<span class="song-name">${s.title}</span>`;
-
-
-    /* =====================================================
-       TROCA DE MÚSICA
-       Aqui a rolagem anterior é encerrada primeiro.
-       ===================================================== */
-
-    open.onclick=()=>{
-
-  resetAutoScrollForNewSong();
-
-  currentSongId=s.id;
-
-  localStorage.setItem(
-    'harpa_current_song',
-    currentSongId
+  // Na visão Todas ou Favoritos, separa as músicas pelos títulos de categoria.
+  const categories=['Harpa Cristã','Louvor'].filter(category=>
+    filtered.some(song=>getSongCategory(song)===category)
   );
 
-  currentIndex=getSongStartIndex(currentSongId);
+  categories.forEach(category=>{
+    const lab=document.createElement('div');
+    lab.className='library-section-label';
+    lab.textContent=category;
+    list.appendChild(lab);
 
-  autoScrollSpeedLevel=
-    loadAutoScrollMemory(currentSongId);
+    filtered.filter(song=>getSongCategory(song)===category).forEach(s=>{
+      const row=document.createElement('div');
+      row.className='song-item'+(s.id===currentSongId?' active':'');
 
-  render();
+      const open=document.createElement('button');
+      open.className='song-open';
+      open.innerHTML=
+        `<span class="song-number">${s.number}</span>`+
+        `<span class="song-name">${s.title}</span>`;
 
-  centerOriginalTone();
+      open.onclick=()=>{
+        resetAutoScrollForNewSong();
+		sectionsHidden = getSongCategory(s) !== 'Louvor';
+        currentSongId=s.id;
+        localStorage.setItem('harpa_current_song',currentSongId);
+        currentIndex=getSongStartIndex(currentSongId);
+        autoScrollSpeedLevel=loadAutoScrollMemory(currentSongId);
+        render();
+        centerOriginalTone();
+        window.scrollTo(0,0);
+        renderLibrary();
+        closeLibrary();
+      };
 
-  window.scrollTo(0,0);
+      const fav=document.createElement('button');
+      fav.className='song-fav';
+      fav.textContent=favoriteSongs.has(s.id)?'★':'☆';
+      fav.title=favoriteSongs.has(s.id)?'Remover dos favoritos':'Adicionar aos favoritos';
+      fav.onclick=e=>{
+        e.stopPropagation();
+        if(favoriteSongs.has(s.id)) favoriteSongs.delete(s.id);
+        else favoriteSongs.add(s.id);
+        saveFav();
+        renderLibrary();
+      };
 
-  renderLibrary();
-  closeLibrary();
-};
-
-
-    /* =====================================================
-       BOTÃO DE FAVORITO
-       ===================================================== */
-
-    const fav=document.createElement('button');
-
-    fav.className='song-fav';
-
-    fav.textContent=
-      favoriteSongs.has(s.id)
-      ? '★'
-      : '☆';
-
-
-    fav.onclick=(e)=>{
-
-      e.stopPropagation();
-
-      if(favoriteSongs.has(s.id)){
-        favoriteSongs.delete(s.id)
-      }else{
-        favoriteSongs.add(s.id)
-      }
-
-      saveFav();
-
-      renderLibrary();
-    };
-
-
-    row.append(open,fav);
-
-    list.appendChild(row);
+      row.append(open,fav);
+      list.appendChild(row);
+    });
   });
 }
-
 
 /* =========================================================
    ABRIR / FECHAR BIBLIOTECA
@@ -2762,6 +2802,7 @@ libraryBackdrop=document.getElementById('libraryBackdrop'),
 libraryDrawer=document.getElementById('libraryDrawer'),
 librarySearch=document.getElementById('librarySearch'),
 favoritesFilter=document.getElementById('favoritesFilter'),
+louvorFilter=document.getElementById('louvorFilter'),
 allSongsFilter=document.getElementById('allSongsFilter');
 
 const ocultarComNotas=[
@@ -2912,14 +2953,27 @@ librarySearch.oninput=renderLibrary;
 
 favoritesFilter.onclick=()=>{
   favoritesOnly=true;
+  louvorOnly=false;
   favoritesFilter.classList.add('active');
+  louvorFilter.classList.remove('active');
+  allSongsFilter.classList.remove('active');
+  renderLibrary();
+};
+
+louvorFilter.onclick=()=>{
+  favoritesOnly=false;
+  louvorOnly=true;
+  favoritesFilter.classList.remove('active');
+  louvorFilter.classList.add('active');
   allSongsFilter.classList.remove('active');
   renderLibrary();
 };
 
 allSongsFilter.onclick=()=>{
   favoritesOnly=false;
+  louvorOnly=false;
   favoritesFilter.classList.remove('active');
+  louvorFilter.classList.remove('active');
   allSongsFilter.classList.add('active');
   renderLibrary();
 };
@@ -2931,14 +2985,27 @@ librarySearch.oninput=renderLibrary;
 
 favoritesFilter.onclick=()=>{
   favoritesOnly=true;
+  louvorOnly=false;
   favoritesFilter.classList.add('active');
+  louvorFilter.classList.remove('active');
+  allSongsFilter.classList.remove('active');
+  renderLibrary();
+};
+
+louvorFilter.onclick=()=>{
+  favoritesOnly=false;
+  louvorOnly=true;
+  favoritesFilter.classList.remove('active');
+  louvorFilter.classList.add('active');
   allSongsFilter.classList.remove('active');
   renderLibrary();
 };
 
 allSongsFilter.onclick=()=>{
   favoritesOnly=false;
+  louvorOnly=false;
   favoritesFilter.classList.remove('active');
+  louvorFilter.classList.remove('active');
   allSongsFilter.classList.add('active');
   renderLibrary();
 };

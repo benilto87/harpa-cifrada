@@ -3646,8 +3646,8 @@ const songs=[
 {
   id:'1000',
   number:'1000',
-  title:'Bem Mais Que Tudo - Aline Barros',
-  category:'Harpa Cristã',
+  title:'BEM MAIS QUE TUDO - Aline Barros',
+  category:'Louvor',
   sourceToneIndex:7,
 
   sections:[
@@ -3708,14 +3708,124 @@ const songs=[
 },
 
 /* =========================
+   1001 — AO ÚNICO - CORINHOS EVANGÉLICOS
+========================= */
+
+{
+  id:'1001',
+  number:'1001',
+  title:'AO ÚNICO - Corinhos Evangélicos',
+  category:'Louvor',
+  sourceToneIndex:0,
+
+  sections:[
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'Ao único que é digno de receber',anchors:[{pos:3,chord:'C'},{pos:16,chord:'G/B'},{pos:25,chord:'Am'}]},
+      {lyric:'A honra e a glória',anchors:[{pos:3,chord:'F'},{pos:14,chord:'C'}]},
+      {lyric:'A força e o poder',anchors:[{pos:3,chord:'Dm'},{pos:15,chord:'G'}]},
+      {lyric:'Ao rei, eterno, imortal',anchors:[{pos:4,chord:'C'}]},
+      {lyric:'Invisível, mas real',anchors:[{pos:0,chord:'F'},{pos:12,chord:'Fm'}]},
+      {lyric:'A Ele ministramos o louvor',anchors:[{pos:2,chord:'C'},{pos:13,chord:'G'},{pos:24,chord:'C'}]},
+      {lyric:'Ao único que é digno de receber',anchors:[{pos:3,chord:'C'},{pos:16,chord:'G/B'},{pos:27,chord:'Am'}]},
+      {lyric:'A honra e a glória',anchors:[{pos:3,chord:'F'},{pos:14,chord:'C'}]},
+      {lyric:'A força e o poder',anchors:[{pos:3,chord:'F'},{pos:15,chord:'G'}]},
+      {lyric:'Ao rei, eterno, imortal',anchors:[{pos:4,chord:'C'}]},
+      {lyric:'Invisível, mas real',anchors:[{pos:0,chord:'F'},{pos:12,chord:'Fm'}]},
+      {lyric:'A Ele ministramos o louvor',anchors:[{pos:2,chord:'C'},{pos:13,chord:'G'},{pos:24,chord:'C'},{pos:26,chord:'G/B'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:26,chord:'C'},{pos:28,chord:'G/B'}]},
+      {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:26,chord:'C'}]},
+      {lyric:'Adoramos o teu nome',anchors:[{pos:4,chord:'F'},{pos:16,chord:'G'}]},
+      {lyric:'Nos rendemos a teus pés',anchors:[{pos:8,chord:'E'},{pos:21,chord:'Am'}]},
+      {lyric:'Consagramos todo nosso ser a ti',anchors:[{pos:7,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'}]},
+      {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:26,chord:'C'}]},
+      {lyric:'Coroa__mos a ti, ó rei Jesus  ',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:26,chord:'G4'},{pos:30,chord:'G'}]},
+      {lyric:'Adoramos o teu nome',anchors:[{pos:4,chord:'F'},{pos:16,chord:'G'}]},
+      {lyric:'Nos rendemos a teus pés',anchors:[{pos:8,chord:'E'},{pos:21,chord:'Am'}]},
+      {lyric:'Consagramos todo nosso ser a ti',anchors:[{pos:7,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'}]}
+    ]
+    },
+    {
+      label:'2ª Parte',
+      lines:[
+      {lyric:'Ao único que é digno de receber',anchors:[{pos:3,chord:'C'},{pos:16,chord:'G/B'},{pos:25,chord:'Am'}]},
+      {lyric:'A honra e a glória',anchors:[{pos:3,chord:'F'},{pos:14,chord:'C'}]},
+      {lyric:'A força e o poder',anchors:[{pos:3,chord:'Dm'},{pos:15,chord:'G'}]},
+      {lyric:'Ao rei, eterno, imortal',anchors:[{pos:4,chord:'C'}]},
+      {lyric:'Invisível, mas real',anchors:[{pos:0,chord:'F'},{pos:12,chord:'Fm'}]},
+      {lyric:'A Ele ministramos o louvor',anchors:[{pos:2,chord:'C'},{pos:13,chord:'G'},{pos:24,chord:'C'},{pos:26,chord:'G/B'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:26,chord:'C'}]},
+      {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:25,chord:'G4'},{pos:28,chord:'G'}]},
+      {lyric:'Adoramos o teu nome',anchors:[{pos:4,chord:'F'},{pos:16,chord:'G'}]},
+      {lyric:'Nos rendemos a teus pés',anchors:[{pos:8,chord:'E'},{pos:21,chord:'Am'}]},
+      {lyric:'Consagramos todo nosso ser a ti',anchors:[{pos:7,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'}]},
+      {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:26,chord:'C'}]},
+      {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:25,chord:'G4'},{pos:28,chord:'G'}]},
+      {lyric:'Adoramos o teu nome',anchors:[{pos:4,chord:'F'},{pos:16,chord:'G'}]},
+      {lyric:'Nos rendemos a teus pés',anchors:[{pos:8,chord:'E'},{pos:21,chord:'Am'}]},
+      {lyric:'Consagramos todo nosso ser a ti   ',anchors:[{pos:7,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'},{pos:34,chord:'Am'}]},
+      {lyric:'Consagramos todo nosso ser a ti   ',anchors:[{pos:7,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'},{pos:34,chord:'Am'}]},
+      {lyric:'Consagramos todo nosso ser a ti',anchors:[{pos:7,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   1002 — DEUS SARA ESTA NAÇÃO - COMUNIDADE DE NILÓPOLIS
+========================= */
+
+{
+  id:'1002',
+  number:'1002',
+  title:'DEUS SARA ESTA NAÇÃO - Comunidade de Nilópolis',
+  category:'Louvor',
+  sourceToneIndex:0,
+
+  sections:[
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Deus, sara esta nação',anchors:[{pos:0,chord:'C'},{pos:6,chord:'G/B'},{pos:18,chord:'Am7'}]},
+      {lyric:'Com Teu poder, com o óleo da Tua unção',anchors:[{pos:0,chord:'Em'},{pos:11,chord:'F'},{pos:18,chord:'F/G'},{pos:24,chord:'G'},{pos:31,chord:'C'},{pos:35,chord:'G'},{pos:38,chord:'G/B'}]},
+      {lyric:'Deus, sara esta nação',anchors:[{pos:0,chord:'C'},{pos:6,chord:'G/B'},{pos:13,chord:'G#º'},{pos:21,chord:'Am7'}]},
+      {lyric:'Com Teu poder, com o óleo da Tua unção',anchors:[{pos:0,chord:'Em'},{pos:11,chord:'F'},{pos:18,chord:'F/G'},{pos:24,chord:'G'},{pos:31,chord:'C'},{pos:36,chord:'G'},{pos:38,chord:'G/B'}]}
+    ]
+    },
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'Um dia. Deus olhou para esta nação',anchors:[{pos:0,chord:'C'},{pos:14,chord:'G/B'},{pos:31,chord:'Am7'}]},
+      {lyric:'E por ela se apaixonou de uma forma especial',anchors:[{pos:4,chord:'Em'},{pos:17,chord:'F'},{pos:29,chord:'G'},{pos:41,chord:'C'},{pos:44,chord:'G'}]},
+      {lyric:'Um dia. Deus olhou para esta nação',anchors:[{pos:3,chord:'C'},{pos:14,chord:'G/B'},{pos:31,chord:'Am7'}]},
+      {lyric:'E por ela se apaixonou de uma forma especial ',anchors:[{pos:6,chord:'Em'},{pos:18,chord:'F'},{pos:30,chord:'G'},{pos:42,chord:'C'},{pos:45,chord:'C7'}]},
+      {lyric:'Colocou sobre ela a Sua mão',anchors:[{pos:0,chord:'F'},{pos:15,chord:'G/F'},{pos:27,chord:'Em'}]},
+      {lyric:'Derramando a Sua unção, liberando o Seu poder',anchors:[{pos:5,chord:'Am7'},{pos:17,chord:'Dm'},{pos:27,chord:'G'},{pos:42,chord:'C'},{pos:45,chord:'C7'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    1100 — DE CORAÇÃO PRA CORAÇÃO - SHIRLEY CARVALHAES
 ========================= */
 
 {
   id:'1100',
   number:'1100',
-  title:'De Coração Pra Coração - Shirley Carvalhaes',
-  category:'Harpa Cristã',
+  title:'DE CORAÇÃO PRA CORAÇÃO - Shirley Carvalhaes',
+  category:'Louvor',
   sourceToneIndex:7,
 
   sections:[

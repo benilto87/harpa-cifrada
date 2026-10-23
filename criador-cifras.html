@@ -534,7 +534,13 @@
       </div>
     </div>
 
-    <label>Título</label>
+    <label for="songCategory">Categoria</label>
+    <select id="songCategory">
+      <option value="Harpa Cristã" selected>Harpa Cristã</option>
+      <option value="Louvor">Louvor</option>
+    </select>
+
+    <label for="songTitle">Título</label>
     <input id="songTitle" value="Chuvas de Graça">
 
     <label>Letra + cifras</label>
@@ -605,6 +611,12 @@ Ele nos dá fortaleza e ricas bênçãos sem par</textarea>
   let codeDirty = false;
   const selectedInfo = document.getElementById('selectedInfo');
   const status = document.getElementById('status');
+
+  document.getElementById('songCategory').addEventListener('change', () => {
+    codeDirty = false;
+    renderOutput(true);
+    status.textContent = `Categoria definida como “${document.getElementById('songCategory').value}”.`;
+  });
 
   const addBtn = document.getElementById('addBtn');
   let addMode = false;
@@ -1271,6 +1283,8 @@ function isSectionLabel(text) {
   function applySongObject(song){
     document.getElementById('songNumber').value=song.number;
     document.getElementById('songTitle').value=song.title;
+    document.getElementById('songCategory').value =
+      song.category === 'Louvor' ? 'Louvor' : 'Harpa Cristã';
     const chromatic=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
     document.getElementById('songKey').value=chromatic[song.sourceToneIndex] || 'C';
 
@@ -1299,6 +1313,7 @@ function renderOutput(force = false) {
   const key = escapeHtml(
     document.getElementById('songKey').value.trim() || 'C'
   );
+  const category = document.getElementById('songCategory').value || 'Harpa Cristã';
 
   const groupedSections = [];
   let lastLabel = null;
@@ -1338,7 +1353,7 @@ function renderOutput(force = false) {
   id:'${n}',
   number:'${n}',
   title:'${title.replace(/'/g, "\\'")}',
-  category:'Harpa Cristã',
+  category:'${escapeJsString(category)}',
   sourceToneIndex:${getSourceToneIndex(key)},
 
   sections:[
