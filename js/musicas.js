@@ -3912,6 +3912,58 @@ const songs=[
 },
 
 /* =========================
+   244 — LOUVAI A JESUS
+========================= */
+
+{
+  id:'244',
+  number:'244',
+  title:'LOUVAI A JESUS',
+  category:'Harpa Cristã',
+  sourceToneIndex:10,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Louvai a Jesus, amoroso; / Na cruz os pecados levou,',anchors:[{pos:3,chord:'Bb'},{pos:31,chord:'F'},{pos:48,chord:'Bb'}]},
+      {lyric:'Que nos enche de santo gozo; / Com sangue o céu nos ganhou.',anchors:[{pos:4,chord:'Bb'},{pos:36,chord:'F'},{pos:55,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Ao meu Senhor,',anchors:[{pos:4,chord:'Eb'},{pos:11,chord:'Bb'}]},
+      {lyric:'Que tenho no meu coração,',anchors:[{pos:5,chord:'F'},{pos:21,chord:'Bb'}]},
+      {lyric:'Eu dou louvor,',anchors:[{pos:4,chord:'Eb'},{pos:10,chord:'Bb'}]},
+      {lyric:'Pois Ele me deu salvação.',anchors:[{pos:5,chord:'F'},{pos:21,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Louvai a Jesus poderoso, / Que veio livrar da prisão',anchors:[{pos:3,chord:'Bb'},{pos:32,chord:'F'},{pos:49,chord:'Bb'}]},
+      {lyric:'Um povo cativo, medroso, / Que não tinha consolação.',anchors:[{pos:3,chord:'Bb'},{pos:32,chord:'F'},{pos:48,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Louvai a Jesus, vosso guia / No mundo de tribulação;',anchors:[{pos:3,chord:'Bb'},{pos:33,chord:'F'},{pos:48,chord:'Bb'}]},
+      {lyric:'E não têm temor, quem confia / Em Deus, mas real proteção.',anchors:[{pos:3,chord:'Bb'},{pos:35,chord:'F'},{pos:54,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Louvai a Jesus, dai-Lhe glória, / Pois Rei e Senhor Ele é;',anchors:[{pos:3,chord:'Bb'},{pos:40,chord:'F'},{pos:55,chord:'Bb'}]},
+      {lyric:'Na cruz nos ganhou a vitória; / Vencei com Jesus pela fé.',anchors:[{pos:4,chord:'Bb'},{pos:35,chord:'F'},{pos:53,chord:'Bb'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    299 — HÁ UM CANTO NOVO
 ========================= */
 
