@@ -638,17 +638,94 @@ Ele nos dá fortaleza e ricas bênçãos sem par</textarea>
       pos:Math.max(0, Math.min(lyricLen, Math.round(item.column / lineLen * lyricLen)))
     }));
   }
+  
+  function normalizarRotuloSecao(text) {
+  const original = String(text || '').trim();
 
-  function isSectionLabel(text){
-    const value=text.trim();
-    return /^(?:\d+\s*[ªº]\s*|\d+\s+)?estrofe$/i.test(value)
-      || /^coro$/i.test(value)
-      || /^refr[aã]o$/i.test(value);
+  // Aceita títulos entre colchetes, como [Refrão].
+  const valor = original
+    .replace(/^\[([^\]]+)\]$/, '$1')
+    .trim();
+
+  const chave = valor
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/\s+/g, ' ');
+
+  // Padroniza Coro e Refrão.
+  if (chave === 'coro') return 'Coro';
+  if (chave === 'refrao') return 'Refrão';
+
+  // Aceita partes escritas por extenso.
+  const partes = {
+    primeira: '1ª Parte',
+    segunda: '2ª Parte',
+    terceira: '3ª Parte',
+    quarta: '4ª Parte',
+    quinta: '5ª Parte',
+    sexta: '6ª Parte',
+    setima: '7ª Parte',
+    oitava: '8ª Parte',
+    nona: '9ª Parte',
+    decima: '10ª Parte'
+  };
+
+  const parteExtenso = chave.match(
+    /^(primeira|segunda|terceira|quarta|quinta|sexta|setima|oitava|nona|decima)\s+parte$/
+  );
+
+  if (parteExtenso) {
+    return partes[parteExtenso[1]];
   }
 
+  // Aceita 1ª Parte, 1º Parte, 1a Parte, 1 Parte etc.
+  const parteNumerica = chave.match(
+    /^(\d+)\s*(?:[ªºao])?\s*parte$/
+  );
+
+  if (parteNumerica) {
+    return `${Number(parteNumerica[1])}ª Parte`;
+  }
+
+  // Preserva os demais títulos, removendo apenas os colchetes.
+  return valor;
+}
+
+function isSectionLabel(text) {
+  const original = String(text || '').trim();
+  const value = normalizarRotuloSecao(original);
+
+  // Qualquer título isolado entre colchetes pode indicar uma seção.
+  if (/^\[[^\]]+\]$/.test(original)) {
+    return true;
+  }
+
+  const chave = value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/\s+/g, ' ');
+
+  const ordinais =
+    '(?:primeira|segunda|terceira|quarta|quinta|sexta|setima|oitava|nona|decima)';
+
+  const numero = '(?:\\d+\\s*(?:[ªºao])?\\s*)';
+
+  return (
+    chave === 'coro' ||
+    chave === 'refrao' ||
+    new RegExp(`^(?:${numero}|${ordinais}\\s+)?estrofe$`).test(chave) ||
+    new RegExp(`^(?:${numero}|${ordinais}\\s+)?parte$`).test(chave)
+  );
+}
+
   function parseSource(){
-    const raw = source.value.replace(/\r/g,'');
-    const lines = raw.split('\n').map(s=>s.replace(/\t/g,'    '));
+    const raw = source.value.replace(/\r/g, '');
+    const lines = raw.split('\n').map(s =>
+      s.replace(/\t/g, '    ')
+       .replace(/[\u200B-\u200D\uFEFF]/g, '')
+    );
 
     const sections = [];
     let currentSection = null;
@@ -664,7 +741,10 @@ Ele nos dá fortaleza e ricas bênçãos sem par</textarea>
 
       // Reconhece automaticamente: 1ª estrofe, 2ª estrofe, Coro, Refrão etc.
       if(isSectionLabel(current)){
-        currentSection = {label:current, lines:[]};
+        currentSection = {
+          label: normalizarRotuloSecao(current),
+          lines: []
+        };
         sections.push(currentSection);
         i++;
         continue;
@@ -1148,7 +1228,7 @@ Ele nos dá fortaleza e ricas bênçãos sem par</textarea>
       if(!section || typeof section!=='object' || !Array.isArray(section.lines))
         throw new Error(`Seção ${si+1} inválida.`);
       return {
-        label:String(section.label ?? `1ª estrofe`),
+        label: normalizarRotuloSecao(section.label ?? '1ª estrofe'),
         lines:section.lines.map((line,li)=>{
           if(!line || typeof line!=='object' || typeof line.lyric!=='string' || !Array.isArray(line.anchors))
             throw new Error(`Linha ${li+1} da seção "${section.label}" inválida.`);
@@ -1208,41 +1288,56 @@ Ele nos dá fortaleza e ricas bênçãos sem par</textarea>
     status.textContent='Código aplicado: entrada, prévia e código estão sincronizados.';
   }
 
-  function renderOutput(force=false){
+  
+function renderOutput(force = false) {
+  const n = escapeHtml(
+    document.getElementById('songNumber').value.trim() || '001'
+  );
+  const title = escapeHtml(
+    document.getElementById('songTitle').value.trim() || 'Sem título'
+  );
+  const key = escapeHtml(
+    document.getElementById('songKey').value.trim() || 'C'
+  );
 
-    const n=escapeHtml(document.getElementById('songNumber').value.trim() || '001');
-    const title=escapeHtml(document.getElementById('songTitle').value.trim() || 'Sem título');
-    const key=escapeHtml(document.getElementById('songKey').value.trim() || 'C');
+  const groupedSections = [];
+  let lastLabel = null;
+  let section = null;
 
-    const groupedSections = [];
-    parsedLines.forEach(line=>{
-      const label=line.sectionLabel || '1ª estrofe';
-      let section=groupedSections.find(s=>s.label===label);
+  parsedLines.forEach(line => {
+    const label = line.sectionLabel || '1ª estrofe';
 
-      if(!section){
-        section={label,lines:[]};
-        groupedSections.push(section);
-      }
+    // Abre uma nova seção sempre que o rótulo mudar.
+    // Se "Refrão" aparecer novamente depois de outra seção,
+    // ele será criado novamente, sem unir os refrões.
+    if (label !== lastLabel) {
+      section = { label, lines: [] };
+      groupedSections.push(section);
+      lastLabel = label;
+    }
 
-      section.lines.push({
-        lyric:line.lyric.replace(/\s+I\s+/g,' '),
-        anchors:line.anchors.map(a=>({pos:a.pos,chord:a.chord}))
-      });
+    section.lines.push({
+      lyric: line.lyric.replace(/\s+I\s+/g, ' '),
+      anchors: line.anchors.map(a => ({
+        pos: a.pos,
+        chord: a.chord
+      }))
     });
+  });
 
-    const sectionCode = groupedSections.map(section=>`    {
-      label:'${section.label.replace(/'/g,"\\'")}',
+  const sectionCode = groupedSections.map(section => `    {
+      label:'${section.label.replace(/'/g, "\\'")}',
       lines:${formatLines(section.lines)}
     }`).join(',\n');
 
-    const js = `/* =========================
+  const js = `/* =========================
    ${n} — ${title.toUpperCase()}
 ========================= */
 
 {
   id:'${n}',
   number:'${n}',
-  title:'${title.replace(/'/g,"\\'")}',
+  title:'${title.replace(/'/g, "\\'")}',
   category:'Harpa Cristã',
   sourceToneIndex:${getSourceToneIndex(key)},
 
@@ -1250,8 +1345,10 @@ Ele nos dá fortaleza e ricas bênçãos sem par</textarea>
 ${sectionCode}
   ]
 },`;
-    if(force || !codeDirty) codeEditor.value=js;
-  }
+
+  if (force || !codeDirty) codeEditor.value = js;
+}
+
 
   function formatLines(lines){
     if(!lines.length) return '[]';
@@ -1286,7 +1383,9 @@ ${sectionCode}
   function insertLineFromVisual(){
     draftFromVisualRow();
 
-    const sectionLabel=(addDraft.section||'1ª estrofe').trim() || '1ª estrofe';
+    const sectionLabel = normalizarRotuloSecao(
+  (addDraft.section || '1ª estrofe').trim() || '1ª estrofe'
+);
     const lyric=addDraft.lyric || '';
     const chordLine=addDraft.chords || '';
 
@@ -1299,7 +1398,13 @@ ${sectionCode}
     // Se o usuário escrever [Coro], [Ponte] etc., isso vira uma nova seção.
     const sectionMatch=lyric.match(/^\[([^\]]+)\]$/);
     if(sectionMatch){
-      addDraft={section:sectionMatch[1].trim()||'1ª estrofe',chords:'',lyric:''};
+      addDraft = {
+  section: normalizarRotuloSecao(
+    sectionMatch[1].trim() || '1ª estrofe'
+  ),
+  chords: '',
+  lyric: ''
+};
       const row=preview.querySelector('.visual-add-row');
       if(row){
         row.querySelector('.visual-add-section').textContent=addDraft.section;

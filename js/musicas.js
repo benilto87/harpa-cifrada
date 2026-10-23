@@ -3623,23 +3623,89 @@ const songs=[
     {
       label:'Coro',
       lines:[
-      {lyric:'Porque Ele vive, posso crer no amanhã.',anchors:[{pos:11,chord:'Ab'},{pos:31,chord:'Db'}]},
-      {lyric:'Porque Ele vive, temor não há.',anchors:[{pos:11,chord:'Ab'},{pos:27,chord:'Bbm'}]},
+      {lyric:'Porque Ele vive, posso crer no amanhã.',anchors:[{pos:11,chord:'Ab'},{pos:30,chord:'Db'}]},
+      {lyric:'Porque Ele vive, temor não há.',anchors:[{pos:11,chord:'Ab'},{pos:26,chord:'Bbm'}]},
       {lyric:'Mas eu bem sei, eu sei, que a minha vida',anchors:[{pos:0,chord:'Eb'},{pos:19,chord:'Ab'},{pos:36,chord:'Db'}]},
-      {lyric:'Está nas mãos de meu Jesus, que vivo está.',anchors:[{pos:9,chord:'Ab'},{pos:24,chord:'Eb'},{pos:39,chord:'Ab'}]}
+      {lyric:'Está nas mãos de meu Jesus, que vivo está.',anchors:[{pos:10,chord:'Ab'},{pos:24,chord:'Eb'},{pos:39,chord:'Ab'}]}
     ]
     },
     {
       label:'2ª estrofe',
       lines:[
       {lyric:'E quando, enfim, chegar a hora / Em que a morte enfrentarei,',anchors:[{pos:12,chord:'Ab'},{pos:26,chord:'Db'},{pos:42,chord:'Ab'},{pos:55,chord:'Bbm'}]},
-      {lyric:'Sem medo, então, terei vitória: / Irei à Glória, ao meu Jesus que vivo está.',anchors:[{pos:0,chord:'Eb'},{pos:13,chord:'Ab'},{pos:25,chord:'Db'},{pos:41,chord:'Ab'},{pos:74,chord:'Eb'},{pos:73,chord:'Ab'}]}
+      {lyric:'Sem medo, então, terei vitória: / Irei à Glória, ao meu Jesus que vivo está.',anchors:[{pos:0,chord:'Eb'},{pos:13,chord:'Ab'},{pos:24,chord:'Db'},{pos:41,chord:'Ab'},{pos:59,chord:'Eb'},{pos:73,chord:'Ab'}]}
     ]
     }
   ]
-}, 
+},
 
+/* =========================
+   1000 — BEM MAIS QUE TUDO - ALINE BARROS
+========================= */
 
+{
+  id:'1000',
+  number:'1000',
+  title:'Bem Mais Que Tudo - Aline Barros',
+  category:'Harpa Cristã',
+  sourceToneIndex:7,
+
+  sections:[
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'Bem mais que as forças,   poder e reis',anchors:[{pos:18,chord:'C'},{pos:23,chord:'D'},{pos:35,chord:'G'}]},
+      {lyric:'Que a natureza e tudo que se fez',anchors:[{pos:11,chord:'C'},{pos:18,chord:'D'},{pos:30,chord:'G'}]},
+      {lyric:'Bem mais que tudo, criado por tuas mã______os',anchors:[{pos:5,chord:'D/F#'},{pos:14,chord:'Em'},{pos:22,chord:'D'},{pos:36,chord:'C'},{pos:39,chord:'G/B'}]},
+      {lyric:'Deus, tu és início, meio e fim',anchors:[{pos:1,chord:'Am'},{pos:14,chord:'Em/G'},{pos:26,chord:'D/F#'},{pos:30,chord:'G'}]},
+      {lyric:'Bem mais que os mares,   bem mais que o sol',anchors:[{pos:5,chord:'G/B'},{pos:17,chord:'C'},{pos:22,chord:'D'},{pos:41,chord:'G'}]},
+      {lyric:'E as maravilhas que o mundo conheceu',anchors:[{pos:2,chord:'G/B'},{pos:10,chord:'C'},{pos:23,chord:'D'},{pos:34,chord:'G'}]},
+      {lyric:'As riquezas, tesouros dessa terra',anchors:[{pos:0,chord:'D/F#'},{pos:7,chord:'Em'},{pos:16,chord:'D'},{pos:28,chord:'C'},{pos:32,chord:'G/B'}]},
+      {lyric:'Incomparável és pra mim',anchors:[{pos:0,chord:'Am'},{pos:8,chord:'Em/G'},{pos:20,chord:'F#m7'},{pos:23,chord:'B7'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Por amor, sua vida entregou',anchors:[{pos:1,chord:'G'},{pos:6,chord:'Am'},{pos:15,chord:'D/F#'},{pos:25,chord:'G'}]},
+      {lyric:'    Meu senhor humilhado foi',anchors:[{pos:0,chord:'C/G'},{pos:5,chord:'G'},{pos:12,chord:'Am'},{pos:16,chord:'D/F#'},{pos:26,chord:'G'}]},
+      {lyric:'Como a flor machucada no jardim',anchors:[{pos:1,chord:'D/F#'},{pos:9,chord:'Em'},{pos:18,chord:'D'},{pos:29,chord:'C'},{pos:31,chord:'G/B'}]},
+      {lyric:'Morreu por mim,     pensou em mim',anchors:[{pos:12,chord:'Am'},{pos:15,chord:'G/B'},{pos:31,chord:'C'}]},
+      {lyric:'  Me amou',anchors:[{pos:0,chord:'D'},{pos:7,chord:'G'}]}
+    ]
+    },
+    {
+      label:'2ª Parte',
+      lines:[
+      {lyric:'Bem mais que as forças,   poder e reis',anchors:[{pos:17,chord:'C'},{pos:23,chord:'D'},{pos:35,chord:'G'}]},
+      {lyric:'Que a natureza e tudo que se fez',anchors:[{pos:11,chord:'C'},{pos:18,chord:'D'},{pos:30,chord:'G'}]},
+      {lyric:'Bem mais que tudo, criado por tuas mã______os',anchors:[{pos:5,chord:'D/F#'},{pos:14,chord:'Em'},{pos:22,chord:'D'},{pos:36,chord:'C'},{pos:39,chord:'G/B'}]},
+      {lyric:'Deus, tu és início, meio e fim',anchors:[{pos:1,chord:'Am'},{pos:14,chord:'Em/G'},{pos:26,chord:'D/F#'},{pos:30,chord:'G'}]},
+      {lyric:'Bem mais que os mares,   bem mais que o sol',anchors:[{pos:5,chord:'G/B'},{pos:17,chord:'C'},{pos:22,chord:'D'},{pos:41,chord:'G'}]},
+      {lyric:'E as maravilhas que o mundo conheceu',anchors:[{pos:1,chord:'G/B'},{pos:10,chord:'C'},{pos:23,chord:'D'},{pos:34,chord:'G'}]},
+      {lyric:'As riquezas, tesouros dessa terra',anchors:[{pos:0,chord:'D/F#'},{pos:7,chord:'Em'},{pos:16,chord:'D'},{pos:28,chord:'C'},{pos:32,chord:'G/B'}]},
+      {lyric:'Incomparável és pra mim',anchors:[{pos:0,chord:'Am'},{pos:8,chord:'Em'},{pos:20,chord:'F#m7'},{pos:23,chord:'B7'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Por amor, sua vida entregou',anchors:[{pos:1,chord:'G'},{pos:6,chord:'Am'},{pos:15,chord:'D/F#'},{pos:25,chord:'G'}]},
+      {lyric:'    Meu senhor humilhado foi',anchors:[{pos:0,chord:'C/G'},{pos:5,chord:'G'},{pos:12,chord:'Am'},{pos:16,chord:'D/F#'},{pos:26,chord:'G'}]},
+      {lyric:'Como a flor machucada no jardim',anchors:[{pos:1,chord:'D/F#'},{pos:9,chord:'Em'},{pos:18,chord:'D'},{pos:28,chord:'C'},{pos:31,chord:'G/B'}]},
+      {lyric:'Morreu por mim,     pensou em mim',anchors:[{pos:12,chord:'Am'},{pos:16,chord:'G/B'},{pos:31,chord:'C'}]},
+      {lyric:'  Me amou',anchors:[{pos:0,chord:'D'},{pos:7,chord:'G'},{pos:9,chord:'Am'}]},
+      {lyric:'Por amor, sua vida entregou',anchors:[{pos:1,chord:'G'},{pos:6,chord:'Am'},{pos:15,chord:'D/F#'},{pos:25,chord:'G'}]},
+      {lyric:'    Meu senhor humilhado foi',anchors:[{pos:0,chord:'C/G'},{pos:5,chord:'G'},{pos:12,chord:'Am'},{pos:16,chord:'D/F#'},{pos:26,chord:'G'}]},
+      {lyric:'Como a flor machucada no jardim',anchors:[{pos:1,chord:'D/F#'},{pos:8,chord:'Em'},{pos:18,chord:'D'},{pos:28,chord:'C'},{pos:31,chord:'G/B'}]},
+      {lyric:'Morreu por mim,     pensou em mim',anchors:[{pos:12,chord:'Am'},{pos:15,chord:'G/B'},{pos:31,chord:'C'},{pos:33,chord:'D'}]},
+      {lyric:'Como a flor machucada no jardim',anchors:[{pos:1,chord:'D/F#'},{pos:9,chord:'Em'},{pos:18,chord:'D'},{pos:28,chord:'C'},{pos:31,chord:'G/B'}]},
+      {lyric:'Morreu por mim,     pensou em mim',anchors:[{pos:12,chord:'Am'},{pos:15,chord:'G/B'},{pos:31,chord:'C'},{pos:33,chord:'D'}]},
+      {lyric:'Me amou', anchors:[]}
+    ]
+    }
+  ]
+},
 
 /* =========================
    1100 — DE CORAÇÃO PRA CORAÇÃO - SHIRLEY CARVALHAES

@@ -1496,7 +1496,7 @@ label.textContent=a.chord;
 
     const text=document.createElement('span');
     text.className='chord-text';
-    text.textContent=lyric.slice(a.pos,nextPos);
+    text.textContent = lyric.slice(a.pos, nextPos) || '\u200B';
 
     group.append(label,text);
     line.appendChild(group);
@@ -1724,19 +1724,53 @@ function splitLineAtSlash(lyric,anchors){
   };
 }
 
-function isChorusSection(section){return /^(coro|refrão)$/i.test(String(section?.label||'').trim())}
-function isVerseSection(section){return /^\s*\d+ª?\s*estrofe/i.test(String(section?.label||''))}
-function getAutoScrollSections(sections){
-  const choruses=sections.filter(isChorusSection);
-  if(!choruses.length)return sections;
-  const result=[];
-  sections.forEach(section=>{
-    if(isChorusSection(section))return;
-    result.push(section);
-    if(isVerseSection(section))choruses.forEach(chorus=>result.push(chorus));
-  });
-  return result.length?result:sections;
+function normalizarNomeSecao(label) {
+  return String(label || '')
+    .trim()
+    .replace(/^\[([\s\S]*?)\]$/, '$1')
+    .trim()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
 }
+
+function isChorusSection(section) {
+  return normalizarNomeSecao(section?.label) === 'coro';
+}
+
+function isVerseSection(section) {
+  const label = normalizarNomeSecao(section?.label);
+
+  return /^(?:(?:\d+\s*[ao]?\s*)|(?:primeira|segunda|terceira|quarta|quinta|sexta|setima|oitava|nona|decima)\s+)?(?:estrofe|parte)$/.test(label);
+}
+
+function isChorusOrRefrainSection(section) {
+  const label = normalizarNomeSecao(section?.label);
+  return label === 'coro' || label === 'refrao';
+}
+
+function getAutoScrollSections(sections) {
+  const choruses = sections.filter(isChorusSection);
+
+  if (!choruses.length) return sections;
+
+  const result = [];
+
+  sections.forEach(section => {
+    // O Coro original será repetido após cada estrofe ou parte.
+    if (isChorusSection(section)) return;
+
+    // O Refrão e as demais seções permanecem na posição original.
+    result.push(section);
+
+    if (isVerseSection(section)) {
+      choruses.forEach(chorus => result.push(chorus));
+    }
+  });
+
+  return result.length ? result : sections;
+}
+
 function getAutoScrollMax(){return Math.max(0,document.documentElement.scrollHeight-window.innerHeight)}
 function getAutoScrollMultiplier(){return Math.pow(1.15,autoScrollSpeedLevel)}
 function getAutoScrollDurationMs(){return 180000/getAutoScrollMultiplier()}
@@ -2218,11 +2252,15 @@ function render(){
 
   sectionsToRender.forEach(sectionData=>{
     const section=document.createElement('section');
-    section.className='stanza'+(/^coro$/i.test(sectionData.label.trim())?' chorus-section':'');
+    section.className = 'stanza' +
+  (isChorusOrRefrainSection(sectionData) ? ' chorus-section' : '');
 
     const label=document.createElement('div');
     label.className='verse-title';
-    label.textContent=sectionData.label;
+    label.textContent = String(sectionData.label || '')
+      .trim()
+      .replace(/^\[([\s\S]*?)\]$/, '$1')
+      .trim();
     section.appendChild(label);
 
     sectionData.lines.forEach(lineData=>{
