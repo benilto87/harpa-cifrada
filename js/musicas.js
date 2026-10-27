@@ -4405,6 +4405,79 @@ const songs=[
 },
 
 /* =========================
+   300 — NOSSA ESPERANÇA
+========================= */
+
+{
+  id:'300',
+  number:'300',
+  title:'NOSSA ESPERANÇA',
+  category:'Harpa Cristã',
+  sourceToneIndex:0,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Jesus, sim, vem do céu, em glória Ele vem!',anchors:[{pos:3,chord:'C'}]},
+      {lyric:'Ecoa a nova pelo mundo além;',anchors:[{pos:1,chord:'G'}]},
+      {lyric:'Oh esperança que a Sua Igreja tem!',anchors:[{pos:3,chord:'C'},{pos:14,chord:'F'}]},
+      {lyric:'Dai glória a Deus, Jesus em breve vem!',anchors:[{pos:5,chord:'C'},{pos:22,chord:'G'},{pos:35,chord:'C'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Nossa esperança é Sua vinda',anchors:[{pos:11,chord:'C'}]},
+      {lyric:'O Rei dos reis vem nos buscar;',anchors:[{pos:11,chord:'C'},{pos:27,chord:'G'}]},
+      {lyric:'Nós aguardamos, Jesus, ainda,',anchors:[{pos:9,chord:'G'}]},
+      {lyric:'Té a luz da manhã raiar.',anchors:[{pos:9,chord:'G'},{pos:21,chord:'C'}]},
+      {lyric:'Nossa esperança é Sua vinda',anchors:[{pos:11,chord:'C'}]},
+      {lyric:'O Rei dos reis vem nos buscar;',anchors:[{pos:11,chord:'C'},{pos:27,chord:'F'}]},
+      {lyric:'Nós aguardamos, Jesus, ainda,',anchors:[{pos:7,chord:'F#dim'},{pos:24,chord:'C'}]},
+      {lyric:'Té a luz da manhã raiar.',anchors:[{pos:9,chord:'F'},{pos:15,chord:'G'},{pos:21,chord:'C'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Jesus, sim, vem, os mortos esperando estão;',anchors:[{pos:3,chord:'C'}]},
+      {lyric:'O gran momento da ressurreição',anchors:[{pos:3,chord:'G'}]},
+      {lyric:'E do sepulcro em breve se levantarão!',anchors:[{pos:3,chord:'C'},{pos:18,chord:'F'}]},
+      {lyric:'Dai glória a Deus, Jesus em breve vem!',anchors:[{pos:6,chord:'C'},{pos:22,chord:'G'},{pos:35,chord:'C'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Jesus, sim, vem do céu cercado de esplendor,',anchors:[{pos:3,chord:'C'}]},
+      {lyric:'Aniquilando a corrupção e a dor,',anchors:[{pos:2,chord:'G'}]},
+      {lyric:'Quebrando os laços do astuto usurpador,',anchors:[{pos:4,chord:'C'},{pos:20,chord:'F'}]},
+      {lyric:'Dai glória a Deus, Jesus em breve vem!',anchors:[{pos:5,chord:'C'},{pos:22,chord:'G'},{pos:35,chord:'C'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Jesus, sim, vem, completamente restaurar',anchors:[{pos:3,chord:'C'}]},
+      {lyric:'O mundo que se arruína sem parar;',anchors:[{pos:3,chord:'G'}]},
+      {lyric:'Sim, todas as coisas vem depressa transformar',anchors:[{pos:5,chord:'C'},{pos:22,chord:'F'}]},
+      {lyric:'Dai glória a Deus, Jesus em breve vem!',anchors:[{pos:5,chord:'C'},{pos:22,chord:'G'},{pos:35,chord:'C'}]}
+    ]
+    },
+    {
+      label:'5ª estrofe',
+      lines:[
+      {lyric:'Jesus, sim, vem, em sempiterna adoração',anchors:[{pos:3,chord:'C'}]},
+      {lyric:'Daremos nós ao Rei de coração;',anchors:[{pos:3,chord:'G'}]},
+      {lyric:'Ao grande autor da nossa eterna salvação,',anchors:[{pos:4,chord:'C'},{pos:20,chord:'F'}]},
+      {lyric:'Dai glória a Deus, Jesus em breve vem!',anchors:[{pos:5,chord:'C'},{pos:22,chord:'G'},{pos:35,chord:'C'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    301 — “VEM CEAR”
 ========================= */
 
