@@ -3964,6 +3964,118 @@ const songs=[
 },
 
 /* =========================
+   255 — MEU REDENTOR
+========================= */
+
+{
+  id:'255',
+  number:'255',
+  title:'MEU REDENTOR',
+  category:'Harpa Cristã',
+  sourceToneIndex:0,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Na cruz morrendo meu Redentor; / Minhas maldades todas levou;',anchors:[{pos:0,chord:'C'},{pos:18,chord:'F'},{pos:27,chord:'C'},{pos:34,chord:'G'},{pos:58,chord:'C'}]},
+      {lyric:'Se O recebes, tens Seu amor, / Pois teus pecados, Jesus perdoou.',anchors:[{pos:1,chord:'C'},{pos:15,chord:'F'},{pos:32,chord:'F'},{pos:44,chord:'G'},{pos:61,chord:'C'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Quando Deus, o sangue vir,',anchors:[{pos:8,chord:'C'}]},
+      {lyric:'Que Jesus já verteu,',anchors:[{pos:7,chord:'G'},{pos:17,chord:'C'}]},
+      {lyric:'Passará sem te ferir,',anchors:[{pos:6,chord:'C'},{pos:18,chord:'F'}]},
+      {lyric:'No Egito assim sucedeu.',anchors:[{pos:5,chord:'G'},{pos:20,chord:'C'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Deus quer salvar ao vil malfeitor, / Como promete, sempre fará;',anchors:[{pos:1,chord:'C'},{pos:21,chord:'F'},{pos:31,chord:'C'},{pos:38,chord:'G'},{pos:60,chord:'C'}]},
+      {lyric:'NEle confia, ó pecador, / E pela fé vida nova terás.',anchors:[{pos:1,chord:'C'},{pos:13,chord:'F'},{pos:26,chord:'F'},{pos:33,chord:'G'},{pos:49,chord:'C'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Breve se finda a tua luz, / E no juízo tu vais entrar;',anchors:[{pos:1,chord:'C'},{pos:15,chord:'F'},{pos:22,chord:'C'},{pos:28,chord:'G'},{pos:51,chord:'C'}]},
+      {lyric:'Não te detenhas, vem a Jesus, / Que teus pecados deseja apagar.',anchors:[{pos:1,chord:'C'},{pos:18,chord:'F'},{pos:33,chord:'F'},{pos:44,chord:'G'},{pos:60,chord:'C'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Que maravilha, que grande amor! / Se hoje creres, salvo serás!',anchors:[{pos:1,chord:'C'},{pos:16,chord:'F'},{pos:28,chord:'C'},{pos:35,chord:'G'},{pos:59,chord:'C'}]},
+      {lyric:'Cristo te chama, vem pecador, / E gozo eterno no céu fruirás.',anchors:[{pos:1,chord:'C'},{pos:18,chord:'F'},{pos:32,chord:'F'},{pos:41,chord:'G'},{pos:58,chord:'C'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   259 — CREIO EU NA BÍBLIA
+========================= */
+
+{
+  id:'259',
+  number:'259',
+  title:'CREIO EU NA BÍBLIA',
+  category:'Harpa Cristã',
+  sourceToneIndex:2,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Creio eu na Bíblia, o livro do Senhor,',anchors:[{pos:2,chord:'D'}]},
+      {lyric:'Pois de Jesus Cristo mostra o doce amor;',anchors:[{pos:1,chord:'D'},{pos:37,chord:'A'}]},
+      {lyric:'Todos meus pecados apagados estão,',anchors:[{pos:1,chord:'D'}]},
+      {lyric:'Paz e gozo tenho em meu coração.',anchors:[{pos:1,chord:'D'},{pos:25,chord:'A'},{pos:29,chord:'D'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Creio eu na Bíblia, livro de meu Deus;',anchors:[{pos:2,chord:'D'}]},
+      {lyric:'Para mim a Bíblia é o maná dos céus!',anchors:[{pos:1,chord:'D'},{pos:32,chord:'A'}]},
+      {lyric:'Mostra-me o caminho para o lar celestial;',anchors:[{pos:1,chord:'D'},{pos:28,chord:'G'},{pos:37,chord:'D'}]},
+      {lyric:'Acho eu na Bíblia, graça divinal!',anchors:[{pos:0,chord:'D'},{pos:25,chord:'A'},{pos:30,chord:'D'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Creio eu na Bíblia, ensina-me a cantar',anchors:[{pos:2,chord:'D'}]},
+      {lyric:'Cantos de vitória, e de amor sem par;',anchors:[{pos:1,chord:'D'},{pos:34,chord:'A'}]},
+      {lyric:'Lindas melodias, eu cantando vou,',anchors:[{pos:1,chord:'D'}]},
+      {lyric:'Porque redimido pelo sangue estou!',anchors:[{pos:1,chord:'D'},{pos:22,chord:'A'},{pos:31,chord:'D'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Só a santa Bíblia a santidade dá,',anchors:[{pos:1,chord:'D'}]},
+      {lyric:'Este dom de Cristo, prometido já;',anchors:[{pos:0,chord:'D'},{pos:30,chord:'A'}]},
+      {lyric:'Todos os que buscam plena salvação,',anchors:[{pos:1,chord:'D'}]},
+      {lyric:'Estas bênçãos, só em Cristo, acharão.',anchors:[{pos:1,chord:'D'},{pos:29,chord:'A'},{pos:34,chord:'D'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Lemos hoje a Bíblia p’ra todo o pecador,',anchors:[{pos:0,chord:'D'}]},
+      {lyric:'Para que encontre Cristo, o Salvador;',anchors:[{pos:1,chord:'D'},{pos:34,chord:'A'}]},
+      {lyric:'Sendo sua vida, livre de pecar,',anchors:[{pos:1,chord:'D'}]},
+      {lyric:'O divino livro, ele vai honrar!',anchors:[{pos:0,chord:'D'},{pos:21,chord:'A'},{pos:28,chord:'D'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    299 — HÁ UM CANTO NOVO
 ========================= */
 
