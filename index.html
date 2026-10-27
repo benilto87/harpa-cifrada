@@ -1815,21 +1815,40 @@ function isChorusOrRefrainSection(section) {
   return label === 'coro' || label === 'refrao';
 }
 
-function getAutoScrollSections(sections) {
+function getAutoScrollSections(
+  sections,
+  skipChorusAfterLastVerse = false
+) {
   const choruses = sections.filter(isChorusSection);
 
   if (!choruses.length) return sections;
 
+  let lastVerseIndex = -1;
+
+  sections.forEach((section, index) => {
+    if (isVerseSection(section)) {
+      lastVerseIndex = index;
+    }
+  });
+
   const result = [];
 
-  sections.forEach(section => {
-    // O Coro original será repetido após cada estrofe ou parte.
+  sections.forEach((section, index) => {
+    // O Coro será inserido automaticamente após as estrofes.
     if (isChorusSection(section)) return;
 
-    // O Refrão e as demais seções permanecem na posição original.
+    // Mantém as outras seções na posição original.
     result.push(section);
 
     if (isVerseSection(section)) {
+      // Exceção: não repetir o Coro após a última estrofe.
+      if (
+        skipChorusAfterLastVerse &&
+        index === lastVerseIndex
+      ) {
+        return;
+      }
+
       choruses.forEach(chorus => result.push(chorus));
     }
   });
@@ -2332,7 +2351,12 @@ if (String(s.category || '').trim().toLowerCase() === 'louvor') {
     tituloLouvor.textContent = s.title;
     root.appendChild(tituloLouvor);
   }
-  const sectionsToRender=autoScrollMode?getAutoScrollSections(s.sections):s.sections;
+  const sectionsToRender = autoScrollMode
+  ? getAutoScrollSections(
+      s.sections,
+      s.skipChorusAfterLastVerse === true
+    )
+  : s.sections;
 
   sectionsToRender.forEach(sectionData=>{
     const section=document.createElement('section');

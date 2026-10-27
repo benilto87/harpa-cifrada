@@ -4076,6 +4076,191 @@ const songs=[
 },
 
 /* =========================
+   277 — SALVO ESTÁS? LIMPO ESTÁS?
+========================= */
+
+{
+  id:'277',
+  number:'277',
+  title:'SALVO ESTÁS? LIMPO ESTÁS?',
+  category:'Harpa Cristã',
+  sourceToneIndex:8,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Tens achado em Cristo plena salvação,',anchors:[{pos:7,chord:'Ab'}]},
+      {lyric:'Pelo sangue vertido na cruz?',anchors:[{pos:5,chord:'Ab'},{pos:24,chord:'Eb'}]},
+      {lyric:'Toda mancha lava de teu coração,',anchors:[{pos:6,chord:'Ab'},{pos:24,chord:'Db'}]},
+      {lyric:'Este sangue eficaz de Jesus.',anchors:[{pos:5,chord:'Ab'},{pos:15,chord:'Eb'},{pos:24,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Salvo estás, limpo estás,',anchors:[{pos:8,chord:'Ab'},{pos:21,chord:'Db'}]},
+      {lyric:'Pelo sangue de Cristo Jesus?',anchors:[{pos:5,chord:'Ab'},{pos:24,chord:'Eb'}]},
+      {lyric:'Tens teu coração mais alvo que a luz,',anchors:[{pos:9,chord:'Ab'},{pos:27,chord:'Db'}]},
+      {lyric:'Foste limpo no sangue eficaz?',anchors:[{pos:6,chord:'Eb'},{pos:25,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Vives sempre ao lado do teu Salvador,',anchors:[{pos:6,chord:'Ab'}]},
+      {lyric:'Pelo sangue que mana da cruz?',anchors:[{pos:5,chord:'Ab'},{pos:25,chord:'Eb'}]},
+      {lyric:'Do pecado foste sempre vencedor,',anchors:[{pos:5,chord:'Ab'},{pos:23,chord:'Db'}]},
+      {lyric:'Como foi teu bendito Jesus?',anchors:[{pos:5,chord:'Ab'},{pos:16,chord:'Eb'},{pos:23,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Terás roupa branca quando vier Jesus,',anchors:[{pos:6,chord:'Ab'}]},
+      {lyric:'Foste limpo na fonte de amor?',anchors:[{pos:6,chord:'Ab'},{pos:26,chord:'Eb'}]},
+      {lyric:'Estás pronto p’ra seguir ao céu de luz,',anchors:[{pos:6,chord:'Ab'},{pos:29,chord:'Db'}]},
+      {lyric:'Pelo sangue purificador?',anchors:[{pos:5,chord:'Ab'},{pos:13,chord:'Eb'},{pos:20,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Cristo hoje dá pureza e mui poder,',anchors:[{pos:7,chord:'Ab'}]},
+      {lyric:'Fita os olhos na cruz do Senhor,',anchors:[{pos:7,chord:'Ab'},{pos:28,chord:'Eb'}]},
+      {lyric:'Dela, fonte sai que te enche de prazer,',anchors:[{pos:6,chord:'Ab'},{pos:29,chord:'Db'}]},
+      {lyric:'Que te farta de vida e vigor.',anchors:[{pos:7,chord:'Ab'},{pos:16,chord:'Eb'},{pos:25,chord:'Ab'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   290 — TEU ESPÍRITO VEM DERRAMAR (CORO ALTERNATIVO COM: skipChorusAfterLastVerse: true,)
+========================= */
+
+{
+  id:'290',
+  number:'290',
+  title:'TEU ESPÍRITO VEM DERRAMAR',
+  category:'Harpa Cristã',
+  skipChorusAfterLastVerse: true,
+  sourceToneIndex:5,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Ó Senhor, nós esperamos / Que escutes a oração;',anchors:[{pos:5,chord:'F'},{pos:18,chord:'C'},{pos:32,chord:'F'},{pos:38,chord:'C'},{pos:44,chord:'F'}]},
+      {lyric:'Nós, Teus servos, já clamamos, / Com humilde coração.',anchors:[{pos:11,chord:'F'},{pos:25,chord:'C'},{pos:40,chord:'F'},{pos:46,chord:'C'},{pos:50,chord:'F'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Teu Espírito, vem, derrama,',anchors:[{pos:6,chord:'F'},{pos:21,chord:'Gm'}]},
+      {lyric:'Sobre cada coração!',anchors:[{pos:6,chord:'F'},{pos:16,chord:'C'}]},
+      {lyric:'E no crente, que a Ti clama,',anchors:[{pos:6,chord:'F'},{pos:23,chord:'C'}]},
+      {lyric:'Vem, confirma a petição.',anchors:[{pos:8,chord:'F'},{pos:16,chord:'C'},{pos:20,chord:'F'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Deixa o fogo do Espírito, / Sim, nos corações arder,',anchors:[{pos:8,chord:'F'},{pos:19,chord:'C'},{pos:38,chord:'F'},{pos:42,chord:'C'},{pos:49,chord:'F'}]},
+      {lyric:'P’ra que tudo que é finito, / Jamais possa se reter.',anchors:[{pos:9,chord:'F'},{pos:23,chord:'C'},{pos:38,chord:'F'},{pos:43,chord:'C'},{pos:49,chord:'F'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Ó Senhor, me purifica, / Tira o mal que está em mim,',anchors:[{pos:5,chord:'F'},{pos:17,chord:'C'},{pos:33,chord:'F'},{pos:42,chord:'C'},{pos:49,chord:'F'}]},
+      {lyric:'A minh’alma santifica, / E me guarda até o fim.',anchors:[{pos:6,chord:'F'},{pos:17,chord:'C'},{pos:31,chord:'F'},{pos:38,chord:'C'},{pos:44,chord:'F'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Dá-nos mais da Tua graça, / E enche-nos do Teu poder,',anchors:[{pos:8,chord:'F'},{pos:20,chord:'C'},{pos:37,chord:'F'},{pos:44,chord:'C'},{pos:50,chord:'F'}]},
+      {lyric:'Do Teu templo, ó Deus, se faça, / A Tua voz se perceber.',anchors:[{pos:7,chord:'F'},{pos:26,chord:'C'},{pos:41,chord:'F'},{pos:48,chord:'C'},{pos:53,chord:'F'}]}
+    ]
+    },
+    {
+      label:'5ª estrofe',
+      lines:[
+      {lyric:'Dá-nos dons do Teu Espírito, / Faz milagres, ó Senhor,',anchors:[{pos:8,chord:'F'},{pos:22,chord:'C'},{pos:37,chord:'F'},{pos:45,chord:'C'},{pos:50,chord:'F'}]},
+      {lyric:'P’ra que tudo, que tens dito, / Cumpra-se, meu Redentor.',anchors:[{pos:9,chord:'F'},{pos:24,chord:'C'},{pos:39,chord:'F'},{pos:48,chord:'C'},{pos:53,chord:'F'}]}
+     ]
+     },
+     {   
+	  label:'Refrão',
+      lines:[
+      {lyric:'Dou-te graças, Rei da glória,',anchors:[{pos:8,chord:'F'},{pos:22,chord:'Gm'}]},
+      {lyric:'Pois ouviste a petição;',anchors:[{pos:7,chord:'F'},{pos:20,chord:'C'}]},
+      {lyric:'Belos hinos de vitória,',anchors:[{pos:7,chord:'F'},{pos:18,chord:'C'}]},
+      {lyric:'Mais Tu deste ao coração.',anchors:[{pos:9,chord:'F'},{pos:18,chord:'C'},{pos:22,chord:'F'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   291 — A MENSAGEM DA CRUZ
+========================= */
+
+{
+  id:'291',
+  number:'291',
+  title:'A MENSAGEM DA CRUZ',
+  category:'Harpa Cristã',
+  sourceToneIndex:10,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Rude cruz se erguiu, / Dela o dia fugiu,',anchors:[{pos:5,chord:'Bb'},{pos:29,chord:'Eb'}]},
+      {lyric:'Como emblema de vergonha e dor; / Mas contemplo esta cruz,',anchors:[{pos:8,chord:'F'},{pos:27,chord:'Bb'},{pos:41,chord:'Bb'}]},
+      {lyric:'Porque nela Jesus / Deu a vida por mim, pecador.',anchors:[{pos:7,chord:'Eb'},{pos:27,chord:'F'},{pos:44,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Sim, eu amo a mensagem da cruz',anchors:[{pos:8,chord:'F'},{pos:27,chord:'Bb'}]},
+      {lyric:'Até morrer eu a vou proclamar;',anchors:[{pos:7,chord:'Eb'},{pos:26,chord:'Bb'}]},
+      {lyric:'Levarei eu também minha cruz',anchors:[{pos:4,chord:'Bb'},{pos:25,chord:'Eb'}]},
+      {lyric:'Até por uma coroa trocar.',anchors:[{pos:8,chord:'F'},{pos:21,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Desde a glória dos céus, / O Cordeiro de Deus,',anchors:[{pos:8,chord:'Bb'},{pos:32,chord:'Eb'}]},
+      {lyric:'Ao Calvário humilhante baixou; / Essa cruz tem n’a mim',anchors:[{pos:6,chord:'F'},{pos:26,chord:'Bb'},{pos:39,chord:'Bb'}]},
+      {lyric:'Atrativos sem fim, / Porque nela Jesus me salvou.',anchors:[{pos:4,chord:'Eb'},{pos:29,chord:'F'},{pos:45,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Nesta cruz padeceu / E por mim já morreu,',anchors:[{pos:7,chord:'Bb'},{pos:27,chord:'Eb'}]},
+      {lyric:'Meu Jesus, para dar-me o perdão / E eu me alegro na cruz,',anchors:[{pos:7,chord:'F'},{pos:29,chord:'Bb'},{pos:43,chord:'Bb'}]},
+      {lyric:'Dela vem graça e luz, / Para minha santificação.',anchors:[{pos:5,chord:'Eb'},{pos:30,chord:'F'},{pos:44,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Eu aqui com Jesus, / A vergonha da cruz',anchors:[{pos:4,chord:'Bb'},{pos:26,chord:'Eb'}]},
+      {lyric:'Quero sempre levar e sofrer; / Cristo vem me buscar,',anchors:[{pos:7,chord:'F'},{pos:24,chord:'Bb'},{pos:39,chord:'Bb'}]},
+      {lyric:'E com Ele, no lar, / Uma parte da glória hei de ter.',anchors:[{pos:6,chord:'Eb'},{pos:25,chord:'F'},{pos:47,chord:'Bb'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    299 — HÁ UM CANTO NOVO
 ========================= */
 
