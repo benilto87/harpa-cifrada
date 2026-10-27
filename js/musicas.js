@@ -4261,6 +4261,99 @@ const songs=[
 },
 
 /* =========================
+   296 — NO JARDIM
+========================= */
+
+{
+  id:'296',
+  number:'296',
+  title:'NO JARDIM',
+  category:'Harpa Cristã',
+  sourceToneIndex:2,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'No jardim, Jesus Cristo clamava, / Quando os ímpios O foram prender;',anchors:[{pos:7,chord:'D'},{pos:18,chord:'G'},{pos:28,chord:'D'},{pos:44,chord:'D'},{pos:55,chord:'A'},{pos:65,chord:'D'}]},
+      {lyric:'E falando co’o Pai suplicava, / Pelo cálice que ia beber.',anchors:[{pos:4,chord:'D'},{pos:16,chord:'G'},{pos:24,chord:'D'},{pos:38,chord:'A'},{pos:54,chord:'D'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Com Jesus a minh’alma deseja estar',anchors:[{pos:7,chord:'A'},{pos:25,chord:'D'}]},
+      {lyric:'No jardim, em constante oração;',anchors:[{pos:6,chord:'A'},{pos:28,chord:'D'}]},
+      {lyric:'Quando a noite chegar, e o mal me cercar,',anchors:[{pos:10,chord:'D'},{pos:28,chord:'G'}]},
+      {lyric:'Quero estar em constante oração.',anchors:[{pos:9,chord:'A'},{pos:29,chord:'D'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Qual orvalho que dá vida às flores, / Assim é para o crente a oração;',anchors:[{pos:7,chord:'D'},{pos:17,chord:'G'},{pos:29,chord:'D'},{pos:44,chord:'D'},{pos:54,chord:'A'},{pos:66,chord:'D'}]},
+      {lyric:'Meus cuidados, tristezas e dores, / Cristo as sabe por minha oração.',anchors:[{pos:8,chord:'D'},{pos:19,chord:'G'},{pos:28,chord:'D'},{pos:47,chord:'E'},{pos:65,chord:'A'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Jesus teve completa vitória, / Porque sempre viveu em oração,',anchors:[{pos:6,chord:'D'},{pos:15,chord:'G'},{pos:23,chord:'D'},{pos:39,chord:'D'},{pos:48,chord:'A'},{pos:58,chord:'D'}]},
+      {lyric:'Muitos santos chegaram à glória, / Sob o manto da doce oração.',anchors:[{pos:8,chord:'D'},{pos:18,chord:'G'},{pos:26,chord:'D'},{pos:42,chord:'E'},{pos:59,chord:'A'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Renovados em forças seremos, / Nós teremos a nova unção;',anchors:[{pos:4,chord:'D'},{pos:14,chord:'G'},{pos:23,chord:'D'},{pos:38,chord:'D'},{pos:46,chord:'A'},{pos:53,chord:'D'}]},
+      {lyric:'E com Deus, no jardim falaremos, / Se vivermos sempre em oração.',anchors:[{pos:7,chord:'D'},{pos:19,chord:'G'},{pos:27,chord:'D'},{pos:41,chord:'E'},{pos:60,chord:'A'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   298 — AVANTE, SERVOS DE JESUS
+========================= */
+
+{
+  id:'298',
+  number:'298',
+  title:'AVANTE, SERVOS DE JESUS',
+  category:'Harpa Cristã',
+  sourceToneIndex:10,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Avante, servos de Jesus, por nosso Deus;',anchors:[{pos:1,chord:'Bb'},{pos:15,chord:'Eb'},{pos:20,chord:'Bb'},{pos:26,chord:'F'},{pos:36,chord:'Bb'}]},
+      {lyric:'Nas trevas brilhe vossa luz, a luz lá dos céus.',anchors:[{pos:5,chord:'Bb'},{pos:18,chord:'Eb'},{pos:25,chord:'Bb'},{pos:32,chord:'F'},{pos:42,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Glória a Deus, pois vencerei,',anchors:[{pos:9,chord:'Bb'}]},
+      {lyric:'Glória a Deus, pois vencerei,',anchors:[{pos:9,chord:'Eb'}]},
+      {lyric:'Triunfante sigo, levando a cruz!',anchors:[{pos:6,chord:'F'},{pos:19,chord:'Bb'}]},
+      {lyric:'Glória a Deus, pois vencerei,',anchors:[{pos:10,chord:'Bb'}]},
+      {lyric:'Glória a Deus, pois vencerei,',anchors:[{pos:10,chord:'Eb'}]},
+      {lyric:'Em nome de Jesus!',anchors:[{pos:4,chord:'F'},{pos:13,chord:'Bb'}]},
+      {lyric:'Levanta Josué pendão, com mui valor;',anchors:[{pos:2,chord:'Bb'},{pos:11,chord:'Eb'},{pos:18,chord:'Bb'},{pos:23,chord:'F'},{pos:32,chord:'Bb'}]},
+      {lyric:'E o inimigo foge, então, com grande pavor.',anchors:[{pos:3,chord:'Bb'},{pos:12,chord:'Eb'},{pos:20,chord:'Bb'},{pos:30,chord:'F'},{pos:38,chord:'Bb'}]},
+      {lyric:'Sai com trezentos Gideão, a combater;',anchors:[{pos:5,chord:'Bb'},{pos:18,chord:'Eb'},{pos:21,chord:'Bb'},{pos:25,chord:'F'},{pos:33,chord:'Bb'}]},
+      {lyric:'Os midianitas logo vão a guerra perder.',anchors:[{pos:3,chord:'Bb'},{pos:13,chord:'Eb'},{pos:19,chord:'Bb'},{pos:26,chord:'F'},{pos:35,chord:'Bb'}]},
+      {lyric:'Golias mui soberbo está, zomba de Deus.',anchors:[{pos:1,chord:'Bb'},{pos:13,chord:'Eb'},{pos:20,chord:'Bb'},{pos:25,chord:'F'},{pos:35,chord:'Bb'}]},
+      {lyric:'Mas vem Davi, e nele dá, com ajuda do céu.',anchors:[{pos:4,chord:'Bb'},{pos:16,chord:'Eb'},{pos:21,chord:'Bb'},{pos:30,chord:'F'},{pos:38,chord:'Bb'}]},
+      {lyric:'Cerrai fileiras, ó fiéis, sempre avançai;',anchors:[{pos:3,chord:'Bb'},{pos:16,chord:'Eb'},{pos:21,chord:'Bb'},{pos:27,chord:'F'},{pos:37,chord:'Bb'}]},
+      {lyric:'No céu coroas e lauréis, Jesus vai nos dar.',anchors:[{pos:3,chord:'Bb'},{pos:13,chord:'Eb'},{pos:19,chord:'Bb'},{pos:28,chord:'F'},{pos:39,chord:'Bb'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    299 — HÁ UM CANTO NOVO
 ========================= */
 
