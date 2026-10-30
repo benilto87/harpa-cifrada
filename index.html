@@ -726,6 +726,11 @@ button.active{
 
 }
 
+.sequence-builder{
+  max-height:65%;
+  min-height:220px;
+}
+
 /* =========================================================
    PLAQUINHA DE ROLAGEM — AJUSTE PARA CELULAR
    ========================================================= */
@@ -1051,6 +1056,166 @@ Título elegante das músicas de Louvor / INATIVO POR HORA
 } 
 */
 
+/* =========================
+   MONTAGEM DA SEQUÊNCIA
+========================= */
+
+.library-list{
+  flex:1 1 auto;
+  min-height:100px;
+}
+
+.sequence-builder[hidden]{
+  display:none !important;
+}
+
+.sequence-builder {
+  flex:0 1 65%;
+  max-height:65%;
+  min-height:240px;
+  overflow:auto;
+  padding:12px;
+  border-top:2px solid var(--line);
+  background:#f7f2eb;
+}
+
+.sequence-builder-title{
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:6px;
+}
+
+.sequence-builder-hint,
+.sequence-status{
+  font-size:.76rem;
+  color:var(--muted);
+  line-height:1.4;
+  margin-bottom:9px;
+}
+
+.sequence-item{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 65px auto;
+  gap:5px;
+  align-items:center;
+  padding:7px;
+  margin-bottom:5px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#fffdf9;
+}
+
+.sequence-item-name{
+  font-size:.78rem;
+  font-weight:700;
+  overflow-wrap:anywhere;
+}
+
+.sequence-tone{
+  width:65px;
+  padding:6px 3px;
+  font-size:.78rem;
+}
+
+.sequence-item-actions{
+  display:flex;
+  gap:3px;
+}
+
+.sequence-item-actions button{
+  min-width:27px;
+  min-height:29px;
+  padding:3px 5px;
+}
+
+.sequence-builder-actions{
+  display:flex;
+  gap:6px;
+  margin-top:9px;
+}
+
+.sequence-builder-actions button{
+  flex:1;
+  padding:8px 5px;
+  font-size:.74rem;
+}
+
+/* =========================
+   MÚSICAS DA SEQUÊNCIA
+========================= */
+
+.sequence-song{
+  margin-bottom:22px;
+}
+
+.sequence-song-heading{
+  background:#fffdf9;
+  border:1px solid var(--line);
+  border-left:4px solid var(--accent);
+  border-radius:8px;
+  padding:9px 11px;
+  margin:12px 7px 9px;
+  font:700 .88rem/1.4 Arial,sans-serif;
+}
+
+.sequence-song.section-markers-hidden .verse-title{
+  display:none;
+}
+
+/* Aparência das músicas de Louvor */
+.sequence-song.louvor-mode .stanza{
+  background:#fff;
+  border-radius:6px;
+  padding:6px 5px;
+  margin-bottom:10px;
+}
+
+.sequence-song.louvor-mode .aligned-line,
+.sequence-song.louvor-mode .lyrics-inline{
+  font-family:'Courier New',Courier,monospace;
+  font-style:normal;
+  font-weight:400;
+  letter-spacing:0;
+}
+
+.sequence-song.louvor-mode .chord-label,
+.sequence-song.louvor-mode .inline-chord,
+.sequence-song.louvor-mode .verse-title{
+  color:#ed7b18;
+}
+
+@media(max-width:760px){
+  .sequence-item{
+    grid-template-columns:minmax(0,1fr) 58px auto;
+  }
+
+  .sequence-tone{
+    width:58px;
+  }
+
+  .sequence-builder{
+    max-height:48%;
+  }
+
+  .sequence-song.louvor-mode .aligned-line{
+    font-size:calc(1.09rem*var(--font-scale));
+    line-height:1.20;
+    letter-spacing:-0.12em;
+  }
+
+  .sequence-song.louvor-mode .lyrics-inline{
+    font-size:calc(1.09rem*var(--font-scale));
+    line-height:1.22;
+    letter-spacing:-0.12em;
+  }
+}
+
+/* Os controles de tom individual não se aplicam à sequência */
+body.sequence-active #tonePanel,
+body.sequence-active .tone-pill{
+  display:none !important;
+}
+
 </style><span></span></label>
 <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
 
@@ -1192,6 +1357,7 @@ Título elegante das músicas de Louvor / INATIVO POR HORA
 <div class="toolbar" aria-label="Controles">
 
   <button class="action" id="openLibrary" title="Biblioteca">☰</button>
+  <button class="action" id="openSequence" title="Montar sequência de músicas">🎼</button>
 
   <div class="current-song" id="currentSongLabel">
     <strong>001 — Chuvas de Graça</strong>
@@ -1321,6 +1487,30 @@ Título elegante das músicas de Louvor / INATIVO POR HORA
 
 </div>
   <div class="library-list" id="libraryList"></div>
+  <div class="sequence-builder" id="sequenceBuilder" hidden>
+  <div class="sequence-builder-title">
+    🎼 MINHA SEQUÊNCIA
+  </div>
+
+  <div class="sequence-builder-hint">
+    Toque nas músicas da biblioteca para adicioná-las.
+    Depois escolha o tom e organize a ordem.
+  </div>
+
+  <div id="sequenceItems"></div>
+
+  <div id="sequenceStatus" class="sequence-status"></div>
+
+  <div class="sequence-builder-actions">
+    <button id="showSequenceBtn" class="active">
+      ▶ MOSTRAR SEQUÊNCIA
+    </button>
+
+    <button id="clearSequenceBtn">
+      LIMPAR
+    </button>
+  </div>
+</div>
 </aside>
 <main id="score" class="score"><div id="song"></div></main>
 <script src="js/musicas.js"></script>
@@ -2328,7 +2518,216 @@ document.addEventListener('keydown',e=>{
 window.addEventListener('resize',positionChordPopup,{passive:true});
 window.addEventListener('scroll',positionChordPopup,{passive:true,capture:true});
 
+
+function renderSequenceSong(song,entry,index){
+
+  const toneIndex = getSequenceToneIndex(entry,song);
+  const originalTone = Number(song.sourceToneIndex);
+
+  const sourceToneIndex =
+    Number.isInteger(originalTone) &&
+    originalTone >= 0 &&
+    originalTone < 12
+      ? originalTone
+      : 0;
+
+  const delta = toneIndex-sourceToneIndex;
+  const current = spellNote(chromatic[toneIndex].name);
+  const category = getSongCategory(song);
+
+  const block = document.createElement('section');
+  block.className = 'sequence-song';
+
+  if(category === 'Louvor'){
+    block.classList.add('louvor-mode');
+  }
+
+  if(sectionsHidden && category !== 'Louvor'){
+    block.classList.add('section-markers-hidden');
+  }
+
+  const heading = document.createElement('div');
+  heading.className = 'sequence-song-heading';
+  heading.textContent =
+    `${song.number} — ${song.title} | TOM ${current}`;
+
+  block.appendChild(heading);
+
+  const sectionsToRender = autoScrollMode
+    ? getAutoScrollSections(
+        song.sections,
+        song.skipChorusAfterLastVerse === true
+      )
+    : song.sections;
+
+  sectionsToRender.forEach(sectionData=>{
+
+    const section = document.createElement('section');
+
+    section.className = 'stanza' +
+      (isChorusOrRefrainSection(sectionData)
+        ? ' chorus-section'
+        : '');
+
+    const label = document.createElement('div');
+    label.className = 'verse-title';
+    label.textContent = String(sectionData.label || '')
+      .trim()
+      .replace(/^\[([\s\S]*?)\]$/,'$1')
+      .trim();
+
+    section.appendChild(label);
+
+    sectionData.lines.forEach(lineData=>{
+
+      const originalAnchors = (lineData.anchors || []).map(a=>{
+
+        const sourceChord = transposeChord(a.chord,delta);
+
+        return {
+          ...a,
+          sourceChord,
+          chord:progressionMode
+            ? chordToProgression(sourceChord,current)
+            : sourceChord
+        };
+      });
+
+      const split = splitMode
+        ? splitLineAtSlash(lineData.lyric,originalAnchors)
+        : null;
+
+      const parts = split
+        ? [
+            {
+              lyric:split.leftLyric,
+              anchors:split.leftAnchors
+            },
+            {
+              lyric:split.rightLyric,
+              anchors:split.rightAnchors
+            }
+          ]
+        : [
+            {
+              lyric:lineData.lyric,
+              anchors:originalAnchors
+            }
+          ];
+
+      parts.forEach(part=>{
+
+        const line = document.createElement('div');
+        line.className = 'music-line';
+
+        if(inlineMode){
+          const lr = document.createElement('div');
+          lr.className = 'lyrics-inline';
+          lr.appendChild(
+            renderInlineFromAnchors(
+              part.lyric,
+              part.anchors
+            )
+          );
+          line.appendChild(lr);
+        }else{
+          line.appendChild(
+            renderAlignedFromAnchors(
+              part.lyric,
+              part.anchors
+            )
+          );
+        }
+
+        section.appendChild(line);
+      });
+    });
+
+    block.appendChild(section);
+  });
+
+  return block;
+}
+
+function renderSequence(){
+
+  const score = document.getElementById('score');
+  const root = document.getElementById('song');
+
+  root.innerHTML = '';
+
+  score.classList.add('sequence-mode');
+  score.classList.remove(
+    'louvor-mode',
+    'section-markers-hidden'
+  );
+
+  document.body.classList.add('sequence-active');
+
+  document.getElementById('currentSongLabel').innerHTML =
+    `<strong>SEQUÊNCIA — ${musicSequence.length} MÚSICA(S)</strong>`;
+
+  document.getElementById('currentTone').textContent = '—';
+
+  musicSequence.forEach((entry,index)=>{
+
+    const song = songs.find(
+      s => String(s.id) === String(entry.id)
+    );
+
+    if(!song) return;
+
+    root.appendChild(
+      renderSequenceSong(song,entry,index)
+    );
+  });
+
+  score.classList.toggle(
+    'auto-scroll-mode',
+    autoScrollMode
+  );
+
+  document.body.classList.toggle(
+    'rolagem-ativa',
+    autoScrollMode
+  );
+
+  const sb = document.getElementById('toggleSections');
+  sb.classList.toggle('active',sectionsHidden);
+  sb.textContent = sectionsHidden ? '/' : '🎵';
+  sb.title = sectionsHidden
+    ? 'Mostrar marcações'
+    : 'Ocultar marcações';
+
+  document.getElementById('toggleProgression')
+    .classList.toggle('active',progressionMode);
+
+  document.getElementById('toggleInline')
+    .classList.toggle('active',inlineMode);
+
+  document.getElementById('toggleSplit')
+    .classList.toggle('active',splitMode);
+
+  document.getElementById('openSequence')
+    .classList.add('active');
+
+  updateAutoScrollPanel();
+}
+
+
 function render(){
+  if(sequenceMode){
+    renderSequence();
+    return;
+  }
+
+  document.body.classList.remove('sequence-active');
+
+  document.getElementById('score')
+    .classList.remove('sequence-mode');
+
+  document.getElementById('openSequence')
+    .classList.remove('active');
   const s=getCurrentSong(),delta=currentIndex-s.sourceToneIndex,current=spellNote(chromatic[currentIndex].name);
   document.getElementById('currentTone').textContent=current;
   document.getElementById('currentSongLabel').innerHTML=`<strong>${s.number} — ${s.title}</strong><label class="tone-memory-check" title="Memorizar o tom desta música"><input type="checkbox" id="toneMemory"><span>tom</span></label>`;
@@ -2532,6 +2931,173 @@ try{
 
 let favoritesOnly=false;
 let louvorOnly=false;
+// =========================
+// SEQUÊNCIA DE MÚSICAS
+// =========================
+
+let sequenceMode = false;
+let sequenceBuildMode = false;
+let musicSequence = [];
+
+try{
+  const savedSequence = JSON.parse(
+    safeGet('harpa_sequence_items','[]')
+  );
+
+  if(Array.isArray(savedSequence)){
+    musicSequence = savedSequence.filter(
+      item => item && item.id != null
+    );
+  }
+}catch{
+  musicSequence = [];
+}
+
+function saveMusicSequence(){
+  safeSet(
+    'harpa_sequence_items',
+    JSON.stringify(musicSequence)
+  );
+}
+
+function getSequenceToneIndex(entry,song){
+  const selectedTone = Number(entry.toneIndex);
+
+  if(
+    Number.isInteger(selectedTone) &&
+    selectedTone >= 0 &&
+    selectedTone < 12
+  ){
+    return selectedTone;
+  }
+
+  const savedTone = Number(getSongStartIndex(song.id));
+
+  if(
+    Number.isInteger(savedTone) &&
+    savedTone >= 0 &&
+    savedTone < 12
+  ){
+    return savedTone;
+  }
+
+  const originalTone = Number(song.sourceToneIndex);
+
+  return (
+    Number.isInteger(originalTone) &&
+    originalTone >= 0 &&
+    originalTone < 12
+  ) ? originalTone : 0;
+}
+
+function addSongToSequence(song){
+  const defaultTone = Number(getSongStartIndex(song.id));
+  const originalTone = Number(song.sourceToneIndex);
+
+  const toneIndex =
+    Number.isInteger(defaultTone) && defaultTone >= 0 && defaultTone < 12
+      ? defaultTone
+      : Number.isInteger(originalTone) && originalTone >= 0 && originalTone < 12
+        ? originalTone
+        : 0;
+
+  musicSequence.push({
+    id:String(song.id),
+    toneIndex
+  });
+
+  saveMusicSequence();
+  renderSequenceBuilder();
+}
+
+function renderSequenceBuilder(){
+  const panel = document.getElementById('sequenceBuilder');
+  const list = document.getElementById('sequenceItems');
+  const status = document.getElementById('sequenceStatus');
+
+  if(!panel || !list || !status) return;
+
+  panel.hidden = !sequenceBuildMode;
+
+  if(!sequenceBuildMode) return;
+
+  list.innerHTML = '';
+
+  musicSequence.forEach((entry,index)=>{
+    const song = songs.find(
+      s => String(s.id) === String(entry.id)
+    );
+
+    if(!song) return;
+
+    const row = document.createElement('div');
+    row.className = 'sequence-item';
+
+    const name = document.createElement('div');
+    name.className = 'sequence-item-name';
+    name.textContent =
+      `${index+1}. ${song.number} — ${song.title}`;
+
+    const tone = document.createElement('select');
+    tone.className = 'sequence-tone';
+
+    chromatic.forEach((note,noteIndex)=>{
+      const option = document.createElement('option');
+      option.value = String(noteIndex);
+      option.textContent = spellNote(note.name);
+      tone.appendChild(option);
+    });
+
+    tone.value = String(getSequenceToneIndex(entry,song));
+
+    tone.onchange = ()=>{
+      entry.toneIndex = Number(tone.value);
+      saveMusicSequence();
+    };
+
+    const actions = document.createElement('div');
+    actions.className = 'sequence-item-actions';
+
+    function makeButton(symbol,title,callback,disabled=false){
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = symbol;
+      button.title = title;
+      button.disabled = disabled;
+      button.onclick = callback;
+      return button;
+    }
+
+    actions.append(
+      makeButton('↑','Subir',()=>{
+        const item = musicSequence.splice(index,1)[0];
+        musicSequence.splice(index-1,0,item);
+        saveMusicSequence();
+        renderSequenceBuilder();
+      },index===0),
+
+      makeButton('↓','Descer',()=>{
+        const item = musicSequence.splice(index,1)[0];
+        musicSequence.splice(index+1,0,item);
+        saveMusicSequence();
+        renderSequenceBuilder();
+      },index===musicSequence.length-1),
+
+      makeButton('×','Remover',()=>{
+        musicSequence.splice(index,1);
+        saveMusicSequence();
+        renderSequenceBuilder();
+      })
+    );
+
+    row.append(name,tone,actions);
+    list.appendChild(row);
+  });
+
+  status.textContent = musicSequence.length
+    ? `${musicSequence.length} música(s) na sequência.`
+    : 'Nenhuma música adicionada ainda.';
+}
 
 // A partir do número 1000, a música é classificada como Louvor.
 function getSongCategory(song){
@@ -2593,8 +3159,9 @@ function resetAutoScrollForNewSong(){
 
 function renderLibrary(){
   const list=document.getElementById('libraryList');
+  
   const q=document.getElementById('librarySearch').value.trim().toLowerCase();
-
+  renderSequenceBuilder();
   const filtered=songs.filter(s=>{
     const category=getSongCategory(s);
     return (!q||`${s.number} ${s.title} ${category}`.toLowerCase().includes(q))
@@ -2637,8 +3204,21 @@ function renderLibrary(){
         `<span class="song-number">${s.number}</span>`+
         `<span class="song-name">${s.title}</span>`;
 
-      open.onclick=()=>{
-        resetAutoScrollForNewSong();
+open.onclick=()=>{
+
+  // Durante a montagem, o clique adiciona à sequência.
+  if(sequenceBuildMode){
+    addSongToSequence(s);
+    return;
+  }
+
+  // Fora da montagem, mantém a abertura normal.
+  sequenceMode = false;
+  document.body.classList.remove('sequence-active');
+  document.getElementById('score')
+    .classList.remove('sequence-mode');
+
+  resetAutoScrollForNewSong();
 		sectionsHidden = getSongCategory(s) !== 'Louvor';
         currentSongId=s.id;
         localStorage.setItem('harpa_current_song',currentSongId);
@@ -2974,6 +3554,78 @@ document.getElementById('toggleNotes').onclick=()=>{
 
 openLibraryBtn.onclick=openLibrary;
 closeLibraryBtn.onclick=closeLibrary;
+// Abre a montagem ou sai da visualização da sequência.
+document.getElementById('openSequence').onclick=()=>{
+
+  if(sequenceMode){
+    resetAutoScrollForNewSong();
+    sequenceMode = false;
+    document.body.classList.remove('sequence-active');
+    document.getElementById('score')
+      .classList.remove('sequence-mode');
+
+    render();
+    window.scrollTo(0,0);
+    return;
+  }
+
+  if(sequenceBuildMode){
+    sequenceBuildMode = false;
+    renderSequenceBuilder();
+    closeLibrary();
+    return;
+  }
+
+  resetAutoScrollForNewSong();
+
+  sequenceBuildMode = true;
+
+  // A montagem começa mostrando todas as músicas.
+  librarySearch.value = '';
+  favoritesOnly = false;
+  louvorOnly = false;
+
+  favoritesFilter.classList.remove('active');
+  louvorFilter.classList.remove('active');
+  allSongsFilter.classList.add('active');
+
+  renderLibrary();
+  openLibrary();
+};
+
+
+// Mostra todas as músicas empilhadas na tela.
+document.getElementById('showSequenceBtn').onclick=()=>{
+
+  const validSongs = musicSequence.filter(entry=>
+    songs.some(s=>String(s.id)===String(entry.id))
+  );
+
+  if(!validSongs.length){
+    alert('Adicione pelo menos uma música à sequência.');
+    return;
+  }
+
+  musicSequence = validSongs;
+  saveMusicSequence();
+
+  sequenceBuildMode = false;
+  sequenceMode = true;
+
+  closeLibrary();
+  render();
+
+  window.scrollTo(0,0);
+};
+
+
+// Limpa a sequência montada.
+document.getElementById('clearSequenceBtn').onclick=()=>{
+
+  musicSequence = [];
+  saveMusicSequence();
+  renderSequenceBuilder();
+};
 libraryBackdrop.onclick=closeLibrary;
 librarySearch.oninput=renderLibrary;
 
