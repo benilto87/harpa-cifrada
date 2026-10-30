@@ -4547,6 +4547,409 @@ const songs=[
 },
 
 /* =========================
+   302 — NÃO MURMURES: CANTA
+========================= */
+
+{
+  id:'302',
+  number:'302',
+  title:'NÃO MURMURES: CANTA',
+  category:'Harpa Cristã',
+  sourceToneIndex:3,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'No mundo murmura-se tanto,',anchors:[{pos:4,chord:'Eb'},{pos:20,chord:'Fm'}]},
+      {lyric:'Entre os que cristãos dizem ser;',anchors:[{pos:3,chord:'Bb'},{pos:28,chord:'Eb'}]},
+      {lyric:'Em vez de louvores há pranto,',anchors:[{pos:3,chord:'Eb'},{pos:22,chord:'Fm'}]},
+      {lyric:'Fraqueza em lugar de poder.',anchors:[{pos:4,chord:'Bb'},{pos:23,chord:'Eb'}]},
+      {lyric:'Murmuram - assim no deserto,',anchors:[{pos:3,chord:'Cm'},{pos:23,chord:'G'}]},
+      {lyric:'Em Mara, Israel murmurou;',anchors:[{pos:3,chord:'Fm'},{pos:22,chord:'G'}]},
+      {lyric:'Oh! Não vêem que Deus está perto;',anchors:[{pos:5,chord:'Eb'},{pos:27,chord:'Fm'}]},
+      {lyric:'Jamais Seu auxílio negou.',anchors:[{pos:2,chord:'Bb'},{pos:21,chord:'Eb'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Em vez de murmurares, canta',anchors:[{pos:3,chord:'Ab'},{pos:23,chord:'Eb'}]},
+      {lyric:'Um hino de louvor a Deus;',anchors:[{pos:2,chord:'Bb'},{pos:21,chord:'Eb'}]},
+      {lyric:'Jesus quer te dar vida santa,',anchors:[{pos:2,chord:'Ab'},{pos:23,chord:'Eb'}]},
+      {lyric:'Qual noiva levar-te p\'ra os céus.',anchors:[{pos:5,chord:'Bb'},{pos:28,chord:'Eb'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Tu vives, irmão, murmurando,',anchors:[{pos:2,chord:'Eb'},{pos:22,chord:'Fm'}]},
+      {lyric:'Tal como um escravo do mal;',anchors:[{pos:4,chord:'Bb'},{pos:23,chord:'Eb'}]},
+      {lyric:'Se Deus a tua fé \'stá provando,',anchors:[{pos:4,chord:'Eb'},{pos:25,chord:'Fm'}]},
+      {lyric:'Tu não tens razão para tal.',anchors:[{pos:3,chord:'Bb'},{pos:23,chord:'Eb'}]},
+      {lyric:'Deus castiga aquele a quem ama,',anchors:[{pos:5,chord:'Cm'},{pos:27,chord:'G'}]},
+      {lyric:'De ti, também não se esqueceu;',anchors:[{pos:1,chord:'Fm'},{pos:27,chord:'G'}]},
+      {lyric:'Qual pai amoroso te chama,',anchors:[{pos:5,chord:'Eb'},{pos:20,chord:'Fm'}]},
+      {lyric:'E cuida, sim, do que é Seu.',anchors:[{pos:2,chord:'Bb'},{pos:23,chord:'Eb'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'E mesmo se as ondas rugirem,',anchors:[{pos:3,chord:'Eb'},{pos:22,chord:'Fm'}]},
+      {lyric:'No revolto e bravio mar,',anchors:[{pos:3,chord:'Bb'},{pos:21,chord:'Eb'}]},
+      {lyric:'Os céus poderás ver se abrirem,',anchors:[{pos:3,chord:'Eb'},{pos:24,chord:'Fm'}]},
+      {lyric:'Se um hino tua alma cantar,',anchors:[{pos:6,chord:'Bb'},{pos:23,chord:'Eb'}]},
+      {lyric:'Não temas ciladas, nem morte,',anchors:[{pos:3,chord:'Cm'},{pos:24,chord:'G'}]},
+      {lyric:'P\'ra cima tu deves olhar;',anchors:[{pos:4,chord:'Fm'},{pos:21,chord:'G'}]},
+      {lyric:'O leme segura bem forte,',anchors:[{pos:2,chord:'Eb'},{pos:18,chord:'Fm'}]},
+      {lyric:'Até do céu a luz raiar.',anchors:[{pos:1,chord:'Bb'},{pos:20,chord:'Eb'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Se um hino cantar tu puderes,',anchors:[{pos:2,chord:'Eb'},{pos:23,chord:'Fm'}]},
+      {lyric:'Nas horas de grande aflição,',anchors:[{pos:3,chord:'Bb'},{pos:25,chord:'Eb'}]},
+      {lyric:'Então voarás, se quiseres,',anchors:[{pos:2,chord:'Eb'},{pos:20,chord:'Fm'}]},
+      {lyric:'Até a celeste mansão;',anchors:[{pos:1,chord:'Bb'},{pos:18,chord:'Eb'}]},
+      {lyric:'Nas asas da águia levado,',anchors:[{pos:2,chord:'Cm'},{pos:21,chord:'G'}]},
+      {lyric:'Bem perto do mar de cristal',anchors:[{pos:4,chord:'Fm'},{pos:24,chord:'G'}]},
+      {lyric:'E por fim então libertado,',anchors:[{pos:2,chord:'Eb'},{pos:21,chord:'Fm'}]},
+      {lyric:'À terra, chegar, celestial.',anchors:[{pos:2,chord:'Bb'},{pos:24,chord:'Eb'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   303 — PRECISAMOS DE JESUS
+========================= */
+
+{
+  id:'303',
+  number:'303',
+  title:'PRECISAMOS DE JESUS',
+  category:'Harpa Cristã',
+  sourceToneIndex:7,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Quando o sol brilhar em qualquer lugar,',anchors:[{pos:10,chord:'G'}]},
+      {lyric:'Tu precisas de Jesus;',anchors:[{pos:1,chord:'G'},{pos:12,chord:'Em'},{pos:18,chord:'D'}]},
+      {lyric:'Quando escurecer, tudo fenecer, / Tu precisas de Jesus!',anchors:[{pos:10,chord:'G'},{pos:35,chord:'G'},{pos:47,chord:'D'},{pos:52,chord:'G'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Eu preciso de Jesus,',anchors:[{pos:1,chord:'G'},{pos:17,chord:'D'}]},
+      {lyric:'Tu precisas de Jesus;',anchors:[{pos:1,chord:'D'},{pos:18,chord:'G'}]},
+      {lyric:'Pecador, vem para a luz',anchors:[{pos:1,chord:'G'}]},
+      {lyric:'Que resplandece na cruz;',anchors:[{pos:8,chord:'C'}]},
+      {lyric:'Tu precisas de Jesus!',anchors:[{pos:0,chord:'G'},{pos:12,chord:'D'},{pos:18,chord:'G'}]},
+      ]
+      },
+      {
+      label:'2ª estrofe',
+      lines:[
+	  {lyric:'P\'ra obter perdão, plena salvação, / Tu precisas de Jesus;',anchors:[{pos:8,chord:'G'},{pos:38,chord:'G'},{pos:49,chord:'Em'},{pos:55,chord:'D'}]},
+      {lyric:'Para caminhar firme, sem errar; / Tu precisas de Jesus!',anchors:[{pos:5,chord:'G'},{pos:35,chord:'G'},{pos:46,chord:'D'},{pos:52,chord:'G'}]},
+      ]
+      },
+      {
+      label:'3ª estrofe',
+      lines:[
+	  {lyric:'Mesmo havendo paz, calma mui veraz, ',anchors:[{pos:9,chord:'G'}]},
+      {lyric:'Tu precisas de Jesus;',anchors:[{pos:0,chord:'G'},{pos:12,chord:'Em'},{pos:18,chord:'D'}]},
+      {lyric:'Na perseguição, na tribulação, / Tu precisas de Jesus!',anchors:[{pos:7,chord:'G'},{pos:34,chord:'G'},{pos:45,chord:'D'},{pos:51,chord:'G'}]},
+      ]
+      },
+      {
+      label:'4ª estrofe',
+      lines:[      
+	  {lyric:'Quando a morte entrar em teu próprio lar,',anchors:[{pos:10,chord:'G'}]},
+      {lyric:'Tu precisas de Jesus;',anchors:[{pos:1,chord:'G'},{pos:12,chord:'Em'},{pos:18,chord:'D'}]},
+      {lyric:'Ante o tribunal, decisão final, / Tu precisas de Jesus!',anchors:[{pos:8,chord:'G'},{pos:35,chord:'G'},{pos:46,chord:'D'},{pos:52,chord:'G'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   305 — CAMPEÕES DA LUZ
+========================= */
+
+{
+  id:'305',
+  number:'305',
+  title:'CAMPEÕES DA LUZ',
+  category:'Harpa Cristã',
+  sourceToneIndex:7,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Soldados somos de Jesus / E campeões do bem, da luz;',anchors:[{pos:10,chord:'G'},{pos:33,chord:'G'},{pos:49,chord:'D'}]},
+      {lyric:'Nos exércitos de Deus, / Batalhamos pelos céus,',anchors:[{pos:6,chord:'D'},{pos:30,chord:'D'},{pos:43,chord:'G'}]},
+      {lyric:'Cantando, vamos combater, / O vil pecado e seu poder;',anchors:[{pos:10,chord:'G'},{pos:37,chord:'G'},{pos:50,chord:'C'}]},
+      {lyric:'A batalha ganha está; / A vitória Deus nos dá.',anchors:[{pos:4,chord:'C'},{pos:18,chord:'G'},{pos:29,chord:'C'},{pos:35,chord:'D'},{pos:44,chord:'G'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Breve vamos terminar a batalha aqui,',anchors:[{pos:1,chord:'G'},{pos:33,chord:'D'}]},
+      {lyric:'E p’ra sempre descansar com Jesus ali;',anchors:[{pos:0,chord:'D'},{pos:35,chord:'G'}]},
+      {lyric:'Todos os que são fiéis ao bom Capitão,',anchors:[{pos:1,chord:'G'},{pos:35,chord:'C'}]},
+      {lyric:'Hão de receber lauréis como galardão.',anchors:[{pos:1,chord:'C'},{pos:12,chord:'G'},{pos:24,chord:'D'},{pos:34,chord:'G'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Levai o escudo, sim, da fé, / Pois a peleja dura é,',anchors:[{pos:11,chord:'G'},{pos:39,chord:'G'},{pos:48,chord:'D'}]},
+      {lyric:'Mas promessa temos nós / De jamais lutarmos sós.',anchors:[{pos:8,chord:'D'},{pos:31,chord:'D'},{pos:45,chord:'G'}]},
+      {lyric:'As flechas do mal não temer, / Mas combater até vencer,',anchors:[{pos:11,chord:'G'},{pos:41,chord:'G'},{pos:52,chord:'C'}]},
+      {lyric:'Olham os campeões p’ros céus, / A vitória vem de Deus.',anchors:[{pos:10,chord:'C'},{pos:25,chord:'G'},{pos:37,chord:'C'},{pos:43,chord:'D'},{pos:50,chord:'G'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Se alguém cansado se encontrar, / Sem forças para pelejar,',anchors:[{pos:13,chord:'G'},{pos:45,chord:'G'},{pos:55,chord:'D'}]},
+      {lyric:'O Senhor quer te ajudar / A vitória alcançar;',anchors:[{pos:5,chord:'D'},{pos:31,chord:'D'},{pos:42,chord:'G'}]},
+      {lyric:'O mal vencendo avançai, / E hinos a Jesus cantai,',anchors:[{pos:9,chord:'G'},{pos:33,chord:'G'},{pos:46,chord:'C'}]},
+      {lyric:'E da salvação falai; / Almas ao Senhor levai.',anchors:[{pos:5,chord:'C'},{pos:17,chord:'G'},{pos:29,chord:'C'},{pos:35,chord:'D'},{pos:42,chord:'G'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   306 — A PALAVRA DE DEUS É UM TESOURO
+========================= */
+
+{
+  id:'306',
+  number:'306',
+  title:'A PALAVRA DE DEUS É UM TESOURO',
+  category:'Harpa Cristã',
+  sourceToneIndex:10,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'A Palavra de Deus é para mim,',anchors:[{pos:0,chord:'Bb'},{pos:25,chord:'Cm'}]},
+      {lyric:'Um tesouro sem igual em valor!',anchors:[{pos:1,chord:'F'},{pos:26,chord:'Bb'}]},
+      {lyric:'Fala do amor de Deus, do amor que não tem fim;',anchors:[{pos:0,chord:'Bb'},{pos:9,chord:'Cm'},{pos:23,chord:'F'},{pos:35,chord:'Bb'}]},
+      {lyric:'Mais precioso do que ouro é este amor!',anchors:[{pos:1,chord:'Bb'},{pos:26,chord:'F'},{pos:35,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'A Palavra de Deus é doce, mais que o mel,',anchors:[{pos:0,chord:'Bb'},{pos:37,chord:'Cm'}]},
+      {lyric:'O que a toma pela fé há de ser fiel,',anchors:[{pos:0,chord:'F'},{pos:32,chord:'Bb'}]},
+      {lyric:'Porque Deus nos concedeu o Emanuel,',anchors:[{pos:1,chord:'Bb'},{pos:31,chord:'Eb'}]},
+      {lyric:'Rocha viva donde mana leite e mel.',anchors:[{pos:0,chord:'Eb'},{pos:11,chord:'Bb'},{pos:23,chord:'F'},{pos:30,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Luz que guia pela senda da paz,',anchors:[{pos:1,chord:'Bb'},{pos:27,chord:'Cm'}]},
+      {lyric:'E alumia os que em trevas estão;',anchors:[{pos:0,chord:'F'},{pos:29,chord:'Bb'}]},
+      {lyric:'Lâmpada que nos faz ver os ardis de Satanás,',anchors:[{pos:1,chord:'Bb'},{pos:12,chord:'Cm'},{pos:24,chord:'F'},{pos:36,chord:'Bb'}]},
+      {lyric:'E que brilha mesmo na escuridão.',anchors:[{pos:0,chord:'Bb'},{pos:24,chord:'F'},{pos:29,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'É um farol que sempre resplandeceu,',anchors:[{pos:0,chord:'Bb'},{pos:31,chord:'Cm'}]},
+      {lyric:'E que mostra o porto da salvação;',anchors:[{pos:0,chord:'F'},{pos:29,chord:'Bb'}]},
+      {lyric:'Quem na arca já entrou e do mundo se esqueceu,',anchors:[{pos:1,chord:'Bb'},{pos:11,chord:'Cm'},{pos:22,chord:'F'},{pos:35,chord:'Bb'}]},
+      {lyric:'Chegará por certo à eternal mansão.',anchors:[{pos:1,chord:'Bb'},{pos:24,chord:'F'},{pos:31,chord:'Bb'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   310 — AVANTE EU VOU
+========================= */
+
+{
+  id:'310',
+  number:'310',
+  title:'AVANTE EU VOU',
+  category:'Harpa Cristã',
+  sourceToneIndex:9,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Jesus é o Redentor, que veio nos salvar,',anchors:[{pos:3,chord:'A'}]},
+      {lyric:'Do mundo de horror, das ondas deste mar;',anchors:[{pos:4,chord:'D'},{pos:16,chord:'A'},{pos:24,chord:'E'}]},
+      {lyric:'A todo o que crer vitória lhe dará,',anchors:[{pos:2,chord:'A'}]},
+      {lyric:'Também real poder, que gozo lhe trará.',anchors:[{pos:4,chord:'D'},{pos:15,chord:'A'},{pos:23,chord:'E'},{pos:36,chord:'A'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Avante eu vou, avante eu vou,',anchors:[{pos:11,chord:'E'},{pos:26,chord:'A'}]},
+      {lyric:'Para entrar no céu, na divinal mansão;',anchors:[{pos:8,chord:'A'},{pos:35,chord:'E'}]},
+      {lyric:'Tenho gozo mui profundo; Jesus no coração,',anchors:[{pos:7,chord:'A'},{pos:28,chord:'D'},{pos:39,chord:'A'}]},
+      {lyric:'Não olhando para o mundo, avante eu vou.',anchors:[{pos:6,chord:'A'},{pos:20,chord:'E'},{pos:37,chord:'A'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Jesus meu Salvador, ao céu me levará,',anchors:[{pos:3,chord:'A'}]},
+      {lyric:'E do destruidor, o corpo esmagará;',anchors:[{pos:2,chord:'D'},{pos:13,chord:'A'},{pos:20,chord:'E'}]},
+      {lyric:'Ao caro Redentor, fiel aqui serei,',anchors:[{pos:4,chord:'A'}]},
+      {lyric:'A Ele, com fervor, somente seguirei.',anchors:[{pos:2,chord:'D'},{pos:15,chord:'A'},{pos:22,chord:'E'},{pos:33,chord:'A'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Trombeta soará do nosso Criador;',anchors:[{pos:4,chord:'A'}]},
+      {lyric:'A grei se elevará dos santos do Senhor;',anchors:[{pos:4,chord:'D'},{pos:16,chord:'A'},{pos:23,chord:'E'}]},
+      {lyric:'Em glória e poder Jesus regressará,',anchors:[{pos:4,chord:'A'}]},
+      {lyric:'Seus servos hão de O ver, pois breve voltará.',anchors:[{pos:6,chord:'D'},{pos:22,chord:'A'},{pos:32,chord:'E'},{pos:42,chord:'A'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Eis que virá Jesus, a fim de me levar,',anchors:[{pos:5,chord:'A'}]},
+      {lyric:'A desfrutar em luz, o Seu amor sem par;',anchors:[{pos:3,chord:'D'},{pos:16,chord:'A'},{pos:23,chord:'E'}]},
+      {lyric:'Abraão, Isaque e Jó ali no céu verei,',anchors:[{pos:4,chord:'A'}]},
+      {lyric:'Ao lado de Jacó, com eles cearei.',anchors:[{pos:4,chord:'D'},{pos:13,chord:'A'},{pos:21,chord:'E'},{pos:30,chord:'A'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   334 — O FIM VEM, CUIDADO!
+========================= */
+
+{
+  id:'334',
+  number:'334',
+  title:'O FIM VEM, CUIDADO!',
+  category:'Harpa Cristã',
+  sourceToneIndex:5,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'O fim de todas coisas vem, não tarda, cuidado!',anchors:[{pos:3,chord:'F'},{pos:32,chord:'C'},{pos:42,chord:'F'}]},
+      {lyric:'Não queiras hoje recusar a graça do Salvador;',anchors:[{pos:5,chord:'F'},{pos:28,chord:'C'},{pos:42,chord:'F'}]},
+      {lyric:'Procura bem depressa, ficar abrigado,',anchors:[{pos:4,chord:'C'},{pos:16,chord:'F'},{pos:25,chord:'C'},{pos:33,chord:'F'}]},
+      {lyric:'No sangue do Cordeiro, no sangue remidor.',anchors:[{pos:4,chord:'F'},{pos:27,chord:'C'},{pos:38,chord:'F'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Que sangue precioso, saiu de meu Jesus!',anchors:[{pos:5,chord:'F'},{pos:7,chord:'Gm'},{pos:15,chord:'C'},{pos:18,chord:'F'},{pos:23,chord:'C'},{pos:36,chord:'F'}]},
+      {lyric:'Que sangue glorioso, vertido foi, na cruz!',anchors:[{pos:5,chord:'F'},{pos:16,chord:'C'},{pos:18,chord:'F'},{pos:23,chord:'Gm'},{pos:34,chord:'C'},{pos:39,chord:'F'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'O fundamento do cristão é a rocha eleita,',anchors:[{pos:3,chord:'F'},{pos:29,chord:'C'},{pos:36,chord:'F'}]},
+      {lyric:'Por isso pode resistir os ventos da tentação.',anchors:[{pos:4,chord:'F'},{pos:27,chord:'C'},{pos:42,chord:'F'}]},
+      {lyric:'A todo o que sincero, a Cristo aceita,',anchors:[{pos:3,chord:'C'},{pos:16,chord:'F'},{pos:25,chord:'C'},{pos:33,chord:'F'}]},
+      {lyric:'O sangue do Cordeiro garante salvação.',anchors:[{pos:3,chord:'F'},{pos:24,chord:'C'},{pos:35,chord:'F'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Quem pois ouvir, há de viver com Cristo na glória,',anchors:[{pos:6,chord:'F'},{pos:34,chord:'C'},{pos:45,chord:'F'}]},
+      {lyric:'Quem não ouvir há de morrer, tormentos padecerá,',anchors:[{pos:6,chord:'F'},{pos:33,chord:'C'},{pos:45,chord:'F'}]},
+      {lyric:'Pois quem deseja sobre o mal a vitória,',anchors:[{pos:6,chord:'C'},{pos:18,chord:'F'},{pos:26,chord:'C'},{pos:34,chord:'F'}]},
+      {lyric:'No sangue do Cordeiro poder encontrará.',anchors:[{pos:4,chord:'F'},{pos:25,chord:'C'},{pos:36,chord:'F'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   340 — UM POVO FORTE
+========================= */
+
+{
+  id:'340',
+  number:'340',
+  title:'UM POVO FORTE',
+  category:'Harpa Cristã',
+  sourceToneIndex:10,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Eis que surge um povo forte, / Revestido de poder;',anchors:[{pos:9,chord:'Bb'},{pos:35,chord:'Bb'},{pos:41,chord:'Eb'},{pos:46,chord:'Bb'}]},
+      {lyric:'E não teme nem a morte, / Quem a ele pertencer;',anchors:[{pos:6,chord:'Bb'},{pos:33,chord:'F'}]},
+      {lyric:'E terá sublime sorte, / Pois com Cristo ao céu vai,',anchors:[{pos:3,chord:'Bb'},{pos:34,chord:'Bb'},{pos:40,chord:'Eb'},{pos:47,chord:'Bb'}]},
+      {lyric:'Podes tu dizer também. / "Sou um dos tais"?',anchors:[{pos:6,chord:'Bb'},{pos:19,chord:'F'},{pos:37,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Um dos tais. Um dos tais.',anchors:[{pos:7,chord:'Bb'}]},
+      {lyric:'Podes tu também dizer: "Sou um dos tais"?',anchors:[{pos:5,chord:'Bb'},{pos:18,chord:'Gm'},{pos:28,chord:'C'},{pos:36,chord:'F'}]},
+      {lyric:'Um dos tais, um dos tais.',anchors:[{pos:7,chord:'Bb'}]},
+      {lyric:'Podes tu também dizer: "Sou um dos tais"?',anchors:[{pos:6,chord:'F'},{pos:35,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'No Cenáculo reunidos, / O poder buscavam então,',anchors:[{pos:5,chord:'Bb'},{pos:28,chord:'Bb'},{pos:35,chord:'Eb'},{pos:43,chord:'Bb'}]},
+      {lyric:'Pelo amor de Deus unidos / A clamar em oração;',anchors:[{pos:6,chord:'Bb'},{pos:33,chord:'F'}]},
+      {lyric:'Eis que um vento é descido / E o fogo do céu cai;',anchors:[{pos:11,chord:'Bb'},{pos:33,chord:'Bb'},{pos:38,chord:'Eb'},{pos:45,chord:'Bb'}]},
+      {lyric:'Podes tu dizer também: / "Sou um dos tais"?',anchors:[{pos:6,chord:'Bb'},{pos:19,chord:'F'},{pos:37,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Este povo destemido, / (São os discípulos de Jesus)',anchors:[{pos:5,chord:'Bb'},{pos:34,chord:'Bb'},{pos:42,chord:'Eb'},{pos:47,chord:'Bb'}]},
+      {lyric:'Pelo mundo perseguido, / Por levar a sua cruz,',anchors:[{pos:6,chord:'Bb'},{pos:32,chord:'F'}]},
+      {lyric:'E agora revestido / Com poder ao mundo sai;',anchors:[{pos:2,chord:'Bb'},{pos:26,chord:'Bb'},{pos:33,chord:'Eb'},{pos:39,chord:'Bb'}]},
+      {lyric:'Podes tu dizer também: / "Sou um dos tais"?',anchors:[{pos:6,chord:'Bb'},{pos:19,chord:'F'},{pos:37,chord:'Bb'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Ó não sejas descuidado / P\'ra buscar o dom de Deus,',anchors:[{pos:5,chord:'Bb'},{pos:33,chord:'Bb'},{pos:40,chord:'Eb'},{pos:47,chord:'Bb'}]},
+      {lyric:'Dom que te fará ditoso, / Dar-te-á visões do céu.',anchors:[{pos:7,chord:'Bb'},{pos:33,chord:'F'}]},
+      {lyric:'E Jesus maravilhoso / Proclamando aos outros vais,',anchors:[{pos:4,chord:'Bb'},{pos:28,chord:'Bb'},{pos:38,chord:'Eb'},{pos:45,chord:'Bb'}]},
+      {lyric:'Poderás então dizer: / "Sou um dos tais".',anchors:[{pos:4,chord:'Bb'},{pos:17,chord:'F'},{pos:36,chord:'Bb'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    350 — A HISTÓRIA DA CRUZ
 ========================= */
 
@@ -4659,54 +5062,54 @@ const songs=[
     {
       label:'1ª Parte',
       lines:[
-      {lyric:'Bem mais que as forças,   poder e reis',anchors:[{pos:18,chord:'C'},{pos:23,chord:'D'},{pos:35,chord:'G'}]},
-      {lyric:'Que a natureza e tudo que se fez',anchors:[{pos:11,chord:'C'},{pos:18,chord:'D'},{pos:30,chord:'G'}]},
-      {lyric:'Bem mais que tudo, criado por tuas mã______os',anchors:[{pos:5,chord:'D/F#'},{pos:14,chord:'Em'},{pos:22,chord:'D'},{pos:36,chord:'C'},{pos:39,chord:'G/B'}]},
-      {lyric:'Deus, tu és início, meio e fim',anchors:[{pos:1,chord:'Am'},{pos:14,chord:'Em/G'},{pos:26,chord:'D/F#'},{pos:30,chord:'G'}]},
-      {lyric:'Bem mais que os mares,   bem mais que o sol',anchors:[{pos:5,chord:'G/B'},{pos:17,chord:'C'},{pos:22,chord:'D'},{pos:41,chord:'G'}]},
-      {lyric:'E as maravilhas que o mundo conheceu',anchors:[{pos:2,chord:'G/B'},{pos:10,chord:'C'},{pos:23,chord:'D'},{pos:34,chord:'G'}]},
-      {lyric:'As riquezas, tesouros dessa terra',anchors:[{pos:0,chord:'D/F#'},{pos:7,chord:'Em'},{pos:16,chord:'D'},{pos:28,chord:'C'},{pos:32,chord:'G/B'}]},
-      {lyric:'Incomparável és pra mim',anchors:[{pos:0,chord:'Am'},{pos:8,chord:'Em/G'},{pos:20,chord:'F#m7'},{pos:23,chord:'B7'}]}
+      {lyric:'Bem mais que as forças,   poder e reis',anchors:[{pos:18,chord:'C'},{pos:27,chord:'D'},{pos:34,chord:'G'}]},
+      {lyric:'Que a natureza e tudo que se fez',anchors:[{pos:12,chord:'C'},{pos:18,chord:'D'},{pos:30,chord:'G'}]},
+      {lyric:'Bem mais que tudo, criado por tuas mã______os',anchors:[{pos:10,chord:'Em'},{pos:22,chord:'D'},{pos:32,chord:'C'},{pos:44,chord:'G'}]},
+      {lyric:'Deus, tu és início, meio e fim',anchors:[{pos:2,chord:'Am'},{pos:26,chord:'D'}]},
+      {lyric:'Bem mais que os mares,   bem mais que o sol',anchors:[{pos:18,chord:'C'},{pos:30,chord:'D'},{pos:41,chord:'G'}]},
+      {lyric:'E as maravilhas que o mundo conheceu',anchors:[{pos:10,chord:'C'},{pos:24,chord:'D'},{pos:34,chord:'G'}]},
+      {lyric:'As riquezas, tesouros dessa terra',anchors:[{pos:6,chord:'Em'},{pos:16,chord:'D'},{pos:28,chord:'C'},{pos:32,chord:'G'}]},
+      {lyric:'Incomparável és pra mim',anchors:[{pos:1,chord:'Am'},{pos:20,chord:'D'}]}
     ]
     },
     {
       label:'Refrão',
       lines:[
-      {lyric:'Por amor, sua vida entregou',anchors:[{pos:1,chord:'G'},{pos:6,chord:'Am'},{pos:15,chord:'D/F#'},{pos:25,chord:'G'}]},
-      {lyric:'    Meu senhor humilhado foi',anchors:[{pos:0,chord:'C/G'},{pos:5,chord:'G'},{pos:12,chord:'Am'},{pos:16,chord:'D/F#'},{pos:26,chord:'G'}]},
-      {lyric:'Como a flor machucada no jardim',anchors:[{pos:1,chord:'D/F#'},{pos:9,chord:'Em'},{pos:18,chord:'D'},{pos:29,chord:'C'},{pos:31,chord:'G/B'}]},
-      {lyric:'Morreu por mim,     pensou em mim',anchors:[{pos:12,chord:'Am'},{pos:15,chord:'G/B'},{pos:31,chord:'C'}]},
+      {lyric:'Por amor, sua vida entregou',anchors:[{pos:0,chord:'G'},{pos:5,chord:'Am'},{pos:15,chord:'D'},{pos:25,chord:'G'}]},
+      {lyric:'    Meu senhor humilhado foi',anchors:[{pos:0,chord:'C'},{pos:4,chord:'G'},{pos:9,chord:'Am'},{pos:20,chord:'D'},{pos:26,chord:'G'}]},
+      {lyric:'Como a flor machucada no jardim',anchors:[{pos:8,chord:'Em'},{pos:17,chord:'D'},{pos:23,chord:'C'},{pos:29,chord:'G'}]},
+      {lyric:'Morreu por mim,     pensou em mim',anchors:[{pos:12,chord:'Am'},{pos:17,chord:'G'},{pos:31,chord:'C'}]},
       {lyric:'  Me amou',anchors:[{pos:0,chord:'D'},{pos:7,chord:'G'}]}
     ]
     },
     {
       label:'2ª Parte',
       lines:[
-      {lyric:'Bem mais que as forças,   poder e reis',anchors:[{pos:17,chord:'C'},{pos:23,chord:'D'},{pos:35,chord:'G'}]},
-      {lyric:'Que a natureza e tudo que se fez',anchors:[{pos:11,chord:'C'},{pos:18,chord:'D'},{pos:30,chord:'G'}]},
-      {lyric:'Bem mais que tudo, criado por tuas mã______os',anchors:[{pos:5,chord:'D/F#'},{pos:14,chord:'Em'},{pos:22,chord:'D'},{pos:36,chord:'C'},{pos:39,chord:'G/B'}]},
-      {lyric:'Deus, tu és início, meio e fim',anchors:[{pos:1,chord:'Am'},{pos:14,chord:'Em/G'},{pos:26,chord:'D/F#'},{pos:30,chord:'G'}]},
-      {lyric:'Bem mais que os mares,   bem mais que o sol',anchors:[{pos:5,chord:'G/B'},{pos:17,chord:'C'},{pos:22,chord:'D'},{pos:41,chord:'G'}]},
-      {lyric:'E as maravilhas que o mundo conheceu',anchors:[{pos:1,chord:'G/B'},{pos:10,chord:'C'},{pos:23,chord:'D'},{pos:34,chord:'G'}]},
-      {lyric:'As riquezas, tesouros dessa terra',anchors:[{pos:0,chord:'D/F#'},{pos:7,chord:'Em'},{pos:16,chord:'D'},{pos:28,chord:'C'},{pos:32,chord:'G/B'}]},
-      {lyric:'Incomparável és pra mim',anchors:[{pos:0,chord:'Am'},{pos:8,chord:'Em'},{pos:20,chord:'F#m7'},{pos:23,chord:'B7'}]}
+      {lyric:'Bem mais que as forças,   poder e reis',anchors:[{pos:18,chord:'C'},{pos:28,chord:'D'},{pos:34,chord:'G'}]},
+      {lyric:'Que a natureza e tudo que se fez',anchors:[{pos:12,chord:'C'},{pos:18,chord:'D'},{pos:30,chord:'G'}]},
+      {lyric:'Bem mais que tudo, criado por tuas mã______os',anchors:[{pos:10,chord:'Em'},{pos:22,chord:'D'},{pos:32,chord:'C'},{pos:44,chord:'G'}]},
+      {lyric:'Deus, tu és início, meio e fim',anchors:[{pos:2,chord:'Am'},{pos:26,chord:'D'}]},
+      {lyric:'Bem mais que os mares,   bem mais que o sol',anchors:[{pos:18,chord:'C'},{pos:30,chord:'D'},{pos:41,chord:'G'}]},
+      {lyric:'E as maravilhas que o mundo conheceu',anchors:[{pos:10,chord:'C'},{pos:24,chord:'D'},{pos:34,chord:'G'}]},
+      {lyric:'As riquezas, tesouros dessa terra',anchors:[{pos:6,chord:'Em'},{pos:16,chord:'D'},{pos:28,chord:'C'},{pos:32,chord:'G'}]},
+      {lyric:'Incomparável és pra mim',anchors:[{pos:1,chord:'Am'},{pos:20,chord:'D'}]}
     ]
     },
     {
       label:'Refrão',
       lines:[
-      {lyric:'Por amor, sua vida entregou',anchors:[{pos:1,chord:'G'},{pos:6,chord:'Am'},{pos:15,chord:'D/F#'},{pos:25,chord:'G'}]},
-      {lyric:'    Meu senhor humilhado foi',anchors:[{pos:0,chord:'C/G'},{pos:5,chord:'G'},{pos:12,chord:'Am'},{pos:16,chord:'D/F#'},{pos:26,chord:'G'}]},
-      {lyric:'Como a flor machucada no jardim',anchors:[{pos:1,chord:'D/F#'},{pos:9,chord:'Em'},{pos:18,chord:'D'},{pos:28,chord:'C'},{pos:31,chord:'G/B'}]},
-      {lyric:'Morreu por mim,     pensou em mim',anchors:[{pos:12,chord:'Am'},{pos:16,chord:'G/B'},{pos:31,chord:'C'}]},
+      {lyric:'Por amor, sua vida entregou',anchors:[{pos:0,chord:'G'},{pos:5,chord:'Am'},{pos:15,chord:'D'},{pos:25,chord:'G'}]},
+      {lyric:'   Meu senhor humilhado foi',anchors:[{pos:0,chord:'C'},{pos:3,chord:'G'},{pos:8,chord:'Am'},{pos:17,chord:'D'},{pos:25,chord:'G'}]},
+      {lyric:'Como a flor machucada no jardim',anchors:[{pos:8,chord:'Em'},{pos:17,chord:'D'},{pos:23,chord:'C'},{pos:29,chord:'G'}]},
+      {lyric:'Morreu por mim,     pensou em mim',anchors:[{pos:12,chord:'Am'},{pos:17,chord:'G'},{pos:31,chord:'C'}]},
       {lyric:'  Me amou',anchors:[{pos:0,chord:'D'},{pos:7,chord:'G'},{pos:9,chord:'Am'}]},
-      {lyric:'Por amor, sua vida entregou',anchors:[{pos:1,chord:'G'},{pos:6,chord:'Am'},{pos:15,chord:'D/F#'},{pos:25,chord:'G'}]},
-      {lyric:'    Meu senhor humilhado foi',anchors:[{pos:0,chord:'C/G'},{pos:5,chord:'G'},{pos:12,chord:'Am'},{pos:16,chord:'D/F#'},{pos:26,chord:'G'}]},
-      {lyric:'Como a flor machucada no jardim',anchors:[{pos:1,chord:'D/F#'},{pos:8,chord:'Em'},{pos:18,chord:'D'},{pos:28,chord:'C'},{pos:31,chord:'G/B'}]},
-      {lyric:'Morreu por mim,     pensou em mim',anchors:[{pos:12,chord:'Am'},{pos:15,chord:'G/B'},{pos:31,chord:'C'},{pos:33,chord:'D'}]},
-      {lyric:'Como a flor machucada no jardim',anchors:[{pos:1,chord:'D/F#'},{pos:9,chord:'Em'},{pos:18,chord:'D'},{pos:28,chord:'C'},{pos:31,chord:'G/B'}]},
-      {lyric:'Morreu por mim,     pensou em mim',anchors:[{pos:12,chord:'Am'},{pos:15,chord:'G/B'},{pos:31,chord:'C'},{pos:33,chord:'D'}]},
-      {lyric:'Me amou', anchors:[]}
+      {lyric:'Por amor, sua vida entregou',anchors:[{pos:0,chord:'G'},{pos:5,chord:'Am'},{pos:15,chord:'D'},{pos:25,chord:'G'}]},
+      {lyric:'    Meu senhor humilhado foi',anchors:[{pos:0,chord:'C'},{pos:4,chord:'G'},{pos:9,chord:'Am'},{pos:18,chord:'D'},{pos:26,chord:'G'}]},
+      {lyric:'Como a flor machucada no jardim',anchors:[{pos:8,chord:'Em'},{pos:17,chord:'D'},{pos:23,chord:'C'},{pos:29,chord:'G'}]},
+      {lyric:'Morreu por mim,     pensou em mim',anchors:[{pos:9,chord:'Am'},{pos:16,chord:'G'},{pos:31,chord:'C'},{pos:33,chord:'D'}]},
+      {lyric:'Como a flor machucada no jardim',anchors:[{pos:8,chord:'Em'},{pos:17,chord:'D'},{pos:27,chord:'C'},{pos:31,chord:'G'}]},
+      {lyric:'Morreu por mim,     pensou em mim',anchors:[{pos:9,chord:'Am'},{pos:15,chord:'G'},{pos:31,chord:'C'},{pos:33,chord:'D'}]},
+      {lyric:'Me amou',anchors:[]}
     ]
     }
   ]

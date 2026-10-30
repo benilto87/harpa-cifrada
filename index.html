@@ -1027,7 +1027,8 @@ body.rolagem-ativa header.topbar.topbar-fade-rolagem {
 }
 
 
-/* Título elegante das músicas de Louvor */
+/* 
+Título elegante das músicas de Louvor / INATIVO POR HORA
 .score.louvor-mode .louvor-song-title {
   background: #ffffff;
   color: #704323;
@@ -1047,7 +1048,8 @@ body.rolagem-ativa header.topbar.topbar-fade-rolagem {
   text-transform: none;
   overflow-wrap: anywhere;
   box-shadow: 0 2px 5px rgba(80, 48, 20, .06);
-}
+} 
+*/
 
 </style><span></span></label>
 <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
@@ -2345,12 +2347,12 @@ if (String(s.category || '').trim().toLowerCase() === 'louvor') {
     getSongCategory(s)==='Louvor'
   );
 
-  if (getSongCategory(s) === 'Louvor') {
+  /*if (getSongCategory(s) === 'Louvor') {
     const tituloLouvor = document.createElement('div');
     tituloLouvor.className = 'louvor-song-title';
     tituloLouvor.textContent = s.title;
     root.appendChild(tituloLouvor);
-  }
+  }*/
   const sectionsToRender = autoScrollMode
   ? getAutoScrollSections(
       s.sections,
