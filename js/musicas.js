@@ -5813,6 +5813,66 @@ const songs=[
 },
 
 /* =========================
+   515 — SE CRISTO COMIGO VAI
+========================= */
+
+{
+  id:'515',
+  number:'515',
+  title:'SE CRISTO COMIGO VAI',
+  category:'Harpa Cristã',
+  sourceToneIndex:0,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Se, pelos vales, eu peregrino ou andar,',anchors:[{pos:5,chord:'C'},{pos:25,chord:'F'},{pos:36,chord:'C'}]},
+      {lyric:'Ou na luz gloriosa de Cristo habitar,',anchors:[{pos:4,chord:'C'},{pos:23,chord:'D'},{pos:34,chord:'G'}]},
+      {lyric:'Irei com meu Senhor p’ra onde Ele for.',anchors:[{pos:1,chord:'G'},{pos:25,chord:'C'}]},
+      {lyric:'Confiando na graça de meu Salvador.',anchors:[{pos:5,chord:'F'},{pos:14,chord:'C'},{pos:23,chord:'G'},{pos:32,chord:'C'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Se Cristo comigo vai, eu irei',anchors:[{pos:4,chord:'C'},{pos:26,chord:'G'}]},
+      {lyric:'E não temerei, com gozo irei; comigo vai;',anchors:[{pos:3,chord:'G'},{pos:38,chord:'C'}]},
+      {lyric:'É grato servir a Jesus, levar a cruz;',anchors:[{pos:3,chord:'C'},{pos:33,chord:'F'}]},
+      {lyric:'Se Cristo comigo vai, eu irei.',anchors:[{pos:4,chord:'F'},{pos:18,chord:'C'},{pos:22,chord:'G'},{pos:27,chord:'C'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Se lá para o deserto Jesus me quer mandar;',anchors:[{pos:3,chord:'C'},{pos:24,chord:'F'},{pos:39,chord:'C'}]},
+      {lyric:'Levando boas novas de salvação sem par;',anchors:[{pos:3,chord:'C'},{pos:23,chord:'D'},{pos:36,chord:'G'}]},
+      {lyric:'Eu lidarei, então, com paz no coração.',anchors:[{pos:3,chord:'G'},{pos:24,chord:'C'}]},
+      {lyric:'A Cristo seguindo, sem mais dilação.',anchors:[{pos:3,chord:'F'},{pos:13,chord:'C'},{pos:24,chord:'G'},{pos:33,chord:'C'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Será a minha sorte a dura cruz levar,',anchors:[{pos:3,chord:'C'},{pos:22,chord:'F'},{pos:34,chord:'C'}]},
+      {lyric:'Sua graça e Seu poder, quero sempre aqui contar.',anchors:[{pos:5,chord:'C'},{pos:30,chord:'D'},{pos:45,chord:'G'}]},
+      {lyric:'Contente com Jesus, levando a minha cruz.',anchors:[{pos:3,chord:'G'},{pos:23,chord:'C'}]},
+      {lyric:'Eu falo de Cristo que é minha luz.',anchors:[{pos:4,chord:'F'},{pos:12,chord:'C'},{pos:22,chord:'G'},{pos:31,chord:'C'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Ao Salvador Jesus eu desejo obedecer,',anchors:[{pos:4,chord:'C'},{pos:24,chord:'F'},{pos:34,chord:'C'}]},
+      {lyric:'Pois na Sua Palavra encontro o meu saber;',anchors:[{pos:5,chord:'C'},{pos:23,chord:'D'},{pos:38,chord:'G'}]},
+      {lyric:'Fiel a Deus serei, o mundo vencerei,',anchors:[{pos:2,chord:'G'},{pos:22,chord:'C'}]},
+      {lyric:'Jesus vai comigo, não mais temerei.',anchors:[{pos:3,chord:'F'},{pos:13,chord:'C'},{pos:23,chord:'G'},{pos:32,chord:'C'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    545 — PORQUE ELE VIVE
 ========================= */
 
