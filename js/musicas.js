@@ -7498,9 +7498,9 @@ const songs=[
       label:'1ª estrofe',
       lines:[
       {lyric:'Graças dou por esta vida: / pelo bem que revelou.',anchors:[{pos:7,chord:'Bb'},{pos:21,chord:'F'},{pos:45,chord:'Bb'}]},
-      {lyric:'Graças dou pelo futuro, e por tudo que passou.',anchors:[{pos:7,chord:'Bb'},{pos:18,chord:'Eb'},{pos:31,chord:'F'},{pos:42,chord:'Bb'}]},
-      {lyric:'Pelas bênçãos derramadas, pela dor, pela aflição,',anchors:[{pos:7,chord:'Eb'},{pos:19,chord:'Bb'},{pos:46,chord:'F'}]},
-      {lyric:'Pela graça revelada! - graças dou pelo perdão.',anchors:[{pos:5,chord:'Bb'},{pos:14,chord:'Eb'},{pos:31,chord:'F'},{pos:43,chord:'Bb'}]}
+      {lyric:'Graças dou pelo futuro, / e por tudo que passou.',anchors:[{pos:8,chord:'Bb'},{pos:18,chord:'Eb'},{pos:33,chord:'F'},{pos:44,chord:'Bb'}]},
+      {lyric:'Pelas bênçãos derramadas, / pela dor, pela aflição,',anchors:[{pos:7,chord:'Eb'},{pos:19,chord:'Bb'},{pos:48,chord:'F'}]},
+      {lyric:'Pela graça revelada! / graças dou pelo perdão.',anchors:[{pos:5,chord:'Bb'},{pos:14,chord:'Eb'},{pos:31,chord:'F'},{pos:43,chord:'Bb'}]}
     ]
     },
     {
@@ -7510,16 +7510,16 @@ const songs=[
       {lyric:'por nuvens que há também,',anchors:[{pos:21,chord:'Bb'}]},
       {lyric:'Pelas rosas do caminho,',anchors:[{pos:6,chord:'Bb'},{pos:17,chord:'Eb'}]},
       {lyric:'por espinhos que elas têm,',anchors:[{pos:7,chord:'F'},{pos:22,chord:'Bb'}]},
-      {lyric:'Pela escuridão da noite, pela estrela que brilhou,',anchors:[{pos:7,chord:'Eb'},{pos:18,chord:'Bb'},{pos:47,chord:'F'}]},
-      {lyric:'Pela prece respondida, pelo sonho que falhou.',anchors:[{pos:6,chord:'Bb'},{pos:17,chord:'Eb'},{pos:29,chord:'F'},{pos:41,chord:'Bb'}]}
+      {lyric:'Pela escuridão da noite, / pela estrela que brilhou,',anchors:[{pos:7,chord:'Eb'},{pos:18,chord:'Bb'},{pos:49,chord:'F'}]},
+      {lyric:'Pela prece respondida, / pelo sonho que falhou.',anchors:[{pos:5,chord:'Bb'},{pos:17,chord:'Eb'},{pos:31,chord:'F'},{pos:44,chord:'Bb'}]}
     ]
     },
     {
       label:'3ª estrofe',
       lines:[
-      {lyric:'Pela cruz e o sofrimento e por toda provação,',anchors:[{pos:6,chord:'Bb'},{pos:20,chord:'F'},{pos:42,chord:'Bb'}]},
-      {lyric:'Pelo amor que é sem medida, pela paz no coração,',anchors:[{pos:7,chord:'Bb'},{pos:22,chord:'Eb'},{pos:34,chord:'F'},{pos:44,chord:'Bb'}]},
-      {lyric:'Pela lágrima vertida, pelo alívio que é sem par.',anchors:[{pos:5,chord:'Eb'},{pos:16,chord:'Bb'},{pos:45,chord:'F'}]},
+      {lyric:'Pela cruz e o sofrimento / e por toda provação,',anchors:[{pos:6,chord:'Bb'},{pos:20,chord:'F'},{pos:44,chord:'Bb'}]},
+      {lyric:'Pelo amor que é sem medida, / pela paz no coração,',anchors:[{pos:7,chord:'Bb'},{pos:22,chord:'Eb'},{pos:36,chord:'F'},{pos:46,chord:'Bb'}]},
+      {lyric:'Pela lágrima vertida, / pelo alívio que é sem par.',anchors:[{pos:5,chord:'Eb'},{pos:16,chord:'Bb'},{pos:47,chord:'F'}]},
       {lyric:'Pelo dom da eterna vida,',anchors:[{pos:5,chord:'Bb'},{pos:19,chord:'Eb'}]},
       {lyric:'sempre graças hei de dar!',anchors:[{pos:8,chord:'F'},{pos:21,chord:'Bb'}]}
     ]
@@ -7700,6 +7700,343 @@ const songs=[
       {lyric:'E por ela se apaixonou de uma forma especial ',anchors:[{pos:6,chord:'Em'},{pos:18,chord:'F'},{pos:30,chord:'G'},{pos:42,chord:'C'},{pos:45,chord:'C7'}]},
       {lyric:'Colocou sobre ela a Sua mão',anchors:[{pos:0,chord:'F'},{pos:15,chord:'G/F'},{pos:27,chord:'Em'}]},
       {lyric:'Derramando a Sua unção, liberando o Seu poder',anchors:[{pos:5,chord:'Am7'},{pos:17,chord:'Dm'},{pos:27,chord:'G'},{pos:42,chord:'C'},{pos:45,chord:'C7'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   1003 — DESCANSAREI
+========================= */
+
+{
+  id:'1003',
+  number:'1003',
+  title:'DESCANSAREI',
+  category:'Louvor',
+  sourceToneIndex:2,
+
+  sections:[
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'Cobre-me com Tuas mãos',anchors:[{pos:1,chord:'D'},{pos:7,chord:'Bm7'},{pos:14,chord:'G'},{pos:19,chord:'A'}]},
+      {lyric:'Com poder vem me esconder Senhor',anchors:[{pos:1,chord:'D'},{pos:7,chord:'G'},{pos:17,chord:'Em'},{pos:30,chord:'A'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Se o trovão e o mar se erguendo vem',anchors:[{pos:1,chord:'D'},{pos:17,chord:'G'},{pos:27,chord:'A'},{pos:33,chord:'D'}]},
+      {lyric:'Sobre a tempestade eu voarei',anchors:[{pos:1,chord:'D'},{pos:15,chord:'G'},{pos:23,chord:'A'},{pos:26,chord:'Bm7'}]},
+      {lyric:'Sobre as águas Tú também és Rei',anchors:[{pos:1,chord:'D'},{pos:16,chord:'G'},{pos:22,chord:'A'},{pos:29,chord:'D'}]},
+      {lyric:'Descansarei, pois sei que és Deus',anchors:[{pos:1,chord:'A'},{pos:9,chord:'G'},{pos:19,chord:'A'},{pos:30,chord:'G'}]}
+    ]
+    },
+    {
+      label:'2ª Parte',
+      lines:[
+      {lyric:'Minh’alma está segura em Ti',anchors:[{pos:5,chord:'D'},{pos:13,chord:'Bm7'},{pos:18,chord:'G'},{pos:26,chord:'A'}]},
+      {lyric:'Sabe bem que em Cristo firme está',anchors:[{pos:1,chord:'D'},{pos:6,chord:'G'},{pos:18,chord:'Em'},{pos:32,chord:'A'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Se o trovão e o mar se erguendo vem',anchors:[{pos:1,chord:'D'},{pos:17,chord:'G'},{pos:27,chord:'A'},{pos:33,chord:'D'}]},
+      {lyric:'Sobre a tempestade eu voarei',anchors:[{pos:9,chord:'D'},{pos:15,chord:'G'},{pos:23,chord:'A'},{pos:26,chord:'Bm7'}]},
+      {lyric:'Sobre as águas Tú também és Rei',anchors:[{pos:9,chord:'D'},{pos:16,chord:'G'},{pos:22,chord:'A'},{pos:29,chord:'D'}]},
+      {lyric:'Descansarei, pois sei que és Deus',anchors:[{pos:1,chord:'A'},{pos:9,chord:'G'},{pos:19,chord:'A'},{pos:30,chord:'D'}]},
+      {lyric:'Se o trovão e o mar se erguendo vem',anchors:[{pos:9,chord:'D'},{pos:17,chord:'G'},{pos:27,chord:'A'},{pos:33,chord:'D'}]},
+      {lyric:'Sobre a tempestade eu voarei',anchors:[{pos:9,chord:'D'},{pos:15,chord:'G'},{pos:23,chord:'A'},{pos:26,chord:'Bm7'}]},
+      {lyric:'Sobre as águas Tú também és Rei',anchors:[{pos:9,chord:'D'},{pos:16,chord:'G'},{pos:22,chord:'A'},{pos:29,chord:'D'}]},
+      {lyric:'Descansarei, pois sei que és Deus',anchors:[{pos:1,chord:'A'},{pos:9,chord:'G'},{pos:19,chord:'A'},{pos:30,chord:'G'},{pos:33,chord:'Bm'}]}
+    ]
+    },
+    {
+      label:'3ª Parte',
+      lines:[
+      {lyric:'Minh’alma está segura em Ti',anchors:[{pos:5,chord:'D'},{pos:13,chord:'Bm7'},{pos:18,chord:'G'},{pos:26,chord:'A'}]},
+      {lyric:'Sabe bem que em Cristo firme está',anchors:[{pos:1,chord:'D'},{pos:6,chord:'G'},{pos:18,chord:'Em'},{pos:32,chord:'A'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Se o trovão e o mar se erguendo vem',anchors:[{pos:1,chord:'D'},{pos:17,chord:'G'},{pos:27,chord:'A'},{pos:33,chord:'D'}]},
+      {lyric:'Sobre a tempestade eu voarei',anchors:[{pos:9,chord:'D'},{pos:15,chord:'G'},{pos:23,chord:'A'},{pos:26,chord:'Bm7'}]},
+      {lyric:'Sobre as águas Tú também és Rei',anchors:[{pos:1,chord:'D'},{pos:16,chord:'G'},{pos:22,chord:'A'},{pos:29,chord:'D'}]},
+      {lyric:'Descansarei, pois sei que és Deus',anchors:[{pos:1,chord:'A'},{pos:9,chord:'G'},{pos:19,chord:'A'},{pos:30,chord:'D'}]},
+      {lyric:'Se o trovão e o mar se erguendo vem',anchors:[{pos:9,chord:'D'},{pos:17,chord:'G'},{pos:27,chord:'A'},{pos:33,chord:'D'}]},
+      {lyric:'Sobre a tempestade eu voarei',anchors:[{pos:9,chord:'D'},{pos:15,chord:'G'},{pos:23,chord:'A'},{pos:26,chord:'Bm7'}]},
+      {lyric:'Sobre as águas Tú também és Rei',anchors:[{pos:9,chord:'D'},{pos:16,chord:'G'},{pos:22,chord:'A'},{pos:29,chord:'D'}]},
+      {lyric:'Descansarei, pois sei que és Deus',anchors:[{pos:1,chord:'A'},{pos:9,chord:'G'},{pos:19,chord:'A'},{pos:30,chord:'D'}]},
+      {lyric:'Se o trovão e o mar se erguendo vem',anchors:[{pos:9,chord:'D'},{pos:17,chord:'G'},{pos:27,chord:'A'},{pos:33,chord:'D'}]},
+      {lyric:'Sobre a tempestade eu voarei',anchors:[{pos:9,chord:'D'},{pos:15,chord:'G'},{pos:23,chord:'A'},{pos:26,chord:'Bm7'}]},
+      {lyric:'Sobre as águas Tú também és Rei',anchors:[{pos:9,chord:'D'},{pos:16,chord:'G'},{pos:22,chord:'A'},{pos:29,chord:'D'}]},
+      {lyric:'Descansarei, pois sei que és Deus',anchors:[{pos:1,chord:'A'},{pos:9,chord:'G'},{pos:19,chord:'A'},{pos:31,chord:'D'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   1004 — NÃO HÁ DEUS MAIOR
+========================= */
+
+{
+  id:'1004',
+  number:'1004',
+  title:'NÃO HÁ DEUS MAIOR',
+  category:'Louvor',
+  sourceToneIndex:4,
+
+  sections:[
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'  Não há Deus maior  /   Não há Deus melhor',anchors:[{pos:0,chord:'E'},{pos:17,chord:'F#'},{pos:22,chord:'B'},{pos:41,chord:'E'}]},
+      {lyric:'   Não há Deus tão grande  /   Como nosso Deus ',anchors:[{pos:0,chord:'C#m'},{pos:22,chord:'F#m'},{pos:28,chord:'B'},{pos:43,chord:'E'},{pos:47,chord:'A'}]},
+      {lyric:'  Não há Deus maior  /   Não há Deus melhor',anchors:[{pos:0,chord:'E'},{pos:17,chord:'F#'},{pos:22,chord:'B'},{pos:41,chord:'E'}]},
+      {lyric:'   Não há Deus tão grande  /   Como nosso Deus ',anchors:[{pos:0,chord:'C#m'},{pos:22,chord:'F#m'},{pos:28,chord:'B'},{pos:43,chord:'E'},{pos:47,chord:'A'}]}
+    ]
+    },
+    {
+      label:'2ª Parte',
+      lines:[
+      {lyric:'   Criou os céus, criou a terra',anchors:[{pos:0,chord:'G#'},{pos:27,chord:'C#m'}]},
+      {lyric:'   Criou o sol e as estrelas',anchors:[{pos:0,chord:'G#'},{pos:24,chord:'C#m'}]},
+      {lyric:'Tudo Ele fez / Tudo criou / Tudo formou',anchors:[{pos:1,chord:'F#m'},{pos:11,chord:'B'},{pos:16,chord:'F#m'},{pos:24,chord:'B'},{pos:29,chord:'F#m'},{pos:38,chord:'B'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'  Para o seu louvor /   Para o seu louvor',anchors:[{pos:0,chord:'A'},{pos:10,chord:'B'},{pos:17,chord:'E'},{pos:22,chord:'A'},{pos:32,chord:'B'},{pos:39,chord:'E'}]},
+      {lyric:'  Para o seu,         para o seu',anchors:[{pos:0,chord:'A'},{pos:10,chord:'B'},{pos:15,chord:'G#m'},{pos:30,chord:'C#'}]},
+      {lyric:'   Para o seu louvor         ',anchors:[{pos:0,chord:'F#m'},{pos:12,chord:'B'},{pos:19,chord:'E'},{pos:23,chord:'A'},{pos:28,chord:'E'}]}
+    ]
+    },
+    {
+      label:'3ª Parte',
+      lines:[
+      {lyric:'  Não há Deus maior  /  Não há Deus melhor',anchors:[{pos:0,chord:'E'},{pos:17,chord:'F#'},{pos:22,chord:'B'},{pos:40,chord:'E'}]},
+      {lyric:'   Não há Deus tão grande  /   Como nosso Deus ',anchors:[{pos:0,chord:'C#m'},{pos:22,chord:'F#m'},{pos:28,chord:'B'},{pos:43,chord:'E'}]}
+    ]
+    },
+    {
+      label:'4ª Parte',
+      lines:[
+      {lyric:'   Criou os céus, criou a terra',anchors:[{pos:0,chord:'G#'},{pos:27,chord:'C#m'}]},
+      {lyric:'   Criou o sol e as estrelas',anchors:[{pos:0,chord:'G#'},{pos:24,chord:'C#m'}]},
+      {lyric:'Tudo Ele fez / Tudo criou / Tudo formou',anchors:[{pos:1,chord:'F#m'},{pos:11,chord:'B'},{pos:16,chord:'F#m'},{pos:24,chord:'B'},{pos:29,chord:'F#m'},{pos:38,chord:'B'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'  Para o seu louvor  /    Para o seu louvor',anchors:[{pos:0,chord:'A'},{pos:10,chord:'B'},{pos:17,chord:'E'},{pos:23,chord:'A'},{pos:34,chord:'B'},{pos:41,chord:'E'}]},
+      {lyric:'  Para o seu,         para o seu',anchors:[{pos:0,chord:'A'},{pos:10,chord:'B'},{pos:15,chord:'G#m'},{pos:30,chord:'C#'}]},
+      {lyric:'   Para o seu louvor',anchors:[{pos:0,chord:'F#m'},{pos:12,chord:'B'},{pos:19,chord:'E'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   1005 — ROMPENDO EM FÉ
+========================= */
+
+{
+  id:'1005',
+  number:'1005',
+  title:'ROMPENDO EM FÉ',
+  category:'Louvor',
+  sourceToneIndex:7,
+
+  sections:[
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'Cada vez que a minha fé é provada',anchors:[{pos:6,chord:'G'},{pos:29,chord:'C'}]},
+      {lyric:'Tu me dás a chance de crescer um / Pouco mais  ',anchors:[{pos:7,chord:'Am'},{pos:35,chord:'G'},{pos:46,chord:'G'}]},
+      {lyric:'As montanhas e vales desertos e mares',anchors:[{pos:6,chord:'Em7'},{pos:23,chord:'Bm7'}]},
+      {lyric:'Que atravesso me levam pra perto De ti',anchors:[{pos:8,chord:'C'},{pos:19,chord:'Am7'},{pos:29,chord:'D'}]},
+      {lyric:'Minhas provações não são maiores / Que meu DEUS',anchors:[{pos:7,chord:'G'},{pos:39,chord:'C'}]},
+      {lyric:'E não vão me impedir de caminhar',anchors:[{pos:6,chord:'Am7'},{pos:28,chord:'G'}]},
+      {lyric:'Se diante de mim não se / Abrir o Mar',anchors:[{pos:5,chord:'Am7'},{pos:13,chord:'D'},{pos:26,chord:'Bm'},{pos:34,chord:'Em7'}]},
+      {lyric:'Deus vai me fazer andar por sobre / As águas',anchors:[{pos:9,chord:'Am'},{pos:19,chord:'C'},{pos:29,chord:'D'},{pos:39,chord:'G'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Rompendo em fé',anchors:[{pos:0,chord:'C'},{pos:12,chord:'G'}]},
+      {lyric:'Minha vida se revestirá do teu poder',anchors:[{pos:6,chord:'G'},{pos:15,chord:'Am'},{pos:31,chord:'Em7'}]},
+      {lyric:'Rompendo em fé / Com ousadia vou mover',anchors:[{pos:0,chord:'C'},{pos:10,chord:'G'},{pos:13,chord:'C'},{pos:24,chord:'C'},{pos:35,chord:'Am'}]},
+      {lyric:'No sobrenatural / Vou lutar e vencer',anchors:[{pos:8,chord:'Em7'},{pos:24,chord:'C'},{pos:34,chord:'Am'}]},
+      {lyric:'Vou plantar e colher ',anchors:[{pos:8,chord:'C'},{pos:17,chord:'Em7'}]},
+      {lyric:'A cada dia vou viver / Rompendo em fé',anchors:[{pos:7,chord:'C'},{pos:12,chord:'D'},{pos:19,chord:'C'},{pos:36,chord:'G'}]},
+      {lyric:'A cada dia vou viver / Rompendo em fé',anchors:[{pos:7,chord:'Am7'},{pos:17,chord:'Em'},{pos:28,chord:'D'},{pos:37,chord:'G'}]},
+      {lyric:'A cada dia vou viver / Rompendo em fé',anchors:[{pos:8,chord:'Am7'},{pos:17,chord:'Em'},{pos:27,chord:'D'},{pos:37,chord:'G'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   1006 — BOM É ESTARMOS AQUI - CORINHOS EVANGÉLICOS
+========================= */
+
+{
+  id:'1006',
+  number:'1006',
+  title:'BOM É ESTARMOS AQUI - Corinhos Evangélicos',
+  category:'Louvor',
+  sourceToneIndex:4,
+
+  sections:[
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'Bom estarmos aqui louvando a  Deus',anchors:[{pos:1,chord:'C'},{pos:13,chord:'Dm'},{pos:28,chord:'Em'},{pos:33,chord:'Dm'}]},
+      {lyric:'E podendo exaltar seu santo nome',anchors:[{pos:5,chord:'C'},{pos:14,chord:'Dm'},{pos:28,chord:'Em'},{pos:32,chord:'Dm'}]},
+      {lyric:'Bom estarmos aqui louvando a  Deus',anchors:[{pos:1,chord:'C'},{pos:13,chord:'Dm'},{pos:28,chord:'Em'},{pos:33,chord:'Dm'}]},
+      {lyric:'E podendo exaltar seu santo nome        ',anchors:[{pos:5,chord:'C'},{pos:14,chord:'Dm'},{pos:28,chord:'Em'},{pos:38,chord:'C'},{pos:32,chord:'Gm'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Tempo para isso',anchors:[{pos:1,chord:'F'},{pos:12,chord:'G'}]},
+      {lyric:'Tempo para louvarmos a Deus',anchors:[{pos:0,chord:'Em'},{pos:13,chord:'Am'}]},
+      {lyric:'Num só amor, num só espírito',anchors:[{pos:0,chord:'Dm'},{pos:8,chord:'G'},{pos:22,chord:'C'},{pos:28,chord:'G'}]}
+    ]
+    },
+    {
+      label:'2ª Parte',
+      lines:[
+      {lyric:'Deus venha nos abençoar',anchors:[{pos:1,chord:'C'},{pos:21,chord:'Dm'}]},
+      {lyric:'E que essa união',anchors:[{pos:14,chord:'G'}]},
+      {lyric:'Nunca falte para nós   ',anchors:[{pos:1,chord:'F'},{pos:18,chord:'C'},{pos:23,chord:'G'}]},
+      {lyric:'Deus venha nos abençoar',anchors:[{pos:0,chord:'C'},{pos:21,chord:'Dm'}]},
+      {lyric:'E que essa união',anchors:[{pos:14,chord:'G'}]},
+      {lyric:'Nunca falte para nós     ',anchors:[{pos:1,chord:'F'},{pos:13,chord:'G'},{pos:18,chord:'C'},{pos:23,chord:'G'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   1007 — OCEANOS - ANA NÓBREGA
+========================= */
+
+{
+  id:'1007',
+  number:'1007',
+  title:'OCEANOS - Ana Nóbrega',
+  category:'Louvor',
+  sourceToneIndex:1,
+
+  sections:[
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'   Tua voz me chama sobre as águas',anchors:[{pos:0,chord:'C#m'},{pos:22,chord:'B'},{pos:30,chord:'E'}]},
+      {lyric:'Onde os meus pés podem falhar',anchors:[{pos:9,chord:'B'},{pos:24,chord:'A'}]},
+      {lyric:'   E ali te encontro no mistério',anchors:[{pos:0,chord:'C#m'},{pos:23,chord:'B'},{pos:29,chord:'E'}]},
+      {lyric:'Em meio ao mar, confiarei',anchors:[{pos:8,chord:'B'},{pos:21,chord:'A'}]}
+    ]
+    },
+    {
+      label:'2ª Parte',
+      lines:[
+      {lyric:'  Ao teu nome clamarei /   E além das ondas olharei',anchors:[{pos:0,chord:'A'},{pos:10,chord:'E'},{pos:18,chord:'B'},{pos:25,chord:'A'},{pos:38,chord:'E'},{pos:47,chord:'B'}]},
+      {lyric:'Se o mar crescer / Somente em Ti descansarei',anchors:[{pos:14,chord:'A'},{pos:31,chord:'E'},{pos:40,chord:'B'}]},
+      {lyric:'Pois eu sou teu e Tu  és meu',anchors:[{pos:13,chord:'A'},{pos:19,chord:'B'},{pos:22,chord:'C#m'}]}
+    ]
+    },
+    {
+      label:'3ª Parte',
+      lines:[
+      {lyric:'   Tua graça cobre os meus temores',anchors:[{pos:0,chord:'C#m'},{pos:24,chord:'B'},{pos:31,chord:'E'}]},
+      {lyric:'Tua forte mão me guiará',anchors:[{pos:8,chord:'B'},{pos:20,chord:'A'}]},
+      {lyric:'   Se estou cercado pelo medo',anchors:[{pos:0,chord:'C#m'},{pos:22,chord:'B'},{pos:27,chord:'E'}]},
+      {lyric:'Tu és fiel, nunca vais falhar',anchors:[{pos:7,chord:'B'},{pos:24,chord:'A'}]}
+    ]
+    },
+    {
+      label:'4ª Parte',
+      lines:[
+      {lyric:'  Ao teu nome clamarei /   E além das ondas olharei',anchors:[{pos:0,chord:'A'},{pos:10,chord:'E'},{pos:18,chord:'B'},{pos:25,chord:'A'},{pos:38,chord:'E'},{pos:47,chord:'B'}]},
+      {lyric:'Se o mar crescer / Somente em Ti descansarei',anchors:[{pos:14,chord:'A'},{pos:31,chord:'E'},{pos:40,chord:'B'}]},
+      {lyric:'Pois eu sou teu e Tu  és meu',anchors:[{pos:13,chord:'A'},{pos:19,chord:'B'},{pos:22,chord:'C#m'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'   Guia-me para que em tudo em Ti confie',anchors:[{pos:0,chord:'C#m'},{pos:25,chord:'A'}]},
+      {lyric:'Sobre as águas eu caminhe / Por onde quer que chames',anchors:[{pos:9,chord:'E'},{pos:32,chord:'B'}]},
+      {lyric:'   Leva-me mais fundo do que já estive',anchors:[{pos:0,chord:'C#m'},{pos:24,chord:'A'}]},
+      {lyric:'E minha fé será mais firme',anchors:[{pos:9,chord:'E'}]},
+      {lyric:'Senhor, em Tua presença',anchors:[{pos:4,chord:'B'}]},
+      {lyric:'   Guia-me para que em tudo em Ti confie',anchors:[{pos:0,chord:'C#m'},{pos:24,chord:'A'}]},
+      {lyric:'Sobre as águas eu caminhe',anchors:[{pos:9,chord:'E'}]},
+      {lyric:'Por onde quer que chames',anchors:[{pos:4,chord:'B'}]},
+      {lyric:'   Leva-me mais fundo do que já estive',anchors:[{pos:0,chord:'C#m'},{pos:24,chord:'A'}]},
+      {lyric:'E minha fé será mais firme',anchors:[{pos:9,chord:'E'}]},
+      {lyric:'Senhor, em Tua presença',anchors:[{pos:4,chord:'B'}]},
+      {lyric:'  Guia-me para que em tudo em Ti confie',anchors:[{pos:0,chord:'A'},{pos:23,chord:'E'}]},
+      {lyric:'Sobre as águas eu caminhe',anchors:[{pos:9,chord:'B'}]},
+      {lyric:'Por onde quer que chames',anchors:[{pos:4,chord:'F#m'}]},
+      {lyric:'  Leva-me mais fundo do que já estive',anchors:[{pos:0,chord:'A'},{pos:22,chord:'E'}]},
+      {lyric:'E minha fé será mais firme',anchors:[{pos:9,chord:'B'}]},
+      {lyric:'Senhor, em Tua presença',anchors:[{pos:4,chord:'F#m'}]},
+      {lyric:'   Guia-me para que em tudo em Ti confie',anchors:[{pos:0,chord:'C#m'},{pos:13,chord:'B'},{pos:25,chord:'E'}]},
+      {lyric:'Sobre as águas eu caminhe',anchors:[{pos:9,chord:'B'}]},
+      {lyric:'Por onde quer que chames',anchors:[{pos:4,chord:'F#m'}]},
+      {lyric:'   Leva-me mais fundo do que já estive',anchors:[{pos:0,chord:'C#m'},{pos:18,chord:'B'},{pos:24,chord:'E'}]},
+      {lyric:'E minha fé será mais firme',anchors:[{pos:9,chord:'B'}]},
+      {lyric:'Senhor, em Tua presença',anchors:[{pos:4,chord:'F#m'}]},
+      {lyric:'  Ao teu nome clamarei /   E além das ondas olharei',anchors:[{pos:0,chord:'A'},{pos:10,chord:'E'},{pos:18,chord:'B'},{pos:25,chord:'A'},{pos:38,chord:'E'},{pos:47,chord:'B'}]},
+      {lyric:'  Somente em Ti descansarei',anchors:[{pos:0,chord:'A'},{pos:14,chord:'E'},{pos:23,chord:'B'}]},
+      {lyric:'Pois eu sou teu e Tu  és meu',anchors:[{pos:13,chord:'A'},{pos:19,chord:'B'},{pos:22,chord:'C#m'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   1008 — EU NAVEGAREI - CORINHOS DE FOGO
+========================= */
+
+{
+  id:'1008',
+  number:'1008',
+  title:'EU NAVEGAREI - Corinhos de Fogo',
+  category:'Louvor',
+  sourceToneIndex:9,
+
+  sections:[
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'Eu navegarei no oceano do Espírito',anchors:[{pos:8,chord:'Am'},{pos:28,chord:'G'}]},
+      {lyric:'E ali adorarei  ao   Deus do meu amor',anchors:[{pos:13,chord:'F7'},{pos:18,chord:'Dm'},{pos:37,chord:'E'}]},
+      {lyric:'Espírito, espírito, que desce como fogo',anchors:[{pos:12,chord:'Am'},{pos:36,chord:'G'}]},
+      {lyric:'Vem como em pentecostes,   /     e enche-me de novo',anchors:[{pos:16,chord:'F7'},{pos:23,chord:'Dm'},{pos:49,chord:'E'}]},
+      {lyric:'Eu adorarei ao Deus da minha vida',anchors:[{pos:8,chord:'Am'},{pos:30,chord:'G'}]},
+      {lyric:'Que me compreendeu,   /     sem nenhuma explicação',anchors:[{pos:16,chord:'F7'},{pos:28,chord:'Dm'},{pos:50,chord:'E'}]},
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[     
+  	  {lyric:'Espírito, espírito, que desce como fogo',anchors:[{pos:12,chord:'Am'},{pos:36,chord:'G'}]},
+      {lyric:'Vem como em pentecostes,   /     e enche-me de novo',anchors:[{pos:16,chord:'F7'},{pos:23,chord:'Dm'},{pos:50,chord:'E'}]},
+      {lyric:'Espírito, espírito, que desce como fogo',anchors:[{pos:12,chord:'Am'},{pos:36,chord:'G'}]},
+      {lyric:'Vem como em pentecostes,   /     e enche-me de novo',anchors:[{pos:16,chord:'F7'},{pos:23,chord:'Dm'},{pos:50,chord:'E'}]}
     ]
     }
   ]
