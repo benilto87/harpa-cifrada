@@ -7611,59 +7611,49 @@ const songs=[
       label:'1ª Parte',
       lines:[
       {lyric:'Ao único que é digno de receber',anchors:[{pos:3,chord:'C'},{pos:16,chord:'G/B'},{pos:25,chord:'Am'}]},
-      {lyric:'A honra e a glória',anchors:[{pos:3,chord:'F'},{pos:14,chord:'C'}]},
-      {lyric:'A força e o poder',anchors:[{pos:3,chord:'Dm'},{pos:15,chord:'G'}]},
-      {lyric:'Ao rei, eterno, imortal',anchors:[{pos:4,chord:'C'}]},
-      {lyric:'Invisível, mas real',anchors:[{pos:0,chord:'F'},{pos:12,chord:'Fm'}]},
+      {lyric:'A honra e a glória / A força e o poder',anchors:[{pos:3,chord:'F'},{pos:14,chord:'C'},{pos:24,chord:'Dm'},{pos:36,chord:'G'}]},
+      {lyric:'Ao rei, eterno, imortal / Invisível, mas real',anchors:[{pos:4,chord:'C'},{pos:25,chord:'F'},{pos:37,chord:'Fm'}]},
       {lyric:'A Ele ministramos o louvor',anchors:[{pos:2,chord:'C'},{pos:13,chord:'G'},{pos:24,chord:'C'}]},
       {lyric:'Ao único que é digno de receber',anchors:[{pos:3,chord:'C'},{pos:16,chord:'G/B'},{pos:27,chord:'Am'}]},
-      {lyric:'A honra e a glória',anchors:[{pos:3,chord:'F'},{pos:14,chord:'C'}]},
-      {lyric:'A força e o poder',anchors:[{pos:3,chord:'F'},{pos:15,chord:'G'}]},
-      {lyric:'Ao rei, eterno, imortal',anchors:[{pos:4,chord:'C'}]},
-      {lyric:'Invisível, mas real',anchors:[{pos:0,chord:'F'},{pos:12,chord:'Fm'}]},
-      {lyric:'A Ele ministramos o louvor',anchors:[{pos:2,chord:'C'},{pos:13,chord:'G'},{pos:24,chord:'C'},{pos:26,chord:'G/B'}]}
+      {lyric:'A honra e a glória / A força e o poder',anchors:[{pos:3,chord:'F'},{pos:14,chord:'C'},{pos:24,chord:'F'},{pos:36,chord:'G'}]},
+      {lyric:'Ao rei, eterno, imortal / Invisível, mas real',anchors:[{pos:4,chord:'C'},{pos:25,chord:'F'},{pos:37,chord:'Fm'}]},
+      {lyric:'A Ele ministramos o louvor',anchors:[{pos:2,chord:'C'},{pos:13,chord:'G'},{pos:24,chord:'C'}]}
     ]
     },
     {
       label:'Refrão',
       lines:[
-      {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:26,chord:'C'},{pos:28,chord:'G/B'}]},
       {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:26,chord:'C'}]},
-      {lyric:'Adoramos o teu nome',anchors:[{pos:4,chord:'F'},{pos:16,chord:'G'}]},
-      {lyric:'Nos rendemos a teus pés',anchors:[{pos:8,chord:'E'},{pos:21,chord:'Am'}]},
-      {lyric:'Consagramos todo nosso ser a ti',anchors:[{pos:7,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'}]},
       {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:26,chord:'C'}]},
-      {lyric:'Coroa__mos a ti, ó rei Jesus  ',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:26,chord:'G4'},{pos:30,chord:'G'}]},
-      {lyric:'Adoramos o teu nome',anchors:[{pos:4,chord:'F'},{pos:16,chord:'G'}]},
-      {lyric:'Nos rendemos a teus pés',anchors:[{pos:8,chord:'E'},{pos:21,chord:'Am'}]},
-      {lyric:'Consagramos todo nosso ser a ti',anchors:[{pos:7,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'}]}
+      {lyric:'Adoramos o teu nome / Nos rendemos a teus pés',anchors:[{pos:3,chord:'F'},{pos:16,chord:'G'},{pos:30,chord:'E'},{pos:43,chord:'Am'}]},
+      {lyric:'Consagramos todo nosso ser a ti',anchors:[{pos:6,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'}]},
+      {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:26,chord:'C'}]},
+      {lyric:'Coroa__mos a ti, ó rei Jesus  ',anchors:[{pos:4,chord:'Am'},{pos:9,chord:'Em'},{pos:14,chord:'F'},{pos:26,chord:'G4'}]},
+      {lyric:'Adoramos o teu nome / Nos rendemos a teus pés',anchors:[{pos:3,chord:'F'},{pos:16,chord:'G'},{pos:30,chord:'E'},{pos:43,chord:'Am'}]},
+      {lyric:'Consagramos todo nosso ser a ti',anchors:[{pos:6,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'}]}
     ]
     },
     {
       label:'2ª Parte',
       lines:[
       {lyric:'Ao único que é digno de receber',anchors:[{pos:3,chord:'C'},{pos:16,chord:'G/B'},{pos:25,chord:'Am'}]},
-      {lyric:'A honra e a glória',anchors:[{pos:3,chord:'F'},{pos:14,chord:'C'}]},
-      {lyric:'A força e o poder',anchors:[{pos:3,chord:'Dm'},{pos:15,chord:'G'}]},
-      {lyric:'Ao rei, eterno, imortal',anchors:[{pos:4,chord:'C'}]},
-      {lyric:'Invisível, mas real',anchors:[{pos:0,chord:'F'},{pos:12,chord:'Fm'}]},
-      {lyric:'A Ele ministramos o louvor',anchors:[{pos:2,chord:'C'},{pos:13,chord:'G'},{pos:24,chord:'C'},{pos:26,chord:'G/B'}]}
+      {lyric:'A honra e a glória / A força e o poder',anchors:[{pos:3,chord:'F'},{pos:14,chord:'C'},{pos:24,chord:'Dm'},{pos:36,chord:'G'}]},
+      {lyric:'Ao rei, eterno, imortal / Invisível, mas real',anchors:[{pos:4,chord:'C'},{pos:25,chord:'F'},{pos:37,chord:'Fm'}]},
+      {lyric:'A Ele ministramos o louvor',anchors:[{pos:2,chord:'C'},{pos:13,chord:'G'},{pos:24,chord:'C'}]}
     ]
     },
     {
       label:'Refrão',
       lines:[
       {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:26,chord:'C'}]},
-      {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:25,chord:'G4'},{pos:28,chord:'G'}]},
-      {lyric:'Adoramos o teu nome',anchors:[{pos:4,chord:'F'},{pos:16,chord:'G'}]},
-      {lyric:'Nos rendemos a teus pés',anchors:[{pos:8,chord:'E'},{pos:21,chord:'Am'}]},
+      {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:25,chord:'G4'}]},
+      {lyric:'Adoramos o teu nome / Nos rendemos a teus pés',anchors:[{pos:3,chord:'F'},{pos:16,chord:'G'},{pos:30,chord:'E'},{pos:43,chord:'Am'}]},
       {lyric:'Consagramos todo nosso ser a ti',anchors:[{pos:7,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'}]},
       {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:26,chord:'C'}]},
-      {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:25,chord:'G4'},{pos:28,chord:'G'}]},
-      {lyric:'Adoramos o teu nome',anchors:[{pos:4,chord:'F'},{pos:16,chord:'G'}]},
-      {lyric:'Nos rendemos a teus pés',anchors:[{pos:8,chord:'E'},{pos:21,chord:'Am'}]},
-      {lyric:'Consagramos todo nosso ser a ti   ',anchors:[{pos:7,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'},{pos:34,chord:'Am'}]},
-      {lyric:'Consagramos todo nosso ser a ti   ',anchors:[{pos:7,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'},{pos:34,chord:'Am'}]},
+      {lyric:'Coroa__mos a ti, ó rei Jesus',anchors:[{pos:4,chord:'Am'},{pos:8,chord:'Em'},{pos:14,chord:'F'},{pos:25,chord:'G4'}]},
+      {lyric:'Adoramos o teu nome / Nos rendemos a teus pés',anchors:[{pos:4,chord:'F'},{pos:16,chord:'G'},{pos:30,chord:'E'},{pos:43,chord:'Am'}]},
+      {lyric:'Consagramos todo nosso ser a ti   ',anchors:[{pos:7,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'}]},
+      {lyric:'Consagramos todo nosso ser a ti   ',anchors:[{pos:7,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'}]},
       {lyric:'Consagramos todo nosso ser a ti',anchors:[{pos:7,chord:'Dm'},{pos:18,chord:'G'},{pos:30,chord:'C'}]}
     ]
     }
@@ -8037,6 +8027,46 @@ const songs=[
       {lyric:'Vem como em pentecostes,   /     e enche-me de novo',anchors:[{pos:16,chord:'F7'},{pos:23,chord:'Dm'},{pos:50,chord:'E'}]},
       {lyric:'Espírito, espírito, que desce como fogo',anchors:[{pos:12,chord:'Am'},{pos:36,chord:'G'}]},
       {lyric:'Vem como em pentecostes,   /     e enche-me de novo',anchors:[{pos:16,chord:'F7'},{pos:23,chord:'Dm'},{pos:50,chord:'E'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   1009 — BOM É ESTARMOS AQUI - CORINHOS EVANGÉLICOS
+========================= */
+
+{
+  id:'1009',
+  number:'1009',
+  title:'BOM É ESTARMOS AQUI - Corinhos Evangélicos',
+  category:'Louvor',
+  sourceToneIndex:0,
+
+  sections:[
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'Bom estarmos aqui louvando a   Deus',anchors:[{pos:1,chord:'C'},{pos:13,chord:'Dm'},{pos:28,chord:'Em'},{pos:34,chord:'Dm'}]},
+      {lyric:'E podendo exaltar seu santo nome',anchors:[{pos:5,chord:'C'},{pos:14,chord:'Dm'},{pos:28,chord:'Em'},{pos:32,chord:'Dm'}]},
+      {lyric:'Bom estarmos aqui louvando a   Deus',anchors:[{pos:1,chord:'C'},{pos:13,chord:'Dm'},{pos:28,chord:'Em'},{pos:34,chord:'Dm'}]},
+      {lyric:'E podendo exaltar seu santo nome      ',anchors:[{pos:5,chord:'C'},{pos:14,chord:'Dm'},{pos:28,chord:'Em'},{pos:32,chord:'Gm'},{pos:37,chord:'C'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Tempo para isso / Tempo para louvarmos a Deus',anchors:[{pos:1,chord:'F'},{pos:12,chord:'G'},{pos:18,chord:'Em'},{pos:31,chord:'Am'}]},
+      {lyric:'Num só amor, num só espírito',anchors:[{pos:0,chord:'Dm'},{pos:8,chord:'G'},{pos:22,chord:'C'},{pos:28,chord:'G'}]}
+    ]
+    },
+    {
+      label:'2ª Parte',
+      lines:[
+      {lyric:'Deus venha nos abençoar / E que essa união    ',anchors:[{pos:1,chord:'C'},{pos:21,chord:'Dm'},{pos:40,chord:'G'}]},
+      {lyric:'Nunca falte para nós    ',anchors:[{pos:1,chord:'F'},{pos:18,chord:'C'},{pos:23,chord:'G'}]},
+      {lyric:'Deus venha nos abençoar / E que essa união',anchors:[{pos:0,chord:'C'},{pos:21,chord:'Dm'},{pos:40,chord:'G'}]},
+      {lyric:'Nunca falte para nós    ',anchors:[{pos:1,chord:'F'},{pos:13,chord:'G'},{pos:18,chord:'C'},{pos:23,chord:'G'}]}
     ]
     }
   ]

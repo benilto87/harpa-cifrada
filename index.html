@@ -1550,8 +1550,8 @@ function getSongStartIndex(songId){
 
 let currentSongId=localStorage.getItem('harpa_current_song')||'001'; // MEMORIZA HINO ABERTO //
 let currentIndex=getSongStartIndex(currentSongId);
-let sectionsHidden =
-  getSongCategory(songs.find(s => s.id === currentSongId) || songs[0]) !== 'Louvor';
+let sectionsHidden = true;
+ // getSongCategory(songs.find(s => s.id === currentSongId) || songs[0]) !== 'Louvor';  (FUNÇÃO INVERTER HIDEM DESATIVADA)
 let progressionMode=false;
 let inlineMode=false;
 let splitMode=false;
@@ -3219,7 +3219,7 @@ open.onclick=()=>{
     .classList.remove('sequence-mode');
 
   resetAutoScrollForNewSong();
-		sectionsHidden = getSongCategory(s) !== 'Louvor';
+	//	sectionsHidden = getSongCategory(s) !== 'Louvor'; (FUNÇÃO INVERTER HIDEM DESATIVADA)
         currentSongId=s.id;
         localStorage.setItem('harpa_current_song',currentSongId);
         currentIndex=getSongStartIndex(currentSongId);
