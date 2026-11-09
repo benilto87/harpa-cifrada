@@ -421,27 +421,45 @@ button.active{
   min-width:0;
 }
 
-.song-open{
+.song-open {
   display:grid;
-  grid-template-columns:18px minmax(0,1fr) 07px;
+  grid-template-columns:44px minmax(0,1fr) 30px;
   align-items:center;
-  gap:8px;
+  gap:5px;
+
   width:100%;
+  min-width:0;
+  box-sizing:border-box;
+
   border:0;
   background:transparent;
   text-align:left;
-  padding:5px 25px;
+  padding:6px 5px;
   border-radius:9px;
-  transform:none!important;
+  transform:none !important;
+}
+
+.song-open:hover {
+  background:#f6f1e9;
 }
 
 .song-open:hover{
   background:#f6f1e9;
 }
 
-.song-number{
-  font:700 .82rem/1 Arial,sans-serif;
-  color:var(--muted);
+.song-number {
+  font:600 .82rem/1 Arial,sans-serif;
+  color:#a58a70 !important;
+  white-space:nowrap;
+}
+
+.song-name {
+  min-width:0;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font:600 .90rem/1.2 Arial,sans-serif;
+  text-align:left;
 }
 
 .song-tone {
@@ -461,14 +479,6 @@ button.active{
   font: 700 .72rem/1 Arial, sans-serif;
   text-align: center;
   flex-shrink: 0;
-}
-
-.song-name{
-  min-width:0;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  font:600 .90rem/1.2 Arial,sans-serif;
 }
 
 /* Estrela de favoritos: aparência simples */
@@ -3330,6 +3340,17 @@ open.onclick=()=>{
    ABRIR / FECHAR BIBLIOTECA
    ========================================================= */
 
+function atualizarTonsDaBiblioteca(){
+  const lista = document.getElementById('libraryList');
+  const posicao = lista ? lista.scrollTop : 0;
+
+  renderLibrary();
+
+  if(lista){
+    lista.scrollTop = posicao;
+  }
+}
+
 function openLibrary(){
 
   libraryDrawer.classList.add('open');
@@ -3588,6 +3609,7 @@ document.getElementById('toggleSharp').onchange=e=>{
   localStorage.setItem('harpa_use_sharps',useSharps?'1':'0');
   updateToneKeyLabels();
   render();
+  atualizarTonsDaBiblioteca();
 };
 
 document.getElementById('toggleSharp').checked=useSharps;
@@ -3603,6 +3625,7 @@ document.getElementById('toggleHalfDown').onchange=e=>{
 
   saveToneIfEnabled();
   render();
+  atualizarTonsDaBiblioteca();
 };
 
 document.getElementById('toggleHalfDown').checked=startHalfDown;
