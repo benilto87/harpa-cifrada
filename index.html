@@ -416,7 +416,7 @@ button.active{
 
 .song-open{
   display:grid;
-  grid-template-columns:44px minmax(0,1fr);
+  grid-template-columns:22px minmax(0,1fr) 07px;
   align-items:center;
   gap:8px;
   width:100%;
@@ -437,22 +437,68 @@ button.active{
   color:var(--muted);
 }
 
+.song-tone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+  padding: 0;
+
+  border-radius: 50%;
+  border: 1px solid #d8c4ad;
+  background: #f0e7da;
+
+  color: var(--accent);
+  font: 700 .72rem/1 Arial, sans-serif;
+  text-align: center;
+  flex-shrink: 0;
+}
+
 .song-name{
   min-width:0;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  font:600 .92rem/1.2 Arial,sans-serif;
+  font:600 .90rem/1.2 Arial,sans-serif;
 }
 
-.song-fav{
-  min-width:34px;
-  padding:7px 5px;
-  color:#8d6b2f;
-  border-color:transparent;
-  background:transparent;
-  font-size:1rem;
-  transform:none!important;
+/* Estrela de favoritos: aparência simples */
+.song-fav {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  width: 40px !important;
+  min-width: 40px !important;
+  height: 40px !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+
+  color: #98702f;
+  font-size: 17px;
+  cursor: pointer;
+
+  transform: none !important;
+}
+
+/* Não criar contorno ao passar o mouse ou clicar */
+.song-fav:hover,
+.song-fav:focus,
+.song-fav:focus-visible,
+.song-fav:active {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
 }
 
 .library-empty{
@@ -705,13 +751,13 @@ button.active{
 .score.louvor-mode .aligned-line {
   font-size: calc(1.09rem * var(--font-scale));
   line-height: 1.20;
-  letter-spacing: -0.12em;
+  letter-spacing: -0.09em;
 }
 
 .score.louvor-mode .lyrics-inline {
   font-size: calc(1.09rem * var(--font-scale));
   line-height: 1.22;
-  letter-spacing: -0.12em;
+  letter-spacing: -0.09em;
 }
 
   .tone-panel{
@@ -1214,6 +1260,12 @@ Título elegante das músicas de Louvor / INATIVO POR HORA
 body.sequence-active #tonePanel,
 body.sequence-active .tone-pill{
   display:none !important;
+}
+
+.pre-chorus-section .aligned-line,
+.pre-chorus-section .lyrics-inline {
+  font-style: italic !important;
+  font-weight: normal !important;
 }
 
 </style><span></span></label>
@@ -2761,8 +2813,17 @@ if (String(s.category || '').trim().toLowerCase() === 'louvor') {
 
   sectionsToRender.forEach(sectionData=>{
     const section=document.createElement('section');
-    section.className = 'stanza' +
-  (isChorusOrRefrainSection(sectionData) ? ' chorus-section' : '');
+    const labelSecao = normalizarNomeSecao(sectionData.label);
+
+section.className = 'stanza';
+
+if (labelSecao === 'coro' || labelSecao === 'refrao') {
+  section.classList.add('chorus-section');
+}
+
+if (labelSecao === 'pre-refrao') {
+  section.classList.add('pre-chorus-section');
+}
 
     const label=document.createElement('div');
     label.className='verse-title';
@@ -3200,9 +3261,18 @@ function renderLibrary(){
 
       const open=document.createElement('button');
       open.className='song-open';
-      open.innerHTML=
+
+// Mostra o tom memorizado ou o tom inicial da música.
+      const toneIndex = getSongStartIndex(s.id);
+
+      const songTone = Number.isInteger(toneIndex) && chromatic[toneIndex]
+        ? spellNote(chromatic[toneIndex].name)
+        : '—';
+
+      open.innerHTML =
         `<span class="song-number">${s.number}</span>`+
-        `<span class="song-name">${s.title}</span>`;
+        `<span class="song-name">${s.title}</span>`+
+        `<span class="song-tone">${songTone}</span>`;
 
 open.onclick=()=>{
 

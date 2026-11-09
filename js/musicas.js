@@ -1402,6 +1402,72 @@ const songs=[
 },
 
 /* =========================
+   087 — MEU TESTEMUNHO
+========================= */
+
+{
+  id:'087',
+  number:'087',
+  title:'MEU TESTEMUNHO',
+  category:'Harpa Cristã',
+  sourceToneIndex:5,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Justificado estou; / Cristo Jesus me livrou;',anchors:[{pos:1,chord:'F'},{pos:15,chord:'C'},{pos:22,chord:'C'},{pos:41,chord:'F'}]},
+      {lyric:'Ele é meu Mediador, / Também, meu bom Salvador.',anchors:[{pos:0,chord:'F'},{pos:16,chord:'C'},{pos:23,chord:'C'},{pos:44,chord:'F'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Jesus, sou Teu, e Tu és meu;',anchors:[{pos:0,chord:'Bb'},{pos:16,chord:'F'}]},
+      {lyric:'Me guiarás para o céu;',anchors:[{pos:1,chord:'C'},{pos:12,chord:'F'}]},
+      {lyric:'Com graça e paz me satisfaz',anchors:[{pos:0,chord:'Bb'},{pos:17,chord:'F'}]},
+      {lyric:'Cristo, meu Mestre veraz.',anchors:[{pos:1,chord:'C'},{pos:22,chord:'F'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Santificado fiquei, / Quando a Ele roguei;',anchors:[{pos:1,chord:'F'},{pos:16,chord:'C'},{pos:24,chord:'C'},{pos:39,chord:'F'}]},
+      {lyric:'Ele me disse: tomai; / De minha graça usai.',anchors:[{pos:0,chord:'F'},{pos:17,chord:'C'},{pos:24,chord:'C'},{pos:40,chord:'F'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Fui redimido, também, / Obra do meu Sumo Bem;',anchors:[{pos:1,chord:'F'},{pos:18,chord:'C'},{pos:24,chord:'C'},{pos:42,chord:'F'}]},
+      {lyric:'Tudo de graça ganhei; / Nada por obras da lei.',anchors:[{pos:1,chord:'F'},{pos:18,chord:'C'},{pos:25,chord:'C'},{pos:43,chord:'F'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Ele a promessa me deu, / Do Guia santo do céu;',anchors:[{pos:0,chord:'F'},{pos:19,chord:'C'},{pos:26,chord:'C'},{pos:43,chord:'F'}]},
+      {lyric:'Também me disse: ficai, / E o batismo esperai.',anchors:[{pos:1,chord:'F'},{pos:20,chord:'C'},{pos:26,chord:'C'},{pos:43,chord:'F'}]}
+    ]
+    },
+    {
+      label:'5ª estrofe',
+      lines:[
+      {lyric:'Quando a Ele busquei, / E batizado fiquei,',anchors:[{pos:1,chord:'F'},{pos:18,chord:'C'},{pos:24,chord:'C'},{pos:39,chord:'F'}]},
+      {lyric:'Línguas estranhas falei, / E meu Senhor exaltei.',anchors:[{pos:1,chord:'F'},{pos:21,chord:'C'},{pos:27,chord:'C'},{pos:45,chord:'F'}]}
+    ]
+    },
+    {
+      label:'6ª estrofe',
+      lines:[
+      {lyric:'Agora, vou trabalhar, / E muitas almas ganhar;',anchors:[{pos:0,chord:'F'},{pos:18,chord:'C'},{pos:24,chord:'C'},{pos:43,chord:'F'}]},
+      {lyric:'Essas que Ele salvou, / Quando na cruz expirou.',anchors:[{pos:0,chord:'F'},{pos:18,chord:'C'},{pos:26,chord:'C'},{pos:44,chord:'F'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    088 — REVELA A NÓS, SENHOR
 ========================= */
 
@@ -8067,6 +8133,198 @@ const songs=[
       {lyric:'Nunca falte para nós    ',anchors:[{pos:1,chord:'F'},{pos:18,chord:'C'},{pos:23,chord:'G'}]},
       {lyric:'Deus venha nos abençoar / E que essa união',anchors:[{pos:0,chord:'C'},{pos:21,chord:'Dm'},{pos:40,chord:'G'}]},
       {lyric:'Nunca falte para nós    ',anchors:[{pos:1,chord:'F'},{pos:13,chord:'G'},{pos:18,chord:'C'},{pos:23,chord:'G'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   1010 — LINDO MOMENTO - JULLIANY SOUZA
+========================= */
+
+{
+  id:'1010',
+  number:'1010',
+  title:'LINDO MOMENTO - Julliany Souza',
+  category:'Louvor',
+  sourceToneIndex:4,
+
+  sections:[
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'Tão lindo é cada momento',anchors:[{pos:10,chord:'F#m'},{pos:23,chord:'A'}]},
+      {lyric:'Que me visita e faz de mim o Teu altar',anchors:[{pos:10,chord:'E'},{pos:36,chord:'B2'}]},
+      {lyric:'Quero ir contigo mais profundo',anchors:[{pos:13,chord:'F#m'},{pos:29,chord:'A'}]},
+      {lyric:'Segura a minha mão /  Eu sei, nunca vai soltar',anchors:[{pos:10,chord:'E'},{pos:44,chord:'B2'}]},
+      {lyric:'Tão lindo é cada momento',anchors:[{pos:10,chord:'F#m'},{pos:23,chord:'A'}]},
+      {lyric:'Que me visita e faz de mim o Teu altar',anchors:[{pos:10,chord:'E'},{pos:36,chord:'B2'}]},
+      {lyric:'Quero ir contigo mais profundo',anchors:[{pos:13,chord:'F#m'},{pos:29,chord:'A'}]},
+      {lyric:'Segura a minha mão / Eu sei, nunca vai soltar',anchors:[{pos:10,chord:'E'},{pos:43,chord:'B2'}]}
+    ]
+    },
+    {
+      label:'Pré-Refrão',
+      lines:[
+      {lyric:'Leva-me a um luga____ar / Onde só você e eu',anchors:[{pos:16,chord:'F#m'},{pos:21,chord:'A'},{pos:41,chord:'E'}]},
+      {lyric:'Desfrutamos o momento / Te amo, meu papa____ai',anchors:[{pos:17,chord:'B2'},{pos:39,chord:'F#m'},{pos:44,chord:'A'}]},
+      {lyric:'Eu dependo desse amor / E sem Ti eu sei que morro',anchors:[{pos:19,chord:'E'},{pos:45,chord:'B2'}]},
+      {lyric:'Eu morro... Eu não suportaria. / Eu morreria sem Ti, ',anchors:[{pos:4,chord:'F#m'},{pos:26,chord:'A'},{pos:50,chord:'E'}]},
+      {lyric:'sem ti, Deus',anchors:[{pos:10,chord:'B'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Me enxergou na minha tormenta',anchors:[{pos:9,chord:'F#m'}]},
+      {lyric:'Me livrou em meus problemas',anchors:[{pos:7,chord:'A'}]},
+      {lyric:'Transformou minha tristeza / E mudou minha vida inteira',anchors:[{pos:9,chord:'E'},{pos:34,chord:'B2'}]},
+      {lyric:'Me vestiu com roupas novas / Pôs azeite em minha cabeça',anchors:[{pos:7,chord:'F#m'},{pos:35,chord:'A'}]},
+      {lyric:'Me deu um lugar na mesa / O meu Pai não me rejeita',anchors:[{pos:7,chord:'E'},{pos:33,chord:'B2'}]},
+      {lyric:'Me enxergou na minha tormenta',anchors:[{pos:9,chord:'F#m'}]},
+      {lyric:'Me livrou em meus problemas',anchors:[{pos:7,chord:'A'}]},
+      {lyric:'Transformou minha tristeza / E mudou minha vida inteira',anchors:[{pos:9,chord:'E'},{pos:34,chord:'B2'}]},
+      {lyric:'Me vestiu com roupas novas / Pôs azeite em minha cabeça',anchors:[{pos:7,chord:'F#m'},{pos:35,chord:'A'}]},
+      {lyric:'Me deu um lugar na mesa / O meu Pai não me rejeita',anchors:[{pos:7,chord:'E'},{pos:33,chord:'B2'}]}
+    ]
+    },
+    {
+      label:'Pré-Refrão',
+      lines:[
+      {lyric:'Leva-me a um luga____ar / Onde só você e eu',anchors:[{pos:16,chord:'F#m'},{pos:21,chord:'A'},{pos:41,chord:'E'}]},
+      {lyric:'Desfrutamos o momento / Te amo, meu papa____ai',anchors:[{pos:17,chord:'B2'},{pos:39,chord:'F#m'},{pos:44,chord:'A'}]},
+      {lyric:'Eu dependo desse amor / E sem Ti eu sei que morro',anchors:[{pos:19,chord:'E'},{pos:45,chord:'B2'}]},
+      {lyric:'Leva-me a um luga____ar / Onde só você e eu',anchors:[{pos:16,chord:'F#m'},{pos:21,chord:'A'},{pos:41,chord:'E'}]},
+      {lyric:'Desfrutamos o momento / Te amo, meu papa____ai',anchors:[{pos:17,chord:'B2'},{pos:39,chord:'F#m'},{pos:44,chord:'A'}]},
+      {lyric:'Eu dependo desse amor / E sem Ti eu sei que morro',anchors:[{pos:19,chord:'E'},{pos:45,chord:'B2'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Me enxergou na minha tormenta',anchors:[{pos:9,chord:'F#m'}]},
+      {lyric:'Me livrou em meus problemas',anchors:[{pos:7,chord:'A'}]},
+      {lyric:'Transformou minha tristeza / E mudou minha vida inteira',anchors:[{pos:9,chord:'E'},{pos:34,chord:'B2'}]},
+      {lyric:'Me vestiu com roupas novas / Pôs azeite em minha cabeça',anchors:[{pos:7,chord:'F#m'},{pos:35,chord:'A'}]},
+      {lyric:'Me deu um lugar na mesa / O meu Pai não me rejeita',anchors:[{pos:7,chord:'E'},{pos:33,chord:'B2'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   1011 — PODEROSO DEUS - DAVID QUINLAN
+========================= */
+
+{
+  id:'1011',
+  number:'1011',
+  title:'PODEROSO DEUS - David Quinlan',
+  category:'Louvor',
+  sourceToneIndex:2,
+
+  sections:[
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'Ao que está assentado No trono',anchors:[{pos:18,chord:'D'},{pos:31,chord:'A'},{pos:35,chord:'Bm'}]},
+      {lyric:'E ao cordeiro    /  Seja o louvor',anchors:[{pos:6,chord:'A'},{pos:9,chord:'G'},{pos:14,chord:'Em'},{pos:32,chord:'A'}]},
+      {lyric:'Ao que está assentado No trono',anchors:[{pos:18,chord:'D'},{pos:30,chord:'A'},{pos:34,chord:'Bm'}]},
+      {lyric:'E ao cordeiro    / Seja o louvor',anchors:[{pos:6,chord:'A'},{pos:9,chord:'G'},{pos:14,chord:'Em'},{pos:30,chord:'A'}]}
+    ]
+    },
+    {
+      label:'Pré-Refrão',
+      lines:[
+      {lyric:'Seja a honra      / Seja a glória',anchors:[{pos:8,chord:'D'},{pos:25,chord:'A'},{pos:29,chord:'Bm'}]},
+      {lyric:'Seja o domínio    / Pelos séculos dos séculos',anchors:[{pos:10,chord:'G'},{pos:15,chord:'Em'},{pos:39,chord:'A'}]},
+      {lyric:'Seja a honra      / Seja a glória',anchors:[{pos:8,chord:'D'},{pos:25,chord:'A'},{pos:29,chord:'Bm'}]},
+      {lyric:'Seja o domínio    / Pelos séculos dos séculos',anchors:[{pos:10,chord:'G'},{pos:15,chord:'Em'},{pos:39,chord:'A'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Poderoso Deus      / Poderoso Deus',anchors:[{pos:10,chord:'D'},{pos:26,chord:'A'},{pos:31,chord:'Bm'}]},
+      {lyric:'Poderoso Deus    / Minh\'alma anseia por Ti!',anchors:[{pos:10,chord:'G'},{pos:14,chord:'Em'},{pos:41,chord:'A'}]},
+      {lyric:'Poderoso Deus      / Poderoso Deus',anchors:[{pos:10,chord:'D'},{pos:26,chord:'A'},{pos:31,chord:'Bm'}]},
+      {lyric:'Poderoso Deus    / Minh\'alma anseia por Ti!',anchors:[{pos:10,chord:'G'},{pos:14,chord:'Em'},{pos:41,chord:'A'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   1012 — ALÉM DO RIO AZUL - VOZ DA VERDADE
+========================= */
+
+{
+  id:'1012',
+  number:'1012',
+  title:'ALÉM DO RIO AZUL - Voz da Verdade',
+  category:'Louvor',
+  sourceToneIndex:8,
+
+  sections:[
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'Além do rio azul',anchors:[{pos:2,chord:'G#'},{pos:9,chord:'C#'},{pos:14,chord:'G#'}]},
+      {lyric:'As ruas são de ouro e de cristais',anchors:[{pos:4,chord:'C#'},{pos:15,chord:'D#'},{pos:30,chord:'G#'}]},
+      {lyric:'Ali tudo é vida, ali tudo é paz',anchors:[{pos:1,chord:'C#'},{pos:12,chord:'D#'},{pos:18,chord:'G#'},{pos:22,chord:'D#/G'},{pos:29,chord:'Fm'}]},
+      {lyric:'Morte e choro,   nunca mais   ',anchors:[{pos:1,chord:'D#'},{pos:10,chord:'C#'},{pos:14,chord:'D#'},{pos:24,chord:'G#'},{pos:30,chord:'Fm'}]},
+      {lyric:'Tristeza e dor,   nunca mais   ',anchors:[{pos:12,chord:'C#'},{pos:15,chord:'D#'},{pos:25,chord:'G#'},{pos:31,chord:'C#'}]},
+      {lyric:'Além do rio azul',anchors:[{pos:2,chord:'G#'},{pos:9,chord:'C#'},{pos:14,chord:'G#'}]},
+      {lyric:'As ruas são de ouro e de cristais',anchors:[{pos:4,chord:'C#'},{pos:15,chord:'D#'},{pos:30,chord:'G#'}]},
+      {lyric:'Ali tudo é vida, ali tudo é paz',anchors:[{pos:1,chord:'C#'},{pos:12,chord:'D#'},{pos:18,chord:'G#'},{pos:22,chord:'D#/G'},{pos:29,chord:'Fm'}]},
+      {lyric:'Morte e choro,   nunca mais   ',anchors:[{pos:1,chord:'D#'},{pos:10,chord:'C#'},{pos:14,chord:'D#'},{pos:24,chord:'G#'},{pos:30,chord:'Fm'}]},
+      {lyric:'Tristeza e dor,   nunca mais   ',anchors:[{pos:12,chord:'C#'},{pos:15,chord:'D#'},{pos:25,chord:'G#'}]}
+    ]
+    },
+    {
+      label:'Pré-Refrão',
+      lines:[
+      {lyric:'Verei o grande rio da vida',anchors:[{pos:3,chord:'Gb2'},{pos:16,chord:'C#'},{pos:23,chord:'D#'}]},
+      {lyric:'Claro como o cristal',anchors:[{pos:2,chord:'Gb2'},{pos:11,chord:'C#'},{pos:18,chord:'D#'}]},
+      {lyric:'Verei a face do meu Mestre querido',anchors:[{pos:3,chord:'Gb2'},{pos:17,chord:'C#'},{pos:31,chord:'D#'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'      Não haverá mais noite ali',anchors:[{pos:0,chord:'Fm'},{pos:15,chord:'A#m'},{pos:29,chord:'D#'}]},
+      {lyric:'Não haverá      nenhum clamor    ',anchors:[{pos:9,chord:'G#'},{pos:12,chord:'D#/G'},{pos:27,chord:'Fm'}]},
+      {lyric:'Verei os olhos de Jesus',anchors:[{pos:9,chord:'A#m'},{pos:21,chord:'D#'}]},
+      {lyric:'E tocarei Seu corpo, enfim',anchors:[{pos:7,chord:'G#'},{pos:24,chord:'C'}]},
+      {lyric:'Não haverá mais noite ali',anchors:[{pos:9,chord:'A#m'},{pos:23,chord:'D#'}]},
+      {lyric:'Não haverá      nenhum clamor',anchors:[{pos:9,chord:'G#'},{pos:12,chord:'D#/G'},{pos:27,chord:'Fm'}]},
+      {lyric:'Verei os olhos de Jesus',anchors:[{pos:9,chord:'A#m'},{pos:21,chord:'D#'}]},
+      {lyric:'E tocarei Seu corpo, enfim',anchors:[{pos:7,chord:'G#'},{pos:24,chord:'C'}]}
+    ]
+    },
+    {
+      label:'Ponte',
+      lines:[
+      {lyric:'    As nações andarão à Sua  luz     ',anchors:[{pos:0,chord:'C#'},{pos:10,chord:'D#'},{pos:19,chord:'G#'},{pos:25,chord:'D#/G'},{pos:30,chord:'Fm'},{pos:36,chord:'D#'}]},
+      {lyric:'    E as portas jamais se fecharão     ',anchors:[{pos:0,chord:'C#'},{pos:10,chord:'D#'},{pos:19,chord:'G#'},{pos:27,chord:'D#/G'},{pos:32,chord:'Fm'},{pos:37,chord:'D#'}]},
+      {lyric:'    A cidade é de ouro   puro',anchors:[{pos:0,chord:'C#'},{pos:9,chord:'D#'},{pos:18,chord:'G#'},{pos:21,chord:'D#/G'},{pos:26,chord:'Fm'}]},
+      {lyric:'De jaspe é seu muro',anchors:[{pos:12,chord:'C#'}]},
+      {lyric:'Além do rio azul...',anchors:[{pos:14,chord:'G#'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Morte e choro, tristeza e dor',anchors:[]},
+      {lyric:'Nunca mais, nunca mais',anchors:[]},
+      {lyric:'Morte e choro, tristeza e dor',anchors:[{pos:10,chord:'G#'}]},
+      {lyric:'Nunca mais, nunca mais',anchors:[{pos:7,chord:'D#'},{pos:19,chord:'G#'}]},
+      {lyric:'Morte e choro, tristeza e dor',anchors:[{pos:10,chord:'G#'}]},
+      {lyric:'Nunca mais, nunca mais',anchors:[{pos:7,chord:'D#'},{pos:19,chord:'G#'}]},
+      {lyric:'Morte e choro, tristeza e dor',anchors:[{pos:10,chord:'G#'}]},
+      {lyric:'Nunca mais, nunca mais',anchors:[{pos:7,chord:'D#'},{pos:19,chord:'G#'}]},
+      {lyric:'Morte e choro, tristeza e dor',anchors:[{pos:10,chord:'G#'}]},
+      {lyric:'Nunca mais, além do rio azul',anchors:[{pos:7,chord:'D#'},{pos:26,chord:'G#'}]}
     ]
     }
   ]

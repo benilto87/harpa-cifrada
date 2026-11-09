@@ -668,7 +668,8 @@ Ele nos dá fortaleza e ricas bênçãos sem par</textarea>
   // Padroniza Coro e Refrão.
   if (chave === 'coro') return 'Coro';
   if (chave === 'refrao') return 'Refrão';
-
+  if (chave === 'pre-refrao') return 'Pré-Refrão';
+  
   // Aceita partes escritas por extenso.
   const partes = {
     primeira: '1ª Parte',
@@ -727,6 +728,7 @@ function isSectionLabel(text) {
   return (
     chave === 'coro' ||
     chave === 'refrao' ||
+	chave === 'pre-refrao' ||
     new RegExp(`^(?:${numero}|${ordinais}\\s+)?estrofe$`).test(chave) ||
     new RegExp(`^(?:${numero}|${ordinais}\\s+)?parte$`).test(chave)
   );
