@@ -409,21 +409,28 @@ button.active{
   border-radius:9px;
 }
 
-.song-item.active{
-  background:#efe5d8;
-  border-color:#dcc6ad;
+.song-item {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 30px;
+  align-items:center;
+  gap:2px;
+  margin:2px 0;
+  border:1px solid transparent;
+  background:transparent;
+  border-radius:9px;
+  min-width:0;
 }
 
 .song-open{
   display:grid;
-  grid-template-columns:22px minmax(0,1fr) 07px;
+  grid-template-columns:18px minmax(0,1fr) 07px;
   align-items:center;
   gap:8px;
   width:100%;
   border:0;
   background:transparent;
   text-align:left;
-  padding:10px 8px;
+  padding:5px 25px;
   border-radius:9px;
   transform:none!important;
 }
