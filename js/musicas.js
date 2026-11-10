@@ -8464,6 +8464,92 @@ const songs=[
 },
 
 /* =========================
+   1015 — TUDO SOBRE MIM - SHIRLEY CARVALHAES
+========================= */
+
+{
+  id:'1015',
+  number:'1015',
+  title:'TUDO SOBRE MIM - Shirley Carvalhaes',
+  category:'Louvor',
+  sourceToneIndex:6,
+
+  sections:[
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'Pra chegar até aqui, / muitas lágrimas chorei',anchors:[{pos:8,chord:'F#'},{pos:41,chord:'A#m'}]},
+      {lyric:'Quantas noites acordado, / alto preço eu paguei',anchors:[{pos:11,chord:'B'},{pos:34,chord:'G#m'},{pos:45,chord:'C#'}]},
+      {lyric:'Foram lutas e vitórias, / sofrimentos e alegrias',anchors:[{pos:11,chord:'F#'},{pos:43,chord:'A#m'}]},
+      {lyric:'E novas experiências, / conquistando a cada dia',anchors:[{pos:4,chord:'B'},{pos:29,chord:'G#m'},{pos:45,chord:'C#'}]},
+      {lyric:'Tive muitas aflições, / mas venci nas orações',anchors:[{pos:9,chord:'D#m'},{pos:41,chord:'A#m'}]},
+      {lyric:'Em segredo com Deus eu falei, / em gemidos eu desabafei',anchors:[{pos:7,chord:'B'},{pos:38,chord:'G#m'},{pos:53,chord:'C#'}]}
+    ]
+    },
+    {
+      label:'Pré-Refrão',
+      lines:[
+      {lyric:'Quem escreveu minha história / sabe tudo sobre mim',anchors:[{pos:9,chord:'D#m'},{pos:46,chord:'A#m'}]},
+      {lyric:'Cada erro, cada acerto, / pra chegar até aqui',anchors:[{pos:6,chord:'B'},{pos:32,chord:'G#'},{pos:43,chord:'C#'}]},
+      {lyric:'O Deus que me conhece sabe o que mereço',anchors:[{pos:36,chord:'F#'}]},
+      {lyric:'E o que necessito para prosseguir',anchors:[{pos:12,chord:'A#m'},{pos:30,chord:'D#m'}]},
+      {lyric:'Conhece os desejos que tenho na alma',anchors:[{pos:35,chord:'B'}]},
+      {lyric:'Nas minhas fraquezas / Deus cuida de mim',anchors:[{pos:15,chord:'G#m'},{pos:38,chord:'C#'}]},
+      {lyric:'Até meu silêncio pra Ele é um grito',anchors:[{pos:29,chord:'F#'}]},
+      {lyric:'Em todos os meus passos comigo Ele vai',anchors:[{pos:38,chord:'B'}]},
+      {lyric:'E quando tropeço me pega nos braços',anchors:[{pos:30,chord:'G#m'}]},
+      {lyric:'Quando estou aflito, Ele vem me dá paz',anchors:[{pos:35,chord:'C#'}]},
+      {lyric:'A minha história Deus já escreveu',anchors:[{pos:30,chord:'F#'}]},
+      {lyric:'Ele me ungiu só para o Seu louvor',anchors:[{pos:32,chord:'B'}]},
+      {lyric:'Posso ter mil defeitos, / porém Deus me ama',anchors:[{pos:4,chord:'B'},{pos:8,chord:'F#'},{pos:17,chord:'G#m'},{pos:41,chord:'C#'}]},
+      {lyric:'Sou mais que vencedor',anchors:[{pos:19,chord:'F#'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Fui escolhido e ungido pelo meu Senhor',anchors:[{pos:36,chord:'A#'}]},
+      {lyric:'Sou protegido e amado do meu Criador',anchors:[{pos:32,chord:'D#m'}]},
+      {lyric:'Sou instrumento usado / nas mãos do Deus vivo',anchors:[{pos:41,chord:'A#'}]},
+      {lyric:'E em todo momento comigo Ele está',anchors:[{pos:28,chord:'D#m'}]},
+      {lyric:'E com Ele vou até o fim',anchors:[{pos:7,chord:'B'},{pos:12,chord:'C#'},{pos:21,chord:'F#'}]},
+      {lyric:'Pois só Ele sabe tudo sobre mim',anchors:[{pos:10,chord:'B'},{pos:20,chord:'C#'},{pos:31,chord:'F#'}]}
+    ]
+    },
+    {
+      label:'Pré-Refrão',
+      lines:[
+      {lyric:'Quem escreveu minha história / sabe tudo sobre mim',anchors:[{pos:9,chord:'D#m'},{pos:46,chord:'A#m'}]},
+      {lyric:'Cada erro, cada acerto, / pra chegar até aqui',anchors:[{pos:6,chord:'B'},{pos:32,chord:'G#'},{pos:43,chord:'C#'}]},
+      {lyric:'O Deus que me conhece sabe o que mereço',anchors:[{pos:36,chord:'F#'}]},
+      {lyric:'E o que necessito para prosseguir',anchors:[{pos:12,chord:'A#m'},{pos:30,chord:'D#m'}]},
+      {lyric:'Conhece os desejos que tenho na alma',anchors:[{pos:35,chord:'B'}]},
+      {lyric:'Nas minhas fraquezas / Deus cuida de mim',anchors:[{pos:15,chord:'G#m'},{pos:38,chord:'C#'}]},
+      {lyric:'Até meu silêncio pra Ele é um grito',anchors:[{pos:29,chord:'F#'}]},
+      {lyric:'Em todos os meus passos comigo Ele vai',anchors:[{pos:38,chord:'B'}]},
+      {lyric:'E quando tropeço me pega nos braços',anchors:[{pos:30,chord:'G#m'}]},
+      {lyric:'Quando estou aflito, Ele vem me dá paz',anchors:[{pos:35,chord:'C#'}]},
+      {lyric:'A minha história Deus já escreveu',anchors:[{pos:30,chord:'F#'}]},
+      {lyric:'Ele me ungiu só para o Seu louvor',anchors:[{pos:32,chord:'B'}]},
+      {lyric:'Posso ter mil defeitos, / porém Deus me ama',anchors:[{pos:4,chord:'B'},{pos:8,chord:'F#'},{pos:17,chord:'G#m'},{pos:41,chord:'C#'}]},
+      {lyric:'Sou mais que vencedor',anchors:[{pos:19,chord:'F#'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Fui escolhido e ungido pelo meu Senhor',anchors:[{pos:36,chord:'A#'}]},
+      {lyric:'Sou protegido e amado do meu Criador',anchors:[{pos:32,chord:'D#m'}]},
+      {lyric:'Sou instrumento usado / nas mãos do Deus vivo',anchors:[{pos:41,chord:'A#'}]},
+      {lyric:'E em todo momento comigo Ele está',anchors:[{pos:28,chord:'D#m'}]},
+      {lyric:'E com Ele vou até o fim',anchors:[{pos:7,chord:'B'},{pos:12,chord:'C#'},{pos:21,chord:'F#'}]},
+      {lyric:'Pois só Ele sabe tudo sobre mim',anchors:[{pos:10,chord:'B'},{pos:20,chord:'C#'},{pos:31,chord:'F#'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    1100 — DE CORAÇÃO PRA CORAÇÃO - SHIRLEY CARVALHAES
 ========================= */
 
