@@ -8331,6 +8331,139 @@ const songs=[
 },
 
 /* =========================
+   1013 — DEUS PROVERÁ - GABRIELA GOMES
+========================= */
+
+{
+  id:'1013',
+  number:'1013',
+  title:'DEUS PROVERÁ - Gabriela Gomes',
+  category:'Louvor',
+  sourceToneIndex:4,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'    Posso até estar aflito / Mas nunca derrotado',anchors:[{pos:0,chord:'Em'},{pos:23,chord:'C'},{pos:45,chord:'G'}]},
+      {lyric:'Eu posso até chorar / Eu posso até sofrer',anchors:[{pos:17,chord:'D'},{pos:39,chord:'Em'}]},
+      {lyric:'Mas o amanhã vira / E minha fé será recompensada',anchors:[{pos:11,chord:'C'},{pos:34,chord:'G'},{pos:45,chord:'D'}]},
+      {lyric:'E o meu Deus não falha não / Oh, oh, oh',anchors:[{pos:18,chord:'C'},{pos:37,chord:'Em'}]},
+      {lyric:'  Posso até estar ferido / Mas nunca destruído',anchors:[{pos:21,chord:'C'},{pos:43,chord:'G'}]},
+      {lyric:'Eu posso ser provado / para ser aprovado',anchors:[{pos:17,chord:'D'},{pos:37,chord:'Em'}]},
+      {lyric:'Mas o amanhã vira / E minha fé será recompensada',anchors:[{pos:11,chord:'C'},{pos:34,chord:'G'},{pos:45,chord:'D'}]},
+      {lyric:'E o meu Deus não falha não / não falha não',anchors:[{pos:34,chord:'C'}]}
+    ]
+    },
+    {
+      label:'Pré-Refrão',
+      lines:[
+      {lyric:'     Não vivo pela vista não /    Eu vivo pela fé então',anchors:[{pos:0,chord:'Em'},{pos:30,chord:'C'}]},
+      {lyric:'     Deus proverá /     Deus proverá',anchors:[{pos:0,chord:'G'},{pos:19,chord:'D'}]},
+      {lyric:'     Olho para o alto então /    Vem o socorro sim',anchors:[{pos:0,chord:'Em'},{pos:29,chord:'C'}]},
+      {lyric:'    Deus proverá /    Deus proverá...',anchors:[{pos:0,chord:'G'},{pos:18,chord:'D'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'   Deus proverá...',anchors:[{pos:14,chord:'Am'}]},
+      {lyric:'Quando o azeite e a farinha faltar',anchors:[{pos:32,chord:'Em'}]},
+      {lyric:'E a minha força se esgotar / Deus proverá ',anchors:[{pos:24,chord:'G'},{pos:40,chord:'D'}]},
+      {lyric:'Deus proverá...',anchors:[{pos:11,chord:'Am'}]},
+      {lyric:'Mesmo o cego me faz enxergar',anchors:[{pos:26,chord:'Em'}]},
+      {lyric:'Mesmo falho me faz andar / Sobre as águas ',anchors:[{pos:19,chord:'G'},{pos:36,chord:'D'}]},
+      {lyric:'Deus proverá',anchors:[{pos:11,chord:'Am'}]},
+      {lyric:'Quando o azeite e a farinha faltar',anchors:[{pos:32,chord:'Em'}]},
+      {lyric:'E a minha força se esgotar / Deus proverá ',anchors:[{pos:24,chord:'G'},{pos:40,chord:'D'}]},
+      {lyric:'Deus proverá...',anchors:[{pos:11,chord:'Am'}]},
+      {lyric:'Mesmo o cego me faz enxergar',anchors:[{pos:26,chord:'Em'}]},
+      {lyric:'Mesmo falho me faz andar / Sobre as águas ',anchors:[{pos:19,chord:'G'},{pos:36,chord:'D'}]}
+    ]
+    },
+    {
+      label:'Pré-Refrão',
+      lines:[
+      {lyric:'     Não vivo pela vista não /    Eu vivo pela fé então',anchors:[{pos:0,chord:'Em'},{pos:30,chord:'C'}]},
+      {lyric:'     Deus proverá /    Deus proverá',anchors:[{pos:0,chord:'G'},{pos:19,chord:'D'}]},
+      {lyric:'     Olho para o alto então /    Vem o socorro sim',anchors:[{pos:0,chord:'Em'},{pos:29,chord:'C'}]},
+      {lyric:'    Deus proverá /    Deus proverá...',anchors:[{pos:0,chord:'G'},{pos:18,chord:'D'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   1014 — QUÃO GRANDE É O MEU DEUS - SORAYA MORAES
+========================= */
+
+{
+  id:'1014',
+  number:'1014',
+  title:'QUÃO GRANDE É O MEU DEUS - Soraya Moraes',
+  category:'Louvor',
+  sourceToneIndex:9,
+
+  sections:[
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Quão grande é o meu Deus',anchors:[{pos:7,chord:'A'}]},
+      {lyric:'Cantarei  quão grande é o meu Deus',anchors:[{pos:6,chord:'E/G#'},{pos:12,chord:'F#m7'}]},
+      {lyric:'E todos hão de ver / Quão grande é o meu Deus   ',anchors:[{pos:9,chord:'F#m/E'},{pos:16,chord:'D9'},{pos:28,chord:'D/E'},{pos:42,chord:'A'},{pos:48,chord:'D/E'}]}
+    ]
+    },
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'Com esplendor de um Rei / Em majestade e luz',anchors:[{pos:4,chord:'A'},{pos:30,chord:'F#m7'}]},
+      {lyric:'Faz a Terra se alegrar / Faz a Terra se alegrar',anchors:[{pos:45,chord:'D9'}]},
+      {lyric:'Ele é a própria luz / E as trevas vão fugir',anchors:[{pos:0,chord:'A'},{pos:29,chord:'F#m7'}]},
+      {lyric:'Tremer com sua voz / Tremer com sua voz',anchors:[{pos:16,chord:'D9'},{pos:36,chord:'D/E'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Quão grande é o meu Deus',anchors:[{pos:7,chord:'A'}]},
+      {lyric:'Cantarei  quão grande é o meu Deus',anchors:[{pos:6,chord:'E/G#'},{pos:12,chord:'F#m7'}]},
+      {lyric:'E todos hão de ver / Quão grande é o meu Deus   ',anchors:[{pos:9,chord:'F#m/E'},{pos:16,chord:'D9'},{pos:28,chord:'D/E'},{pos:42,chord:'A'},{pos:48,chord:'D/E'}]}
+    ]
+    },
+    {
+      label:'2ª Parte',
+      lines:[
+      {lyric:'Por gerações Ele é / O tempo está em tuas mãos',anchors:[{pos:5,chord:'A'},{pos:24,chord:'F#m7'}]},
+      {lyric:'O começo e o fim / O começo e o fim',anchors:[{pos:33,chord:'D9'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Quão grande é o meu Deus',anchors:[{pos:7,chord:'A'}]},
+      {lyric:'Cantarei  quão grande é o meu Deus',anchors:[{pos:6,chord:'E/G#'},{pos:12,chord:'F#m7'}]},
+      {lyric:'E todos hão de ver / Quão grande é o meu Deus   ',anchors:[{pos:9,chord:'F#m/E'},{pos:16,chord:'D9'},{pos:28,chord:'D/E'},{pos:42,chord:'A'},{pos:48,chord:'D/E'}]},
+    ]
+    },
+    {
+      label:'3ª Parte',
+      lines:[ 
+      {lyric:'Três se formam em um / Filho, Espírito e Pai',anchors:[{pos:2,chord:'A'},{pos:24,chord:'F#m7'}]},
+      {lyric:'Cordeiro e leão / Cordeiro e leão',anchors:[{pos:13,chord:'D9'},{pos:31,chord:'D/E'}]},
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Quão grande é o meu Deus',anchors:[{pos:7,chord:'A'}]},
+      {lyric:'Cantarei  quão grande é o meu Deus',anchors:[{pos:6,chord:'E/G#'},{pos:12,chord:'F#m7'}]},
+      {lyric:'E todos hão de ver / Quão grande é o meu Deus   ',anchors:[{pos:9,chord:'F#m/E'},{pos:16,chord:'D9'},{pos:28,chord:'D/E'},{pos:42,chord:'A'},{pos:48,chord:'D/E'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    1100 — DE CORAÇÃO PRA CORAÇÃO - SHIRLEY CARVALHAES
 ========================= */
 

@@ -409,6 +409,12 @@ button.active{
   border-radius:9px;
 }
 
+/* Destaca a música atualmente selecionada */
+.song-item.active {
+  background: #efe5d8;
+  border-color: #dcc6ad;
+}
+
 .song-item {
   display:grid;
   grid-template-columns:minmax(0,1fr) 30px;
@@ -2022,7 +2028,7 @@ function splitLineAtSlash(lyric,anchors){
     O espaço inicial da segunda parte é preservado quando existir.
   */
   const left=leftRaw.replace(/\s+$/,'');
-  const right=rightRaw.replace(/^\s+/,' ');
+  const right = rightRaw;
 
   const cut=slash;
 
