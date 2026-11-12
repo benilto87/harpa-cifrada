@@ -5015,14 +5015,14 @@ const songs=[
       lines:[
       {lyric:'A Palavra de Deus é para mim,',anchors:[{pos:0,chord:'Bb'},{pos:25,chord:'Cm'}]},
       {lyric:'Um tesouro sem igual em valor!',anchors:[{pos:1,chord:'F'},{pos:26,chord:'Bb'}]},
-      {lyric:'Fala do amor de Deus, do amor que não tem fim;',anchors:[{pos:0,chord:'Bb'},{pos:9,chord:'Cm'},{pos:23,chord:'F'},{pos:35,chord:'Bb'}]},
-      {lyric:'Mais precioso do que ouro é este amor!',anchors:[{pos:1,chord:'Bb'},{pos:26,chord:'F'},{pos:35,chord:'Bb'}]}
+      {lyric:'Fala do amor de Deus, / do amor que não tem fim;',anchors:[{pos:0,chord:'Bb'},{pos:9,chord:'Cm'},{pos:25,chord:'F'},{pos:37,chord:'Bb'}]},
+      {lyric:'Mais precioso do que ouro é este amor!',anchors:[{pos:1,chord:'Bb'},{pos:26,chord:'F'},{pos:34,chord:'Bb'}]}
     ]
     },
     {
       label:'Coro',
       lines:[
-      {lyric:'A Palavra de Deus é doce, mais que o mel,',anchors:[{pos:0,chord:'Bb'},{pos:37,chord:'Cm'}]},
+      {lyric:'A Palavra de Deus é doce, / mais que o mel,',anchors:[{pos:0,chord:'Bb'},{pos:39,chord:'Cm'}]},
       {lyric:'O que a toma pela fé há de ser fiel,',anchors:[{pos:0,chord:'F'},{pos:32,chord:'Bb'}]},
       {lyric:'Porque Deus nos concedeu o Emanuel,',anchors:[{pos:1,chord:'Bb'},{pos:31,chord:'Eb'}]},
       {lyric:'Rocha viva donde mana leite e mel.',anchors:[{pos:0,chord:'Eb'},{pos:11,chord:'Bb'},{pos:23,chord:'F'},{pos:30,chord:'Bb'}]}
@@ -5042,7 +5042,7 @@ const songs=[
       lines:[
       {lyric:'É um farol que sempre resplandeceu,',anchors:[{pos:0,chord:'Bb'},{pos:31,chord:'Cm'}]},
       {lyric:'E que mostra o porto da salvação;',anchors:[{pos:0,chord:'F'},{pos:29,chord:'Bb'}]},
-      {lyric:'Quem na arca já entrou e do mundo se esqueceu,',anchors:[{pos:1,chord:'Bb'},{pos:11,chord:'Cm'},{pos:22,chord:'F'},{pos:35,chord:'Bb'}]},
+      {lyric:'Quem na arca já entrou e / do mundo se esqueceu,',anchors:[{pos:1,chord:'Bb'},{pos:12,chord:'Cm'},{pos:22,chord:'F'},{pos:37,chord:'Bb'}]},
       {lyric:'Chegará por certo à eternal mansão.',anchors:[{pos:1,chord:'Bb'},{pos:24,chord:'F'},{pos:31,chord:'Bb'}]}
     ]
     }
@@ -8544,6 +8544,94 @@ const songs=[
       {lyric:'E em todo momento comigo Ele está',anchors:[{pos:28,chord:'D#m'}]},
       {lyric:'E com Ele vou até o fim',anchors:[{pos:7,chord:'B'},{pos:12,chord:'C#'},{pos:21,chord:'F#'}]},
       {lyric:'Pois só Ele sabe tudo sobre mim',anchors:[{pos:10,chord:'B'},{pos:20,chord:'C#'},{pos:31,chord:'F#'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   1016 — PRIMEIRA ESSÊNCIA
+========================= */
+
+{
+  id:'1016',
+  number:'1016',
+  title:'PRIMEIRA ESSÊNCIA',
+  category:'Louvor',
+  sourceToneIndex:11,
+
+  sections:[
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'Estou no meu jardim /   Tranquei a porta',anchors:[{pos:0,chord:'D'},{pos:3,chord:'A'},{pos:8,chord:'G'},{pos:18,chord:'A'},{pos:23,chord:'G'},{pos:39,chord:'D'}]},
+      {lyric:'     Abri meu coração / Reguei   minhas raízes',anchors:[{pos:0,chord:'Em'},{pos:15,chord:'A'},{pos:26,chord:'D'},{pos:29,chord:'A'},{pos:31,chord:'G'},{pos:43,chord:'F#m'}]},
+      {lyric:'    Com minhas lágrimas    / Gotas de adoração',anchors:[{pos:0,chord:'G'},{pos:18,chord:'D'},{pos:24,chord:'Em'},{pos:45,chord:'A'}]}
+    ]
+    },
+    {
+      label:'Pré-Refrão',
+      lines:[
+      {lyric:'    Senhor, não quero que os meus olhos',anchors:[{pos:0,chord:'G'},{pos:38,chord:'A'}]},
+      {lyric:'Percam o brilho / Do primeiro amor por Ti',anchors:[{pos:1,chord:'D'},{pos:19,chord:'G'},{pos:40,chord:'E'}]},
+      {lyric:'Não quero que em mim se perca / O desejo de te adorar',anchors:[{pos:25,chord:'A'},{pos:33,chord:'G'},{pos:52,chord:'A'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Vem, Senhor e me resgata',anchors:[{pos:1,chord:'D'},{pos:7,chord:'A'},{pos:10,chord:'Bm'},{pos:23,chord:'A'}]},
+      {lyric:'     Todos os dias,    só pra te adorar',anchors:[{pos:0,chord:'G'},{pos:17,chord:'D'},{pos:22,chord:'Em'},{pos:38,chord:'A'}]},
+      {lyric:'Que_ro ser teu bom perfume',anchors:[{pos:2,chord:'D'},{pos:5,chord:'A'},{pos:9,chord:'Bm'},{pos:25,chord:'A'}]},
+      {lyric:'     Primeira essência /       Jardim particular   ',anchors:[{pos:0,chord:'G'},{pos:18,chord:'D'},{pos:26,chord:'Em'},{pos:46,chord:'A'},{pos:50,chord:'D'}]}
+    ]
+    },
+    {
+      label:'2ª Parte',
+      lines:[
+      {lyric:'Estou no meu jardim /   Tranquei a porta',anchors:[{pos:0,chord:'D'},{pos:3,chord:'A'},{pos:8,chord:'G'},{pos:18,chord:'F#m'},{pos:24,chord:'G'},{pos:39,chord:'D'}]},
+      {lyric:'      Abri meu coração / Reguei   minhas raízes',anchors:[{pos:0,chord:'Em'},{pos:16,chord:'A'},{pos:27,chord:'D'},{pos:30,chord:'A'},{pos:33,chord:'G'},{pos:44,chord:'F#m'}]},
+      {lyric:'    Com minhas lágrimas    / Gotas de adoração',anchors:[{pos:0,chord:'G'},{pos:18,chord:'D'},{pos:24,chord:'Em'},{pos:45,chord:'A'}]}
+    ]
+    },
+    {
+      label:'Pré-Refrão',
+      lines:[
+      {lyric:'    Senhor, não quero que os meus olhos',anchors:[{pos:0,chord:'G'},{pos:38,chord:'A'}]},
+      {lyric:'Percam o brilho / Do primeiro amor por Ti',anchors:[{pos:1,chord:'D'},{pos:19,chord:'G'},{pos:40,chord:'E'}]},
+      {lyric:'Não quero que em mim se perca / O desejo de te adorar',anchors:[{pos:25,chord:'A'},{pos:33,chord:'G'},{pos:52,chord:'A'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Vem, Senhor e me resgata',anchors:[{pos:1,chord:'D'},{pos:7,chord:'A'},{pos:10,chord:'Bm'},{pos:23,chord:'A'}]},
+      {lyric:'     Todos os dias,    só pra te adorar',anchors:[{pos:0,chord:'G'},{pos:17,chord:'D'},{pos:22,chord:'Em'},{pos:38,chord:'A'}]},
+      {lyric:'Que_ro ser teu bom perfume',anchors:[{pos:2,chord:'D'},{pos:5,chord:'A'},{pos:9,chord:'Bm'},{pos:25,chord:'A'}]},
+      {lyric:'     Primeira essência /       Jardim particular   ',anchors:[{pos:0,chord:'G'},{pos:18,chord:'D'},{pos:25,chord:'Em'},{pos:47,chord:'G'},{pos:50,chord:'A'}]}
+    ]
+    },
+    {
+      label:'Pré-Refrão',
+      lines:[
+      {lyric:'Te adoro / Te adoro',anchors:[{pos:1,chord:'Bm'},{pos:18,chord:'G'}]},
+      {lyric:'     Vem sobre mim, Senhor / Vem sobre mim, Senhor',anchors:[{pos:0,chord:'D'}]},
+      {lyric:'     Vem sobre mim, Senhor / Vem sobre mim, Senhor',anchors:[{pos:0,chord:'A'}]},
+      {lyric:'Te adoro / Te adoro',anchors:[{pos:1,chord:'Bm'},{pos:18,chord:'G'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Vem, Senhor e me resgata',anchors:[{pos:1,chord:'D'},{pos:7,chord:'A'},{pos:10,chord:'Bm'},{pos:23,chord:'A'}]},
+      {lyric:'     Todos os dias,    só pra te adorar',anchors:[{pos:0,chord:'G'},{pos:17,chord:'D'},{pos:22,chord:'Em'},{pos:38,chord:'A'}]},
+      {lyric:'Que_ro ser teu bom perfume',anchors:[{pos:2,chord:'D'},{pos:5,chord:'A'},{pos:9,chord:'Bm'},{pos:25,chord:'A'}]},
+      {lyric:'     Primeira essência /     Jardim particular   ',anchors:[{pos:0,chord:'G'},{pos:18,chord:'D'},{pos:26,chord:'Em'},{pos:43,chord:'A'},{pos:47,chord:'Bm'}]},
+      {lyric:'Vem, Senhor e me resgata',anchors:[{pos:1,chord:'D'},{pos:7,chord:'A'},{pos:10,chord:'Bm'},{pos:23,chord:'A'}]},
+      {lyric:'     Todos os dias,    só pra te adorar',anchors:[{pos:0,chord:'G'},{pos:17,chord:'D'},{pos:22,chord:'Em'},{pos:38,chord:'A'}]},
+      {lyric:'Que_ro ser teu bom perfume',anchors:[{pos:2,chord:'D'},{pos:5,chord:'A'},{pos:9,chord:'Bm'},{pos:25,chord:'A'}]},
+      {lyric:'     Primeira essência /      Jardim particular   ',anchors:[{pos:0,chord:'G'},{pos:18,chord:'D'},{pos:26,chord:'Em'},{pos:44,chord:'A'},{pos:48,chord:'Bm'}]},
+      {lyric:'  Jardim particular',anchors:[{pos:0,chord:'G'},{pos:14,chord:'A'},{pos:18,chord:'D'}]}
     ]
     }
   ]
