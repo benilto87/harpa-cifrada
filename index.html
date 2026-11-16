@@ -1291,6 +1291,28 @@ body.sequence-active .tone-pill{
   font-weight: normal !important;
 }
 
+/* Link do YouTube no final da música */
+.song-youtube-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 18px 7px 24px;
+  color: #222;
+  font: 500 .9rem Arial, sans-serif;
+  text-decoration: none;
+}
+
+.song-youtube-link svg {
+  width: 21px;
+  height: 15px;
+  color: #ff0033;
+  flex-shrink: 0;
+}
+
+.song-youtube-link:hover {
+  text-decoration: underline;
+}
+
 </style><span></span></label>
 <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
 
@@ -2593,6 +2615,28 @@ document.addEventListener('keydown',e=>{
 window.addEventListener('resize',positionChordPopup,{passive:true});
 window.addEventListener('scroll',positionChordPopup,{passive:true,capture:true});
 
+function appendYoutubeLink(container,song){
+
+  if(!song.youtubeUrl) return;
+
+  const link = document.createElement('a');
+
+  link.className = 'song-youtube-link';
+  link.href = song.youtubeUrl;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.innerHTML = `
+  <svg viewBox="0 0 24 17" fill="none"
+       xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="22" height="15"
+          rx="4" stroke="currentColor" stroke-width="2"/>
+    <path d="M10 5L16 8.5L10 12V5Z" fill="currentColor"/>
+  </svg>
+  <span>Ouvir no YouTube</span>
+`;
+
+  container.appendChild(link);
+}
 
 function renderSequenceSong(song,entry,index){
 
@@ -2904,20 +2948,22 @@ if (labelSecao === 'pre-refrao') {
     root.appendChild(section);
   });
 
+  appendYoutubeLink(root,s);
+
   document.getElementById('score').classList.toggle(
-  'section-markers-hidden',
-  sectionsHidden
-);
+    'section-markers-hidden',
+    sectionsHidden
+  );
 
-document.getElementById('score').classList.toggle(
-  'auto-scroll-mode',
-  autoScrollMode
-);
+  document.getElementById('score').classList.toggle(
+    'auto-scroll-mode',
+    autoScrollMode
+  );
 
-document.body.classList.toggle(
-  'rolagem-ativa',
-  autoScrollMode
-);
+  document.body.classList.toggle(
+    'rolagem-ativa',
+    autoScrollMode
+  );
 
   const sb=document.getElementById('toggleSections');
   sb.classList.toggle('active',sectionsHidden);

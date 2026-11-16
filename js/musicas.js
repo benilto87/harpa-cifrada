@@ -3809,6 +3809,7 @@ const songs=[
   title:'DESEJAMOS IR LÁ',
   category:'Harpa Cristã',
   sourceToneIndex:5,
+  youtubeUrl:'https://youtu.be/9pMY9ogillk?list=RD9pMY9ogillk',
 
   sections:[
     {
@@ -8632,6 +8633,105 @@ const songs=[
       {lyric:'Que_ro ser teu bom perfume',anchors:[{pos:2,chord:'D'},{pos:5,chord:'A'},{pos:9,chord:'Bm'},{pos:25,chord:'A'}]},
       {lyric:'     Primeira essência /      Jardim particular   ',anchors:[{pos:0,chord:'G'},{pos:18,chord:'D'},{pos:26,chord:'Em'},{pos:44,chord:'A'},{pos:48,chord:'Bm'}]},
       {lyric:'  Jardim particular',anchors:[{pos:0,chord:'G'},{pos:14,chord:'A'},{pos:18,chord:'D'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   1017 — AGNUS DEI - DAVID QUINLAN
+========================= */
+
+{
+  id:'1017',
+  number:'1017',
+  title:'AGNUS DEI - David Quinlan',
+  category:'Louvor',
+  sourceToneIndex:0,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Aleluia, aleluia!          ',anchors:[{pos:0,chord:'E'},{pos:3,chord:'A'},{pos:6,chord:'E'},{pos:15,chord:'A'},{pos:19,chord:'B'},{pos:27,chord:'C#m'}]},
+      {lyric:'Poderoso é o Senhor nosso Deus',anchors:[{pos:0,chord:'A'},{pos:14,chord:'B'},{pos:27,chord:'E'}]},
+      {lyric:'Aleluia, aleluia!        ',anchors:[{pos:0,chord:'E'},{pos:3,chord:'A'},{pos:6,chord:'E'},{pos:14,chord:'A'},{pos:19,chord:'B'},{pos:25,chord:'C#m'}]},
+      {lyric:'Poderoso é o Senhor nosso Deus',anchors:[{pos:0,chord:'A'},{pos:14,chord:'B'},{pos:27,chord:'E'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'Aleluia       ',anchors:[{pos:0,chord:'E'},{pos:6,chord:'A'},{pos:9,chord:'B'},{pos:14,chord:'C#m'}]},
+      {lyric:'Santo, santo é o Senhor Deus, poderoso',anchors:[{pos:0,chord:'A'},{pos:2,chord:'B'},{pos:4,chord:'E'},{pos:8,chord:'A'},{pos:11,chord:'E'},{pos:19,chord:'A'},{pos:26,chord:'E'},{pos:33,chord:'C#m'},{pos:38,chord:'B'}]},
+      {lyric:'Digno de louvor, digno de louvor',anchors:[{pos:0,chord:'C#m'},{pos:6,chord:'B'},{pos:12,chord:'D'},{pos:19,chord:'E'},{pos:29,chord:'F#m'}]},
+      {lyric:'Tu é santo, santo é / o Senhor Deus, poderoso',anchors:[{pos:6,chord:'B'},{pos:10,chord:'E'},{pos:14,chord:'A'},{pos:16,chord:'E'},{pos:26,chord:'A'},{pos:33,chord:'E'},{pos:35,chord:'C#m'},{pos:44,chord:'B'}]},
+      {lyric:'Digno de louvor, digno de louvor!',anchors:[{pos:0,chord:'C#m'},{pos:6,chord:'B'},{pos:11,chord:'F#m'},{pos:18,chord:'E'},{pos:28,chord:'F#m'}]},
+      {lyric:'Amém!',anchors:[{pos:0,chord:'B'},{pos:4,chord:'E'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   1018 — A ELE A GLÓRIA - DIANTE DO TRONO (Em)
+========================= */
+
+{
+  id:'1018',
+  number:'1018',
+  title:'A ELE A GLÓRIA - Diante do Trono',
+  category:'Louvor',
+  sourceToneIndex:4,
+  youtubeUrl:'https://youtu.be/Q_MerFW9qA4?list=RDQ_MerFW9qA4',
+
+  sections:[
+    {
+      label:'1ª Parte',
+      lines:[
+      {lyric:'       Porque dEle e por Ele',anchors:[{pos:0,chord:'Em'},{pos:25,chord:'C'}]},
+      {lyric:'Para Ele são todas as coisas',anchors:[{pos:5,chord:'D9'},{pos:23,chord:'Em'}]},
+      {lyric:'Porque dEle e por Ele',anchors:[{pos:18,chord:'C'}]},
+      {lyric:'Para Ele são todas as coisas            ',anchors:[{pos:5,chord:'D9'},{pos:23,chord:'Em'},{pos:30,chord:'Em7'},{pos:37,chord:'E7'}]},
+      {lyric:'Porque dEle e por Ele',anchors:[{pos:18,chord:'C'}]},
+      {lyric:'Para Ele são todas as coisas',anchors:[{pos:5,chord:'D9'},{pos:23,chord:'Em'}]},
+      {lyric:'Porque dEle e por Ele',anchors:[{pos:18,chord:'C'}]},
+      {lyric:'Para Ele são todas as coisas',anchors:[{pos:5,chord:'D9'},{pos:23,chord:'Em'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'A Ele a Glória',anchors:[{pos:10,chord:'C'},{pos:13,chord:'D9'}]},
+      {lyric:'A Ele a Gló______ria',anchors:[{pos:10,chord:'G'},{pos:13,chord:'D/F#'},{pos:19,chord:'Em'}]},
+      {lyric:'Ele a Glória, pra sempre amém',anchors:[{pos:8,chord:'C'},{pos:11,chord:'Bm7'},{pos:27,chord:'Em7'}]},
+      {lyric:'A Ele a Glória',anchors:[{pos:10,chord:'C'},{pos:13,chord:'D9'}]},
+      {lyric:'A Ele a Gló______ria',anchors:[{pos:10,chord:'G'},{pos:13,chord:'D/F#'},{pos:19,chord:'Em'}]},
+      {lyric:'Ele a Glória, pra sempre amém',anchors:[{pos:8,chord:'C'},{pos:11,chord:'Bm7'},{pos:27,chord:'Em'}]}
+    ]
+    },
+    {
+      label:'2ª Parte',
+      lines:[
+      {lyric:'       Quão profundas riquezas',anchors:[{pos:0,chord:'Em'},{pos:26,chord:'C'}]},
+      {lyric:'O saber e o conhecer de Deus',anchors:[{pos:5,chord:'D9'},{pos:25,chord:'Em'}]},
+      {lyric:'Quão insondáveis, seus juízos',anchors:[{pos:11,chord:'C'},{pos:25,chord:'D9'}]},
+      {lyric:'E seus caminhos         ',anchors:[{pos:10,chord:'Em'},{pos:17,chord:'Em7'},{pos:24,chord:'E7'}]},
+      {lyric:'Quão profundas riquezas',anchors:[{pos:19,chord:'C'}]},
+      {lyric:'O saber e o conhecer de Deus',anchors:[{pos:5,chord:'D9'},{pos:25,chord:'Em'}]},
+      {lyric:'Quão insondáveis, seus juízos',anchors:[{pos:11,chord:'C'},{pos:25,chord:'D9'}]},
+      {lyric:'E seus caminhos',anchors:[{pos:10,chord:'Em'}]}
+    ]
+    },
+    {
+      label:'Refrão',
+      lines:[
+      {lyric:'A Ele a Glória',anchors:[{pos:10,chord:'C'},{pos:13,chord:'D9'}]},
+      {lyric:'A Ele a Gló______ria',anchors:[{pos:10,chord:'G'},{pos:13,chord:'D/F#'},{pos:19,chord:'Em'}]},
+      {lyric:'Ele a Glória, pra sempre amém',anchors:[{pos:8,chord:'C'},{pos:11,chord:'Bm7'},{pos:27,chord:'Em7'}]},
+      {lyric:'A Ele a Glória',anchors:[{pos:10,chord:'C'},{pos:13,chord:'D9'}]},
+      {lyric:'A Ele a Gló______ria',anchors:[{pos:10,chord:'G'},{pos:13,chord:'D/F#'},{pos:19,chord:'Em'}]},
+      {lyric:'Ele a Glória, pra sempre amém',anchors:[{pos:8,chord:'C'},{pos:11,chord:'Bm7'},{pos:27,chord:'Em'}]}
     ]
     }
   ]
