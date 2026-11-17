@@ -1876,6 +1876,7 @@ const songs=[
       url:'https://youtu.be/tdEQwNQLRfU?list=RDtdEQwNQLRfU'
     }
   ],
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -1936,7 +1937,17 @@ const songs=[
   title:'JESUS PROCURA A OVELHA',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-  youtubeUrl:'https://youtu.be/SN-jb-xo_7M?list=RDSN-jb-xo_7M',
+  youtubeUrl:'',
+    youtubeUrls:[
+    {
+      label:'Ouvir no YouTube — opção 1',
+      url:'https://youtu.be/n2-sKqISGRc?list=RDn2-sKqISGRc'
+    },
+    {
+      label:'Ouvir no YouTube — opção 2',
+      url:'https://youtu.be/SN-jb-xo_7M?list=RDSN-jb-xo_7M'
+    }
+  ],
   
   sections:[
     {
