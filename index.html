@@ -1293,13 +1293,15 @@ body.sequence-active .tone-pill{
 
 /* Link do YouTube no final da música */
 .song-youtube-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  margin: 18px 7px 24px;
-  color: #222;
-  font: 500 .9rem Arial, sans-serif;
-  text-decoration: none;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  width:max-content;
+  margin:20px 7px 8px;
+
+  color:#222;
+  font:500 .9rem Arial,sans-serif;
+  text-decoration:none;
 }
 
 .song-youtube-link svg {
@@ -2617,25 +2619,42 @@ window.addEventListener('scroll',positionChordPopup,{passive:true,capture:true})
 
 function appendYoutubeLink(container,song){
 
-  if(!song.youtubeUrl) return;
+  // Aceita vários links ou o formato antigo de um único link.
+  const links = Array.isArray(song.youtubeUrls)
+    ? song.youtubeUrls
+    : song.youtubeUrl
+      ? [{label:'Ouvir no YouTube',url:song.youtubeUrl}]
+      : [];
 
-  const link = document.createElement('a');
+  links.forEach((item,index)=>{
 
-  link.className = 'song-youtube-link';
-  link.href = song.youtubeUrl;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
-  link.innerHTML = `
-  <svg viewBox="0 0 24 17" fill="none"
-       xmlns="http://www.w3.org/2000/svg">
-    <rect x="1" y="1" width="22" height="15"
-          rx="4" stroke="currentColor" stroke-width="2"/>
-    <path d="M10 5L16 8.5L10 12V5Z" fill="currentColor"/>
-  </svg>
-  <span>Ouvir no YouTube</span>
-`;
+    if(!item.url) return;
 
-  container.appendChild(link);
+    const link = document.createElement('a');
+
+    link.className = 'song-youtube-link';
+    link.href = item.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+
+    const svg = `
+      <svg viewBox="0 0 24 17" fill="none"
+           xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="22" height="15"
+              rx="4" stroke="currentColor" stroke-width="2"/>
+        <path d="M10 5L16 8.5L10 12V5Z"
+              fill="currentColor"/>
+      </svg>
+    `;
+
+    link.innerHTML = svg;
+
+    const texto = document.createElement('span');
+    texto.textContent = item.label || `Ouvir no YouTube ${index+1}`;
+
+    link.appendChild(texto);
+    container.appendChild(link);
+  });
 }
 
 function renderSequenceSong(song,entry,index){

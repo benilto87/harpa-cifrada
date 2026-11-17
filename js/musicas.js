@@ -408,6 +408,71 @@ const songs=[
 },
 
 /* =========================
+   014 — GOZO EM JESUS
+========================= */
+
+{
+  id:'014',
+  number:'014',
+  title:'GOZO EM JESUS',
+  category:'Harpa Cristã',
+  sourceToneIndex:8,
+  youtubeUrls:[
+    {
+      label:'Ouvir no YouTube — opção 1',
+      url:'https://youtu.be/duPreFoiVhI'
+    },
+    {
+      label:'Ouvir no YouTube — opção 2',
+      url:'https://youtu.be/B9T3iCYJfFU'
+    }
+  ],
+  
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Oh! que gozo sinto em Jesus,',anchors:[{pos:0,chord:'Ab'},{pos:19,chord:'Db'},{pos:25,chord:'Ab'}]},
+      {lyric:'Que por mim expirou na cruz;',anchors:[{pos:1,chord:'Eb'},{pos:17,chord:'Ab'}]},
+      {lyric:'A minh’alma deu divina luz, / Glória a meu Jesus!',anchors:[{pos:0,chord:'Ab'},{pos:18,chord:'Db'},{pos:24,chord:'Ab'},{pos:30,chord:'Eb'},{pos:46,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Quanto glória vejo em Jesus,',anchors:[{pos:1,chord:'Ab'},{pos:19,chord:'Eb'}]},
+      {lyric:'Gozo santo e bendita luz,',anchors:[{pos:0,chord:'Eb'},{pos:16,chord:'Ab'}]},
+      {lyric:'Cujos raios brilham lá na cruz,',anchors:[{pos:0,chord:'Bb'},{pos:20,chord:'Eb'}]},
+      {lyric:'Na qual morreu Jesus.',anchors:[{pos:4,chord:'Bb'},{pos:17,chord:'Eb'}]},
+      {lyric:'Sempre avante quero eu andar,',anchors:[{pos:1,chord:'Ab'},{pos:20,chord:'Db'},{pos:26,chord:'Ab'}]},
+      {lyric:'Té no céu chegar.',anchors:[{pos:0,chord:'Eb'},{pos:14,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Livre do pecado já estou, / Do abismo me retirou,',anchors:[{pos:0,chord:'Ab'},{pos:16,chord:'Db'},{pos:21,chord:'Ab'},{pos:28,chord:'Eb'},{pos:41,chord:'Ab'}]},
+      {lyric:'Sobre a rocha eterna me firmou; / Glória a meu Jesus!',anchors:[{pos:0,chord:'Ab'},{pos:21,chord:'Db'},{pos:28,chord:'Ab'},{pos:34,chord:'Eb'},{pos:49,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Divinal louvor Jesus me deu; / Harmonia que vem do céu;',anchors:[{pos:0,chord:'Ab'},{pos:18,chord:'Db'},{pos:25,chord:'Ab'},{pos:32,chord:'Eb'},{pos:45,chord:'Ab'}]},
+      {lyric:'Cantarei, alegre, Cristo é meu, / Glória a meu Jesus!',anchors:[{pos:0,chord:'Ab'},{pos:18,chord:'Db'},{pos:28,chord:'Ab'},{pos:34,chord:'Eb'},{pos:50,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Esta nova hei de proclamar; / Muitos hão de assim chegar,',anchors:[{pos:0,chord:'Ab'},{pos:18,chord:'Db'},{pos:24,chord:'Ab'},{pos:31,chord:'Eb'},{pos:47,chord:'Ab'}]},
+      {lyric:'E a glória receber, sem par, / Glória a meu Jesus!',anchors:[{pos:0,chord:'Ab'},{pos:16,chord:'Db'},{pos:25,chord:'Ab'},{pos:32,chord:'Eb'},{pos:47,chord:'Ab'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    015 — CONVERSÃO
 ========================= */
 
@@ -478,7 +543,7 @@ const songs=[
   title:'DESPERTAR PARA O TRABALHO',
   category:'Harpa Cristã',
   sourceToneIndex:2,
-
+  youtubeUrl:'https://youtu.be/GGmeRKC8CO0?list=RDGGmeRKC8CO0',
   sections:[
     {
       label:'1ª Estrofe',
@@ -786,7 +851,8 @@ const songs=[
   title:'CRISTO P’RA MIM',
   category:'Harpa Cristã',
   sourceToneIndex:8,
-
+  youtubeUrl:'https://youtu.be/Lsqhl3oGFXs?list=RDLsqhl3oGFXs',
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -904,6 +970,7 @@ const songs=[
   title:'SAUDAI JESUS',
   category:'Harpa Cristã',
   sourceToneIndex:8,
+  youtubeUrl:'https://youtu.be/Qi5GniH3qjA?list=RDQi5GniH3qjA',
 
   sections:[
     {
@@ -1123,6 +1190,7 @@ const songs=[
   title:'ACORDAI, ACORDAI',
   category:'Harpa Cristã',
   sourceToneIndex:8,
+  youtubeUrl:'https://youtu.be/CbynIQ2AFxs?list=RDCbynIQ2AFxs',
 
   sections:[
     {
@@ -1188,6 +1256,7 @@ const songs=[
   title:'EM JESUS TENS A PALMA DA VITÓRIA',
   category:'Harpa Cristã',
   sourceToneIndex:10,
+  youtubeUrl:'https://youtu.be/LJyGJOmg71c?list=RDLJyGJOmg71c',
 
   sections:[
     {
@@ -1360,6 +1429,7 @@ const songs=[
   title:'SATISFEITO COM CRISTO',
   category:'Harpa Cristã',
   sourceToneIndex:7,
+  youtubeUrl:'https://youtu.be/h3GvigFFoCA?list=RDh3GvigFFoCA',
 
   sections:[
     {
@@ -1411,7 +1481,8 @@ const songs=[
   title:'MEU TESTEMUNHO',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  youtubeUrl:'https://youtu.be/Ihb49YjA8Cs?list=RDIhb49YjA8Cs',
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -1537,7 +1608,8 @@ const songs=[
   title:'SUBLIME E GRANDE AMOR',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  youtubeUrl:'https://youtu.be/qI4DYLaHi3Q?list=RDqI4DYLaHi3Q',
+ 
   sections:[
     {
       label:'1ª estrofe',
@@ -1604,7 +1676,8 @@ const songs=[
   title:'NÍVEA LUZ',
   category:'Harpa Cristã',
   sourceToneIndex:9,
-
+  youtubeUrl:'https://youtu.be/Za2VSiL4HNs?list=RDZa2VSiL4HNs', 
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -1662,7 +1735,17 @@ const songs=[
   title:'NA JERUSALÉM DE DEUS',
   category:'Harpa Cristã',
   sourceToneIndex:9,
-
+    youtubeUrls:[
+    {
+      label:'Ouvir no YouTube — opção 1',
+      url:'https://youtu.be/KRmaUiIR67g?list=RDKRmaUiIR67g'
+    },
+    {
+      label:'Ouvir no YouTube — opção 2',
+      url:'https://youtu.be/j-SwbQjUyIw?list=RDj-SwbQjUyIw'
+    }
+  ],
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -1783,7 +1866,16 @@ const songs=[
   title:'O BOM CONSOLADOR',
   category:'Harpa Cristã',
   sourceToneIndex:0,
-
+    youtubeUrls:[
+    {
+      label:'Ouvir no YouTube — opção 1',
+      url:'https://youtu.be/wqELQFWZqFE?list=RDwqELQFWZqFE'
+    },
+    {
+      label:'Ouvir no YouTube — opção 2',
+      url:'https://youtu.be/tdEQwNQLRfU?list=RDtdEQwNQLRfU'
+    }
+  ],
   sections:[
     {
       label:'1ª estrofe',
@@ -1844,7 +1936,8 @@ const songs=[
   title:'JESUS PROCURA A OVELHA',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-
+  youtubeUrl:'https://youtu.be/SN-jb-xo_7M?list=RDSN-jb-xo_7M',
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3809,7 +3902,16 @@ const songs=[
   title:'DESEJAMOS IR LÁ',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-  youtubeUrl:'https://youtu.be/9pMY9ogillk?list=RD9pMY9ogillk',
+  youtubeUrls:[
+    {
+      label:'Ouvir no YouTube — opção 1',
+      url:'https://youtu.be/9pMY9ogillk'
+    },
+    {
+      label:'Ouvir no YouTube — opção 2',
+      url:'https://youtu.be/TxrapIRW7W4?list=RDTxrapIRW7W4'
+    }
+  ],
 
   sections:[
     {
