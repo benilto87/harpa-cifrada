@@ -793,6 +793,26 @@ button.active{
     padding:5px 4px;
   }
 
+  .score.louvor-mode .stanza-heading{
+    gap:5px;
+  }
+
+  .louvor-section-controls{
+    gap:2px;
+  }
+
+  .louvor-section-controls button{
+    width:23px;
+    min-width:23px;
+    height:23px;
+    min-height:23px;
+  }
+
+  .louvor-arrangement-dialog{
+    max-height:86vh;
+    padding:11px;
+  }
+
 }
 
 .sequence-builder{
@@ -1218,6 +1238,11 @@ Título elegante das músicas de Louvor / INATIVO POR HORA
 }
 
 .sequence-song-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+
   background:#fffdf9;
   border:1px solid var(--line);
   border-left:4px solid var(--accent);
@@ -1291,6 +1316,305 @@ body.sequence-active .tone-pill{
   font-weight: normal !important;
 }
 
+
+/* Botão único do organizador dentro da primeira seção do Louvor */
+.louvor-arrangement-open{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:27px;
+  min-width:27px;
+  height:25px;
+  min-height:25px;
+  padding:0;
+  border:1px solid #d8c4ad;
+  border-radius:6px;
+  background:#fffdf9;
+  color:#704323;
+  font:700 17px/1 Arial,sans-serif;
+  transform:none !important;
+  outline:none;
+}
+
+.louvor-arrangement-open:hover,
+.louvor-arrangement-open:focus-visible{
+  background:#f0e7da;
+  border-color:#cbb397;
+  outline:none;
+}
+
+.louvor-arrangement-overlay{
+  position:fixed;
+  inset:0;
+  z-index:9500;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px;
+  background:rgba(35,29,23,.42);
+}
+
+.louvor-arrangement-dialog{
+  display:flex;
+  flex-direction:column;
+  width:min(440px,96vw);
+  max-height:min(82vh,720px);
+  padding:14px;
+  border:1px solid #d8cbbb;
+  border-radius:13px;
+  background:#fffdf9;
+  box-shadow:0 14px 40px rgba(40,30,20,.24);
+  font-family:Arial,sans-serif;
+}
+
+.louvor-arrangement-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding-bottom:10px;
+  border-bottom:1px solid #e4dbcf;
+}
+
+
+.louvor-arrangement-header-actions{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex:0 0 auto;
+}
+
+.louvor-arrangement-restore{
+  min-height:30px;
+  padding:4px 8px;
+  border:1px solid #d8c4ad;
+  border-radius:6px;
+  background:#fff8ef;
+  color:#704323;
+  font:600 .68rem Arial,sans-serif;
+  white-space:nowrap;
+}
+.louvor-arrangement-restore:hover,
+.louvor-arrangement-restore:focus-visible{
+  background:#f0e7da;
+  outline:none;
+}
+
+.louvor-arrangement-undo{
+  min-height:30px;
+  padding:4px 9px;
+  border:1px solid #d8c4ad;
+  border-radius:6px;
+  background:#fffdf9;
+  color:#704323;
+  font:600 .72rem Arial,sans-serif;
+}
+
+.louvor-arrangement-undo:disabled{
+  opacity:.35;
+  cursor:default;
+}
+
+.louvor-arrangement-header strong{
+  display:block;
+  color:#704323;
+  font-size:.88rem;
+  letter-spacing:.04em;
+}
+
+.louvor-arrangement-header small{
+  display:block;
+  margin-top:4px;
+  color:#746e64;
+  font-size:.73rem;
+}
+
+.louvor-arrangement-close{
+  width:30px;
+  min-width:30px;
+  height:30px;
+  min-height:30px;
+  padding:0;
+  font-size:18px;
+}
+
+.louvor-arrangement-hint{
+  padding:9px 1px 5px;
+  color:#746e64;
+  font-size:.72rem;
+  line-height:1.35;
+}
+
+.louvor-arrangement-count{
+  padding:0 1px 8px;
+  color:#8a6344;
+  font-size:.72rem;
+  font-weight:700;
+}
+
+.louvor-arrangement-list{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  min-height:50px;
+  overflow:auto;
+  padding:2px 2px 8px 0;
+}
+
+.louvor-arrangement-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:8px;
+  padding:7px 8px;
+  border:1px solid #e0d6ca;
+  border-radius:8px;
+  background:#fff;
+}
+
+.louvor-arrangement-row.is-copy{
+  border-color:#d8bfa4;
+  background:#fbf6ef;
+}
+
+.louvor-arrangement-info{
+  min-width:0;
+}
+
+.louvor-arrangement-info strong{
+  display:block;
+  overflow-wrap:anywhere;
+  color:#29241f;
+  font-size:.82rem;
+}
+
+.louvor-arrangement-info small{
+  display:block;
+  margin-top:3px;
+  color:#8a6344;
+  font-size:.66rem;
+}
+
+.louvor-arrangement-footer{
+  display:flex;
+  justify-content:flex-end;
+  padding-top:9px;
+  border-top:1px solid #e4dbcf;
+}
+
+.louvor-arrangement-footer button{
+  min-width:95px;
+}
+
+/* =========================================================
+   ORGANIZADOR DE SEÇÕES DOS LOUVORES
+   ========================================================= */
+.score.louvor-mode .stanza-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  min-height:24px;
+  margin-bottom:1px;
+}
+
+.score.louvor-mode .stanza-heading .verse-title{
+  min-width:0;
+  margin:0;
+}
+
+.louvor-section-controls{
+  display:flex;
+  align-items:center;
+  gap:3px;
+  flex:0 0 auto;
+}
+
+.louvor-section-controls button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:25px;
+  min-width:25px;
+  height:24px;
+  min-height:24px;
+  padding:0;
+  border:1px solid #e1d2c0;
+  border-radius:6px;
+  background:#fffdf9;
+  color:#704323;
+  font:700 16px/1 Arial,sans-serif;
+  transform:none !important;
+  outline:none;
+}
+
+.louvor-section-controls button:hover,
+.louvor-section-controls button:focus-visible{
+  background:#f0e7da;
+  border-color:#d8c4ad;
+  outline:none;
+}
+
+.louvor-section-controls button:disabled{
+  opacity:.30;
+  cursor:default;
+}
+
+/* Setas de movimentação visíveis junto aos botões + e × */
+.louvor-section-controls .louvor-section-move{
+  font-size:15px;
+  font-weight:700;
+}
+
+.score.louvor-mode .stanza > .stanza-heading + .music-line{
+  padding-left:3px;
+}
+
+.score.louvor-mode .stanza.chorus-section > .stanza-heading + .music-line{
+  padding-left:0;
+}
+
+.repeat-editable-chord{
+  pointer-events:auto !important;
+  cursor:pointer;
+  text-decoration:underline dotted rgba(122,74,36,.45);
+  text-underline-offset:3px;
+}
+
+.repeat-editable-chord:hover{
+  color:#7a4a24;
+}
+
+.repeat-chord-editor{
+  width:min(280px,calc(100vw - 20px));
+}
+
+.repeat-chord-input{
+  display:block;
+  width:100%;
+  min-height:38px;
+  margin:7px 0;
+  padding:8px 10px;
+  border:1px solid #d8cbbb;
+  border-radius:7px;
+  background:#fff;
+  color:#25221e;
+  font:600 .95rem Arial,sans-serif;
+}
+
+.repeat-chord-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:6px;
+  margin-top:7px;
+}
+
+.repeat-chord-actions button{
+  min-height:30px;
+  padding:6px 10px;
+  font-size:.75rem;
+}
+
 /* Link do YouTube no final da música */
 .song-youtube-link {
   display:flex;
@@ -1313,6 +1637,174 @@ body.sequence-active .tone-pill{
 
 .song-youtube-link:hover {
   text-decoration: underline;
+}
+
+
+.sequence-song-time-editor{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding:9px 0 10px;
+  border-bottom:1px solid #e4dbcf;
+}
+.sequence-song-time-label{
+  color:#704323;
+  font-size:.74rem;
+  font-weight:700;
+}
+
+.sequence-song-time-controls{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:nowrap;
+  width:100%;
+}
+
+.sequence-song-time-controls .sequence-song-time-input{
+  flex:0 0 92px;
+  width:92px;
+  min-width:0;
+}
+
+.sequence-song-time-controls .sequence-song-time-save{
+  margin-left:auto;
+  flex:0 0 auto;
+}
+
+.sequence-song-speed-controls{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  flex:0 0 auto;
+}
+
+.sequence-song-time-input{
+  width:92px;
+  min-height:34px;
+  padding:6px 8px;
+  border:1px solid #d8cbbb;
+  border-radius:7px;
+  background:#fff;
+  color:#29241f;
+  font:600 .88rem Arial,sans-serif;
+  text-align:center;
+}
+.sequence-song-time-input.is-invalid{
+  border-color:#bd4b3f;
+  outline:1px solid #bd4b3f;
+}
+.sequence-song-time-save{
+  min-height:34px;
+  padding:6px 12px;
+  border:1px solid #d8c4ad;
+  border-radius:7px;
+  background:#fff8ef;
+  color:#704323;
+  font:600 .74rem Arial,sans-serif;
+}
+.sequence-song-time-save:hover{
+  background:#f0e7da;
+}
+.sequence-song-time-status{
+  color:#746e64;
+  font-size:.66rem;
+  line-height:1.35;
+}
+
+
+/* Velocidade individual da música na sequência */
+
+.sequence-song-speed-editor{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding:5px 0 9px;
+  border-bottom:1px solid #e4dbcf;
+}
+
+.sequence-song-speed-label{
+  color:#704323;
+  font-size:.74rem;
+  font-weight:700;
+}
+
+.sequence-song-speed-controls{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.sequence-song-speed-controls button{
+  width:34px;
+  min-width:34px;
+  height:32px;
+  min-height:32px;
+  padding:0;
+  border:1px solid #d8c4ad;
+  border-radius:7px;
+  background:#fffdf9;
+  color:#704323;
+  font-size:19px;
+  font-weight:700;
+}
+
+.sequence-song-speed-controls button:disabled{
+  opacity:.3;
+  cursor:default;
+}
+
+.sequence-song-speed-value{
+  min-width:25px;
+  text-align:center;
+  color:#704323;
+  font-size:.9rem;
+}
+
+.sequence-song-speed-editor small{
+  color:#746e64;
+  font-size:.66rem;
+}
+
+
+/* Atalho ↺ exibido apenas quando a música tem arranjo personalizado */
+.louvor-arrangement-restore-quick{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 25px;
+  width:25px;
+  min-width:25px;
+  height:25px;
+  min-height:25px;
+  padding:0;
+  border:1px solid #d8c4ad;
+  border-radius:6px;
+  background:#fff8ef;
+  color:#704323;
+  font:700 18px/1 Arial,sans-serif;
+  cursor:pointer;
+  transform:none !important;
+}
+.louvor-arrangement-restore-quick:hover,
+.louvor-arrangement-restore-quick:focus-visible{
+  background:#f0e7da;
+  border-color:#cbb397;
+  outline:none;
+}
+#score .stanza-heading.has-arrangement-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:5px;
+  min-height:25px;
+  margin-bottom:1px;
+}
+#score .stanza-heading.has-arrangement-actions .verse-title{
+  flex:1 1 auto;
+  min-width:0;
+  margin:0;
 }
 
 </style><span></span></label>
@@ -1419,6 +1911,72 @@ body.sequence-active .tone-pill{
 #up{
   display:none !important;
 }
+
+/* Destaque do tom original na lista de tons */
+.sequence-tone option.original-tone-option{
+  color: #c62828 !important;
+  font-weight: 700;
+}
+
+
+/* Seletor personalizado de tons */
+
+.sequence-tone-picker{
+  position:relative;
+  width:65px;
+  display:flex;
+  justify-content:center;
+}
+
+.sequence-tone-trigger{
+  width:100%;
+  min-height:35px;
+  padding:5px;
+  border:1px solid #b9b0a5;
+  border-radius:5px;
+  background:#fff;
+  color:#333;
+  font-size:.85rem;
+  cursor:pointer;
+}
+
+.sequence-tone-menu{
+  position:fixed;
+  z-index:99999;
+  width:96px;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  background:#fffdf9;
+  border:1px solid #cbbda9;
+  border-radius:7px;
+  box-shadow:0 5px 18px rgba(0,0,0,.22);
+  padding:4px;
+}
+
+.sequence-tone-option{
+  display:block;
+  width:100%;
+  min-height:32px;
+  padding:6px 10px;
+  border:0;
+  border-radius:4px;
+  background:transparent;
+  color:#333;
+  text-align:left;
+  font-size:.85rem;
+  cursor:pointer;
+}
+
+.sequence-tone-option:hover{
+  background:#eee5d9;
+}
+
+/* Tom original em vermelho */
+.sequence-tone-option.original-tone-option{
+  color:#c62828;
+  font-weight:800;
+}
+
 
 </style>
 </head>
@@ -1664,7 +2222,7 @@ let autoScrollFadeTimer=0;
 let autoScrollSegmentStartTime=0;
 let autoScrollSegmentStartY=0;
 let autoScrollSegmentDuration=180000;
-let autoScrollResumeY=null;
+let autoScrollResumeY=null; let autoScrollSequenceSegments=null; let autoScrollSequenceIndex=0;
 let fontScale=.80;
 const MIN_FONT_SCALE=.75,MAX_FONT_SCALE=1.35,FONT_STEP=.05;
 
@@ -1767,7 +2325,28 @@ function applyFontScale(){document.getElementById('score').style.setProperty('--
   Ex.: {pos:11,chord:'F'} coloca o acorde exatamente antes do caractere 11.
   A posição fica presa ao texto e acompanha qualquer alteração de fonte/largura.
 */
-function normalizeAnchors(lyric,anchors){return [...anchors].sort((a,b)=>a.pos-b.pos).map(a=>({pos:Math.max(0,Math.min(Number(a.pos),lyric.length)),chord:a.chord}))}
+function normalizeAnchors(lyric,anchors){
+  return [...(anchors || [])]
+    .sort((a,b)=>a.pos-b.pos)
+    .map(a=>({
+      ...a,
+      pos:Math.max(0,Math.min(Number(a.pos),lyric.length)),
+      chord:a.chord
+    }));
+}
+
+function markRepeatChordElement(element,anchor){
+  if(!anchor.repeatInstanceId) return;
+
+  element.classList.add('repeat-editable-chord');
+  element.dataset.repeatId=String(anchor.repeatInstanceId);
+  element.dataset.repeatLine=String(anchor.repeatLineIndex);
+  element.dataset.repeatAnchor=String(anchor.repeatAnchorIndex);
+  element.dataset.sourceChord=String(anchor.sourceChord || anchor.chord || '');
+  element.dataset.originalChord=String(anchor.chord || '');
+  element.title='Editar esta cifra somente nesta repetição';
+}
+
 function renderInlineFromAnchors(lyric,anchors){
   const frag=document.createDocumentFragment();
   let cursor=0;
@@ -1785,6 +2364,7 @@ function renderInlineFromAnchors(lyric,anchors){
     const chord=document.createElement('strong');
 
     chord.className='inline-chord';
+    markRepeatChordElement(chord,a);
 
     /* TECLADINHO SÓ QUANDO O MODO ESTIVER ATIVO */
     if(keyboardMode){
@@ -1837,6 +2417,7 @@ function renderAlignedFromAnchors(lyric,anchors){
 const label=document.createElement('span');
 
 label.className='chord-label';
+markRepeatChordElement(label,a);
 
 /* TECLADINHO SÓ QUANDO O MODO ESTIVER ATIVO */
 if(keyboardMode){
@@ -2061,15 +2642,15 @@ function splitLineAtSlash(lyric,anchors){
 
   normalizeAnchors(lyric,anchors).forEach(a=>{
     if(a.pos<cut){
-      leftAnchors.push({pos:a.pos,chord:a.chord});
+      leftAnchors.push({...a,pos:a.pos,chord:a.chord});
     }else if(a.pos>cut){
       const posInRight=a.pos-(cut+1);
-      rightAnchors.push({pos:Math.max(0,posInRight),chord:a.chord});
+      rightAnchors.push({...a,pos:Math.max(0,posInRight),chord:a.chord});
     }else{
       /*
         Uma cifra exatamente sobre o "/" pertence à segunda parte.
       */
-      rightAnchors.push({pos:0,chord:a.chord});
+      rightAnchors.push({...a,pos:0,chord:a.chord});
     }
   });
 
@@ -2149,7 +2730,64 @@ function getAutoScrollSections(
 
 function getAutoScrollMax(){return Math.max(0,document.documentElement.scrollHeight-window.innerHeight)}
 function getAutoScrollMultiplier(){return Math.pow(1.15,autoScrollSpeedLevel)}
-function getAutoScrollDurationMs(){return 180000/getAutoScrollMultiplier()}
+function getSequenceEntryDurationSeconds(entry){
+  const seconds=Number(entry?.durationSeconds);
+  return Number.isFinite(seconds) && seconds>0 ? Math.round(seconds) : 180;
+}
+
+function getSequenceEntrySpeedLevel(entry){
+  const level=Number(entry?.speedLevel);
+  return Number.isFinite(level)
+    ? Math.max(-5,Math.min(5,Math.round(level)))
+    : 0;
+}
+
+function getSequenceEntryDurationMs(entry){
+  const base=getSequenceEntryDurationSeconds(entry)*1000;
+  const multiplier=Math.pow(1.15,getSequenceEntrySpeedLevel(entry));
+  return base/multiplier;
+}
+
+function getSequenceBaseDurationMs(){
+  if(!Array.isArray(musicSequence) || !musicSequence.length) return 180000;
+
+  return musicSequence.reduce(
+    (total,entry)=>total+getSequenceEntryDurationMs(entry),
+    0
+  );
+}
+
+function formatSequenceDuration(seconds){
+  const total=Math.max(1,Math.round(Number(seconds)||0));
+  const hours=Math.floor(total/3600);
+  const minutes=Math.floor((total%3600)/60);
+  const secs=total%60;
+  return hours>0
+    ? `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(secs).padStart(2,'0')}`
+    : `${String(minutes).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+}
+function parseSequenceDuration(value){
+  const parts=String(value||'').trim().split(':').map(part=>part.trim());
+  if(parts.length!==2 && parts.length!==3) return null;
+  if(parts.some(part=>!/^\d{1,3}$/.test(part))) return null;
+  let seconds;
+  if(parts.length===2){
+    const [minutes,secs]=parts.map(Number);
+    if(secs>59) return null;
+    seconds=minutes*60+secs;
+  }else{
+    const [hours,minutes,secs]=parts.map(Number);
+    if(minutes>59 || secs>59) return null;
+    seconds=hours*3600+minutes*60+secs;
+  }
+  return seconds>=5 && seconds<=86400 ? seconds : null;
+}
+function getAutoScrollDurationMs(){
+  const base=sequenceMode && musicSequence.length
+    ? getSequenceBaseDurationMs()
+    : 180000;
+  return base/getAutoScrollMultiplier();
+}
 function formatAutoScrollTime(ms){const total=Math.max(1,Math.round(ms/1000));const minutes=Math.floor(total/60);const seconds=total%60;return `${minutes}:${String(seconds).padStart(2,'0')}`}
 function autoScrollMemoryKey(songId){return `harpa_scroll_tempo_${songId}`}
 function loadAutoScrollMemory(songId){const raw=safeGet(autoScrollMemoryKey(songId),null);const n=raw===null?0:Number(raw);return Number.isFinite(n)?Math.max(-5,Math.min(5,n)):0}
@@ -2187,6 +2825,8 @@ function resetAutoScrollForNewSong(){
   autoScrollRunning=false;
   autoScrollMode=false;
   autoScrollResumeY=null;
+  autoScrollSequenceSegments=null;
+  autoScrollSequenceIndex=0;
 
   const panel=document.getElementById('autoScrollPanel');
   if(panel){
@@ -2230,6 +2870,8 @@ if(panel){
 
   // Não há mais posição para retomar
   autoScrollResumeY=null;
+  autoScrollSequenceSegments=null;
+  autoScrollSequenceIndex=0;
 
   // Garante que fique exatamente no final
   window.scrollTo(0,getAutoScrollMax());
@@ -2245,8 +2887,91 @@ if(panel){
   // Assim a visualização continua exatamente
   // como estava no modo de rolagem.
 }
+
+function buildAutoScrollSequenceSegments(maxY){
+  const blocks=[...document.querySelectorAll('#song .sequence-song')];
+  if(!sequenceMode || !blocks.length) return null;
+
+  const segments=[];
+  blocks.forEach((block,index)=>{
+    const sequenceIndex=Number(block.dataset.sequenceIndex);
+    const entry=musicSequence[sequenceIndex];
+    const startY=index===0
+      ? 0
+      : Math.max(0,blocks[index].getBoundingClientRect().top+window.scrollY);
+    const endY=index===blocks.length-1
+      ? maxY
+      : Math.max(startY,blocks[index+1].getBoundingClientRect().top+window.scrollY);
+    if(endY<=startY) return;
+
+    segments.push({
+      startY,
+      endY,
+      durationBaseMs:getSequenceEntryDurationMs(entry)
+    });
+  });
+  return segments.length ? segments : null;
+}
+
+function startSequenceScrollSegment(index,startY,now){
+  if(!autoScrollSequenceSegments || index>=autoScrollSequenceSegments.length){
+    finishAutoScroll();
+    return;
+  }
+  autoScrollSequenceIndex=index;
+  const segment=autoScrollSequenceSegments[index];
+  const fromY=Math.max(segment.startY,Math.min(startY ?? segment.startY,segment.endY));
+  const distance=Math.max(1,segment.endY-segment.startY);
+  const remainingRatio=Math.max(0,(segment.endY-fromY)/distance);
+  autoScrollSegmentStartY=fromY;
+  autoScrollSegmentStartTime=now ?? performance.now();
+  autoScrollSegmentDuration=(segment.durationBaseMs/getAutoScrollMultiplier())*remainingRatio;
+}
+
+function rebuildRunningSequenceScrollPlan(){
+  if(!autoScrollRunning || !sequenceMode) return;
+  const currentY=Math.min(window.scrollY,getAutoScrollMax());
+  autoScrollSequenceSegments=buildAutoScrollSequenceSegments(getAutoScrollMax());
+  if(!autoScrollSequenceSegments) return;
+  const index=autoScrollSequenceSegments.findIndex(segment=>currentY<segment.endY);
+  if(index<0){
+    finishAutoScroll();
+    return;
+  }
+  cancelAutoScrollFrame();
+  startSequenceScrollSegment(index,currentY,performance.now());
+  autoScrollFrame=requestAnimationFrame(autoScrollTick);
+}
+
 function autoScrollTick(now){
   if(!autoScrollRunning)return;
+
+  if(sequenceMode && autoScrollSequenceSegments?.length){
+    const segment=autoScrollSequenceSegments[autoScrollSequenceIndex];
+    if(!segment){finishAutoScroll();return;}
+
+    const elapsed=now-autoScrollSegmentStartTime;
+    const p=Math.min(1,elapsed/Math.max(1,autoScrollSegmentDuration));
+    const y=autoScrollSegmentStartY+(segment.endY-autoScrollSegmentStartY)*p;
+    window.scrollTo(0,y);
+
+    if(p>=1){
+      const nextIndex=autoScrollSequenceIndex+1;
+      if(nextIndex>=autoScrollSequenceSegments.length){
+        finishAutoScroll();
+        return;
+      }
+      startSequenceScrollSegment(
+        nextIndex,
+        autoScrollSequenceSegments[nextIndex].startY,
+        now
+      );
+    }
+
+    autoScrollFrame=requestAnimationFrame(autoScrollTick);
+    return;
+  }
+
   const maxY=getAutoScrollMax();
   const elapsed=now-autoScrollSegmentStartTime;
   const p=Math.min(1,elapsed/Math.max(1,autoScrollSegmentDuration));
@@ -2346,11 +3071,23 @@ function startAutoScroll(){
     const maxY=getAutoScrollMax();
     if(maxY<=0){finishAutoScroll();return;}
     const startY=retomando?Math.min(autoScrollResumeY,maxY):0;
-    autoScrollSegmentStartY=startY;
-    autoScrollSegmentStartTime=performance.now();
-    autoScrollSegmentDuration=getAutoScrollDurationMs()*Math.max(0,(maxY-startY)/maxY);
     autoScrollResumeY=null;
-    window.scrollTo(0,startY);
+
+    if(sequenceMode && musicSequence.length){
+      autoScrollSequenceSegments=buildAutoScrollSequenceSegments(maxY);
+      if(!autoScrollSequenceSegments){finishAutoScroll();return;}
+      const index=autoScrollSequenceSegments.findIndex(segment=>startY<segment.endY);
+      if(index<0){finishAutoScroll();return;}
+      window.scrollTo(0,startY);
+      startSequenceScrollSegment(index,startY,performance.now());
+    }else{
+      autoScrollSequenceSegments=null;
+      autoScrollSegmentStartY=startY;
+      autoScrollSegmentStartTime=performance.now();
+      autoScrollSegmentDuration=getAutoScrollDurationMs()*Math.max(0,(maxY-startY)/maxY);
+      window.scrollTo(0,startY);
+    }
+
     autoScrollFrame=requestAnimationFrame(autoScrollTick);
   });
 }
@@ -2382,9 +3119,19 @@ function setAutoScrollSpeed(level){
     const remaining=Math.max(0,maxY-currentY);
     const remainingRatio=maxY>0?remaining/maxY:0;
     autoScrollSpeedLevel=next;
-    autoScrollSegmentStartY=currentY;
-    autoScrollSegmentStartTime=now;
-    autoScrollSegmentDuration=getAutoScrollDurationMs()*remainingRatio;
+
+    if(sequenceMode && autoScrollSequenceSegments?.[autoScrollSequenceIndex]){
+      const segment=autoScrollSequenceSegments[autoScrollSequenceIndex];
+      const segmentDistance=Math.max(1,segment.endY-segment.startY);
+      const segmentRemainingRatio=Math.max(0,(segment.endY-currentY)/segmentDistance);
+      autoScrollSegmentStartY=currentY;
+      autoScrollSegmentStartTime=now;
+      autoScrollSegmentDuration=(segment.durationBaseMs/getAutoScrollMultiplier())*segmentRemainingRatio;
+    }else{
+      autoScrollSegmentStartY=currentY;
+      autoScrollSegmentStartTime=now;
+      autoScrollSegmentDuration=getAutoScrollDurationMs()*remainingRatio;
+    }
   }else{
     autoScrollSpeedLevel=next;
   }
@@ -2404,6 +3151,8 @@ function sairModoRolagem(){
   autoScrollRunning=false;
   autoScrollMode=false;
   autoScrollResumeY=null;
+  autoScrollSequenceSegments=null;
+  autoScrollSequenceIndex=0;
 
   // Volta para o modo normal
   splitMode=false;
@@ -2596,6 +3345,14 @@ function openChordPopup(anchor){
 }
 
 document.addEventListener('click',e=>{
+  const repeatChord=e.target.closest?.('.repeat-editable-chord');
+  if(repeatChord){
+    e.preventDefault();
+    e.stopPropagation();
+    openLouvorRepeatChordEditor(repeatChord);
+    return;
+  }
+
   const chord=e.target.closest?.('.clickable-chord');
   if(chord){
     e.preventDefault();
@@ -2609,9 +3366,14 @@ document.addEventListener('click',e=>{
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape')closeChordPopup();
   const active=document.activeElement;
-  if((e.key==='Enter'||e.key===' ') && active?.classList?.contains('clickable-chord')){
-    e.preventDefault();
-    openChordPopup(active);
+  if(e.key==='Enter'||e.key===' '){
+    if(active?.classList?.contains('repeat-editable-chord')){
+      e.preventDefault();
+      openLouvorRepeatChordEditor(active);
+    }else if(active?.classList?.contains('clickable-chord')){
+      e.preventDefault();
+      openChordPopup(active);
+    }
   }
 });
 window.addEventListener('resize',positionChordPopup,{passive:true});
@@ -2675,6 +3437,7 @@ function renderSequenceSong(song,entry,index){
 
   const block = document.createElement('section');
   block.className = 'sequence-song';
+  block.dataset.sequenceIndex=String(index);
 
   if(category === 'Louvor'){
     block.classList.add('louvor-mode');
@@ -2686,19 +3449,28 @@ function renderSequenceSong(song,entry,index){
 
   const heading = document.createElement('div');
   heading.className = 'sequence-song-heading';
-  heading.textContent =
+  const headingText=document.createElement('span');
+  headingText.textContent =
     `${song.number} — ${song.title} | TOM ${current}`;
+  heading.appendChild(headingText);
 
+  // O organizador fica disponível para qualquer música da sequência,
+  // inclusive os hinos da Harpa Cristã.
+  heading.appendChild(createLouvorArrangementLauncher(song,entry));
+  const restoreShortcut=createLouvorRestoreQuickButton(song);
+  if(restoreShortcut) heading.appendChild(restoreShortcut);
   block.appendChild(heading);
 
-  const sectionsToRender = autoScrollMode
-    ? getAutoScrollSections(
-        song.sections,
-        song.skipChorusAfterLastVerse === true
-      )
-    : song.sections;
+  const arrangement=getLouvorArrangement(song);
+  const sectionsToRender=arrangement
+    .map((arrangementEntry,arrangementIndex)=>({
+      sectionData:getLouvorEntrySection(song,arrangementEntry),
+      arrangementEntry,
+      arrangementIndex
+    }))
+    .filter(item=>item.sectionData);
 
-  sectionsToRender.forEach(sectionData=>{
+  sectionsToRender.forEach(({sectionData,arrangementEntry})=>{
 
     const section = document.createElement('section');
 
@@ -2716,7 +3488,7 @@ function renderSequenceSong(song,entry,index){
 
     section.appendChild(label);
 
-    sectionData.lines.forEach(lineData=>{
+    sectionData.lines.forEach((lineData,lineIndex)=>{
 
       const originalAnchors = (lineData.anchors || []).map(a=>{
 
@@ -2737,21 +3509,10 @@ function renderSequenceSong(song,entry,index){
 
       const parts = split
         ? [
-            {
-              lyric:split.leftLyric,
-              anchors:split.leftAnchors
-            },
-            {
-              lyric:split.rightLyric,
-              anchors:split.rightAnchors
-            }
+            {lyric:split.leftLyric,anchors:split.leftAnchors},
+            {lyric:split.rightLyric,anchors:split.rightAnchors}
           ]
-        : [
-            {
-              lyric:lineData.lyric,
-              anchors:originalAnchors
-            }
-          ];
+        : [{lyric:lineData.lyric,anchors:originalAnchors}];
 
       parts.forEach(part=>{
 
@@ -2762,18 +3523,12 @@ function renderSequenceSong(song,entry,index){
           const lr = document.createElement('div');
           lr.className = 'lyrics-inline';
           lr.appendChild(
-            renderInlineFromAnchors(
-              part.lyric,
-              part.anchors
-            )
+            renderInlineFromAnchors(part.lyric,part.anchors)
           );
           line.appendChild(lr);
         }else{
           line.appendChild(
-            renderAlignedFromAnchors(
-              part.lyric,
-              part.anchors
-            )
+            renderAlignedFromAnchors(part.lyric,part.anchors)
           );
         }
 
@@ -2853,6 +3608,736 @@ function renderSequence(){
 }
 
 
+/* =========================================================
+   ARRANJO PERSONALIZADO DOS LOUVORES
+   A música-base permanece intacta em musicas.js.
+   Cópias e alterações de cifras são guardadas por música.
+   ========================================================= */
+
+let louvorRepeatCounter = 0;
+
+function louvorArrangementKey(song){
+  return `harpa_louvor_arrangement_${song.id}`;
+}
+
+function cloneLouvorSection(section){
+  return {
+    label:String(section?.label || ''),
+    lines:(section?.lines || []).map(line=>({
+      lyric:String(line?.lyric || ''),
+      anchors:(line?.anchors || []).map(anchor=>({
+        pos:Number(anchor.pos) || 0,
+        chord:String(anchor.chord || '')
+      }))
+    }))
+  };
+}
+
+function readSavedLouvorArrangement(song){
+  try{
+    const raw=localStorage.getItem(louvorArrangementKey(song));
+    if(!raw) return null;
+
+    const parsed=JSON.parse(raw);
+    if(!Array.isArray(parsed)) return null;
+
+    return parsed.filter(item=>{
+      if(!item || !Number.isInteger(item.sourceIndex)) return false;
+      if(!song.sections?.[item.sourceIndex]) return false;
+      if(item.copy && (!item.section || !Array.isArray(item.section.lines))) return false;
+      return true;
+    }).map((item,index)=>({
+      id:String(item.id || `louvor-${song.id}-${index}`),
+      sourceIndex:item.sourceIndex,
+      copy:item.copy === true,
+      ...(item.copy ? {section:cloneLouvorSection(item.section)} : {})
+    }));
+  }catch(error){
+    console.warn('Não foi possível carregar o arranjo da música:',error);
+    return null;
+  }
+}
+
+
+function hasCustomizedArrangement(song){
+  try{
+    const raw=localStorage.getItem(louvorArrangementKey(song));
+    if(raw===null) return false;
+
+    const saved=readSavedLouvorArrangement(song);
+    if(!Array.isArray(saved)) return false;
+
+    const originalSections=song.sections || [];
+    const isOriginalOrder=
+      saved.length===originalSections.length &&
+      saved.every((entry,index)=>
+        entry.copy!==true &&
+        entry.sourceIndex===index
+      );
+
+    return !isOriginalOrder;
+  }catch(error){
+    console.warn('Não foi possível verificar a personalização da música:',error);
+    return false;
+  }
+}
+
+function createLouvorRestoreQuickButton(song){
+  if(!hasCustomizedArrangement(song)) return null;
+
+  const button=document.createElement('button');
+  button.type='button';
+  button.className='louvor-arrangement-restore-quick';
+  button.textContent='↺';
+  button.title='Restaurar esta música ao formato original';
+  button.setAttribute('aria-label','Restaurar esta música ao formato original');
+
+  button.onclick=event=>{
+    event.preventDefault();
+    event.stopPropagation();
+    restoreOriginalLouvorArrangement(song);
+  };
+
+  return button;
+}
+
+function getLouvorArrangement(song){
+  const saved=readSavedLouvorArrangement(song);
+  if(saved) return saved;
+
+  return (song.sections || []).map((section,index)=>({
+    id:`base-${song.id}-${index}`,
+    sourceIndex:index,
+    copy:false
+  }));
+}
+
+function louvorArrangementHistoryKey(song){
+  return `${louvorArrangementKey(song)}_undo`;
+}
+
+function getLouvorArrangementHistory(song){
+  try{
+    const history=JSON.parse(localStorage.getItem(louvorArrangementHistoryKey(song)) || '[]');
+    return Array.isArray(history) ? history : [];
+  }catch(error){
+    return [];
+  }
+}
+
+function updateLouvorUndoButton(song){
+  const button=document.querySelector('#louvorArrangementOverlay .louvor-arrangement-undo');
+  if(!button) return;
+  const available=getLouvorArrangementHistory(song).length>0;
+  button.disabled=!available;
+  button.title=available ? 'Desfazer a última alteração' : 'Não há alterações para desfazer';
+}
+
+function saveLouvorArrangement(song,arrangement){
+  try{
+    const key=louvorArrangementKey(song);
+    const history=getLouvorArrangementHistory(song);
+    // Guarda o estado anterior; null representa o arranjo original, sem personalização.
+    history.push(localStorage.getItem(key));
+    if(history.length>30) history.shift();
+    localStorage.setItem(louvorArrangementHistoryKey(song),JSON.stringify(history));
+    localStorage.setItem(key,JSON.stringify(arrangement));
+    updateLouvorUndoButton(song);
+  }catch(error){
+    console.error('Não foi possível salvar o arranjo da música:',error);
+    alert('Não foi possível salvar o arranjo neste navegador.');
+  }
+}
+
+function undoLouvorArrangement(song){
+  const history=getLouvorArrangementHistory(song);
+  if(!history.length) return;
+
+  const previous=history.pop();
+  const key=louvorArrangementKey(song);
+  try{
+    if(previous===null) localStorage.removeItem(key);
+    else localStorage.setItem(key,previous);
+    localStorage.setItem(louvorArrangementHistoryKey(song),JSON.stringify(history));
+    closeChordPopup();
+    renderLouvorKeepingScroll();
+    renderLouvorArrangementEditor(song);
+    updateLouvorUndoButton(song);
+  }catch(error){
+    console.error('Não foi possível desfazer a alteração:',error);
+    alert('Não foi possível desfazer a alteração neste navegador.');
+  }
+}
+
+// Restaura a ordem e o conteúdo-base das seções, inclusive alterações
+// feitas antes de existir o histórico do botão Desfazer.
+function restoreOriginalLouvorArrangement(song){
+  const confirmed=confirm(
+    'Restaurar esta música ao formato original? Repetições, mudanças de ordem e cifras personalizadas serão removidas.'
+  );
+  if(!confirmed) return;
+
+  try{
+    localStorage.removeItem(louvorArrangementKey(song));
+    localStorage.removeItem(louvorArrangementHistoryKey(song));
+    closeChordPopup();
+    renderLouvorKeepingScroll();
+    renderLouvorArrangementEditor(song);
+    updateLouvorUndoButton(song);
+  }catch(error){
+    console.error('Não foi possível restaurar a música:',error);
+    alert('Não foi possível restaurar o Louvor neste navegador.');
+  }
+}
+
+function getLouvorEntrySection(song,entry){
+  return entry.copy
+    ? entry.section
+    : song.sections[entry.sourceIndex];
+}
+
+function nextLouvorRepeatId(song){
+  louvorRepeatCounter++;
+  return `repeat-${song.id}-${Date.now()}-${louvorRepeatCounter}`;
+}
+
+function renderLouvorKeepingScroll(){
+  const x=window.scrollX;
+  const y=window.scrollY;
+  closeChordPopup();
+  render();
+  requestAnimationFrame(()=>window.scrollTo(x,y));
+}
+
+function createLouvorSectionControls(song,arrangement,index,entry){
+  const controls=document.createElement('div');
+  controls.className='louvor-section-controls';
+
+  function makeControl(symbol,title,className,callback){
+    const button=document.createElement('button');
+    button.type='button';
+    button.className=className;
+    button.textContent=symbol;
+    button.title=title;
+    button.setAttribute('aria-label',title);
+    button.onclick=event=>{
+      event.preventDefault();
+      event.stopPropagation();
+      callback();
+    };
+    return button;
+  }
+
+  const addButton=makeControl('＋','Repetir esta seção','louvor-section-add',()=>{
+    const source=getLouvorEntrySection(song,entry);
+    if(!source) return;
+
+    const copy={
+      id:nextLouvorRepeatId(song),
+      sourceIndex:entry.sourceIndex,
+      copy:true,
+      section:cloneLouvorSection(source)
+    };
+
+    arrangement.splice(index+1,0,copy);
+    saveLouvorArrangement(song,arrangement);
+    renderLouvorKeepingScroll();
+    renderLouvorArrangementEditor(song);
+  });
+
+  const upButton=makeControl('↑','Mover para cima','louvor-section-move',()=>{
+    if(index<=0) return;
+    const item=arrangement.splice(index,1)[0];
+    arrangement.splice(index-1,0,item);
+    saveLouvorArrangement(song,arrangement);
+    renderLouvorKeepingScroll();
+    renderLouvorArrangementEditor(song);
+  });
+  upButton.disabled=index===0;
+
+  const downButton=makeControl('↓','Mover para baixo','louvor-section-move',()=>{
+    if(index>=arrangement.length-1) return;
+    const item=arrangement.splice(index,1)[0];
+    arrangement.splice(index+1,0,item);
+    saveLouvorArrangement(song,arrangement);
+    renderLouvorKeepingScroll();
+    renderLouvorArrangementEditor(song);
+  });
+  downButton.disabled=index===arrangement.length-1;
+
+  const removeButton=makeControl('×','Remover esta ocorrência','louvor-section-remove',()=>{
+    if(arrangement.length<=1) return;
+    arrangement.splice(index,1);
+    saveLouvorArrangement(song,arrangement);
+    renderLouvorKeepingScroll();
+    renderLouvorArrangementEditor(song);
+  });
+  removeButton.disabled=arrangement.length<=1;
+
+  controls.append(addButton,upButton,downButton,removeButton);
+  return controls;
+}
+
+
+function createLouvorArrangementLauncher(song,sequenceEntry=null){
+  const button=document.createElement('button');
+  button.type='button';
+  button.className='louvor-arrangement-open';
+  button.textContent='☷';
+  button.title='Organizar partes e repetições deste Louvor';
+  button.setAttribute('aria-label','Organizar partes e repetições deste Louvor');
+  button.onclick=event=>{
+    event.preventDefault();
+    event.stopPropagation();
+    openLouvorArrangementEditor(song,sequenceEntry);
+  };
+  return button;
+}
+
+function closeLouvorArrangementEditor(){
+  document.getElementById('louvorArrangementOverlay')?.remove();
+}
+
+function renderLouvorArrangementEditor(song){
+  const overlay=document.getElementById('louvorArrangementOverlay');
+  if(!overlay) return;
+
+  const list=overlay.querySelector('.louvor-arrangement-list');
+  if(!list) return;
+
+  const arrangement=getLouvorArrangement(song);
+  list.innerHTML='';
+
+  arrangement.forEach((entry,index)=>{
+    const sectionData=getLouvorEntrySection(song,entry);
+    if(!sectionData) return;
+
+    const row=document.createElement('div');
+    row.className='louvor-arrangement-row';
+    if(entry.copy) row.classList.add('is-copy');
+
+    const info=document.createElement('div');
+    info.className='louvor-arrangement-info';
+
+    const name=document.createElement('strong');
+    name.textContent=String(sectionData.label || `Seção ${index+1}`)
+      .replace(/^\[([\s\S]*?)\]$/,'$1');
+    info.appendChild(name);
+
+    if(entry.copy){
+      const detail=document.createElement('small');
+      detail.textContent='Repetição independente';
+      info.appendChild(detail);
+    }
+
+    row.append(
+      info,
+      createLouvorSectionControls(song,arrangement,index,entry)
+    );
+
+    list.appendChild(row);
+  });
+
+  const hint=overlay.querySelector('.louvor-arrangement-count');
+  if(hint){
+    hint.textContent=`${arrangement.length} seção(ões) na ordem de execução.`;
+  }
+  updateLouvorUndoButton(song);
+}
+
+function getSequenceEntryEffectiveDurationSeconds(entry){
+  return Math.max(
+    1,
+    Math.round(getSequenceEntryDurationMs(entry)/1000)
+  );
+}
+
+function createSequenceSongTimeEditor(sequenceEntry){
+  const wrap=document.createElement('div');
+  wrap.className='sequence-song-time-editor';
+
+  const label=document.createElement('label');
+  label.className='sequence-song-time-label';
+  label.textContent='Tempo de rolagem desta música';
+
+  const controls=document.createElement('div');
+  controls.className='sequence-song-time-controls';
+
+  const input=document.createElement('input');
+  input.type='text';
+  input.inputMode='numeric';
+  input.autocomplete='off';
+  input.spellcheck=false;
+  input.maxLength=8;
+  input.className='sequence-song-time-input';
+  input.value=formatSequenceDuration(
+  getSequenceEntryEffectiveDurationSeconds(sequenceEntry)
+);
+  input.setAttribute('aria-label','Tempo de rolagem no formato minutos e segundos');
+
+  const save=document.createElement('button');
+  save.type='button';
+  save.className='sequence-song-time-save';
+  save.textContent='Salvar';
+
+  const status=document.createElement('small');
+  status.className='sequence-song-time-status';
+  status.textContent='Esse tempo será somado aos das demais músicas da sequência.';
+  // CONTROLE DE VELOCIDADE INDIVIDUAL DA MÚSICA
+
+const speedWrap=document.createElement('div');
+speedWrap.className='sequence-song-speed-editor';
+
+const speedLabel=document.createElement('label');
+speedLabel.className='sequence-song-speed-label';
+speedLabel.textContent='Velocidade de rolagem desta música';
+
+const speedControls=document.createElement('div');
+speedControls.className='sequence-song-speed-controls';
+
+const slowButton=document.createElement('button');
+slowButton.type='button';
+slowButton.textContent='−';
+slowButton.title='Mais devagar';
+
+const speedValue=document.createElement('strong');
+speedValue.className='sequence-song-speed-value';
+
+const fastButton=document.createElement('button');
+fastButton.type='button';
+fastButton.textContent='+';
+fastButton.title='Mais rápido';
+
+const speedHint=document.createElement('small');
+speedHint.textContent='−5 mais devagar · 0 normal · +5 mais rápido';
+
+let speedLevel=getSequenceEntrySpeedLevel(sequenceEntry);
+
+function updateSongSpeedDisplay(){
+  speedValue.textContent=
+    speedLevel>0 ? `+${speedLevel}` : String(speedLevel);
+
+  slowButton.disabled=speedLevel<=-5;
+  fastButton.disabled=speedLevel>=5;
+}
+
+function changeSongSpeed(delta){
+  speedLevel=Math.max(-5,Math.min(5,speedLevel+delta));
+
+  sequenceEntry.speedLevel=speedLevel;
+  input.value=formatSequenceDuration(
+  getSequenceEntryEffectiveDurationSeconds(sequenceEntry)
+);  
+  
+  saveMusicSequence();
+  updateSongSpeedDisplay();
+  updateAutoScrollPanel();
+
+  const total=formatAutoScrollTime(getAutoScrollDurationMs());
+
+  status.textContent=
+    `Velocidade atualizada. Total da sequência: ${total}.`;
+
+  if(autoScrollRunning && sequenceMode){
+    rebuildRunningSequenceScrollPlan();
+  }
+}
+
+slowButton.onclick=event=>{
+  event.preventDefault();
+  event.stopPropagation();
+  changeSongSpeed(-1);
+};
+
+fastButton.onclick=event=>{
+  event.preventDefault();
+  event.stopPropagation();
+  changeSongSpeed(1);
+};
+
+speedControls.append(
+  slowButton,
+  speedValue,
+  fastButton
+);
+
+speedWrap.append(speedHint);
+
+updateSongSpeedDisplay();
+
+  const saveTime=()=>{
+    const seconds=parseSequenceDuration(input.value);
+    if(seconds===null){
+      status.textContent='Formato inválido. Use mm:ss, por exemplo 03:30.';
+      input.classList.add('is-invalid');
+      input.focus();
+      return;
+    }
+
+    input.classList.remove('is-invalid');
+    sequenceEntry.durationSeconds=Math.round(
+  seconds*Math.pow(1.15,getSequenceEntrySpeedLevel(sequenceEntry))
+);
+    saveMusicSequence();
+    updateAutoScrollPanel();
+
+    const total=formatAutoScrollTime(getAutoScrollDurationMs());
+    status.textContent=`Tempo salvo. Total da sequência: ${total}.`;
+    if(autoScrollRunning && sequenceMode){
+      rebuildRunningSequenceScrollPlan();
+    }
+  };
+
+  save.onclick=event=>{
+    event.preventDefault();
+    event.stopPropagation();
+    saveTime();
+  };
+  input.addEventListener('keydown',event=>{
+    if(event.key==='Enter'){
+      event.preventDefault();
+      save.click();
+    }
+  });
+
+  controls.append(input,speedControls,save);
+  wrap.append(label,controls,speedWrap,status);
+  return wrap;
+}
+
+function openLouvorArrangementEditor(song,sequenceEntry=null){
+  closeLouvorArrangementEditor();
+
+  const overlay=document.createElement('div');
+  overlay.id='louvorArrangementOverlay';
+  overlay.className='louvor-arrangement-overlay';
+
+  const dialog=document.createElement('div');
+  dialog.className='louvor-arrangement-dialog';
+  dialog.setAttribute('role','dialog');
+  dialog.setAttribute('aria-modal','true');
+  dialog.setAttribute('aria-label','Organizar partes e repetições da música');
+
+  const header=document.createElement('div');
+  header.className='louvor-arrangement-header';
+
+  const titleArea=document.createElement('div');
+  const title=document.createElement('strong');
+  title.textContent='ORGANIZAR MÚSICA';
+  const subtitle=document.createElement('small');
+  subtitle.textContent=song.title || 'Organize as partes e repetições';
+  titleArea.append(title,subtitle);
+
+  const headerActions=document.createElement('div');
+  headerActions.className='louvor-arrangement-header-actions';
+
+  const restore=document.createElement('button');
+  restore.type='button';
+  restore.className='louvor-arrangement-restore';
+  restore.textContent='Restaurar';
+  restore.title='Remover personalizações e voltar às seções originais';
+  restore.onclick=event=>{
+    event.preventDefault();
+    event.stopPropagation();
+    restoreOriginalLouvorArrangement(song);
+  };
+
+  const undo=document.createElement('button');
+  undo.type='button';
+  undo.className='louvor-arrangement-undo';
+  undo.textContent='↶ Desfazer';
+  undo.onclick=event=>{
+    event.preventDefault();
+    event.stopPropagation();
+    undoLouvorArrangement(song);
+  };
+
+  const close=document.createElement('button');
+  close.type='button';
+  close.className='louvor-arrangement-close';
+  close.textContent='×';
+  close.title='Fechar organizador';
+  close.onclick=closeLouvorArrangementEditor;
+
+  headerActions.append(restore,undo,close);
+  header.append(titleArea,headerActions);
+
+  const hint=document.createElement('div');
+  hint.className='louvor-arrangement-hint';
+  hint.textContent='＋ repete a seção · ↑↓ muda a ordem · × remove da execução';
+
+  const count=document.createElement('div');
+  count.className='louvor-arrangement-count';
+
+  const list=document.createElement('div');
+  list.className='louvor-arrangement-list';
+
+  const footer=document.createElement('div');
+  footer.className='louvor-arrangement-footer';
+  const done=document.createElement('button');
+  done.type='button';
+  done.className='active';
+  done.textContent='Concluir';
+  done.onclick=closeLouvorArrangementEditor;
+  footer.appendChild(done);
+
+  if(sequenceEntry){
+    dialog.append(
+      header,
+      hint,
+      createSequenceSongTimeEditor(sequenceEntry),
+      count,
+      list,
+      footer
+    );
+  }else{
+    dialog.append(header,hint,count,list,footer);
+  }
+  overlay.appendChild(dialog);
+
+  overlay.addEventListener('click',event=>{
+    if(event.target===overlay) closeLouvorArrangementEditor();
+  });
+
+  document.body.appendChild(overlay);
+  renderLouvorArrangementEditor(song);
+  close.focus();
+}
+
+function saveLouvorRepeatedChord(songId,repeatId,lineIndex,anchorIndex,chord){
+  const song=songs.find(item=>String(item.id)===String(songId));
+  if(!song || getSongCategory(song)!=='Louvor') return false;
+
+  const arrangement=readSavedLouvorArrangement(song);
+  if(!arrangement) return false;
+
+  const entry=arrangement.find(item=>item.id===String(repeatId) && item.copy);
+  const anchor=entry?.section?.lines?.[lineIndex]?.anchors?.[anchorIndex];
+  if(!anchor) return false;
+
+  // O usuário edita a cifra no tom que está vendo; converte de volta
+  // para o tom-base antes de salvar, evitando transposição dupla.
+  const delta=Number(currentIndex)-Number(song.sourceToneIndex);
+  anchor.chord=transposeChord(chord,-delta);
+  saveLouvorArrangement(song,arrangement);
+  return true;
+}
+
+function openLouvorRepeatChordEditor(anchor){
+  const chord=String(anchor.dataset.sourceChord || anchor.dataset.originalChord || anchor.dataset.chord || '')
+    .replace(/[()]/g,'')
+    .trim();
+
+  closeChordPopup();
+
+  const popup=document.createElement('div');
+  popup.className='chord-keyboard-popup repeat-chord-editor';
+
+  const head=document.createElement('div');
+  head.className='popup-head';
+  head.innerHTML='<span>Editar cifra desta repetição</span>';
+
+  const close=document.createElement('button');
+  close.type='button';
+  close.className='popup-close';
+  close.textContent='×';
+  close.title='Cancelar';
+  close.onclick=event=>{
+    event.stopPropagation();
+    closeChordPopup();
+  };
+  head.appendChild(close);
+  popup.appendChild(head);
+
+  const input=document.createElement('input');
+  input.type='text';
+  input.value=chord;
+  input.autocomplete='off';
+  input.spellcheck=false;
+  input.className='repeat-chord-input';
+  input.setAttribute('aria-label','Nova cifra');
+  popup.appendChild(input);
+
+  const actions=document.createElement('div');
+  actions.className='repeat-chord-actions';
+
+  if(keyboardMode){
+    const viewChord=document.createElement('button');
+    viewChord.type='button';
+    viewChord.textContent=violaoMode?'Ver violão':'Ver piano';
+    viewChord.title='Abrir o desenho deste acorde';
+    viewChord.onclick=event=>{
+      event.stopPropagation();
+      closeChordPopup();
+      openChordPopup(anchor);
+    };
+    actions.appendChild(viewChord);
+  }
+
+  const cancel=document.createElement('button');
+  cancel.type='button';
+  cancel.textContent='Cancelar';
+  cancel.onclick=event=>{
+    event.stopPropagation();
+    closeChordPopup();
+  };
+
+  const save=document.createElement('button');
+  save.type='button';
+  save.className='active';
+  save.textContent='Salvar';
+  save.onclick=event=>{
+    event.stopPropagation();
+    const value=input.value.trim();
+    const root=chordRootName(value);
+
+    if(!value || !root || aliases[root]===undefined || /\s/.test(value)){
+      alert('Digite uma cifra válida, por exemplo: G, Am7, D/F# ou C9.');
+      input.focus();
+      return;
+    }
+
+    const ok=saveLouvorRepeatedChord(
+      currentSongId,
+      anchor.dataset.repeatId,
+      Number(anchor.dataset.repeatLine),
+      Number(anchor.dataset.repeatAnchor),
+      value
+    );
+
+    if(!ok){
+      alert('Não foi possível localizar esta repetição para salvar a cifra.');
+      return;
+    }
+
+    closeChordPopup();
+    renderLouvorKeepingScroll();
+  };
+
+  actions.append(cancel,save);
+  popup.appendChild(actions);
+
+  const help=document.createElement('div');
+  help.className='popup-help';
+  help.textContent='A alteração vale somente para esta repetição.';
+  popup.appendChild(help);
+
+  popup.addEventListener('click',event=>event.stopPropagation());
+  document.body.appendChild(popup);
+  chordPopupState.el=popup;
+  chordPopupState.anchor=anchor;
+  positionChordPopup();
+  input.focus();
+  input.select();
+  input.addEventListener('keydown',event=>{
+    if(event.key==='Enter'){
+      event.preventDefault();
+      save.click();
+    }
+  });
+}
+
+
 function render(){
   if(sequenceMode){
     renderSequence();
@@ -2890,14 +4375,45 @@ if (String(s.category || '').trim().toLowerCase() === 'louvor') {
     tituloLouvor.textContent = s.title;
     root.appendChild(tituloLouvor);
   }*/
-  const sectionsToRender = autoScrollMode
-  ? getAutoScrollSections(
-      s.sections,
-      s.skipChorusAfterLastVerse === true
-    )
-  : s.sections;
+  const isLouvor = getSongCategory(s)==='Louvor';
+  const savedLouvorArrangement = isLouvor
+    ? readSavedLouvorArrangement(s)
+    : null;
+  const louvorArrangement = isLouvor
+    ? (savedLouvorArrangement || getLouvorArrangement(s))
+    : null;
 
-  sectionsToRender.forEach(sectionData=>{
+  // Antes de o usuário personalizar o arranjo, Louvor mantém a repetição
+  // automática do Coro na rolagem. Depois de personalizar, vale a ordem salva.
+  const renderEntries = isLouvor
+    ? (autoScrollMode && !savedLouvorArrangement
+        ? getAutoScrollSections(
+            s.sections,
+            s.skipChorusAfterLastVerse === true
+          ).map((sectionData,index)=>({
+            entry:{
+              id:`auto-${s.id}-${index}`,
+              sourceIndex:Math.max(0,s.sections.indexOf(sectionData)),
+              copy:false
+            },
+            sectionData,
+            arrangementIndex:index
+          }))
+        : louvorArrangement.map((entry,index)=>({
+            entry,
+            sectionData:getLouvorEntrySection(s,entry),
+            arrangementIndex:index
+          })).filter(item=>item.sectionData)
+      )
+    : (autoScrollMode
+        ? getAutoScrollSections(
+            s.sections,
+            s.skipChorusAfterLastVerse === true
+          )
+        : s.sections
+      ).map(sectionData=>({sectionData,entry:null,arrangementIndex:-1}));
+
+  renderEntries.forEach(({sectionData,entry,arrangementIndex})=>{
     const section=document.createElement('section');
     const labelSecao = normalizarNomeSecao(sectionData.label);
 
@@ -2917,18 +4433,45 @@ if (labelSecao === 'pre-refrao') {
       .trim()
       .replace(/^\[([\s\S]*?)\]$/, '$1')
       .trim();
-    section.appendChild(label);
 
-    sectionData.lines.forEach(lineData=>{
-      const originalAnchors=lineData.anchors.map(a=>{
+    const hasCustomArrangement=hasCustomizedArrangement(s);
+    if(isLouvor || (arrangementIndex===0 && hasCustomArrangement)){
+      const heading=document.createElement('div');
+      heading.className='stanza-heading has-arrangement-actions';
+      heading.appendChild(label);
+
+      if(arrangementIndex===0){
+        if(isLouvor || hasCustomArrangement){
+          heading.appendChild(createLouvorArrangementLauncher(s));
+        }
+        const restoreShortcut=createLouvorRestoreQuickButton(s);
+        if(restoreShortcut) heading.appendChild(restoreShortcut);
+      }
+
+      section.appendChild(heading);
+    }else{
+      section.appendChild(label);
+    }
+
+    sectionData.lines.forEach((lineData,lineIndex)=>{
+      const originalAnchors=(lineData.anchors || []).map((a,anchorIndex)=>{
         const sourceChord=transposeChord(a.chord,delta);
-        return {
+        const renderedAnchor={
           ...a,
           sourceChord,
           chord:progressionMode
             ? chordToProgression(sourceChord,current)
             : sourceChord
         };
+
+        // Somente as cópias do arranjo recebem edição independente de cifras.
+        if(entry?.copy){
+          renderedAnchor.repeatInstanceId=entry.id;
+          renderedAnchor.repeatLineIndex=lineIndex;
+          renderedAnchor.repeatAnchorIndex=anchorIndex;
+        }
+
+        return renderedAnchor;
       });
 
       /*
@@ -3152,7 +4695,8 @@ function addSongToSequence(song){
 
   musicSequence.push({
     id:String(song.id),
-    toneIndex
+    toneIndex,
+    durationSeconds:180
   });
 
   saveMusicSequence();
@@ -3187,22 +4731,7 @@ function renderSequenceBuilder(){
     name.textContent =
       `${index+1}. ${song.number} — ${song.title}`;
 
-    const tone = document.createElement('select');
-    tone.className = 'sequence-tone';
-
-    chromatic.forEach((note,noteIndex)=>{
-      const option = document.createElement('option');
-      option.value = String(noteIndex);
-      option.textContent = spellNote(note.name);
-      tone.appendChild(option);
-    });
-
-    tone.value = String(getSequenceToneIndex(entry,song));
-
-    tone.onchange = ()=>{
-      entry.toneIndex = Number(tone.value);
-      saveMusicSequence();
-    };
+    const tone = createSequenceTonePicker(entry,song);
 
     const actions = document.createElement('div');
     actions.className = 'sequence-item-actions';
@@ -3247,6 +4776,130 @@ function renderSequenceBuilder(){
     ? `${musicSequence.length} música(s) na sequência.`
     : 'Nenhuma música adicionada ainda.';
 }
+
+
+function createSequenceTonePicker(entry, song){
+
+  const originalToneIndex = Number(song.sourceToneIndex);
+  const selectedTone = getSequenceToneIndex(entry,song);
+
+  const wrap = document.createElement('div');
+  wrap.className = 'sequence-tone-picker';
+
+  const trigger = document.createElement('button');
+  trigger.type = 'button';
+  trigger.className = 'sequence-tone-trigger';
+  trigger.textContent = spellNote(chromatic[selectedTone].name) + ' ▾';
+  trigger.setAttribute('aria-label','Escolher tom');
+
+  let menu = null;
+
+function handleMenuScroll(event){
+  if(menu && !menu.contains(event.target)){
+    closeMenu();
+  }
+}
+
+  function closeMenu(){
+    if(!menu) return;
+
+    menu.remove();
+    menu = null;
+
+    document.removeEventListener('pointerdown',outsideClick,true);
+    window.removeEventListener('resize',closeMenu);
+    window.removeEventListener('scroll',handleMenuScroll,true);
+
+    trigger.setAttribute('aria-expanded','false');
+  }
+
+  function outsideClick(event){
+    if(!wrap.contains(event.target) &&
+       !menu?.contains(event.target)){
+      closeMenu();
+    }
+  }
+
+  function openMenu(){
+
+    if(menu){
+      closeMenu();
+      return;
+    }
+
+    menu = document.createElement('div');
+    menu.className = 'sequence-tone-menu';
+
+    chromatic.forEach((note,index)=>{
+
+      const option = document.createElement('button');
+      option.type = 'button';
+      option.className = 'sequence-tone-option';
+
+      const isOriginal = index === originalToneIndex;
+      const isSelected = index === Number(entry.toneIndex);
+
+      option.textContent =
+        (isSelected ? '✓ ' : '') + spellNote(note.name);
+
+      if(isOriginal){
+        option.classList.add('original-tone-option');
+        option.title = 'Tom original deste hino';
+      }
+
+      option.onclick = event=>{
+        event.stopPropagation();
+
+        entry.toneIndex = index;
+        saveMusicSequence();
+
+        trigger.textContent =
+          spellNote(note.name) + ' ▾';
+
+        closeMenu();
+      };
+
+      menu.appendChild(option);
+    });
+
+    document.body.appendChild(menu);
+
+    const rect = trigger.getBoundingClientRect();
+    const margin = 8;
+
+    const roomBelow = window.innerHeight - rect.bottom - margin;
+    const roomAbove = rect.top - margin;
+
+    const openUp =
+      roomBelow < 220 && roomAbove > roomBelow;
+
+    const available = openUp ? roomAbove : roomBelow;
+
+    menu.style.maxHeight = Math.max(100,Math.min(260,available)) + 'px';
+
+    const menuHeight = Math.min(menu.scrollHeight,Math.max(100,Math.min(260,available)));
+
+    menu.style.left =
+      Math.max(5,Math.min(rect.left,window.innerWidth - 105)) + 'px';
+
+    menu.style.top = openUp
+      ? Math.max(5,rect.top - menuHeight - 4) + 'px'
+      : Math.min(rect.bottom + 4,window.innerHeight - menuHeight - 5) + 'px';
+
+    document.addEventListener('pointerdown',outsideClick,true);
+    window.addEventListener('resize',closeMenu);
+    window.addEventListener('scroll',handleMenuScroll,true);
+
+    trigger.setAttribute('aria-expanded','true');
+  }
+
+  trigger.onclick = openMenu;
+
+  wrap.appendChild(trigger);
+
+  return wrap;
+}
+
 
 // A partir do número 1000, a música é classificada como Louvor.
 function getSongCategory(song){

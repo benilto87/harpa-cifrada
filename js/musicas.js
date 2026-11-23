@@ -7708,6 +7708,39 @@ const songs=[
 },
 
 /* =========================
+   609 — VITÓRIA DEUS DARÁ A MIM
+========================= */
+
+{
+  id:'609',
+  number:'609',
+  title:'VITÓRIA DEUS DARÁ A MIM',
+  category:'Harpa Cristã',
+  sourceToneIndex:5,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Vitória Deus dará a mim, eu sei, ',anchors:[{pos:9,chord:'F'},{pos:21,chord:'C'},{pos:29,chord:'F'}]},
+      {lyric:'Vitória Deus dará a mim, eu sei.',anchors:[{pos:9,chord:'F'},{pos:21,chord:'C'},{pos:29,chord:'F'}]},
+      {lyric:'Se eu andar em plena luz, / Confiar só em Jesus,',anchors:[{pos:8,chord:'Bb'},{pos:33,chord:'F'}]},
+      {lyric:'Vitória Deus dará a mim, eu sei.',anchors:[{pos:8,chord:'F/C'},{pos:21,chord:'C'},{pos:29,chord:'F'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Vitória Deus dará a mim, eu sei, ',anchors:[{pos:9,chord:'F'},{pos:21,chord:'C'},{pos:29,chord:'F'}]},
+      {lyric:'Vitória Deus dará a mim, eu sei.',anchors:[{pos:9,chord:'F'},{pos:21,chord:'C'},{pos:29,chord:'F'}]},
+      {lyric:'Se eu andar em plena luz, / Confiar só em Jesus,',anchors:[{pos:8,chord:'Bb'},{pos:33,chord:'F'}]},
+      {lyric:'Vitória Deus dará a mim, eu sei.',anchors:[{pos:8,chord:'F/C'},{pos:21,chord:'C'},{pos:29,chord:'F'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    1000 — BEM MAIS QUE TUDO - ALINE BARROS
 ========================= */
 
