@@ -240,58 +240,96 @@ const ACORDES = {
     {nota:"A",oitava:2}
   ],
 
-
   /* =====================================================
-     SUS4
+     SUS2
      ===================================================== */
 
-  "Csus4":[
+  "C2":[
     {nota:"C",oitava:1},
+    {nota:"D",oitava:1},
+    {nota:"G",oitava:1}
+  ],
+
+  "D2":[
+    {nota:"D",oitava:1},
+    {nota:"E",oitava:1},
+    {nota:"A",oitava:1}
+  ],
+
+  "E2":[
+    {nota:"E",oitava:1},
+    {nota:"F#",oitava:1},
+    {nota:"B",oitava:1}
+  ],
+
+  "F2":[
     {nota:"F",oitava:1},
     {nota:"G",oitava:1},
     {nota:"C",oitava:2}
   ],
 
-  "Dsus4":[
-    {nota:"D",oitava:1},
+  "G2":[
     {nota:"G",oitava:1},
     {nota:"A",oitava:1},
     {nota:"D",oitava:2}
   ],
 
-  "Esus4":[
-    {nota:"E",oitava:1},
+  "A2":[
     {nota:"A",oitava:1},
     {nota:"B",oitava:1},
     {nota:"E",oitava:2}
   ],
 
-  "Fsus4":[
+  "B2":[
+    {nota:"B",oitava:1},
+    {nota:"C#",oitava:2},
+    {nota:"F#",oitava:2}
+  ],
+  
+  /* =====================================================
+     SUS4
+     ===================================================== */
+
+  "C4":[
+    {nota:"C",oitava:1},
+    {nota:"F",oitava:1},
+    {nota:"G",oitava:1}
+  ],
+
+  "D4":[
+    {nota:"D",oitava:1},
+    {nota:"G",oitava:1},
+    {nota:"A",oitava:1}
+  ],
+
+  "E4":[
+    {nota:"E",oitava:1},
+    {nota:"A",oitava:1},
+    {nota:"B",oitava:1}
+  ],
+
+  "F4":[
     {nota:"F",oitava:1},
     {nota:"Bb",oitava:1},
-    {nota:"C",oitava:2},
-    {nota:"F",oitava:2}
+    {nota:"C",oitava:2}
   ],
 
-  "Gsus4":[
+  "G4":[
     {nota:"G",oitava:1},
     {nota:"C",oitava:2},
-    {nota:"D",oitava:2},
-    {nota:"G",oitava:2}
+    {nota:"D",oitava:2}
   ],
 
-  "Asus4":[
+  "A4":[
     {nota:"A",oitava:1},
     {nota:"D",oitava:2},
-    {nota:"E",oitava:2},
-    {nota:"A",oitava:2}
+    {nota:"E",oitava:2}
   ],
 
-  "Bsus4":[
+  "B4":[
     {nota:"B",oitava:1},
     {nota:"E",oitava:2},
-    {nota:"F#",oitava:2},
-    {nota:"B",oitava:2}
+    {nota:"F#",oitava:2}
   ],
 
   /* =====================================================
