@@ -783,6 +783,11 @@ button.active{
   letter-spacing: -0.09em;
 }
 
+/* Espaçamento exclusivo das cifras */
+.score.louvor-mode .chord-label {
+  letter-spacing: 0.04em;
+}
+
   .tone-panel{
     padding-left:8px;
     padding-right:8px;
@@ -2235,7 +2240,30 @@ function spellNote(note){
   return (useSharps?sharp:flat)[i];
 }
 
-function transposeChord(chord,semitones){const m=chord.match(/^([A-G](?:#|b)?)(.*)$/);if(!m)return chord;const root=m[1],suffix=m[2]||'';if(!(root in aliases))return chord;return spellNote((['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'])[(aliases[root]+semitones+120)%12])+suffix}
+function transposeChord(chord,semitones){
+  const m=chord.match(/^([A-G](?:#|b)?)(.*?)(?:\/([A-G](?:#|b)?))?$/);
+
+  if(!m)return chord;
+
+  const root=m[1];
+  const suffix=m[2]||'';
+  const bass=m[3]||'';
+
+  if(!(root in aliases))return chord;
+
+  const notes=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
+
+  const newRoot=spellNote(
+    notes[(aliases[root]+semitones+120)%12]
+  );
+
+  const newBass=bass
+    ? '/'+spellNote(notes[(aliases[bass]+semitones+120)%12])
+    : '';
+
+  return newRoot+suffix+newBass;
+}
+
 function chordToProgression(chord,keyName){
 
   const m=chord.match(/^([A-G](?:#|b)?)(.*)$/);
@@ -5237,8 +5265,7 @@ const ocultarComNotas=[
   'down',
   'up',
   'reset',
-  'fontDown',
-  'fontUp',
+  'openSequence',
   'toggleKeyboard',
   'toggleViolao',
   'tonePanel',

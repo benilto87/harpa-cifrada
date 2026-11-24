@@ -8301,11 +8301,11 @@ const songs=[
       label:'1ª Parte',
       lines:[
       {lyric:'Tão lindo é cada momento',anchors:[{pos:10,chord:'F#m'},{pos:23,chord:'A'}]},
-      {lyric:'Que me visita e faz de mim o Teu altar',anchors:[{pos:10,chord:'E'},{pos:36,chord:'B2'}]},
+      {lyric:'Que me visita e faz de mim o Teu altar',anchors:[{pos:10,chord:'E'},{pos:36,chord:'B4'}]},
       {lyric:'Quero ir contigo mais profundo',anchors:[{pos:13,chord:'F#m'},{pos:29,chord:'A'}]},
       {lyric:'Segura a minha mão /  Eu sei, nunca vai soltar',anchors:[{pos:10,chord:'E'},{pos:44,chord:'B2'}]},
       {lyric:'Tão lindo é cada momento',anchors:[{pos:10,chord:'F#m'},{pos:23,chord:'A'}]},
-      {lyric:'Que me visita e faz de mim o Teu altar',anchors:[{pos:10,chord:'E'},{pos:36,chord:'B2'}]},
+      {lyric:'Que me visita e faz de mim o Teu altar',anchors:[{pos:10,chord:'E'},{pos:36,chord:'B4'}]},
       {lyric:'Quero ir contigo mais profundo',anchors:[{pos:13,chord:'F#m'},{pos:29,chord:'A'}]},
       {lyric:'Segura a minha mão / Eu sei, nunca vai soltar',anchors:[{pos:10,chord:'E'},{pos:43,chord:'B2'}]}
     ]

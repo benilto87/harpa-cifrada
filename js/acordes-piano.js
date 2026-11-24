@@ -294,6 +294,81 @@ const ACORDES = {
     {nota:"B",oitava:2}
   ],
 
+  /* =====================================================
+     ACORDES DIMINUTOS
+     ===================================================== */
+
+  "Cdim":[
+    {nota:"C",oitava:1},
+    {nota:"Eb",oitava:1},
+    {nota:"Gb",oitava:1}
+  ],
+
+  "Dbdim":[
+    {nota:"Db",oitava:1},
+    {nota:"E",oitava:1},
+    {nota:"G",oitava:1}
+  ],
+
+  "Ddim":[
+    {nota:"D",oitava:1},
+    {nota:"F",oitava:1},
+    {nota:"Ab",oitava:1}
+  ],
+
+  "Ebdim":[
+    {nota:"Eb",oitava:1},
+    {nota:"Gb",oitava:1},
+    {nota:"A",oitava:1}
+  ],
+
+  "Edim":[
+    {nota:"E",oitava:1},
+    {nota:"G",oitava:1},
+    {nota:"Bb",oitava:1}
+  ],
+
+  "Fdim":[
+    {nota:"F",oitava:1},
+    {nota:"Ab",oitava:1},
+    {nota:"B",oitava:1}
+  ],
+
+  "Gbdim":[
+    {nota:"Gb",oitava:1},
+    {nota:"A",oitava:1},
+    {nota:"C",oitava:2}
+  ],
+
+  "Gdim":[
+    {nota:"G",oitava:1},
+    {nota:"Bb",oitava:1},
+    {nota:"Db",oitava:2}
+  ],
+
+  "Abdim":[
+    {nota:"Ab",oitava:1},
+    {nota:"B",oitava:1},
+    {nota:"D",oitava:2}
+  ],
+
+  "Adim":[
+    {nota:"A",oitava:1},
+    {nota:"C",oitava:2},
+    {nota:"Eb",oitava:2}
+  ],
+
+  "Bbdim":[
+    {nota:"Bb",oitava:1},
+    {nota:"Db",oitava:2},
+    {nota:"E",oitava:2}
+  ],
+
+  "Bdim":[
+    {nota:"B",oitava:1},
+    {nota:"D",oitava:2},
+    {nota:"F",oitava:2}
+  ],
 
   /* =====================================================
      ACORDES COM BEMÓIS
@@ -489,11 +564,14 @@ const ACORDES_EQUIVALENTES = {
 
 function chordNotes(chord){
 
-  if(ACORDES[chord]){
-    return ACORDES[chord];
+  // Ignora a nota do baixo após a barra
+  const acordeBase=String(chord||'').split('/')[0].trim();
+
+  if(ACORDES[acordeBase]){
+    return ACORDES[acordeBase];
   }
 
-  const match=String(chord||'').match(/^([A-G](?:#|b)?)(.*)$/);
+  const match=acordeBase.match(/^([A-G](?:#|b)?)(.*)$/);
 
   if(!match){
     return [];

@@ -20,271 +20,468 @@ window.AcordesViolao = window.AcordesViolao || {};
 
 AcordesViolao.ACORDES = {
 
+
   /* =========================================================
-     MAIORES
+     MAIORES — CASAS E DEDOS
      ========================================================= */
 
   "C":{
-    cordas:["X",3,2,0,1,0]
+    cordas:["X",3,2,0,1,0],
+    dedos:[null,3,2,null,1,null]
   },
 
   "Db":{
-    cordas:[9,11,11,10,9,9]
+    cordas:[9,11,11,10,9,9],
+    dedos:[1,3,4,2,1,1]
   },
 
   "D":{
-    cordas:["X","X",0,2,3,2]
+    cordas:["X","X",0,2,3,2],
+    dedos:[null,null,null,1,3,2]
   },
 
   "Eb":{
-    cordas:[11,13,13,12,11,11]
+    cordas:[11,13,13,12,11,11],
+    dedos:[1,3,4,2,1,1]
   },
 
   "E":{
-    cordas:[0,2,2,1,0,0]
+    cordas:[0,2,2,1,0,0],
+    dedos:[null,2,3,1,null,null]
   },
 
   "F":{
-    cordas:[1,3,3,2,1,1]
+    cordas:[1,3,3,2,1,1],
+    dedos:[1,3,4,2,1,1]
   },
 
   "Gb":{
-    cordas:[2,4,4,3,2,2]
+    cordas:[2,4,4,3,2,2],
+    dedos:[1,3,4,2,1,1]
   },
 
   "G":{
-    cordas:[3,2,0,0,0,3]
+    cordas:[3,2,0,0,0,3],
+    dedos:[2,1,null,null,null,3]
   },
 
   "Ab":{
-    cordas:[4,6,6,5,4,4]
+    cordas:[4,6,6,5,4,4],
+    dedos:[1,3,4,2,1,1]
   },
 
   "A":{
-    cordas:["X",0,2,2,2,0]
+    cordas:["X",0,2,2,2,0],
+    dedos:[null,null,1,2,3,null]
   },
 
   "Bb":{
-    cordas:[6,8,8,7,6,6]
+    cordas:[6,8,8,7,6,6],
+    dedos:[1,3,4,2,1,1]
   },
 
   "B":{
-    cordas:["X",2,4,4,4,2]
+    cordas:["X",2,4,4,4,2],
+    dedos:[null,1,2,3,4,1]
   },
 
 
+
+
   /* =========================================================
-     MENORES
+     MENORES — CASAS E DEDOS
      ========================================================= */
 
   "Cm":{
-    cordas:["X",3,5,5,4,3]
+    cordas:["X",3,5,5,4,3],
+    dedos:[null,1,3,4,2,1]
   },
 
   "Dbm":{
-    cordas:[9,11,11,9,9,9]
+    cordas:[9,11,11,9,9,9],
+    dedos:[1,3,4,1,1,1]
   },
 
   "Dm":{
-    cordas:["X","X",0,2,3,1]
+    cordas:["X","X",0,2,3,1],
+    dedos:[null,null,null,2,3,1]
   },
 
   "Ebm":{
-    cordas:[11,13,13,11,11,11]
+    cordas:[11,13,13,11,11,11],
+    dedos:[1,3,4,1,1,1]
   },
 
   "Em":{
-    cordas:[0,2,2,0,0,0]
+    cordas:[0,2,2,0,0,0],
+    dedos:[null,2,3,null,null,null]
   },
 
   "Fm":{
-    cordas:[1,3,3,1,1,1]
+    cordas:[1,3,3,1,1,1],
+    dedos:[1,3,4,1,1,1]
   },
 
   "Gbm":{
-    cordas:[2,4,4,2,2,2]
+    cordas:[2,4,4,2,2,2],
+    dedos:[1,3,4,1,1,1]
   },
 
   "Gm":{
-    cordas:[3,5,5,3,3,3]
+    cordas:[3,5,5,3,3,3],
+    dedos:[1,3,4,1,1,1]
   },
 
   "Abm":{
-    cordas:[4,6,6,4,4,4]
+    cordas:[4,6,6,4,4,4],
+    dedos:[1,3,4,1,1,1]
   },
 
   "Am":{
-    cordas:["X",0,2,2,1,0]
+    cordas:["X",0,2,2,1,0],
+    dedos:[null,null,2,3,1,null]
   },
 
   "Bbm":{
-    cordas:[6,8,8,6,6,6]
+    cordas:[6,8,8,6,6,6],
+    dedos:[1,3,4,1,1,1]
   },
 
   "Bm":{
-    cordas:["X",2,4,4,3,2]
+    cordas:["X",2,4,4,3,2],
+    dedos:[null,1,3,4,2,1]
   },
 
 
   /* =========================================================
-     7ª
+     7ª DOMINANTE — CASAS E DEDOS
      ========================================================= */
 
   "C7":{
-    cordas:["X",3,2,3,1,0]
+    cordas:["X",3,2,3,1,0],
+    dedos:[null,3,2,4,1,null]
   },
 
   "Db7":{
-    cordas:[9,11,9,10,9,9]
+    cordas:[9,11,9,10,9,9],
+    dedos:[1,3,1,2,1,1]
   },
 
   "D7":{
-    cordas:["X","X",0,2,1,2]
+    cordas:["X","X",0,2,1,2],
+    dedos:[null,null,null,2,1,3]
   },
 
   "Eb7":{
-    cordas:[11,13,11,12,11,11]
+    cordas:[11,13,11,12,11,11],
+    dedos:[1,3,1,2,1,1]
   },
 
   "E7":{
-    cordas:[0,2,0,1,0,0]
+    cordas:[0,2,0,1,0,0],
+    dedos:[null,2,null,1,null,null]
   },
 
   "F7":{
-    cordas:[1,3,1,2,1,1]
+    cordas:[1,3,1,2,1,1],
+    dedos:[1,3,1,2,1,1]
   },
 
   "Gb7":{
-    cordas:[2,4,2,3,2,2]
+    cordas:[2,4,2,3,2,2],
+    dedos:[1,3,1,2,1,1]
   },
 
   "G7":{
-    cordas:[3,2,0,0,0,1]
+    cordas:[3,2,0,0,0,1],
+    dedos:[3,2,null,null,null,1]
   },
 
   "Ab7":{
-    cordas:[4,6,4,5,4,4]
+    cordas:[4,6,4,5,4,4],
+    dedos:[1,3,1,2,1,1]
   },
 
   "A7":{
-    cordas:["X",0,2,0,2,0]
+    cordas:["X",0,2,0,2,0],
+    dedos:[null,null,2,null,3,null]
   },
 
   "Bb7":{
-    cordas:[6,8,6,7,6,6]
+    cordas:[6,8,6,7,6,6],
+    dedos:[1,3,1,2,1,1]
   },
 
   "B7":{
-    cordas:["X",2,1,2,0,2]
+    cordas:["X",2,1,2,0,2],
+    dedos:[null,2,1,3,null,4]
   },
 
 
+
   /* =========================================================
-     MENOR 7ª
+     MENOR 7ª — CASAS E DEDOS
      ========================================================= */
 
   "Cm7":{
-    cordas:["X",3,5,3,4,3]
+    cordas:["X",3,5,3,4,3],
+    dedos:[null,1,3,1,2,1]
   },
 
   "Dbm7":{
-    cordas:[9,11,9,9,9,9]
+    cordas:[9,11,9,9,9,9],
+    dedos:[1,3,1,1,1,1]
   },
 
   "Dm7":{
-    cordas:["X","X",0,2,1,1]
+    cordas:["X","X",0,2,1,1],
+    dedos:[null,null,null,2,1,1]
   },
 
   "Ebm7":{
-    cordas:[11,13,11,11,11,11]
+    cordas:[11,13,11,11,11,11],
+    dedos:[1,3,1,1,1,1]
   },
 
   "Em7":{
-    cordas:[0,2,0,0,0,0]
+    cordas:[0,2,0,0,0,0],
+    dedos:[null,2,null,null,null,null]
   },
 
   "Fm7":{
-    cordas:[1,3,1,1,1,1]
+    cordas:[1,3,1,1,1,1],
+    dedos:[1,3,1,1,1,1]
   },
 
   "Gbm7":{
-    cordas:[2,4,2,2,2,2]
+    cordas:[2,4,2,2,2,2],
+    dedos:[1,3,1,1,1,1]
   },
 
   "Gm7":{
-    cordas:[3,5,3,3,3,3]
+    cordas:[3,5,3,3,3,3],
+    dedos:[1,3,1,1,1,1]
   },
 
   "Abm7":{
-    cordas:[4,6,4,4,4,4]
+    cordas:[4,6,4,4,4,4],
+    dedos:[1,3,1,1,1,1]
   },
 
   "Am7":{
-    cordas:["X",0,2,0,1,0]
+    cordas:["X",0,2,0,1,0],
+    dedos:[null,null,2,null,1,null]
   },
 
   "Bbm7":{
-    cordas:[6,8,6,6,6,6]
+    cordas:[6,8,6,6,6,6],
+    dedos:[1,3,1,1,1,1]
   },
 
   "Bm7":{
-    cordas:["X",2,0,2,0,2]
+    cordas:["X",2,0,2,0,2],
+    dedos:[null,1,null,2,null,3]
   },
 
 
   /* =========================================================
-     SUS4 — 4ª
+     SUS4 — CASAS E DEDOS
      ========================================================= */
 
-  "Csus4":{
-    cordas:["X",3,3,0,1,1]
+  "C4":{
+    cordas:[0,3,3,0,1],
+    dedos:[null,3,4,null,1,null]
   },
 
-  "Dbsus4":{
-    cordas:[9,11,11,11,9,9]
+  "Db4":{
+    cordas:[0,2,4,4,5,2],
+    dedos:[null,1,2,3,4,1]
   },
 
-  "Dsus4":{
-    cordas:["X","X",0,2,3,3]
+  "D4":{
+    cordas:["X","X",0,2,3,3],
+    dedos:[null,null,null,1,3,4]
   },
 
-  "Ebsus4":{
-    cordas:[11,13,13,13,11,11]
+  "Eb4":{
+    cordas:[0,0,1,3,4,4],
+    dedos:[null,null,1,2,3,4]
   },
 
-  "Esus4":{
-    cordas:[0,2,2,2,0,0]
+  "E4":{
+    cordas:[0,2,2,2,0,0],
+    dedos:[null,2,3,4,null,null]
   },
 
-  "Fsus4":{
-    cordas:[1,3,3,3,1,1]
+  "F4":{
+    cordas:[1,3,3,3,1,1],
+    dedos:[1,2,3,4,1,1]
   },
 
-  "Gbsus4":{
-    cordas:[2,4,4,4,2,2]
+  "Gb4":{
+    cordas:[2,4,4,4,2,2],
+    dedos:[1,2,3,4,1,1]
   },
 
-  "Gsus4":{
-    cordas:[3,5,5,5,3,3]
+  "G4":{
+    cordas:[3,2,0,0,1,3],
+    dedos:[3,2,null,null,1,4]
   },
 
-  "Absus4":{
-    cordas:[4,6,6,6,4,4]
+  "Ab4":{
+    cordas:[4,6,6,6,4,4],
+    dedos:[1,2,3,4,1,1]
   },
 
-  "Asus4":{
-    cordas:["X",0,2,2,3,0]
+  "A4":{
+    cordas:["X",0,2,2,3,0],
+    dedos:[null,null,1,2,3,null]
   },
 
-  "Bbsus4":{
-    cordas:[6,8,8,8,6,6]
+  "Bb4":{
+    cordas:[0,1,3,3,4,1],
+    dedos:[null,1,2,3,4,1]
   },
 
-  "Bsus4":{
-    cordas:["X",2,4,4,5,2]
+  "B4":{
+    cordas:["X",2,4,4,5,2],
+    dedos:[null,1,2,3,4,1]
+  },
+
+  /* =========================================================
+     SUS2 — CASAS E DEDOS
+     ========================================================= */
+
+  "C2":{
+    cordas:["X",3,5,5,3,3],
+    dedos:[null,1,3,4,1,1]
+  },
+
+  "Db2":{
+    cordas:["X",4,6,6,4,4],
+    dedos:[null,1,3,4,1,1]
+  },
+
+  "D2":{
+    cordas:["X",5,7,7,5,5],
+    dedos:[null,1,3,4,1,1]
+  },
+
+  "Eb2":{
+    cordas:["X",6,8,8,6,6],
+    dedos:[null,1,3,4,1,1]
+  },
+
+  "E2":{
+    cordas:["X",7,9,9,7,7],
+    dedos:[null,1,3,4,1,1]
+  },
+
+  "F2":{
+    cordas:["X",8,10,10,8,8],
+    dedos:[null,1,3,4,1,1]
+  },
+
+  "Gb2":{
+    cordas:["X",9,11,11,9,9],
+    dedos:[null,1,3,4,1,1]
+  },
+
+  "G2":{
+    cordas:["X",10,12,12,10,10],
+    dedos:[null,1,3,4,1,1]
+  },
+
+  "Ab2":{
+    cordas:["X",11,13,13,11,11],
+    dedos:[null,1,3,4,1,1]
+  },
+
+  "A2":{
+    cordas:["X",12,14,14,12,12],
+    dedos:[null,1,3,4,1,1]
+  },
+
+  "Bb2":{
+    cordas:["X",13,15,15,13,13],
+    dedos:[null,1,3,4,1,1]
+  },
+
+  "B2":{
+    cordas:["X",14,16,16,14,14],
+    dedos:[null,1,3,4,1,1]
+  },
+ 
+  /* =====================================================
+     ACORDES DIMINUTOS — QUATRO NOTAS
+     Nomenclatura: dim
+     cordas = casas
+     dedos = dedos da mão esquerda
+     ===================================================== */
+
+  "Cdim":{
+    cordas:["X",3,4,2,4,"X"],
+    dedos:[null,2,3,1,4,null]
+  },
+
+  "Dbdim":{
+    cordas:["X",4,5,3,5,"X"],
+    dedos:[null,2,3,1,4,null]
+  },
+
+  "Ddim":{
+    cordas:["X",5,6,4,6,"X"],
+    dedos:[null,2,3,1,4,null]
+  },
+
+  "Ebdim":{
+    cordas:["X",6,7,5,7,"X"],
+    dedos:[null,2,3,1,4,null]
+  },
+
+  "Edim":{
+    cordas:["X",7,8,6,8,"X"],
+    dedos:[null,2,3,1,4,null]
+  },
+
+  "Fdim":{
+    cordas:["X","X",3,4,3,4],
+    dedos:[null,null,1,3,2,4]
+  },
+
+  "Gbdim":{
+    cordas:[2,"X",1,2,1,"X"],
+    dedos:[3,null,1,4,2,null]
+  },
+
+  "Gdim":{
+    cordas:[3,"X",2,3,2,"X"],
+    dedos:[3,null,1,4,2,null]
+  },
+
+  "Abdim":{
+    cordas:[4,"X",3,4,3,"X"],
+    dedos:[3,null,1,4,2,null]
+  },
+
+  "Adim":{
+    cordas:[5,"X",4,5,4,"X"],
+    dedos:[3,null,1,4,2,null]
+  },
+
+  "Bbdim":{
+    cordas:[6,"X",5,6,5,"X"],
+    dedos:[3,null,1,4,2,null]
+  },
+
+  "Bdim":{
+    cordas:["X",2,3,1,3,"X"],
+    dedos:[null,2,3,1,4,null]
   }
 
+
 };
+
 
 /* =========================================================
    PESTANAS
@@ -336,17 +533,32 @@ AcordesViolao.EQUIVALENTES = {
   "G#":"Ab", "Ab":"Ab"
 };
 
+
 AcordesViolao.normalizar = function(chord){
-  const value=String(chord||'').trim();
+
+  // Considera somente o acorde antes da barra
+  const value=String(chord||'')
+    .split('/')[0]
+    .trim();
+
   if(this.ACORDES[value]) return value;
+
   const m=value.match(/^([A-G](?:#|b)?)(.*)$/);
+
   if(!m) return null;
-  const root=m[1],suffix=m[2]||'';
+
+  const root=m[1];
+  const suffix=m[2]||'';
+
   const eq=this.EQUIVALENTES[root];
+
   if(!eq) return null;
+
   const name=eq+suffix;
+
   return this.ACORDES[name] ? name : null;
 };
+
 
 AcordesViolao.getShape = function(chord){
   const name=this.normalizar(chord);
@@ -383,17 +595,52 @@ AcordesViolao.ensureStyle = function(){
       position:absolute;left:0;right:0;height:1px;background:#d7d0c7;
       box-shadow:0 1px 1px rgba(0,0,0,.25);
     }
-    .guitar-dot{
-      position:absolute;width:17px;height:17px;border-radius:50%;
-      background:#f5f3ef;border:1px solid #aaa39a;
-      box-shadow:0 1px 2px rgba(0,0,0,.20),inset 0 1px 1px rgba(255,255,255,.70);
-      transform:translate(-50%,-50%);z-index:5;
-    }
-    .guitar-status-row{
-      position:absolute;left:34px;right:34px;top:0;
-      display:grid;grid-template-columns:repeat(6,1fr);
-      text-align:center;font:800 19px/1 Arial,sans-serif;color:#4d4943;z-index:6;
-    }
+	
+.guitar-dot{
+  position:absolute;
+  width:19px;
+  height:19px;
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font:800 12px/1 Arial,sans-serif;
+  color:#38332e;
+
+  background:#f5f3ef;
+  border:1px solid #aaa39a;
+
+  box-shadow:
+    0 1px 2px rgba(0,0,0,.20),
+    inset 0 1px 1px rgba(255,255,255,.70);
+
+  transform:translate(-50%,-50%);
+  z-index:5;
+}
+    
+.guitar-status-row{
+  position:absolute;
+  left:0;
+  right:auto;
+  top:30px;
+  width:28px;
+  height:110px;
+
+  display:grid;
+  grid-template-columns:1fr;
+  grid-template-rows:repeat(6,1fr);
+
+  align-items:center;
+  justify-items:center;
+
+  text-align:center;
+  font:800 17px/1 Arial,sans-serif;
+  color:#4d4943;
+  z-index:6;
+}
+
     .guitar-string-labels{
       position:absolute;right:0;top:30px;height:110px;width:28px;
       display:grid;grid-template-rows:repeat(6,1fr);align-items:center;
@@ -422,6 +669,7 @@ AcordesViolao.buildMiniGuitar = function(chord){
   if(!shape) return null;
 
   const cordas=shape.cordas;
+  const dedos=shape.dedos||[];
   const barre=this.getBarre(chord);
   const fretted=cordas.map(v=>Number(v)).filter(n=>Number.isFinite(n)&&n>0);
   const hasOpen=cordas.some(v=>Number(v)===0);
@@ -485,21 +733,35 @@ AcordesViolao.buildMiniGuitar = function(chord){
     }
   }
 
-  /* Bolinhas: horizontal = casa / vertical = corda */
-  cordas.forEach((v,stringIndex)=>{
-    if(v==='X'||Number(v)===0)return;
-    const fret=Number(v);
-    if(!Number.isFinite(fret))return;
-    const local=fret-startFret+1;
-    if(local<1||local>total)return;
-    const dot=document.createElement('div');
-    dot.className='guitar-dot';
-    const x=((total-local+0.5)/total)*100;
-    const y=(stringIndex/5)*100;
-    dot.style.left=x+'%';
-    dot.style.top=y+'%';
-    board.appendChild(dot);
-  });
+  /* Bolinhas com números dos dedos */
+cordas.forEach((v,stringIndex)=>{
+
+  if(v==='X'||Number(v)===0)return;
+
+  const fret=Number(v);
+
+  if(!Number.isFinite(fret))return;
+
+  const local=fret-startFret+1;
+
+  if(local<1||local>total)return;
+
+  const dot=document.createElement('div');
+  dot.className='guitar-dot';
+
+  // Número do dedo correspondente à corda
+  const dedo=dedos[stringIndex];
+
+  dot.textContent=dedo ? String(dedo) : '';
+
+  const x=((total-local+0.5)/total)*100;
+  const y=(stringIndex/5)*100;
+
+  dot.style.left=x+'%';
+  dot.style.top=y+'%';
+
+  board.appendChild(dot);
+});
 
   /* Números das casas: 5 4 3 2 1 */
   const nums=document.createElement('div');
