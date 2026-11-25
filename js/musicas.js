@@ -10,6 +10,7 @@ const songs=[
   title:'CHUVAS DE GRAÇA',
   category:'Harpa Cristã',
   sourceToneIndex:10/* índice calculado pelo app a partir do tom Bb */,
+  maisTocada:true,
 
   sections:[
     {
@@ -57,8 +58,16 @@ const songs=[
    002 — SAUDOSA LEMBRANÇA
 ========================= */
 
- {id:'002',number:'002',title:'SAUDOSA LEMBRANÇA',category:'Harpa Cristã',sourceToneIndex:0,sections:[
-  {      label:'1ª estrofe',
+ {id:'002',
+ number:'002',
+ title:'SAUDOSA LEMBRANÇA',
+ category:'Harpa Cristã',
+ sourceToneIndex:0,
+ maisTocada:true,
+ 
+ sections:[
+  {      
+    label:'1ª estrofe',
       lines:[
         {lyric:'Oh! que saudosa lembrança / Tenho de ti, ó Sião,',anchors:[{pos:0,chord:'C'},{pos:11,chord:'F/G'},{pos:21,chord:'C'},{pos:37,chord:'Am'},{pos:46,chord:'G'}
         ]},
@@ -124,7 +133,8 @@ const songs=[
   title:'PLENA PAZ',
   category:'Harpa Cristã',
   sourceToneIndex:2,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -187,7 +197,8 @@ const songs=[
   title:'DEUS VELARÁ POR TI',
   category:'Harpa Cristã',
   sourceToneIndex:10/* índice calculado pelo app a partir do tom Bb */,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª ESTROFE',
@@ -246,7 +257,8 @@ const songs=[
   title:'CRISTO CURA, SIM!',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -298,7 +310,8 @@ const songs=[
   title:'CRISTO, O FIEL AMIGO',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -357,7 +370,8 @@ const songs=[
   title:'EU TE LOUVO',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª Estrofe',
@@ -417,6 +431,7 @@ const songs=[
   title:'GOZO EM JESUS',
   category:'Harpa Cristã',
   sourceToneIndex:8,
+  maisTocada:true,
   youtubeUrls:[
     {
       label:'Ouvir no YouTube — opção 1',
@@ -482,7 +497,8 @@ const songs=[
   title:'CONVERSÃO',
   category:'Harpa Cristã',
   sourceToneIndex:7,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -543,6 +559,7 @@ const songs=[
   title:'DESPERTAR PARA O TRABALHO',
   category:'Harpa Cristã',
   sourceToneIndex:2,
+  maisTocada:true,  
   youtubeUrl:'https://youtu.be/GGmeRKC8CO0?list=RDGGmeRKC8CO0',
   sections:[
     {
@@ -613,7 +630,8 @@ const songs=[
   title:'OLHAI P’RA O CORDEIRO DE DEUS',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -673,7 +691,8 @@ const songs=[
   title:'A FORMOSA JERUSALÉM',
   category:'Harpa Cristã',
   sourceToneIndex:0,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -740,7 +759,8 @@ const songs=[
   title:'COM TUA MÃO SEGURA',
   category:'Harpa Cristã',
   sourceToneIndex:8,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -800,7 +820,8 @@ const songs=[
   title:'O EXILADO',
   category:'Harpa Cristã',
   sourceToneIndex:2,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -851,6 +872,7 @@ const songs=[
   title:'CRISTO P’RA MIM',
   category:'Harpa Cristã',
   sourceToneIndex:8,
+  maisTocada:true,
   youtubeUrl:'https://youtu.be/Lsqhl3oGFXs?list=RDLsqhl3oGFXs',
   
   sections:[
@@ -919,7 +941,8 @@ const songs=[
   title:'ALVO MAIS QUE A NEVE',
   category:'Harpa Cristã',
   sourceToneIndex:2,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -971,7 +994,8 @@ const songs=[
   category:'Harpa Cristã',
   sourceToneIndex:8,
   youtubeUrl:'https://youtu.be/Qi5GniH3qjA?list=RDQi5GniH3qjA',
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -1026,7 +1050,8 @@ const songs=[
   title:'UM PENDÃO REAL',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -1078,7 +1103,8 @@ const songs=[
   title:'O DIA DO TRIUNFO DE JESUS',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -1138,7 +1164,8 @@ const songs=[
   title:'DEUS TOMARÁ CONTA DE TI',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -1190,6 +1217,7 @@ const songs=[
   title:'ACORDAI, ACORDAI',
   category:'Harpa Cristã',
   sourceToneIndex:8,
+  maisTocada:true,
   youtubeUrl:'https://youtu.be/CbynIQ2AFxs?list=RDCbynIQ2AFxs',
 
   sections:[
@@ -1247,6 +1275,130 @@ const songs=[
 },
 
 /* =========================
+   064 — DE TODO O MUNDO: ALELUIA!
+========================= */
+
+{
+  id:'064',
+  number:'064',
+  title:'DE TODO O MUNDO: ALELUIA!',
+  category:'Harpa Cristã',
+  sourceToneIndex:7,
+  maisTocada:true,
+  youtubeUrl:'https://www.youtube.com/watch?v=SxA0ki6VOUs',
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'De todo o mundo, eis-nos aqui / Em Ti só confiando,',anchors:[{pos:4,chord:'G'},{pos:11,chord:'D'},{pos:27,chord:'G'},{pos:35,chord:'G'},{pos:46,chord:'D'},{pos:49,chord:'G'}]},
+      {lyric:'Permanecendo em Teu amor, / Teu reino só buscando,',anchors:[{pos:3,chord:'Em'},{pos:8,chord:'D'},{pos:22,chord:'G'},{pos:32,chord:'Em'},{pos:39,chord:'C'},{pos:45,chord:'D'},{pos:48,chord:'G'}]},
+      {lyric:'As nossas vidas, nosso amor, / A Ti trazemos, Salvador,',anchors:[{pos:4,chord:'D'},{pos:33,chord:'G'},{pos:47,chord:'D'},{pos:52,chord:'G'}]},
+      {lyric:'Cantando: “Aleluia!”',anchors:[{pos:3,chord:'Em'},{pos:11,chord:'C'},{pos:14,chord:'D'},{pos:17,chord:'G'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Viver por Ti, em Ti morrer, / Os nossos pais miravam;',anchors:[{pos:3,chord:'G'},{pos:10,chord:'D'},{pos:24,chord:'G'},{pos:34,chord:'G'},{pos:48,chord:'D'},{pos:50,chord:'G'}]},
+      {lyric:'A Tua vontade só fazer, / Eis o que desejavam.',anchors:[{pos:2,chord:'Em'},{pos:9,chord:'D'},{pos:20,chord:'G'},{pos:28,chord:'Em'},{pos:37,chord:'C'},{pos:40,chord:'D'},{pos:43,chord:'G'}]},
+      {lyric:'E nós, que somos Teus, também',anchors:[{pos:3,chord:'D'}]},
+      {lyric:'Dizemos, firmes: “Sim, Amém”',anchors:[{pos:3,chord:'G'},{pos:19,chord:'D'},{pos:25,chord:'G'}]},
+      {lyric:'E: “Glória! “Aleluia!”',anchors:[{pos:4,chord:'Em'},{pos:13,chord:'C'},{pos:16,chord:'D'},{pos:19,chord:'G'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'Ao Evangelho salvador, / Tão puro e glorioso,',anchors:[{pos:3,chord:'G'},{pos:8,chord:'D'},{pos:19,chord:'G'},{pos:30,chord:'G'},{pos:41,chord:'D'},{pos:43,chord:'G'}]},
+      {lyric:'As leis santíssimas que Tu / Nos dás, Senhor bondoso,',anchors:[{pos:2,chord:'Em'},{pos:11,chord:'D'},{pos:25,chord:'G'},{pos:33,chord:'Em'},{pos:42,chord:'C'},{pos:49,chord:'D'},{pos:51,chord:'G'}]},
+      {lyric:'“Amém! Dizemos com fervor, / E, pelo Teu imenso amor,',anchors:[{pos:3,chord:'D'},{pos:33,chord:'G'},{pos:43,chord:'D'},{pos:50,chord:'G'}]},
+      {lyric:'Clamamos: “Aleluia!”',anchors:[{pos:3,chord:'Em'},{pos:11,chord:'C'},{pos:14,chord:'D'},{pos:17,chord:'G'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Sim, constrangidos pelo amor, / Perdidos procuramos',anchors:[{pos:6,chord:'G'},{pos:13,chord:'D'},{pos:26,chord:'G'},{pos:35,chord:'G'},{pos:46,chord:'D'},{pos:49,chord:'G'}]},
+      {lyric:'Salvar, - ganhar p’ra Ti, Senhor: / Eis o que ambicionamos,',anchors:[{pos:3,chord:'Em'},{pos:14,chord:'D'},{pos:30,chord:'G'},{pos:39,chord:'Em'},{pos:48,chord:'C'},{pos:54,chord:'D'},{pos:56,chord:'G'}]},
+      {lyric:'Seguindo sempre a Tua lei, / A Ti, leais, bendito Rei,',anchors:[{pos:4,chord:'D'},{pos:31,chord:'G'},{pos:46,chord:'D'},{pos:51,chord:'G'}]},
+      {lyric:'Cantamos: “Aleluia!”',anchors:[{pos:3,chord:'Em'},{pos:10,chord:'C'},{pos:14,chord:'D'},{pos:17,chord:'G'}]}
+    ]
+    },
+    {
+      label:'5ª estrofe',
+      lines:[
+      {lyric:'Nem o labor será em vão, / Pois eis, que glorioso,',anchors:[{pos:4,chord:'G'},{pos:9,chord:'D'},{pos:21,chord:'G'},{pos:32,chord:'G'},{pos:45,chord:'D'},{pos:48,chord:'G'}]},
+      {lyric:'O dia vem, em que Jesus / Virá vitorioso;',anchors:[{pos:2,chord:'Em'},{pos:7,chord:'D'},{pos:21,chord:'G'},{pos:27,chord:'Em'},{pos:33,chord:'C'},{pos:37,chord:'D'},{pos:39,chord:'G'}]},
+      {lyric:'E todo mundo cantará, / E jubiloso O exaltará,',anchors:[{pos:2,chord:'D'},{pos:27,chord:'G'},{pos:39,chord:'D'},{pos:43,chord:'G'}]},
+      {lyric:'Com: “Amém”, “Aleluia!”',anchors:[{pos:5,chord:'Em'},{pos:13,chord:'C'},{pos:17,chord:'D'},{pos:20,chord:'G'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
+   065\ — QUEM IRÁ?
+========================= */
+
+{
+  id:'065',
+  number:'065',
+  title:'QUEM IRÁ?',
+  category:'Harpa Cristã',
+  sourceToneIndex:9,
+  maisTocada:true,
+  
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+      {lyric:'Eis os milhões, que em trevas tão medonhas,',anchors:[{pos:0,chord:'A'},{pos:3,chord:'D/A'},{pos:11,chord:'A'},{pos:36,chord:'A/E'}]},
+      {lyric:'Jazem perdidos, sem o Salvador!',anchors:[{pos:1,chord:'E'},{pos:17,chord:'A'},{pos:23,chord:'B'},{pos:28,chord:'E'}]},
+      {lyric:'Quem, quem irá as novas proclamando,',anchors:[{pos:2,chord:'A'},{pos:7,chord:'D/A'},{pos:13,chord:'A'},{pos:30,chord:'A/E'}]},
+      {lyric:'Que Deus, em Cristo, salva o pecador?',anchors:[{pos:1,chord:'E'},{pos:14,chord:'A'},{pos:22,chord:'D'},{pos:28,chord:'A/E'},{pos:32,chord:'E'},{pos:34,chord:'A'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'“Todo o poder o Pai me deu,',anchors:[{pos:2,chord:'A'},{pos:11,chord:'D'}]},
+      {lyric:'Na terra, como lá no céu!',anchors:[{pos:1,chord:'B'},{pos:11,chord:'E'}]},
+      {lyric:'Ide, pois, anunciar o Evangelho,',anchors:[{pos:0,chord:'E'},{pos:13,chord:'A'},{pos:22,chord:'E'},{pos:27,chord:'A'}]},
+      {lyric:'E eis-me convosco sempre!”',anchors:[{pos:1,chord:'D'},{pos:12,chord:'A/E'},{pos:19,chord:'E'},{pos:22,chord:'A'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'Portas abertas, eis por todo o mundo!',anchors:[{pos:1,chord:'A'},{pos:3,chord:'D/A'},{pos:9,chord:'A'},{pos:32,chord:'A/E'}]},
+      {lyric:'Cristãos, erguei-vos! Já avante andai!',anchors:[{pos:1,chord:'E'},{pos:23,chord:'A'},{pos:27,chord:'B'},{pos:35,chord:'E'}]},
+      {lyric:'Crentes em Cristo! Uni as vossas forças,',anchors:[{pos:1,chord:'A'},{pos:4,chord:'D/A'},{pos:12,chord:'A'},{pos:32,chord:'A/E'}]},
+      {lyric:'Da escravidão os povos libertai.',anchors:[{pos:1,chord:'E'},{pos:11,chord:'A'},{pos:18,chord:'D'},{pos:22,chord:'A/E'},{pos:26,chord:'E'},{pos:29,chord:'A'}]}
+    ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+      {lyric:'“Ó vinde a mim! A voz divina clama,',anchors:[{pos:1,chord:'A'},{pos:3,chord:'D/A'},{pos:12,chord:'A'},{pos:28,chord:'A/E'}]},
+      {lyric:'“Vinde!” Clamai em nome de Jesus:',anchors:[{pos:2,chord:'E'},{pos:20,chord:'A'},{pos:24,chord:'B'},{pos:30,chord:'E'}]},
+      {lyric:'P’ra nos salvar da maldição eterna,',anchors:[{pos:1,chord:'A'},{pos:5,chord:'D/A'},{pos:13,chord:'A'},{pos:29,chord:'A/E'}]},
+      {lyric:'Seu sangue derramou por nós na cruz.',anchors:[{pos:1,chord:'E'},{pos:12,chord:'A'},{pos:17,chord:'D'},{pos:24,chord:'A/E'},{pos:29,chord:'E'},{pos:33,chord:'A'}]}
+    ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+      {lyric:'Ó Deus apressa o dia glorioso,',anchors:[{pos:0,chord:'A'},{pos:3,chord:'D/A'},{pos:10,chord:'A'},{pos:24,chord:'A/E'}]},
+      {lyric:'Em que os remidos todos se unirão,',anchors:[{pos:0,chord:'E'},{pos:19,chord:'A'},{pos:27,chord:'B'},{pos:31,chord:'E'}]},
+      {lyric:'E, em coro excelso, santo, jubiloso,',anchors:[{pos:1,chord:'A'},{pos:5,chord:'D/A'},{pos:13,chord:'A'},{pos:30,chord:'A/E'}]},
+      {lyric:'P’ra todo o sempre, glória a Ti darão.',anchors:[{pos:1,chord:'E'},{pos:13,chord:'A'},{pos:21,chord:'D'},{pos:28,chord:'A/E'},{pos:33,chord:'E'},{pos:35,chord:'A'}]}
+    ]
+    }
+  ]
+},
+
+/* =========================
    075 — EM JESUS TENS A PALMA DA VITÓRIA
 ========================= */
 
@@ -1256,6 +1408,7 @@ const songs=[
   title:'EM JESUS TENS A PALMA DA VITÓRIA',
   category:'Harpa Cristã',
   sourceToneIndex:10,
+  maisTocada:true,
   youtubeUrl:'https://youtu.be/LJyGJOmg71c?list=RDLJyGJOmg71c',
 
   sections:[
@@ -1308,7 +1461,8 @@ const songs=[
   title:'GUARDA O CONTACTO',
   category:'Harpa Cristã',
   sourceToneIndex:0,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -1368,7 +1522,8 @@ const songs=[
   title:'O GRANDE “EU SOU”',
   category:'Harpa Cristã',
   sourceToneIndex:7,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -1429,6 +1584,7 @@ const songs=[
   title:'SATISFEITO COM CRISTO',
   category:'Harpa Cristã',
   sourceToneIndex:7,
+  maisTocada:true,
   youtubeUrl:'https://youtu.be/h3GvigFFoCA?list=RDh3GvigFFoCA',
 
   sections:[
@@ -1481,6 +1637,7 @@ const songs=[
   title:'MEU TESTEMUNHO',
   category:'Harpa Cristã',
   sourceToneIndex:5,
+  maisTocada:true,
   youtubeUrl:'https://youtu.be/Ihb49YjA8Cs?list=RDIhb49YjA8Cs',
   
   sections:[
@@ -1548,7 +1705,8 @@ const songs=[
   title:'REVELA A NÓS, SENHOR',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -1608,6 +1766,7 @@ const songs=[
   title:'SUBLIME E GRANDE AMOR',
   category:'Harpa Cristã',
   sourceToneIndex:10,
+  maisTocada:true,
   youtubeUrl:'https://youtu.be/qI4DYLaHi3Q?list=RDqI4DYLaHi3Q',
  
   sections:[
@@ -1676,6 +1835,7 @@ const songs=[
   title:'NÍVEA LUZ',
   category:'Harpa Cristã',
   sourceToneIndex:9,
+  maisTocada:true,
   youtubeUrl:'https://youtu.be/Za2VSiL4HNs?list=RDZa2VSiL4HNs', 
   
   sections:[
@@ -1735,6 +1895,7 @@ const songs=[
   title:'NA JERUSALÉM DE DEUS',
   category:'Harpa Cristã',
   sourceToneIndex:9,
+  maisTocada:true,
     youtubeUrls:[
     {
       label:'Ouvir no YouTube — opção 1',
@@ -1807,7 +1968,8 @@ const songs=[
   title:'DEIXA PENETRAR A LUZ',
   category:'Harpa Cristã',
   sourceToneIndex:8,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -1866,6 +2028,7 @@ const songs=[
   title:'O BOM CONSOLADOR',
   category:'Harpa Cristã',
   sourceToneIndex:0,
+  maisTocada:true,
     youtubeUrls:[
     {
       label:'Ouvir no YouTube — opção 1',
@@ -1937,6 +2100,7 @@ const songs=[
   title:'JESUS PROCURA A OVELHA',
   category:'Harpa Cristã',
   sourceToneIndex:3,
+  maisTocada:true,
   youtubeUrl:'',
     youtubeUrls:[
     {
@@ -2009,7 +2173,8 @@ const songs=[
   title:'FIRME NAS PROMESSAS',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -2069,6 +2234,7 @@ const songs=[
   title:'PELEJAR POR JESUS',
   category:'Harpa Cristã',
   sourceToneIndex:0,
+  maisTocada:true,
 
   sections:[
     {
@@ -2120,6 +2286,7 @@ const songs=[
   title:'TRABALHAI E ORAI',
   category:'Harpa Cristã',
   sourceToneIndex:8,
+  maisTocada:true,
 
   sections:[
     {
@@ -2175,6 +2342,7 @@ const songs=[
   title:'LIVRE ESTOU',
   category:'Harpa Cristã',
   sourceToneIndex:5,
+  maisTocada:true,
 
   sections:[
     {
@@ -2229,6 +2397,7 @@ const songs=[
   title:'NOITE DE PAZ',
   category:'Harpa Cristã',
   sourceToneIndex:0,
+  maisTocada:true,
 
   sections:[
     {
@@ -2277,6 +2446,7 @@ const songs=[
   title:'CRISTO VOLTARÁ',
   category:'Harpa Cristã',
   sourceToneIndex:8,
+  maisTocada:true,
 
   sections:[
     {
@@ -2330,6 +2500,7 @@ const songs=[
   title:'ADORAÇÃO',
   category:'Harpa Cristã',
   sourceToneIndex:7,
+  maisTocada:true,
 
   sections:[
     {
@@ -2399,6 +2570,7 @@ const songs=[
   title:'BEM-AVENTURANÇA DO CRENTE',
   category:'Harpa Cristã',
   sourceToneIndex:10,
+  maisTocada:true,
 
   sections:[
     {
@@ -2479,6 +2651,7 @@ const songs=[
   title:'O SENHOR DA CEIFA CHAMA',
   category:'Harpa Cristã',
   sourceToneIndex:7,
+  maisTocada:true,
 
   sections:[
     {
@@ -2539,6 +2712,7 @@ const songs=[
   title:'GUIA-ME SEMPRE, MEU SENHOR',
   category:'Harpa Cristã',
   sourceToneIndex:3,
+  maisTocada:true,
 
   sections:[
     {
@@ -2599,6 +2773,7 @@ const songs=[
   title:'A CIDADE CELESTE',
   category:'Harpa Cristã',
   sourceToneIndex:0,
+  maisTocada:true,
 
   sections:[
     {
@@ -2674,7 +2849,8 @@ const songs=[
   title:'VEM À ASSEMBLÉIA DE DEUS',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -2735,7 +2911,8 @@ const songs=[
   title:'SERVIR A JESUS',
   category:'Harpa Cristã',
   sourceToneIndex:0,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -2795,7 +2972,8 @@ const songs=[
   title:'FALA, JESUS QUERIDO',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -2846,7 +3024,8 @@ const songs=[
   title:'DOCE NOME DE JESUS',
   category:'Harpa Cristã',
   sourceToneIndex:0,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -2898,7 +3077,8 @@ const songs=[
   title:'IMPLORAMOS TEU PODER',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -2965,7 +3145,8 @@ const songs=[
   title:'A OVELHA PERDIDA',
   category:'Harpa Cristã',
   sourceToneIndex:7,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3033,7 +3214,8 @@ const songs=[
   title:'DEIXA ENTRAR O REI DA GLÓRIA',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3085,7 +3267,8 @@ const songs=[
   title:'OH! JESUS ME AMA',
   category:'Harpa Cristã',
   sourceToneIndex:2,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3145,7 +3328,8 @@ const songs=[
   title:'UM PECADOR REMIDO',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3205,7 +3389,8 @@ const songs=[
   title:'IRMÃOS AMADOS',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3256,7 +3441,8 @@ const songs=[
   title:'INVOCAÇÃO E LOUVOR',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3307,7 +3493,8 @@ const songs=[
   title:'DE VALOR EM VALOR',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3367,7 +3554,8 @@ const songs=[
   title:'MAIS PERTO, MEU DEUS, DE TI!',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3418,7 +3606,8 @@ const songs=[
   title:'PELO SANGUE',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3467,7 +3656,8 @@ const songs=[
   title:'A ALMA ABATIDA',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3518,7 +3708,8 @@ const songs=[
   title:'UMA FLOR GLORIOSA',
   category:'Harpa Cristã',
   sourceToneIndex:0,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3571,7 +3762,8 @@ const songs=[
   title:'JESUS, O BOM AMIGO',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3630,7 +3822,8 @@ const songs=[
   title:'O BONDOSO AMIGO',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3672,7 +3865,8 @@ const songs=[
   title:'LUGAR DE DELÍCIAS',
   category:'Harpa Cristã',
   sourceToneIndex:0,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3739,7 +3933,8 @@ const songs=[
   title:'GRAÇA, GRAÇA',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3799,7 +3994,8 @@ const songs=[
   title:'FALA, FALA, SENHOR',
   category:'Harpa Cristã',
   sourceToneIndex:7,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3850,7 +4046,8 @@ const songs=[
   title:'OS GUERREIROS SE PREPARAM',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -3913,6 +4110,7 @@ const songs=[
   title:'DESEJAMOS IR LÁ',
   category:'Harpa Cristã',
   sourceToneIndex:5,
+  maisTocada:true,
   youtubeUrls:[
     {
       label:'Ouvir no YouTube — opção 1',
@@ -3974,7 +4172,8 @@ const songs=[
   title:'É O TEMPO DE SEGAR',
   category:'Harpa Cristã',
   sourceToneIndex:2,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -4029,7 +4228,8 @@ const songs=[
   title:'SÊ VALENTE',
   category:'Harpa Cristã',
   sourceToneIndex:8,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -4099,7 +4299,8 @@ const songs=[
   title:'DEUS AMOU ESTE MUNDO',
   category:'Harpa Cristã',
   sourceToneIndex:8,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -4154,7 +4355,8 @@ const songs=[
   title:'NÃO FOI COM OURO',
   category:'Harpa Cristã',
   sourceToneIndex:0,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -4206,7 +4408,8 @@ const songs=[
   title:'EU CONFIO FIRMEMENTE',
   category:'Harpa Cristã',
   sourceToneIndex:2,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -4262,7 +4465,8 @@ const songs=[
   title:'AO ABRIR O CULTO',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -4304,7 +4508,8 @@ const songs=[
   title:'LOUVAI A JESUS',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -4356,7 +4561,8 @@ const songs=[
   title:'MEU REDENTOR',
   category:'Harpa Cristã',
   sourceToneIndex:0,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -4408,7 +4614,8 @@ const songs=[
   title:'CREIO EU NA BÍBLIA',
   category:'Harpa Cristã',
   sourceToneIndex:2,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -4468,7 +4675,8 @@ const songs=[
   title:'SALVO ESTÁS? LIMPO ESTÁS?',
   category:'Harpa Cristã',
   sourceToneIndex:8,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -4529,6 +4737,7 @@ const songs=[
   category:'Harpa Cristã',
   skipChorusAfterLastVerse: true,
   sourceToneIndex:5,
+  maisTocada:true,
 
   sections:[
     {
@@ -4597,6 +4806,7 @@ const songs=[
   title:'A MENSAGEM DA CRUZ',
   category:'Harpa Cristã',
   sourceToneIndex:10,
+  maisTocada:true,
 
   sections:[
     {
@@ -4653,7 +4863,8 @@ const songs=[
   title:'NO JARDIM',
   category:'Harpa Cristã',
   sourceToneIndex:2,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -4705,7 +4916,8 @@ const songs=[
   title:'AVANTE, SERVOS DE JESUS',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -4746,7 +4958,8 @@ const songs=[
   title:'HÁ UM CANTO NOVO',
   category:'Harpa Cristã',
   sourceToneIndex:8,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -4797,7 +5010,8 @@ const songs=[
   title:'NOSSA ESPERANÇA',
   category:'Harpa Cristã',
   sourceToneIndex:0,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -4870,7 +5084,8 @@ const songs=[
   title:'“VEM CEAR”',
   category:'Harpa Cristã',
   sourceToneIndex:0,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -4939,7 +5154,8 @@ const songs=[
   title:'NÃO MURMURES: CANTA',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5015,7 +5231,8 @@ const songs=[
   title:'PRECISAMOS DE JESUS',
   category:'Harpa Cristã',
   sourceToneIndex:7,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5071,7 +5288,8 @@ const songs=[
   title:'CAMPEÕES DA LUZ',
   category:'Harpa Cristã',
   sourceToneIndex:7,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5122,7 +5340,8 @@ const songs=[
   title:'A PALAVRA DE DEUS É UM TESOURO',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5173,7 +5392,8 @@ const songs=[
   title:'AVANTE EU VOU',
   category:'Harpa Cristã',
   sourceToneIndex:9,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5233,7 +5453,8 @@ const songs=[
   title:'O FIM VEM, CUIDADO!',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5282,7 +5503,8 @@ const songs=[
   title:'UM POVO FORTE',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5342,7 +5564,8 @@ const songs=[
   title:'A HISTÓRIA DA CRUZ',
   category:'Harpa Cristã',
   sourceToneIndex:8,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5402,7 +5625,8 @@ const songs=[
   title:'FALA DO AMOR DE CRISTO',
   category:'Harpa Cristã',
   sourceToneIndex:7,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5457,7 +5681,8 @@ const songs=[
   title:'GRATO A TI',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5508,7 +5733,8 @@ const songs=[
   title:'BREVE VEM O DIA',
   category:'Harpa Cristã',
   sourceToneIndex:8,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5553,7 +5779,8 @@ const songs=[
   title:'VENCERÁ',
   category:'Harpa Cristã',
   sourceToneIndex:9,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5604,7 +5831,8 @@ const songs=[
   title:'ABRAÃO E SEU SACRIFÍCIO',
   category:'Harpa Cristã',
   sourceToneIndex:7,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5710,7 +5938,8 @@ const songs=[
   title:'CANTA, Ó CRENTE',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5752,7 +5981,8 @@ const songs=[
   title:'A MÃO DO ARADO!',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5803,7 +6033,8 @@ const songs=[
   title:'ALÉM DO NOSSO ENTENDIMENTO',
   category:'Harpa Cristã',
   sourceToneIndex:7,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5858,7 +6089,8 @@ const songs=[
   title:'EM JESUS',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5901,7 +6133,8 @@ const songs=[
   title:'EM JESUS',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -5952,7 +6185,8 @@ const songs=[
   title:'JESUS VOLTARÁ',
   category:'Harpa Cristã',
   sourceToneIndex:9,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6002,7 +6236,8 @@ const songs=[
   title:'TRABALHADORES DO EVANGELHO',
   category:'Harpa Cristã',
   sourceToneIndex:8,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6060,7 +6295,8 @@ const songs=[
   title:'JESUS TE QUER CURAR',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6112,7 +6348,8 @@ const songs=[
   title:'VINDE, PECADORES',
   category:'Harpa Cristã',
   sourceToneIndex:8,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6171,7 +6408,8 @@ const songs=[
   title:'NO CÉU NÃO ENTRA PECADO',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6227,7 +6465,8 @@ const songs=[
   title:'VAI ORANDO',
   category:'Harpa Cristã',
   sourceToneIndex:7,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6279,7 +6518,8 @@ const songs=[
   title:'CONSAGRADO AO SENHOR',
   category:'Harpa Cristã',
   sourceToneIndex:2,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6338,7 +6578,8 @@ const songs=[
   title:'SOIS BEM-VINDOS',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6391,7 +6632,8 @@ const songs=[
   title:'O DOM CELESTE',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6433,7 +6675,8 @@ const songs=[
   title:'BREVE VEREI O BOM JESUS',
   category:'Harpa Cristã',
   sourceToneIndex:0,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6483,7 +6726,8 @@ const songs=[
   title:'NASCER DE NOVO',
   category:'Harpa Cristã',
   sourceToneIndex:4,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6543,7 +6787,8 @@ const songs=[
   title:'A FONTE TRANSBORDANTE',
   category:'Harpa Cristã',
   sourceToneIndex:9,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6594,7 +6839,8 @@ const songs=[
   title:'AS FIRMES PROMESSAS',
   category:'Harpa Cristã',
   sourceToneIndex:8,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6654,7 +6900,8 @@ const songs=[
   title:'DIZE-O A CRISTO',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6708,6 +6955,8 @@ const songs=[
   title:'ELE SOFREU POR MIM',
   category:'Harpa Cristã',
   sourceToneIndex:5,
+  maisTocada:true,
+  youtubeUrl:'https://www.youtube.com/watch?v=6woJzR9MOb4',
 
   sections:[
     {
@@ -6768,7 +7017,8 @@ const songs=[
   title:'SOBRE AS ONDAS DO MAR',
   category:'Harpa Cristã',
   sourceToneIndex:7,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6828,7 +7078,8 @@ const songs=[
   title:'AO ESTRUGIR A TROMBETA',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6886,7 +7137,8 @@ const songs=[
   title:'ANDANDO PARA O CÉU',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6944,7 +7196,8 @@ const songs=[
   title:'HÁ PODER NO SANGUE DE JESUS',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -6995,7 +7248,8 @@ const songs=[
   title:'AO PASSAR O JORDÃO',
   category:'Harpa Cristã',
   sourceToneIndex:8,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -7064,7 +7318,8 @@ const songs=[
   title:'GLORIOSO DEUS',
   category:'Harpa Cristã',
   sourceToneIndex:2,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -7124,7 +7379,8 @@ const songs=[
   title:'SE CRISTO COMIGO VAI',
   category:'Harpa Cristã',
   sourceToneIndex:0,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -7184,7 +7440,8 @@ const songs=[
   title:'VENCENDO VEM JESUS',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -7253,7 +7510,8 @@ const songs=[
   title:'GRANDIOSO ÉS TU',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -7322,7 +7580,8 @@ const songs=[
   title:'CALVÁRIO, REVELAÇÃO DE AMOR',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -7370,7 +7629,8 @@ const songs=[
   title:'PORQUE ELE VIVE',
   category:'Harpa Cristã',
   sourceToneIndex:8,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -7408,7 +7668,8 @@ const songs=[
   title:'BÍBLIA SAGRADA',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -7492,7 +7753,8 @@ const songs=[
   title:'CONTA AS BÊNÇÃOS',
   category:'Harpa Cristã',
   sourceToneIndex:3,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -7552,7 +7814,8 @@ const songs=[
   title:'EM FERVENTE ORAÇÃO',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -7603,7 +7866,8 @@ const songs=[
   title:'SOSSEGAI!',
   category:'Harpa Cristã',
   sourceToneIndex:0,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -7672,7 +7936,8 @@ const songs=[
   title:'GRAÇAS DOU',
   category:'Harpa Cristã',
   sourceToneIndex:10,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -7717,7 +7982,8 @@ const songs=[
   title:'VITÓRIA DEUS DARÁ A MIM',
   category:'Harpa Cristã',
   sourceToneIndex:5,
-
+  maisTocada:true,
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -8088,43 +8354,27 @@ const songs=[
 },
 
 /* =========================
-   1006 — BOM É ESTARMOS AQUI - CORINHOS EVANGÉLICOS
+   1006 
+========================= */
+
+/* =========================
+   001 — CHUVAS DE GRAÇA
 ========================= */
 
 {
   id:'1006',
   number:'1006',
-  title:'BOM É ESTARMOS AQUI - Corinhos Evangélicos',
-  category:'Louvor',
-  sourceToneIndex:4,
+  title:'------------------------------------------',
+  category:'Harpa Cristã',
+  sourceToneIndex:10,
+  sourceToneLabel:'Bbm',
 
   sections:[
     {
-      label:'1ª Parte',
+      label:'1ª estrofe',
       lines:[
-      {lyric:'Bom estarmos aqui louvando a  Deus',anchors:[{pos:1,chord:'C'},{pos:13,chord:'Dm'},{pos:28,chord:'Em'},{pos:33,chord:'Dm'}]},
-      {lyric:'E podendo exaltar seu santo nome',anchors:[{pos:5,chord:'C'},{pos:14,chord:'Dm'},{pos:28,chord:'Em'},{pos:32,chord:'Dm'}]},
-      {lyric:'Bom estarmos aqui louvando a  Deus',anchors:[{pos:1,chord:'C'},{pos:13,chord:'Dm'},{pos:28,chord:'Em'},{pos:33,chord:'Dm'}]},
-      {lyric:'E podendo exaltar seu santo nome        ',anchors:[{pos:5,chord:'C'},{pos:14,chord:'Dm'},{pos:28,chord:'Em'},{pos:38,chord:'C'},{pos:32,chord:'Gm'}]}
-    ]
-    },
-    {
-      label:'Refrão',
-      lines:[
-      {lyric:'Tempo para isso',anchors:[{pos:1,chord:'F'},{pos:12,chord:'G'}]},
-      {lyric:'Tempo para louvarmos a Deus',anchors:[{pos:0,chord:'Em'},{pos:13,chord:'Am'}]},
-      {lyric:'Num só amor, num só espírito',anchors:[{pos:0,chord:'Dm'},{pos:8,chord:'G'},{pos:22,chord:'C'},{pos:28,chord:'G'}]}
-    ]
-    },
-    {
-      label:'2ª Parte',
-      lines:[
-      {lyric:'Deus venha nos abençoar',anchors:[{pos:1,chord:'C'},{pos:21,chord:'Dm'}]},
-      {lyric:'E que essa união',anchors:[{pos:14,chord:'G'}]},
-      {lyric:'Nunca falte para nós   ',anchors:[{pos:1,chord:'F'},{pos:18,chord:'C'},{pos:23,chord:'G'}]},
-      {lyric:'Deus venha nos abençoar',anchors:[{pos:0,chord:'C'},{pos:21,chord:'Dm'}]},
-      {lyric:'E que essa união',anchors:[{pos:14,chord:'G'}]},
-      {lyric:'Nunca falte para nós     ',anchors:[{pos:1,chord:'F'},{pos:13,chord:'G'},{pos:18,chord:'C'},{pos:23,chord:'G'}]}
+      {lyric:'Deus prometeu com certeza, chuvas de graça mandar',anchors:[{pos:0,chord:'Bb'},{pos:18,chord:'F'},{pos:28,chord:'Bb'},{pos:38,chord:'F'},{pos:47,chord:'Bb'}]},
+      {lyric:'Ele nos dá fortaleza e ricas bênçãos sem par',anchors:[{pos:0,chord:'Eb'},{pos:16,chord:'Bb'},{pos:26,chord:'Gm'},{pos:35,chord:'C'},{pos:43,chord:'F'}]}
     ]
     }
   ]
@@ -8140,6 +8390,7 @@ const songs=[
   title:'OCEANOS - Ana Nóbrega',
   category:'Louvor',
   sourceToneIndex:1,
+  sourceToneLabel:'Dbm',
 
   sections:[
     {
@@ -8374,9 +8625,9 @@ const songs=[
     {
       label:'1ª Parte',
       lines:[
-      {lyric:'Ao que está assentado No trono',anchors:[{pos:18,chord:'D'},{pos:31,chord:'A'},{pos:35,chord:'Bm'}]},
+      {lyric:'Ao que está assentado No trono',anchors:[{pos:18,chord:'D'},{pos:21,chord:'A'},{pos:27,chord:'Bm'}]},
       {lyric:'E ao cordeiro    /  Seja o louvor',anchors:[{pos:6,chord:'A'},{pos:9,chord:'G'},{pos:14,chord:'Em'},{pos:32,chord:'A'}]},
-      {lyric:'Ao que está assentado No trono',anchors:[{pos:18,chord:'D'},{pos:30,chord:'A'},{pos:34,chord:'Bm'}]},
+      {lyric:'Ao que está assentado No trono',anchors:[{pos:18,chord:'D'},{pos:21,chord:'A'},{pos:27,chord:'Bm'}]},
       {lyric:'E ao cordeiro    / Seja o louvor',anchors:[{pos:6,chord:'A'},{pos:9,chord:'G'},{pos:14,chord:'Em'},{pos:30,chord:'A'}]}
     ]
     },
@@ -8487,7 +8738,8 @@ const songs=[
   title:'DEUS PROVERÁ - Gabriela Gomes',
   category:'Louvor',
   sourceToneIndex:4,
-
+  sourceToneLabel:'Em',
+  
   sections:[
     {
       label:'1ª estrofe',
@@ -8706,6 +8958,7 @@ const songs=[
   title:'PRIMEIRA ESSÊNCIA',
   category:'Louvor',
   sourceToneIndex:11,
+  sourceToneLabel:'Bm',
 
   sections:[
     {
@@ -8829,6 +9082,7 @@ const songs=[
   title:'A ELE A GLÓRIA - Diante do Trono',
   category:'Louvor',
   sourceToneIndex:4,
+  sourceToneLabel:'Em',
   youtubeUrl:'https://youtu.be/Q_MerFW9qA4?list=RDQ_MerFW9qA4',
 
   sections:[

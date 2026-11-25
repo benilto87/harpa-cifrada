@@ -374,6 +374,12 @@ button.active{
   border-color:var(--accent);
 }
 
+/* Esconde a lupa e o texto ao selecionar o campo */
+#librarySearch:focus::placeholder{
+  color:transparent;
+  opacity:0;
+}
+
 .library-tools{
   display:flex;
   gap:7px;
@@ -381,9 +387,40 @@ button.active{
   border-bottom:1px solid var(--line);
 }
 
+/* BOTÕES ESTÉTICA */
+
 .library-tools button{
   flex:1;
+  background:#faf7f1;
+  color:#302820;
+  border:1px solid #d8cbbb;
+  border-radius:10px;
+  box-shadow:none;
+  outline:none;
+  transform:none;
 }
+
+/* Botão selecionado */
+.library-tools button.active,
+.library-tools button.active:focus,
+.library-tools button.active:focus-visible{
+  background:#eee2d1 !important;
+  color:#302820 !important;
+  border:1px solid #d5b995 !important;
+  outline:none !important;
+  outline-offset:0;
+  box-shadow:none !important;
+  transform:none !important;
+}
+
+/* Passagem do mouse */
+.library-tools button:hover{
+  background:#f1e8dc;
+  border-color:#cdb18e;
+  outline:none;
+  transform:none;
+}
+
 
 .library-list{
   overflow:auto;
@@ -485,6 +522,10 @@ button.active{
   font: 700 .72rem/1 Arial, sans-serif;
   text-align: center;
   flex-shrink: 0;
+}
+
+.song-tone.song-tone-small {
+  font-size: .67rem;
 }
 
 /* Estrela de favoritos: aparência simples */
@@ -1982,6 +2023,64 @@ body.sequence-active .tone-pill{
   font-weight:800;
 }
 
+/* =====================================================
+   DESTAQUE — MÚSICAS MAIS TOCADAS
+   ===================================================== */
+
+/* Número em vermelho */
+.song-item.mais-tocada .song-number{
+  color:#b52d25 !important;
+  font-weight:700;
+}
+
+/* Bolinha do tom em vermelho */
+.song-item.mais-tocada .song-tone{
+  color:#b52d25;
+  background:#f8e5e1;
+  border-color:#d9a19a;
+  font-weight:700;
+}
+
+/* Nome da música em laranja discreto */
+.song-item.mais-tocada .song-name{
+  color:#b56a27;
+  font-weight:700;
+}
+
+/* =====================================================
+   LISTA — MÚSICAS MAIS TOCADAS
+   ===================================================== */
+
+.library-tools button{
+  min-width:0;
+  padding:8px 3px;
+  font-size:.72rem;
+  line-height:1.15;
+  white-space:normal;
+}
+
+/* Identidade visual dos Louvores */
+.louvor-item .song-name {
+  color: #6F9BCB !important;
+}
+
+.louvor-item .song-number {
+  color: #365F8C !important;
+}
+
+.louvor-item .song-tone {
+  background: #DCEBFA;
+  border-color: #B7D1EC;
+  color: #365F8C;
+}
+
+/* NOVO VISUAL DOS FILTROS DA BIBLIOTECA */
+.library-tools button.active{
+  background:#efe5d8;
+  color:var(--ink);
+  border-color:#d9c5aa;
+  box-shadow:0 0 0 2px rgba(184,135,81,.15);
+}
 
 </style>
 </head>
@@ -2096,8 +2195,9 @@ body.sequence-active .tone-pill{
   <div class="library-tools">
   <button id="favoritesFilter">⭐ Favoritos</button>
   <button id="louvorFilter">🎵 Louvor</button>
+  <button id="mostPlayedFilter">🔥 Mais tocadas</button>
   <button id="allSongsFilter" class="active">Todas</button>
-  </div>
+</div>
   <div class="library-apps">
 
   <button id="openEarTrainer" class="library-app-button">
@@ -2181,6 +2281,7 @@ body.sequence-active .tone-pill{
 
 <script>
 const chromatic=[{name:'C'},{name:'Db'},{name:'D'},{name:'Eb'},{name:'E'},{name:'F'},{name:'Gb'},{name:'G'},{name:'Ab'},{name:'A'},{name:'Bb'},{name:'B'}];
+
 /*
   MODELO V21 — posição exata.
   Cada linha agora guarda as cifras como âncoras numéricas:
@@ -2193,9 +2294,30 @@ let useSharps=localStorage.getItem('harpa_use_sharps')==='1';
 let startHalfDown=localStorage.getItem('harpa_start_half_down')==='1';
 function toneMemoryKey(songId){return `harpa_tom_${songId}`}
 function loadToneMemory(songId){try{const v=localStorage.getItem(toneMemoryKey(songId));if(v===null)return null;const n=Number(v);return Number.isFinite(n)&&n>=0&&n<12?n:null}catch{return null}}
+
+// Valida e retorna o índice cromático original da música.
+function getSongBaseToneIndex(song){
+  const index=Number(song?.sourceToneIndex);
+
+  return Number.isInteger(index) && index>=0 && index<12
+    ? index
+    : 0;
+}
+
+// Monta o nome do tom usando a etiqueta do Criador de Cifras.
+function formatSongTone(song,index){
+  if(!Number.isInteger(index) || !chromatic[index]){
+    return '—';
+  }
+
+  return spellNote(chromatic[index].name) +
+    (song.sourceToneLabel ? 'm' : '');
+}
+
 function getHalfDownIndex(song){
-  const i=song.sourceToneIndex;
-  const semitones=[1,3,6,8,10]; // Db, Eb, Gb, Ab, Bb
+  const i=getSongBaseToneIndex(song);
+  const semitones=[1,3,6,8,10];
+
   return semitones.includes(i)?(i+11)%12:i;
 }
 
@@ -2207,7 +2329,7 @@ function getSongStartIndex(songId){
 
   return startHalfDown
     ? getHalfDownIndex(song)
-    : song.sourceToneIndex;
+    : getSongBaseToneIndex(song);
 }
 
 let currentSongId=localStorage.getItem('harpa_current_song')||'001'; // MEMORIZA HINO ABERTO //
@@ -4379,7 +4501,9 @@ function render(){
 
   document.getElementById('openSequence')
     .classList.remove('active');
-  const s=getCurrentSong(),delta=currentIndex-s.sourceToneIndex,current=spellNote(chromatic[currentIndex].name);
+  const s=getCurrentSong();
+  const delta=currentIndex-s.sourceToneIndex;
+  const current=formatSongTone(s,currentIndex);
   document.getElementById('currentTone').textContent=current;
   document.getElementById('currentSongLabel').innerHTML=`<strong>${s.number} — ${s.title}</strong><label class="tone-memory-check" title="Memorizar o tom desta música"><input type="checkbox" id="toneMemory"><span>tom</span></label>`;
   const root=document.getElementById('song');
@@ -4576,7 +4700,7 @@ if (labelSecao === 'pre-refrao') {
 
   b.classList.toggle(
     'original-tone',
-    i===s.sourceToneIndex
+    i===getSongBaseToneIndex(s)
   );
 
 });
@@ -4651,6 +4775,7 @@ try{
 
 let favoritesOnly=false;
 let louvorOnly=false;
+let mostPlayedOnly = false;
 // =========================
 // SEQUÊNCIA DE MÚSICAS
 // =========================
@@ -4996,7 +5121,8 @@ function renderLibrary(){
     const category=getSongCategory(s);
     return (!q||`${s.number} ${s.title} ${category}`.toLowerCase().includes(q))
       && (!favoritesOnly||favoriteSongs.has(s.id))
-      && (!louvorOnly||category==='Louvor');
+      && (!louvorOnly||category==='Louvor')
+      && (!mostPlayedOnly||s.maisTocada===true);
   });
 
   list.innerHTML='';
@@ -5026,22 +5152,25 @@ function renderLibrary(){
 
     filtered.filter(song=>getSongCategory(song)===category).forEach(s=>{
       const row=document.createElement('div');
-      row.className='song-item'+(s.id===currentSongId?' active':'');
+      row.className='song-item'+
+        (s.id===currentSongId?' active':'')+
+        (s.maisTocada===true?' mais-tocada':'')+
+        (getSongCategory(s)==='Louvor'?' louvor-item':'');
 
       const open=document.createElement('button');
       open.className='song-open';
 
-// Mostra o tom memorizado ou o tom inicial da música.
+// Mostra o tom memorizado ou o tom inicial da música,
+// preservando a indicação de menor.
       const toneIndex = getSongStartIndex(s.id);
+      const songTone = formatSongTone(s,toneIndex);
 
-      const songTone = Number.isInteger(toneIndex) && chromatic[toneIndex]
-        ? spellNote(chromatic[toneIndex].name)
-        : '—';
+      const smallTone = ['Dbm','Ebm','Gbm','Abm','Bbm'].includes(songTone);
 
       open.innerHTML =
         `<span class="song-number">${s.number}</span>`+
         `<span class="song-name">${s.title}</span>`+
-        `<span class="song-tone">${songTone}</span>`;
+        `<span class="song-tone${smallTone ? ' song-tone-small' : ''}">${songTone}</span>`;
 
 open.onclick=()=>{
 
@@ -5066,8 +5195,8 @@ open.onclick=()=>{
         render();
         centerOriginalTone();
         window.scrollTo(0,0);
-        renderLibrary();
         closeLibrary();
+        renderLibrary();
       };
 
       const fav=document.createElement('button');
@@ -5232,7 +5361,7 @@ function centerOriginalTone(){
   if(!panel)return;
 
   const originalIndex=
-    getCurrentSong().sourceToneIndex;
+    getSongBaseToneIndex(getCurrentSong());
 
   const originalButton=
     panel.querySelector(
@@ -5259,6 +5388,7 @@ libraryDrawer=document.getElementById('libraryDrawer'),
 librarySearch=document.getElementById('librarySearch'),
 favoritesFilter=document.getElementById('favoritesFilter'),
 louvorFilter=document.getElementById('louvorFilter'),
+mostPlayedFilter=document.getElementById('mostPlayedFilter'),
 allSongsFilter=document.getElementById('allSongsFilter');
 
 const ocultarComNotas=[
@@ -5289,7 +5419,11 @@ up.onclick=()=>{
 
 reset.onclick=()=>{
   const song=getCurrentSong();
-  currentIndex=startHalfDown?getHalfDownIndex(song):song.sourceToneIndex;
+
+  currentIndex=startHalfDown
+    ? getHalfDownIndex(song)
+    : getSongBaseToneIndex(song);
+
   saveToneIfEnabled();
   render();
 };
@@ -5370,9 +5504,10 @@ document.getElementById('toggleHalfDown').onchange=e=>{
   localStorage.setItem('harpa_start_half_down',startHalfDown?'1':'0');
 
   const song=getCurrentSong();
+
   currentIndex=startHalfDown
     ? getHalfDownIndex(song)
-    : song.sourceToneIndex;
+    : getSongBaseToneIndex(song);
 
   saveToneIfEnabled();
   render();
@@ -5472,73 +5607,72 @@ document.getElementById('showSequenceBtn').onclick=()=>{
 
 // Limpa a sequência montada.
 document.getElementById('clearSequenceBtn').onclick=()=>{
-
   musicSequence = [];
   saveMusicSequence();
   renderSequenceBuilder();
 };
+
+// Eventos da biblioteca.
 libraryBackdrop.onclick=closeLibrary;
 librarySearch.oninput=renderLibrary;
-
-favoritesFilter.onclick=()=>{
-  favoritesOnly=true;
-  louvorOnly=false;
-  favoritesFilter.classList.add('active');
-  louvorFilter.classList.remove('active');
-  allSongsFilter.classList.remove('active');
-  renderLibrary();
-};
-
-louvorFilter.onclick=()=>{
-  favoritesOnly=false;
-  louvorOnly=true;
-  favoritesFilter.classList.remove('active');
-  louvorFilter.classList.add('active');
-  allSongsFilter.classList.remove('active');
-  renderLibrary();
-};
-
-allSongsFilter.onclick=()=>{
-  favoritesOnly=false;
-  louvorOnly=false;
-  favoritesFilter.classList.remove('active');
-  louvorFilter.classList.remove('active');
-  allSongsFilter.classList.add('active');
-  renderLibrary();
-};
-
 openLibraryBtn.onclick=openLibrary;
 closeLibraryBtn.onclick=closeLibrary;
-libraryBackdrop.onclick=closeLibrary;
-librarySearch.oninput=renderLibrary;
 
+// FILTRO: FAVORITOS
 favoritesFilter.onclick=()=>{
   favoritesOnly=true;
   louvorOnly=false;
+  mostPlayedOnly=false;
+
   favoritesFilter.classList.add('active');
   louvorFilter.classList.remove('active');
+  mostPlayedFilter.classList.remove('active');
   allSongsFilter.classList.remove('active');
+
   renderLibrary();
 };
 
+// FILTRO: LOUVORES
 louvorFilter.onclick=()=>{
   favoritesOnly=false;
   louvorOnly=true;
+  mostPlayedOnly=false;
+
   favoritesFilter.classList.remove('active');
   louvorFilter.classList.add('active');
+  mostPlayedFilter.classList.remove('active');
   allSongsFilter.classList.remove('active');
+
   renderLibrary();
 };
 
+// FILTRO: TODAS
 allSongsFilter.onclick=()=>{
   favoritesOnly=false;
   louvorOnly=false;
+  mostPlayedOnly=false;
+
   favoritesFilter.classList.remove('active');
   louvorFilter.classList.remove('active');
+  mostPlayedFilter.classList.remove('active');
   allSongsFilter.classList.add('active');
+
   renderLibrary();
 };
 
+// FILTRO: MAIS TOCADAS
+mostPlayedFilter.onclick=()=>{
+  favoritesOnly=false;
+  louvorOnly=false;
+  mostPlayedOnly=true;
+
+  favoritesFilter.classList.remove('active');
+  louvorFilter.classList.remove('active');
+  mostPlayedFilter.classList.add('active');
+  allSongsFilter.classList.remove('active');
+
+  renderLibrary();
+};
 
 /* =========================================================
    TREINADOR DE OUVIDO

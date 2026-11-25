@@ -1205,8 +1205,20 @@ function isSectionLabel(text) {
     const aliases={
       'A#':'Bb','C#':'Db','D#':'Eb','F#':'Gb','G#':'Ab'
     };
-    const normalized=aliases[String(key||'').trim()] || String(key||'').trim();
+
+    const clean=String(key||'').trim();
+    const root=clean.replace(/m$/i,'');
+    const normalized=aliases[root] || root;
+
     return ['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'].indexOf(normalized);
+  }
+  
+  function getSourceToneLabel(key){
+    const clean=String(key||'').trim();
+
+    return /m$/i.test(clean)
+      ? clean.slice(0,-1)+'m'
+      : '';
   }
 
   function escapeJsString(s){
@@ -1263,7 +1275,8 @@ function isSectionLabel(text) {
       title:String(song.title ?? ''),
       category:String(song.category ?? 'Harpa Cristã'),
       sourceToneIndex:Number.isFinite(Number(song.sourceToneIndex)) ? Number(song.sourceToneIndex) : 0,
-      sections
+      sourceToneLabel:String(song.sourceToneLabel || ''),
+	  sections
     };
   }
 
@@ -1288,7 +1301,10 @@ function isSectionLabel(text) {
     document.getElementById('songCategory').value =
       song.category === 'Louvor' ? 'Louvor' : 'Harpa Cristã';
     const chromatic=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
-    document.getElementById('songKey').value=chromatic[song.sourceToneIndex] || 'C';
+    const toneIndex=Number(song.sourceToneIndex);
+
+    document.getElementById('songKey').value=
+      (chromatic[toneIndex] || 'C') + (song.sourceToneLabel ? 'm' : '');
 
     parsedLines=song.sections.flatMap(section=>section.lines.map(line=>({
       lyric:line.lyric,
@@ -1357,6 +1373,7 @@ function renderOutput(force = false) {
   title:'${title.replace(/'/g, "\\'")}',
   category:'${escapeJsString(category)}',
   sourceToneIndex:${getSourceToneIndex(key)},
+  ${getSourceToneLabel(key) ? `sourceToneLabel:'${getSourceToneLabel(key)}',` : ''}
 
   sections:[
 ${sectionCode}
