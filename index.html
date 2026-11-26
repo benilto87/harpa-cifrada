@@ -6,6 +6,14 @@
 <title>Harpa Cifrada — Biblioteca v23</title>
 <style>
 
+@font-face{
+  font-family:'Bahnschrift';
+  src:url('fonts/bahnschrift.ttf') format('truetype');
+  font-weight:300;
+  font-style:normal;
+  font-display:swap;
+}
+
 :root{
   --bg:#f2eee7;
   --paper:#fffdf9;
@@ -2085,10 +2093,11 @@ body.sequence-active .tone-pill{
 }
 
 /* Identidade visual dos Louvores */
-.louvor-item .song-name {
-  color: #4779b5 !important;
-  font-family:Bahnschrift Light; /* TESTANDO Bahnschrift */
-  font-weight: 700;
+.louvor-item .song-name{
+  color:#4779b5 !important;
+  font-family:'Bahnschrift', sans-serif !important;
+  font-weight:900 !important;
+  font-style:normal;
 }
 
 .louvor-item .song-number {
