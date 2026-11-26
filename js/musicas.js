@@ -10,7 +10,7 @@ const songs=[
   title:'CHUVAS DE GRAÇA',
   category:'Harpa Cristã',
   sourceToneIndex:10/* índice calculado pelo app a partir do tom Bb */,
-
+  maisTocada:true,
 
   sections:[
     {
