@@ -8144,7 +8144,7 @@ const songs=[
 {
   id:'1000',
   number:'1000',
-  title:'BEM MAIS QUE TUDO - Aline Barros',
+  title:'BEM MAIS QUE TUDO • Aline Barros',
   category:'Louvor',
   sourceToneIndex:7,
 
@@ -8212,7 +8212,7 @@ const songs=[
 {
   id:'1001',
   number:'1001',
-  title:'AO ÚNICO - Corinhos Evangélicos',
+  title:'AO ÚNICO • Corinhos Evangélicos',
   category:'Louvor',
   sourceToneIndex:0,
 
@@ -8277,7 +8277,7 @@ const songs=[
 {
   id:'1002',
   number:'1002',
-  title:'DEUS SARA ESTA NAÇÃO - Comunidade de Nilópolis',
+  title:'DEUS SARA ESTA NAÇÃO • Comunidade de Nilópolis',
   category:'Louvor',
   sourceToneIndex:0,
 
@@ -8312,7 +8312,7 @@ const songs=[
 {
   id:'1003',
   number:'1003',
-  title:'DESCANSAREI',
+  title:'DESCANSAREI • Comunidade Evangélica de Maringá',
   category:'Louvor',
   sourceToneIndex:2,
 
@@ -8387,7 +8387,7 @@ const songs=[
 {
   id:'1004',
   number:'1004',
-  title:'NÃO HÁ DEUS MAIOR',
+  title:'NÃO HÁ DEUS MAIOR • Corinhos Evangélicos',
   category:'Louvor',
   sourceToneIndex:4,
 
@@ -8450,7 +8450,7 @@ const songs=[
 {
   id:'1005',
   number:'1005',
-  title:'ROMPENDO EM FÉ',
+  title:'ROMPENDO EM FÉ • Corinhos Evangélicos',
   category:'Louvor',
   sourceToneIndex:7,
 
@@ -8491,7 +8491,7 @@ const songs=[
 {
   id:'1006 ',
   number:'1006 ',
-  title:'PORQUE ELE VIVE',
+  title:'PORQUE ELE VIVE • Corinhos Evangélicos',
   category:'Louvor',
   sourceToneIndex:8,
   
@@ -8529,7 +8529,7 @@ const songs=[
 {
   id:'1007',
   number:'1007',
-  title:'OCEANOS - Ana Nóbrega',
+  title:'OCEANOS • Ana Nóbrega',
   category:'Louvor',
   sourceToneIndex:1,
   sourceToneLabel:'Dbm',
@@ -8610,7 +8610,7 @@ const songs=[
 {
   id:'1008',
   number:'1008',
-  title:'EU NAVEGAREI - Corinhos de Fogo',
+  title:'EU NAVEGAREI • Corinhos de Fogo',
   category:'Louvor',
   sourceToneIndex:9,
 
@@ -8645,7 +8645,7 @@ const songs=[
 {
   id:'1009',
   number:'1009',
-  title:'BOM É ESTARMOS AQUI - Corinhos Evangélicos',
+  title:'BOM É ESTARMOS AQUI • Corinhos Evangélicos',
   category:'Louvor',
   sourceToneIndex:0,
 
@@ -8685,7 +8685,7 @@ const songs=[
 {
   id:'1010',
   number:'1010',
-  title:'LINDO MOMENTO - Julliany Souza',
+  title:'LINDO MOMENTO • Julliany Souza',
   category:'Louvor',
   sourceToneIndex:4,
 
@@ -8759,7 +8759,7 @@ const songs=[
 {
   id:'1011',
   number:'1011',
-  title:'PODEROSO DEUS - David Quinlan',
+  title:'PODEROSO DEUS • David Quinlan',
   category:'Louvor',
   sourceToneIndex:2,
 
@@ -8801,7 +8801,7 @@ const songs=[
 {
   id:'1012',
   number:'1012',
-  title:'ALÉM DO RIO AZUL - Voz da Verdade',
+  title:'ALÉM DO RIO AZUL • Voz da Verdade',
   category:'Louvor',
   sourceToneIndex:8,
 
@@ -8877,7 +8877,7 @@ const songs=[
 {
   id:'1013',
   number:'1013',
-  title:'DEUS PROVERÁ - Gabriela Gomes',
+  title:'DEUS PROVERÁ • Gabriela Gomes',
   category:'Louvor',
   sourceToneIndex:4,
   sourceToneLabel:'Em',
@@ -8941,7 +8941,7 @@ const songs=[
 {
   id:'1014',
   number:'1014',
-  title:'QUÃO GRANDE É O MEU DEUS - Soraya Moraes',
+  title:'QUÃO GRANDE É O MEU DEUS • Soraya Moraes',
   category:'Louvor',
   sourceToneIndex:9,
 
@@ -9011,7 +9011,7 @@ const songs=[
 {
   id:'1015',
   number:'1015',
-  title:'TUDO SOBRE MIM - Shirley Carvalhaes',
+  title:'TUDO SOBRE MIM • Shirley Carvalhaes',
   category:'Louvor',
   sourceToneIndex:6,
 
@@ -9097,7 +9097,7 @@ const songs=[
 {
   id:'1016',
   number:'1016',
-  title:'PRIMEIRA ESSÊNCIA',
+  title:'PRIMEIRA ESSÊNCIA • Anderson Freire',
   category:'Louvor',
   sourceToneIndex:11,
   sourceToneLabel:'Bm',
@@ -9186,7 +9186,7 @@ const songs=[
 {
   id:'1017',
   number:'1017',
-  title:'AGNUS DEI - David Quinlan',
+  title:'AGNUS DEI • David Quinlan',
   category:'Louvor',
   sourceToneIndex:0,
 
@@ -9221,7 +9221,7 @@ const songs=[
 {
   id:'1018',
   number:'1018',
-  title:'A ELE A GLÓRIA - Diante do Trono',
+  title:'A ELE A GLÓRIA • Diante do Trono',
   category:'Louvor',
   sourceToneIndex:4,
   sourceToneLabel:'Em',
@@ -9280,13 +9280,13 @@ const songs=[
 },
 
 /* =========================
-   1100 — DE CORAÇÃO PRA CORAÇÃO - SHIRLEY CARVALHAES
+   1100 — DE CORAÇÃO PRA CORAÇÃO  • SHIRLEY CARVALHAES
 ========================= */
 
 {
   id:'1100',
   number:'1100',
-  title:'DE CORAÇÃO PRA CORAÇÃO - Shirley Carvalhaes',
+  title:'DE CORAÇÃO PRA CORAÇÃO • Shirley Carvalhaes',
   category:'Louvor',
   sourceToneIndex:7,
 
