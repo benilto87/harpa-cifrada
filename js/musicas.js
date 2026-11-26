@@ -55,6 +55,137 @@ const songs=[
 },
 
 /* =========================
+   001 — CHUVAS DE GRAÇA PRO
+========================= */
+
+{
+  id:'001-pro',
+  number:'001',
+  title:'CHUVAS DE GRAÇA',
+  category:'Harpa Cristã Pro',
+  sourceToneIndex:10,
+  maisTocada:true,
+
+  sections:[
+    {
+      label:'1ª estrofe',
+      lines:[
+        {lyric:'Deus prometeu com certeza, ',anchors:[
+          {pos:0,chord:'Bbmaj7'},
+          {pos:11,chord:'F/A'},
+          {pos:22,chord:'Bb'}
+        ]},
+        {lyric:'Chuvas de graça mandar',anchors:[
+          {pos:1,chord:'F7'},
+          {pos:10,chord:'Dm7'},
+          {pos:20,chord:'Bb'}
+        ]},
+        {lyric:'Ele nos dá fortaleza ',anchors:[
+          {pos:0,chord:'Ebmaj7'},
+          {pos:10,chord:'Ebm6'},
+          {pos:16,chord:'Bb/D'}
+        ]},
+        {lyric:'E ricas bênçãos sem par',anchors:[
+          {pos:0,chord:'Gm7'},
+          {pos:9,chord:'Cm7'},
+          {pos:16,chord:'F7'},
+          {pos:22,chord:'Bb'}
+        ]}
+      ]
+    },
+    {
+      label:'Coro',
+      lines:[
+        {lyric:'Chuvas de graça,',anchors:[
+          {pos:0,chord:'Bbmaj7'}
+        ]},
+        {lyric:'Chuvas pedimos, Senhor;',anchors:[
+          {pos:0,chord:'Bb'},
+          {pos:9,chord:'Gm7'},
+          {pos:15,chord:'Cm7'},
+          {pos:20,chord:'F7'}
+        ]},
+        {lyric:'Manda-nos chuvas constantes,',anchors:[
+          {pos:0,chord:'Bbmaj7'},
+          {pos:11,chord:'Ebmaj7'},
+          {pos:18,chord:'Ebm6'},
+          {pos:22,chord:'Bb/D'},
+          {pos:26,chord:'Gm7'}
+        ]},
+        {lyric:'Chuvas do Consolador.',anchors:[
+          {pos:1,chord:'F7'},
+          {pos:10,chord:'Cm7'},
+          {pos:18,chord:'Bb'}
+        ]}
+      ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+        {lyric:'Cristo nos tem concedido O santo Consolador,',anchors:[
+          {pos:0,chord:'Bbmaj7'},
+          {pos:12,chord:'F/A'},
+          {pos:21,chord:'Bb'},
+          {pos:27,chord:'Dm7'},
+          {pos:36,chord:'Gm7'},
+          {pos:43,chord:'Bb'}
+        ]},
+        {lyric:'De plena paz nos enchido, Para o reinado de amor.',anchors:[
+          {pos:0,chord:'Ebmaj7'},
+          {pos:12,chord:'Ebm6'},
+          {pos:21,chord:'Bb/D'},
+          {pos:26,chord:'Gm7'},
+          {pos:40,chord:'Cm7'},
+          {pos:48,chord:'F7'}
+        ]}
+      ]
+    },
+    {
+      label:'3ª estrofe',
+      lines:[
+        {lyric:'Dá-nos, Senhor, amplamente, Teu grande gozo e poder;',anchors:[
+          {pos:0,chord:'Bbmaj7'},
+          {pos:11,chord:'F/A'},
+          {pos:22,chord:'Bb'},
+          {pos:31,chord:'Dm7'},
+          {pos:40,chord:'Gm7'},
+          {pos:50,chord:'Bb'}
+        ]},
+        {lyric:'Fonte de amor permanente, Põe dentro de nosso ser.',anchors:[
+          {pos:0,chord:'Ebmaj7'},
+          {pos:12,chord:'Ebm6'},
+          {pos:21,chord:'Bb/D'},
+          {pos:26,chord:'Gm7'},
+          {pos:40,chord:'Cm7'},
+          {pos:49,chord:'F7'}
+        ]}
+      ]
+    },
+    {
+      label:'4ª estrofe',
+      lines:[
+        {lyric:'Faze os teus servos piedosos, Dá-lhes virtude e valor,',anchors:[
+          {pos:0,chord:'Bbmaj7'},
+          {pos:14,chord:'F/A'},
+          {pos:23,chord:'Bb'},
+          {pos:33,chord:'Dm7'},
+          {pos:42,chord:'Gm7'},
+          {pos:53,chord:'Bb'}
+        ]},
+        {lyric:'Dando os teus dons preciosos, Do santo Preceptor.',anchors:[
+          {pos:0,chord:'Ebmaj7'},
+          {pos:13,chord:'Ebm6'},
+          {pos:26,chord:'Bb/D'},
+          {pos:32,chord:'Gm7'},
+          {pos:42,chord:'Cm7'},
+          {pos:48,chord:'F7'}
+        ]}
+      ]
+    }
+  ]
+},
+
+/* =========================
    002 — SAUDOSA LEMBRANÇA
 ========================= */
 
@@ -8354,27 +8485,38 @@ const songs=[
 },
 
 /* =========================
-   1006 
-========================= */
-
-/* =========================
-   001 — CHUVAS DE GRAÇA
+   1006  — PORQUE ELE VIVE
 ========================= */
 
 {
-  id:'1006',
-  number:'1006',
-  title:'------------------------------------------',
-  category:'Harpa Cristã',
-  sourceToneIndex:10,
-  sourceToneLabel:'Bbm',
-
+  id:'1006 ',
+  number:'1006 ',
+  title:'PORQUE ELE VIVE',
+  category:'Louvor',
+  sourceToneIndex:8,
+  
   sections:[
     {
       label:'1ª estrofe',
       lines:[
-      {lyric:'Deus prometeu com certeza, chuvas de graça mandar',anchors:[{pos:0,chord:'Bb'},{pos:18,chord:'F'},{pos:28,chord:'Bb'},{pos:38,chord:'F'},{pos:47,chord:'Bb'}]},
-      {lyric:'Ele nos dá fortaleza e ricas bênçãos sem par',anchors:[{pos:0,chord:'Eb'},{pos:16,chord:'Bb'},{pos:26,chord:'Gm'},{pos:35,chord:'C'},{pos:43,chord:'F'}]}
+      {lyric:'Deus enviou seu Filho amado / Pra perdoar, pra me salvar.',anchors:[{pos:9,chord:'Ab'},{pos:23,chord:'Db'},{pos:39,chord:'Ab'},{pos:52,chord:'Bbm'}]},
+      {lyric:'Na cruz morreu por meu pecado, / Mas ressurgiu e vivo com o Pai está.',anchors:[{pos:0,chord:'Eb'},{pos:12,chord:'Ab'},{pos:25,chord:'Db'},{pos:43,chord:'Ab'},{pos:54,chord:'Eb'},{pos:66,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'Coro',
+      lines:[
+      {lyric:'Porque Ele vive, posso crer no amanhã.',anchors:[{pos:11,chord:'Ab'},{pos:30,chord:'Db'}]},
+      {lyric:'Porque Ele vive, temor não há.',anchors:[{pos:11,chord:'Ab'},{pos:26,chord:'Bbm'}]},
+      {lyric:'    Mas eu bem sei, eu sei, que a minha vida',anchors:[{pos:0,chord:'Eb'},{pos:23,chord:'Ab'},{pos:40,chord:'Db'}]},
+      {lyric:'Está nas mãos de meu Jesus, que vivo está.',anchors:[{pos:10,chord:'Ab'},{pos:24,chord:'Eb'},{pos:39,chord:'Ab'}]}
+    ]
+    },
+    {
+      label:'2ª estrofe',
+      lines:[
+      {lyric:'E quando, enfim, chegar a hora / Em que a morte enfrentarei,',anchors:[{pos:12,chord:'Ab'},{pos:26,chord:'Db'},{pos:42,chord:'Ab'},{pos:55,chord:'Bbm'}]},
+      {lyric:'Sem medo, então, terei vitória: / Irei à Glória, ao meu Jesus que vivo está.',anchors:[{pos:0,chord:'Eb'},{pos:13,chord:'Ab'},{pos:24,chord:'Db'},{pos:41,chord:'Ab'},{pos:59,chord:'Eb'},{pos:73,chord:'Ab'}]}
     ]
     }
   ]

@@ -457,7 +457,7 @@ button.active{
   grid-template-columns:minmax(0,1fr) 30px;
   align-items:center;
   gap:2px;
-  margin:2px 0;
+  margin:0px 0;
   border:1px solid transparent;
   background:transparent;
   border-radius:9px;
@@ -501,7 +501,7 @@ button.active{
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  font:600 .90rem/1.2 Arial,sans-serif;
+  font:700 .80rem/1.2 Arial,sans-serif;
   text-align:left;
 }
 
@@ -571,6 +571,31 @@ button.active{
   font:500 .9rem/1.4 Arial,sans-serif;
 }
 
+/* COMPACTAR LISTA NORMAL DA BIBLIOTECA */
+.song-item{
+  margin:0 !important;
+  gap:2px;
+}
+
+.song-open{
+  min-height:29px !important;
+  padding:1px 5px !important;
+  gap:4px;
+}
+
+/* Reduzir o espaço ocupado pela estrela */
+.song-fav{
+  width:37px !important;
+  min-width:37px !important;
+  height:34px !important;
+  min-height:34px !important;
+}
+
+/* Círculo do tom ligeiramente menor */
+.song-tone{
+  width:28px;
+  height:28px;
+}
 
 /* =========================
    PARTITURA / LETRA
@@ -2080,6 +2105,126 @@ body.sequence-active .tone-pill{
   color:var(--ink);
   border-color:#d9c5aa;
   box-shadow:0 0 0 2px rgba(184,135,81,.15);
+}
+
+/* BOTÕES PRO E SIMP — GHOST COM PALETA DO TOM */
+.arrangement-switch{
+  display:flex;
+  align-items:center;
+  gap:3px;
+  margin-left:auto;
+  flex:0 0 auto;
+}
+
+.arrangement-switch button{
+  min-width:10px;
+  min-height:10px;
+  padding:6px 8px;
+  border:none;
+  border-radius:9px;
+  background:#eee9e2;
+  color:#DA5F44;                          /* #DA5F44 */
+  font:500 .75rem Arial,sans-serif;
+  cursor:pointer;
+  transition:background .15s ease;
+}
+
+.arrangement-switch button:hover{
+  background:#e4d8c9;
+}
+
+.arrangement-switch button.active{
+  background:#dfc6a9;
+  color:#F5650F;
+}
+
+/* HISTÓRICO EXPANSÍVEL */
+.history-toggle{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0px 10px;
+  border:0;
+  border-radius:5px;
+  background:#e8d8c5;
+  color:#79502e;
+  font:700 .82rem Arial,sans-serif;
+  text-align:left;
+  cursor:pointer;
+}
+
+.history-arrow{
+  font-size:10px;
+  font-weight:700;
+  line-height:1;
+  color:#79502e;
+  transition:transform .2s ease;
+}
+
+.history-content{
+  padding-bottom:6px;
+}
+
+/* ITENS MAIS COMPACTOS SOMENTE NO HISTÓRICO */
+.history-content .song-item{
+  min-height:34px;
+  padding-top:2px;
+  padding-bottom:2px;
+}
+
+.history-content .song-open{
+  min-height:32px;
+  padding-top:2px;
+  padding-bottom:2px;
+}
+
+.history-content .song-number,
+.history-content .song-name{
+  font-size:.77rem;
+  font-style:italic;
+  color:#32312E;
+}
+
+.history-content .song-tone{
+  width:26px;
+  height:26px;
+  font-size:.60rem;
+}
+
+/* REDUZIR ESPAÇAMENTO ENTRE MÚSICAS DO HISTÓRICO */
+.history-content .song-item{
+  min-height:28px;
+  margin-bottom:0;
+  padding-top:0;
+  padding-bottom:0;
+}
+
+.history-content .song-open{
+  min-height:27px;
+  padding-top:0;
+  padding-bottom:0;
+}
+
+/* MEMORIZAR TOM — ESTILO DISCRETO */
+.tone-memory-check{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  flex:0 0 auto;
+  margin-left:2px;
+  cursor:pointer;
+  user-select:none;
+  font:400 .68rem/1 Arial,sans-serif;
+  color:#8a7968;
+}
+
+.tone-memory-check input{
+  width:13px;
+  height:13px;
+  margin:0;
+  accent-color:#a66b3c;
+  cursor:pointer;
 }
 
 </style>
@@ -4505,8 +4650,26 @@ function render(){
   const delta=currentIndex-s.sourceToneIndex;
   const current=formatSongTone(s,currentIndex);
   document.getElementById('currentTone').textContent=current;
-  document.getElementById('currentSongLabel').innerHTML=`<strong>${s.number} — ${s.title}</strong><label class="tone-memory-check" title="Memorizar o tom desta música"><input type="checkbox" id="toneMemory"><span>tom</span></label>`;
-  const root=document.getElementById('song');
+  const arrangementButtons = ['001','001-pro'].includes(String(s.id))
+    ? '<div class="arrangement-switch">' +
+        '<button type="button" data-arrangement="001" class="' +
+        (String(s.id)==='001' ? 'active' : '') +
+        '">simp</button>' +
+        '<button type="button" data-arrangement="001-pro" class="' +
+        (String(s.id)==='001-pro' ? 'active' : '') +
+        '">pro</button>' +
+      '</div>'
+    : '';
+
+document.getElementById('currentSongLabel').innerHTML =
+  '<strong>' + s.number + ' — ' + s.title + '</strong>' +
+  arrangementButtons +
+  '<label class="tone-memory-check" title="Memorizar o tom desta música">' +
+    '<input type="checkbox" id="toneMemory">' +
+    '<span>💾 tom</span>' +
+  '</label>';
+
+const root=document.getElementById('song');
   // Mostra o título antes da letra somente em Louvor.
 if (String(s.category || '').trim().toLowerCase() === 'louvor') {
   const tituloLouvor = document.createElement('div');
@@ -5054,9 +5217,14 @@ function handleMenuScroll(event){
 }
 
 
-// A partir do número 1000, a música é classificada como Louvor.
+// Preserva a categoria cadastrada; usa o número apenas como alternativa.
 function getSongCategory(song){
+  const explicit=String(song?.category || '').trim();
+
+  if(explicit) return explicit;
+
   const number=Number(song?.number ?? song?.id);
+
   return Number.isFinite(number) && number>=1000
     ? 'Louvor'
     : 'Harpa Cristã';
@@ -5069,11 +5237,52 @@ if(Array.isArray(songs)){
   });
 }
 
+console.log(
+  songs.filter(s => s.id === '001-pro')
+);
+
 function saveFav(){
   safeSet(
     'harpa_favoritos',
     JSON.stringify([...favoriteSongs])
   )
+}
+
+// HISTÓRICO DOS 7 ÚLTIMOS LOUVORES
+let louvorHistory=[];
+let historyExpanded=false;
+
+try{
+  const saved=JSON.parse(
+    safeGet('harpa_historico_louvores','[]')
+  );
+
+  if(Array.isArray(saved)){
+    louvorHistory=saved.slice(0,7);
+  }
+}catch{}
+
+// Identifica músicas que entram no histórico.
+function isHistorySong(song){
+  const category=getSongCategory(song);
+
+  return category==='Louvor'
+    || category==='Harpa Cristã';
+}
+
+// Registra os 7 últimos acessos.
+function registerLouvorHistory(song){
+  if(!song || !isHistorySong(song)) return;
+
+  louvorHistory=[
+    String(song.id),
+    ...louvorHistory.filter(id=>String(id)!==String(song.id))
+  ].slice(0,7);
+
+  safeSet(
+    'harpa_historico_louvores',
+    JSON.stringify(louvorHistory)
+  );
 }
 
 
@@ -5114,11 +5323,16 @@ function resetAutoScrollForNewSong(){
 
 function renderLibrary(){
   const list=document.getElementById('libraryList');
-  
+
   const q=document.getElementById('librarySearch').value.trim().toLowerCase();
   renderSequenceBuilder();
+
   const filtered=songs.filter(s=>{
     const category=getSongCategory(s);
+
+    // A versão Pro não aparece na biblioteca.
+    if(category==='Harpa Cristã Pro') return false;
+
     return (!q||`${s.number} ${s.title} ${category}`.toLowerCase().includes(q))
       && (!favoritesOnly||favoriteSongs.has(s.id))
       && (!louvorOnly||category==='Louvor')
@@ -5127,7 +5341,80 @@ function renderLibrary(){
 
   list.innerHTML='';
 
-  if(!filtered.length){
+// Histórico dos últimos 7 louvores, exibido em Favoritos.
+const historySongs=favoritesOnly
+  ? louvorHistory
+      .map(id=>songs.find(s=>String(s.id)===String(id)))
+      .filter(s=>s && isHistorySong(s))
+  : [];
+
+if(historySongs.length){
+
+  const historyHeader=document.createElement('button');
+  historyHeader.className='history-toggle';
+
+  historyHeader.innerHTML=
+    '<span>↺ HISTÓRICO</span>' +
+    `<span class="history-arrow">${historyExpanded?'ocultar':'ver'}</span>`;
+
+  historyHeader.onclick=()=>{
+    historyExpanded=!historyExpanded;
+    renderLibrary();
+  };
+
+  list.appendChild(historyHeader);
+
+  if(historyExpanded){
+
+    const historyContainer=document.createElement('div');
+    historyContainer.className='history-content';
+
+    historySongs.forEach(s=>{
+      const row=document.createElement('div');
+      row.className='song-item';
+
+      const open=document.createElement('button');
+      open.className='song-open';
+
+      const toneIndex=getSongStartIndex(s.id);
+      const songTone=formatSongTone(s,toneIndex);
+
+      open.innerHTML=
+        `<span class="song-number">${s.number}</span>`+
+        `<span class="song-name">${s.title}</span>`+
+        `<span class="song-tone">${songTone}</span>`;
+
+      open.onclick=()=>{
+        if(sequenceBuildMode){
+          addSongToSequence(s);
+          return;
+        }
+
+        sequenceMode=false;
+        resetAutoScrollForNewSong();
+        registerLouvorHistory(s);
+
+        currentSongId=s.id;
+        localStorage.setItem('harpa_current_song',currentSongId);
+        currentIndex=getSongStartIndex(currentSongId);
+        autoScrollSpeedLevel=loadAutoScrollMemory(currentSongId);
+
+        render();
+        centerOriginalTone();
+        window.scrollTo(0,0);
+        closeLibrary();
+        renderLibrary();
+      };
+
+      row.appendChild(open);
+      historyContainer.appendChild(row);
+    });
+
+    list.appendChild(historyContainer);
+  }
+}
+
+  if(!filtered.length && !historySongs.length){
     const empty=document.createElement('div');
     empty.className='library-empty';
     empty.textContent=favoritesOnly
@@ -5140,9 +5427,9 @@ function renderLibrary(){
   }
 
   // Na visão Todas ou Favoritos, separa as músicas pelos títulos de categoria.
-  const categories=['Harpa Cristã','Louvor'].filter(category=>
-    filtered.some(song=>getSongCategory(song)===category)
-  );
+  const categories=[...new Set(
+    filtered.map(song=>getSongCategory(song))
+  )];
 
   categories.forEach(category=>{
     const lab=document.createElement('div');
@@ -5187,6 +5474,7 @@ open.onclick=()=>{
     .classList.remove('sequence-mode');
 
   resetAutoScrollForNewSong();
+  registerLouvorHistory(s);
 	//	sectionsHidden = getSongCategory(s) !== 'Louvor'; (FUNÇÃO INVERTER HIDEM DESATIVADA)
         currentSongId=s.id;
         localStorage.setItem('harpa_current_song',currentSongId);
@@ -5524,6 +5812,29 @@ document.getElementById('currentSongLabel').addEventListener('change',e=>{
     safeRemove(toneMemoryKey(currentSongId));
   }
   updateToneMemoryControl();
+});
+
+document.getElementById('currentSongLabel').addEventListener('click',e=>{
+  const button=e.target.closest('[data-arrangement]');
+  if(!button)return;
+
+  const targetId=button.dataset.arrangement;
+
+  if(targetId===currentSongId)return;
+
+  const targetSong=songs.find(s=>String(s.id)===String(targetId));
+  if(!targetSong)return;
+
+  resetAutoScrollForNewSong();
+
+  currentSongId=targetId;
+  localStorage.setItem('harpa_current_song',currentSongId);
+
+  currentIndex=getSongStartIndex(currentSongId);
+  autoScrollSpeedLevel=loadAutoScrollMemory(currentSongId);
+
+  render();
+  centerOriginalTone();
 });
 
 document.getElementById('toggleNotes').onclick=()=>{
